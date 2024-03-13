@@ -354,7 +354,7 @@
                 <div class="content">
                     <div class="description">
                         {{-- <h1 style="color: white"></h1> --}}
-                        <p style="color: white">This is how the image looks like before applying a duotone effect.</p>
+                        {{-- <p style="color: white">This is how the image looks like before applying a duotone effect.</p> --}}
                         
                     </div>
 
@@ -366,7 +366,7 @@
                 <div class="content">
                     <div class="description">
                         {{-- <h1 style="color: black">The duotone image.</h1> --}}
-                        <p style="color: black">This is how the image looks like after applying a duotone effect.</p>
+                        {{-- <p style="color: black">This is how the image looks like after applying a duotone effect.</p> --}}
                     </div>
 
                     <img src="../images/product-10.jpg" alt="Duotone">
