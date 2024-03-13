@@ -1,0 +1,311 @@
+@include('header')
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('csss/meanmenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('csss/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('csss/responsive.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="manifest" href="site.webmanifest">
+    <title>Document</title>
+</head>
+<style>
+    .sale-tag {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #f00;
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 0 0 20px 0;
+        z-index: 1;
+    }
+</style>
+
+<style>
+    .product__thumb {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product__thumb:hover .product-action {
+        display: flex;
+    }
+
+    .product__thumb:hover img {
+        filter: blur(8px);
+    }
+
+    .product-action {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    .product-action a {
+        margin-right: 10px;
+        color: #fff;
+        font-size: 20px;
+        box-shadow: 20px 20px 30px -4px rgba(0, 0, 0, 0.2);
+
+    }
+
+    /* Add this CSS */
+    .product-action {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .product-s {
+        width: 20%;
+        min-height: 400px;
+        float: left;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 1100px) {
+        .product-s {
+            width: 25%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .product-s {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .product-s {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Added to Cart!',
+                text: '{{ session('success') }}',
+                showCancelButton: true,
+                confirmButtonText: 'View Cart',
+                cancelButtonText: 'Close'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to view cart page
+                    window.location.href = '{{ route('cart') }}';
+                }
+            });
+        </script>
+    @endif
+    <!-- Main -->
+    <main style="padding: 0px 70px 0px 70px;" class="main--wrapper">
+
+        <!-- shop area start -->
+        <div class="product shop-page pt-80 pb-80 fix">
+            <div class="container">
+                <div class="border-b">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-4">
+                            <div class="shop-bar d-flex align-items-center">
+                                <h4 class="f-800 cod__black-color">Shop</h4>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Blog.</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-8">
+                            <div class="bar-wrapper">
+                                <div class="select-text">
+                                    <span>Showing 1–11 of 23 Results</span>
+                                </div>
+                                <div class="shop-select">
+                                    <select name="select" id="shop-select-one">
+                                        <option value="1">Deafult Sorting</option>
+                                        <option value="2">Deafult Sorting</option>
+                                        <option value="3">Deafult Sorting</option>
+                                        <option value="4">Deafult Sorting</option>
+                                    </select>
+                                </div>
+                                <div class="shop-select">
+                                    <select name="select" id="category-select">
+                                        <option value="{{ route('shop') }}">All Categories</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
+                                                {{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#category-select").change(function() {
+                                            window.location = $(this).val();
+                                        })
+                                    })
+                                </script>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-7 col-md-8">
+                            <div class="bar-wrapper">
+                                <div class="select-text">
+                                    <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
+                                        Results</span>
+                                </div>
+                                <!-- Your sorting select options and scripts -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-30">
+                    <div class="col-sm-12" id="product-list">
+                        @if ($products->isEmpty())
+                            <div class="text-center">No products in this category.</div>
+                        @else
+                            <div class="row">
+                                @foreach ($products as $product)
+                                    <div class="product-s">
+                                        <div class="product__single">
+                                            <div class="product__box">
+                                                <div class="product__thumb">
+                                                    <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                        class="img-wrapper">
+                                                        <img style="height: 220px;" class="img"
+                                                            src="{{ asset($product->image_url) }}" alt="">
+                                                        @if ($product->discountedPrice)
+                                                            @php
+                                                                $salePercentage =
+                                                                    (($product->price - $product->discountedPrice) /
+                                                                        $product->price) *
+                                                                    100;
+                                                            @endphp
+                                                            @if ($salePercentage > 0)
+                                                                <span class="sale-tag">Sale
+                                                                    {{ round($salePercentage) }}% Off</span>
+                                                            @endif
+                                                        @endif
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a href="#"><span class="fas fa-heart"></span></a>
+                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                                class="fas fa-eye"></span></a>
+                                                        <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
+                                                                class="fas fa-shopping-cart"></span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product__content--top">
+                                                    <span class="cate-name">{{ $product->category->name }}</span>
+                                                    <h6 class="product__title mine__shaft-color f-700 mb-0"><a
+                                                            href="product-details.html">{{ $product->name }}</a>
+                                                    </h6>
+                                                    <div class="rating" style="padding-top: 5px;">
+                                                        <ul class="list-inline">
+                                                            <li class="rating-active"><i class="fas fa-star"></i>
+                                                            </li>
+                                                            <li class="rating-active"><i class="fas fa-star"></i>
+                                                            </li>
+                                                            <li class="rating-active"><i class="fas fa-star"></i>
+                                                            </li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <br>
+                                                    <div
+                                                        class="product__content--rating d-flex justify-content-between">
+                                                        <div class="price">
+                                                            @if ($product->discountedPrice)
+                                                                <span class="original-price"
+                                                                    style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">Rs.{{ $product->price }}</span>
+                                                                <span
+                                                                    class="discounted-price"><strong>Rs.{{ $product->discountedPrice }}</strong></span>
+                                                            @else
+                                                                <span>Rs.{{ $product->price }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <!-- Pagination -->
+            </div>
+        </div>
+
+        <!-- shop area end -->
+
+
+
+
+
+
+    </main>
+    <!-- Main End -->
+
+    <!-- Footer -->
+
+    <!-- Footer End -->
+
+
+
+
+
+    <!-- JS here -->
+    <script src="{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}">
+        < script src = "{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}" >
+    </script>
+    <script src="{{ asset('javascript/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('javascript/popper.min.js') }}"></script>
+    <script src="{{ asset('javascript/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('javascript/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('javascript/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('javascript/one-page-nav-min.js') }}"></script>
+    <script src="{{ asset('javascript/slick.min.js') }}"></script>
+    <script src="{{ asset('javascript/ajax-form.js') }}"></script>
+    <script src="{{ asset('javascript/wow.min.js') }}"></script>
+    <script src="{{ asset('javascript/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('javascript/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('javascript/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('javascript/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('javascript/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('javascript/jquery-ui-slider-range.js') }}"></script>
+    <script src="{{ asset('javascript/jquery.elevateZoom-3.0.8.min.js') }}"></script>
+    <script src="{{ asset('javascript/meanmenu.min.js') }}"></script>
+    <script src="{{ asset('javascript/Elemental.js') }}"></script>
+    <script src="{{ asset('javascript/plugins.js') }}"></script>
+    <script src="{{ asset('javascript/main.js') }}"></script>
+
+
+
+</body>
+
+</html>
+@include('foooter');
