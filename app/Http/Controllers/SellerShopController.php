@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\SubCategory;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -17,6 +18,8 @@ class SellerShopController extends Controller
 {
     public function createShop(Request $request)
     {
+        $shopInfo = SellerShop::where('user_id', auth()->id())->first();
+
         $validatedData = $request->validate([
             'shopname' => 'required|string|max:255',
             'shopdescription' => 'required|string',
@@ -30,19 +33,17 @@ class SellerShopController extends Controller
         if ($request->hasFile('shopLogo')) {
             $image = $request->file('shopLogo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $logoImagePath = 'images/' . $imageName;
+            $logoImagePath = $image->storeAs('logos', $imageName, 'uploads');
         } else {
-            $imagePath = null;
+            $logoImagePath = null;
         }
 
         if ($request->hasFile('shopBanner')) {
             $image = $request->file('shopBanner');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $bannerImagePath = 'images/' . $imageName;
+            $bannerImagePath = $image->storeAs('banners', $imageName, 'uploads');
         } else {
-            $imagePath = null;
+            $bannerImagePath = null;
         }
 
         $userId = Auth::id();
@@ -92,11 +93,7 @@ class SellerShopController extends Controller
             $reviews = [];
         }
 
-        
-
-
-        return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'products', 'categories','ord_count', 'Orders'));
-
+        return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'products', 'categories', 'ord_count', 'Orders'));
     }
 
     public function delete($id)

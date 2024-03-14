@@ -8,6 +8,7 @@ use App\Models\SellerShop;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -30,7 +31,6 @@ class CategoryController extends Controller
         }
 
         $rev_count = $reviews->count();
-        
 
         return view('categories', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products'));
     }
@@ -51,8 +51,7 @@ class CategoryController extends Controller
         if ($request->hasFile('CategoryImage')) {
             $image = $request->file('CategoryImage');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $imagePath = 'images/' . $imageName;
+            $imagePath = $image->storeAs('images', $imageName, 'uploads');
         } else {
             $imagePath = null;
         }
