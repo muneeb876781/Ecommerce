@@ -14,6 +14,12 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderPlacedVendor;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Writer;
+use Milon\Barcode\DNS1D;
+use BaconQrCode\Renderer\RendererStyle\Image;
 
 use Illuminate\Http\Request;
 
@@ -38,8 +44,6 @@ class OredrController extends Controller
         $pOrders = Order::where('shop_id', $shopId)->where('order_status', 'Pending')->get();
         $pendingOrders = $pOrders->count();
 
-
-
         $totalOrdersCount = $Orders->count();
 
         $totalProductsOrdered = $cOrders->sum(function ($order) {
@@ -49,8 +53,6 @@ class OredrController extends Controller
         $totalAmountReceived = $cOrders->sum(function ($order) {
             return $order->total_price;
         });
-
-        
 
         return view('order', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
     }
@@ -213,5 +215,43 @@ class OredrController extends Controller
         $userOrders = Order::where('user_id', $user_id)->get();
 
         return view('userOrders', compact('userOrders', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
+    }
+
+    public function downloadPDF($id)
+    {
+        $order = Order::findOrFail($id);
+
+        // Generate QR Code
+        // $renderer = new ImageRenderer(new Image\Png(), new \BaconQrCode\Renderer\RendererStyle\RendererStyle(400), new \BaconQrCode\Renderer\Image\EpsImageBackEnd());
+
+        // $writer = new Writer($renderer);
+
+        // $qrCode = $writer->writeString($order->tracking_number);
+
+
+        // Generate Barcode
+        // $barcode = new DNS1D();
+        // $barcode->setStorPath(__DIR__ . '/cache/');
+        // $barcode->setThickness(2);
+        // $barcode->setHeight(40);
+        // $barcode->setFontSize(10);
+        // $barcodeImage = $barcode->getBarcodePNG($order->tracking_number, 'C128');
+
+        // PDF generation
+        $pdf = new Dompdf();
+        $pdf->setOptions(
+            new Options([
+                'isHtml5ParserEnabled' => true,
+                'isRemoteEnabled' => true,
+            ]),
+        );
+
+        $pdf->loadHtml(view('orderDetails_pdf', compact('order')));
+
+        $pdf->setPaper('A4', 'landscape');
+
+        $pdf->render();
+
+        return $pdf->stream('order_details.pdf');
     }
 }

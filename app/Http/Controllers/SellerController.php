@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\SubCategory;
+use App\Models\Cart;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,7 +52,28 @@ class SellerController extends Controller
 
     public function sellerShop()
     {
-        return view('sellerShop');
+        $products = Product::all();
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+
+        $user_id = auth()->id();
+
+        $cart = Cart::where('user_id', $user_id)->get();
+
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            if ($item->product->discountedPrice) {
+                $totalPrice += $item->product->discountedPrice * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+            
+            
+        }
+
+        $totalItems = $cart->sum('quantity');
+
+        return view('sellerShop', compact('products', 'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 
     public function reviews()
