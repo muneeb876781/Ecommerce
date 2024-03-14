@@ -355,59 +355,11 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 
-    <!-- Category Details Modal -->
-    <div class="modal fade" id="categoryDetailsModal" tabindex="-1" aria-labelledby="categoryDetailsModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="categoryDetailsModalLabel">Category Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Name:</strong> <span id="categoryName"></span></p>
-                    <p><strong>Description:</strong> <span id="categoryDescription"></span></p>
-                    <!-- Add other category details here -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Category Modal -->
-    <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editCategoryForm" action="#" method="post">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="editCategoryName" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="editCategoryName"
-                                name="editCategoryName">
-                        </div>
-                        <div class="mb-3">
-                            <label for="editCategoryDescription" class="form-label">Category Description</label>
-                            <textarea class="form-control" id="editCategoryDescription" name="editCategoryDescription"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
 
     

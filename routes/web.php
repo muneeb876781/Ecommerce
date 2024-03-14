@@ -101,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/storeAttribute', [ProductController::class, 'storeAttribute'])->name('storeAttribute');
     Route::put('/pAttributes/{id}', [ProductController::class, 'edit'])->name('attributesEdit')->middleware('seller');
 
+    Route::get('/order/{id}/downloadPDF', [OredrController::class, 'downloadPDF'])->name('downloadPDF');
 
 
 

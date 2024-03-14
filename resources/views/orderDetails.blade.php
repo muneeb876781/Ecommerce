@@ -39,15 +39,21 @@
                                     <option value="Accepted" {{ $order->order_status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
                                     <option value="Completed" {{ $order->order_status === 'Completed' ? 'selected' : '' }}>Completed</option>
                                     <option value="Rejected" {{ $order->order_status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
-                                    
                                 </select>
-                                
                                 <button class="btn btn-primary" type="submit">Update Status</button>
                             </div>
                         </form>
                     </div>
+                    <div class="col-md-8 text-md-end"> <!-- Align to the end of the column -->
+                        <div class="d-flex justify-content-md-end"> <!-- Align to the end of the column -->
+                            <a href="{{ route('downloadPDF', ['id' => $order->id]) }}" class="btn btn-primary">Download PDF</a>
+                        </div>
+                    </div>
                 </div>
                 
+                
+
+
 
 
                 <div class="container mt-5">
