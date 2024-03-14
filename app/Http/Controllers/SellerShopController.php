@@ -65,6 +65,8 @@ class SellerShopController extends Controller
         $user->role = 'seller';
         $user->save();
 
+        $Orders = []; 
+
         if ($shopInfo) {
             $shopId = SellerShop::where('user_id', Auth::id())->value('id');
             $categories = Category::where('seller_shop_id', $shopId)->get();
