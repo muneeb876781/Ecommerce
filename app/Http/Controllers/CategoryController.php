@@ -51,7 +51,7 @@ class CategoryController extends Controller
         if ($request->hasFile('CategoryImage')) {
             $image = $request->file('CategoryImage');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('images', $imageName, 'uploads');
+            $imagePath = $image->storeAs('uploads', $imageName, 'public');
         } else {
             $imagePath = null;
         }

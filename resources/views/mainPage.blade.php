@@ -879,11 +879,11 @@
                                 <div class="single-categories col-sm-12">
                                     <div class="categories-box position-relative">
                                         <div class="categories-thumb">
-                                            <a href="{{ route('shopcategory', ['id' => $category->id]) }}"><img
-                                                    class="img" src="{{ asset($category->image_url) }}"
-                                                    alt="" style="height: 200px;"></a>
+                                            <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
+                                                <img class="img" src="{{ $category->image_url ? asset('storage/uploads/' . $category->image_url) : asset('path_to_default_image') }}" alt="" style="height: 200px;">
+                                            </a>
                                             <br>
-                                            <br>
+                                            
                                             <h6 class="f-800 pure__black-color cate-title"><a
                                                     href="#">{{ $category->name }}</a></h6>
                                         </div>
