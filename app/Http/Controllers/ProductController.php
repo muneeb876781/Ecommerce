@@ -74,7 +74,7 @@ class ProductController extends Controller
         if ($request->hasFile('productImage')) {
             $image = $request->file('productImage');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs('images', $imageName, 'uploads');
+            $imagePath = $image->storeAs( 'uploads', $imageName);
         } else {
             $imagePath = null;
         }
@@ -82,7 +82,7 @@ class ProductController extends Controller
         if ($request->hasFile('productMedia1Image')) {
             $image1 = $request->file('productMedia1Image');
             $imageName1 = time() . '.' . $image1->getClientOriginalExtension();
-            $media1Path = $image1->storeAs('images', $imageName1, 'uploads');
+            $media1Path = $image1->storeAs( 'uploads', $imageName1);
         } else {
             $media1Path = null;
         }
@@ -90,7 +90,7 @@ class ProductController extends Controller
         if ($request->hasFile('productMedia2Image')) {
             $image2 = $request->file('productMedia2Image');
             $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
-            $media2Path = $image2->storeAs('images', $imageName2, 'uploads');
+            $media2Path = $image1->storeAs( 'uploads', $imageName2);
         } else {
             $media2Path = null;
         }
@@ -98,7 +98,7 @@ class ProductController extends Controller
         if ($request->hasFile('productMedia3Image')) {
             $image3 = $request->file('productMedia3Image');
             $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
-            $media3Path = $image3->storeAs('images', $imageName3, 'uploads');
+            $media3Path = $image1->storeAs( 'uploads', $imageName3);
         } else {
             $media3Path = null;
         }

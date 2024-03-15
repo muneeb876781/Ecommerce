@@ -543,9 +543,8 @@
                                                     <div class="product__thumb">
                                                         <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                             class="img-wrapper">
-                                                            <img style="height: 220px;" class="img"
-                                                                src="{{ asset($product->image_url) }}"
-                                                                alt="">
+                                                            <img class="img" src="{{ Storage::url($product->image_url) }}" alt="product Image" style="height: 220px;">
+
                                                             @if ($product->quantity == 0)
                                                                 <span class="out-of-stock-tag">Out of Stock</span>
                                                             @elseif ($product->discountedPrice)
@@ -635,9 +634,8 @@
                                                         <div class="product__thumb">
                                                             <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                                 class="img-wrapper">
-                                                                <img style="height: 220px;" class="img"
-                                                                    src="{{ asset($product->image_url) }}"
-                                                                    alt="">
+                                                                <img class="img" src="{{ Storage::url($product->image_url) }}" alt="product Image" style="height: 220px;">
+
                                                                 {{-- <img style="height: 220px;" class="img secondary-img"
                                                                 src="{{ asset($product->media1_url) }}"
                                                                 alt=""> --}}
@@ -744,9 +742,8 @@
                                                     <div class="product__thumb">
                                                         <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                             class="img-wrapper">
-                                                            <img style="height: 220px;" class="img"
-                                                                src="{{ asset($product->image_url) }}"
-                                                                alt="">
+                                                            <img class="img" src="{{ Storage::url($product->image_url) }}" alt="product Image" style="height: 220px;">
+
                                                             {{-- <img style="height: 220px;" class="img secondary-img"
                                                                 src="{{ asset($product->media1_url) }}"
                                                                 alt=""> --}}
@@ -880,7 +877,7 @@
                                     <div class="categories-box position-relative">
                                         <div class="categories-thumb">
                                             <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                                <img class="img" src="{{ $category->image_url ? asset('storage/uploads/' . $category->image_url) : asset('path_to_default_image') }}" alt="" style="height: 200px;">
+                                                <img src="{{ Storage::url($category->image_url) }}" alt="Category Image" style="height: 200px;">
                                             </a>
                                             <br>
                                             
@@ -1108,8 +1105,8 @@
                                         <div class="product__thumb">
                                             <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                 class="img-wrapper">
-                                                <img style="height: 220px;" class="img"
-                                                    src="{{ asset($product->image_url) }}" alt="">
+                                                <img class="img" src="{{ Storage::url($product->image_url) }}" alt="product Image" style="height: 220px;">
+
                                                 {{-- <img style="height: 220px;" class="img secondary-img"
                                                     src="{{ asset($product->media1_url) }}"
                                                     alt=""> --}}
@@ -1246,7 +1243,7 @@
                                         <div class="product__thumb">
                                             <a href="product-details.html"><img class="img"
                                                     style="height: 180px; width: 200px; padding-right: 20px;"
-                                                    src="{{ asset($product->image_url) }}" alt=""></a>
+                                                    src="{{ Storage::url($product->image_url) }}" alt=""></a>
                                             @if ($product->discountedPrice)
                                                 @php
                                                     $salePercentage =
@@ -1351,7 +1348,7 @@
                                             <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                 class="img-wrapper">
                                                 <img style="height: 220px;" class="img"
-                                                    src="{{ asset($product->image_url) }}" alt="">
+                                                src="{{ Storage::url($product->image_url) }}" alt="">
                                                 {{-- <img style="height: 220px;" class="img secondary-img"
                                                     src="{{ asset($product->media1_url) }}"
                                                     alt=""> --}}

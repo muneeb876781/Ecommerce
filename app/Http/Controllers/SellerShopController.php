@@ -33,7 +33,7 @@ class SellerShopController extends Controller
         if ($request->hasFile('shopLogo')) {
             $image = $request->file('shopLogo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $logoImagePath = $image->storeAs('logos', $imageName, 'uploads');
+            $logoImagePath = $image->storeAs('uploads', $imageName);
         } else {
             $logoImagePath = null;
         }
@@ -41,7 +41,7 @@ class SellerShopController extends Controller
         if ($request->hasFile('shopBanner')) {
             $image = $request->file('shopBanner');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $bannerImagePath = $image->storeAs('banners', $imageName, 'uploads');
+            $bannerImagePath = $image->storeAs( 'uploads',$imageName);
         } else {
             $bannerImagePath = null;
         }
