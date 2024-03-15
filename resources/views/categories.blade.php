@@ -78,7 +78,7 @@
                                                 <td style="width: 15%"><img style="width: 100px; height: 100px;"
                                                         src="{{ asset($category->image_url) }}"
                                                         alt="{{ $category->name }}" class="rounded-circle"></td>
-                                                <td style="width: 18%"><strong>{{ $category->name }}</strong> <br><a style="color: rgba(0, 0, 0, 0.6);" href="{{ route('subCategoryview')}}">{{ $category->subcategories->count() }} Sub Categories</a> </td>
+                                                <td style="width: 18%"><strong>{{ $category->name }}</strong> <br> </td>
                                                 <td style="width: 37%">{{ $category->description }}</td>
                                                 <td style="width: 20%">
                                                     <a class="btn btn-link text-primary" href="#"
