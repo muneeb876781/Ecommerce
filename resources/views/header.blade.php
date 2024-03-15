@@ -331,7 +331,7 @@
                                                 <li class="dropdown">
                                                     <a class="dept__menu--dlink"
                                                         href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                                                    @if ($category->subcategories->count() > 0)
+                                                    {{-- @if ($category->subcategories->count() > 0)
                                                         <ul style="box-shadow: 20px 20px 20px -8px rgba(0, 0, 0, 0.2);"
                                                             class="sub__menu sub__dept--menu">
                                                             @foreach ($category->subcategories as $subcategory)
@@ -340,7 +340,7 @@
                                                                 </li>
                                                             @endforeach
                                                         </ul>
-                                                    @endif
+                                                    @endif --}}
                                                 </li>
                                             @endforeach
 
@@ -378,14 +378,14 @@
                                                 <li>
                                                     <a
                                                         href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                                                    @foreach ($category->subcategories as $subcategory)
+                                                    {{-- @foreach ($category->subcategories as $subcategory)
                                                         <ul class="submenu">
                                                             <li>
                                                                 <a
                                                                     href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $subcategory->name }}</a>
                                                             </li>
                                                         </ul>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </li>
                                             </ul>
                                         @endforeach
