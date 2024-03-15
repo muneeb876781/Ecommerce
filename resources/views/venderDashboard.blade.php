@@ -133,8 +133,8 @@
                                         </div>
                                         <div class="name ms-4">
                                             <h5 class="mb-1">{{ $category->name }}</h5>
-                                            <h6 class="text-muted mb-0">{{ $category->subcategories->count() }} Sub
-                                                Categories</h6>
+                                            {{-- <h6 class="text-muted mb-0">{{ $category->subcategories->count() }} Sub
+                                                Categories</h6> --}}
                                         </div>
                                     </div>
                                 @endif
