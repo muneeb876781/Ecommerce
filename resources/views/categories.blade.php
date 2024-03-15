@@ -76,7 +76,7 @@
                                             <tr>
                                                 <td style="width: 10%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 15%"><img style="width: 100px; height: 100px;"
-                                                        src="{{ asset($category->image_url) }}"
+                                                    src="{{ Storage::url($category->image_url) }}"
                                                         alt="{{ $category->name }}" class="rounded-circle"></td>
                                                 <td style="width: 18%"><strong>{{ $category->name }}</strong> <br> </td>
                                                 <td style="width: 37%">{{ $category->description }}</td>
