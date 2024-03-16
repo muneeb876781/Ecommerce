@@ -41,7 +41,7 @@ class SellerShopController extends Controller
         if ($request->hasFile('shopBanner')) {
             $image = $request->file('shopBanner');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $bannerImagePath = $image->storeAs( 'uploads',$imageName);
+            $bannerImagePath = $image->storeAs( 'uploads', $imageName);
         } else {
             $bannerImagePath = null;
         }
