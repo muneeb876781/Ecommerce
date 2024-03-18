@@ -396,6 +396,30 @@ label {
     display: inline-block;
 }
 
+.middle{
+    padding: 10px 70px;
+
+}
+
+.mnu{
+    padding: 0 70px;
+}
+
+@media (max-width: 768px){
+    .middle{
+        padding: 10px 0;
+    
+    }
+    
+    .mnu{
+        padding: 0 0;
+    }
+
+    .offers{
+        font-size: 12px;
+    }
+}
+
 .nav--top__link::before {
     content: "|";
     display: inline-block;
@@ -2131,8 +2155,6 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 .blog-details-area .main-wrapper {
     margin-right: 50px;
 }
-<<<<<<< Updated upstream
-=======
 
 .main--wrapper{
     margin: 0px 70px 0px 70px;
@@ -2173,7 +2195,6 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 
 
 
->>>>>>> Stashed changes
 .blog-details-img-active .left,
 .blog-details-img-active .right {
     position: absolute;
@@ -3540,6 +3561,16 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
     color: #cd3301;
 }
 /*contact area css end*/
+
+.foooter{
+    padding: 0 70px;
+}
+
+@media (max-width: 768px) {
+    .foooter{
+        padding: 0;
+    }
+}
 
 
 
