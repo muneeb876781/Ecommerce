@@ -129,12 +129,12 @@
                                 @if ($key <= 2)
                                     <div class="recent-message d-flex px-4 py-3">
                                         <div class="avatar avatar-lg">
-                                            <img src="{{ asset($category->image_url) }}">
+                                            <img src="{{ asset('storage/uploads/'.$category->image_url) }}">
                                         </div>
                                         <div class="name ms-4">
                                             <h5 class="mb-1">{{ $category->name }}</h5>
-                                            <h6 class="text-muted mb-0">{{ $category->subcategories->count() }} Sub
-                                                Categories</h6>
+                                            {{-- <h6 class="text-muted mb-0">{{ $category->subcategories->count() }} Sub
+                                                Categories</h6> --}}
                                         </div>
                                     </div>
                                 @endif
@@ -163,7 +163,7 @@
                                         <a style="padding: 0px;"
                                             href="{{ route('singleProduct', ['id' => $product->id]) }}">
                                             <div class="avatar avatar-lg">
-                                                <img src="{{ asset($product->image_url) }}">
+                                                <img src="{{ asset('storage/uploads/'.$product->image_url) }}">
                                             </div>
                                         </a>
                                         <div class="name ms-4">

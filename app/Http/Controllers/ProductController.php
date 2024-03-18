@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValue;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -73,8 +74,8 @@ class ProductController extends Controller
         if ($request->hasFile('productImage')) {
             $image = $request->file('productImage');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $imagePath = 'images/' . $imageName;
+            $imagePath = $image->storeAs( 'public/uploads', $imageName);
+            $imagePath = $imageName;
         } else {
             $imagePath = null;
         }
@@ -82,26 +83,26 @@ class ProductController extends Controller
         if ($request->hasFile('productMedia1Image')) {
             $image1 = $request->file('productMedia1Image');
             $imageName1 = time() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('images'), $imageName1);
-            $media1Path = 'images/' . $imageName1;
+            $media1Path = $image1->storeAs( 'public/uploads', $imageName1);
+            $imagePath = $imageName1;
         } else {
             $media1Path = null;
         }
 
         if ($request->hasFile('productMedia2Image')) {
-            $image = $request->file('productMedia2Image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $media2Path = 'images/' . $imageName;
+            $image2 = $request->file('productMedia2Image');
+            $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
+            $media2Path = $image1->storeAs( 'public/uploads', $imageName2);
+            $imagePath = $imageName2;
         } else {
             $media2Path = null;
         }
 
         if ($request->hasFile('productMedia3Image')) {
-            $image = $request->file('productMedia3Image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $media3Path = 'images/' . $imageName;
+            $image3 = $request->file('productMedia3Image');
+            $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
+            $media3Path = $image1->storeAs( 'public/uploads', $imageName3);
+            $imagePath = $imageName3;
         } else {
             $media3Path = null;
         }
@@ -109,8 +110,7 @@ class ProductController extends Controller
         if ($request->hasFile('productVideo')) {
             $video = $request->file('productVideo');
             $videoName = time() . '.' . $video->getClientOriginalExtension();
-            $video->move(public_path('videos'), $videoName);
-            $videoPath = 'videos/' . $videoName;
+            $videoPath = $video->storeAs('public/uploads', $videoName, 'uploads');
         } else {
             $videoPath = null;
         }

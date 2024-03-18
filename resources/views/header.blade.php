@@ -70,7 +70,14 @@
         @media (max-width: 800px) {
             .mnu {
                 margin-top: 40px;
+                padding: 0;
             }
+
+            .top {
+                padding: 0;
+            }
+
+
         }
     </style>
     <title>Document</title>
@@ -274,12 +281,11 @@
                         <div class="cart--header__middle d-block d-md-none">
                             <div class="cart--header__list">
                                 <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-user-plus"></i></a></li>
                                     <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                                    <li><a class="mini__cart--link" href="#"><i
-                                                class="fas fa-shopping-bag"><span
-                                                    class="cart__count">3</span></i><span class="cart__amount">$
-                                                3550</span></a></li>
+                                        <li><a class="mini__cart--link" href="#"><i
+                                                    class="fas fa-shopping-bag"><span
+                                                        class="cart__count">{{ $totalItems }}</span></i><span
+                                                    class="cart__amount">Rs. {{ $totalPrice }}</span></a></li>
                                 </ul>
                             </div>
                             @foreach ($cart as $item)
@@ -331,7 +337,7 @@
                                                 <li class="dropdown">
                                                     <a class="dept__menu--dlink"
                                                         href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                                                    @if ($category->subcategories->count() > 0)
+                                                    {{-- @if ($category->subcategories->count() > 0)
                                                         <ul style="box-shadow: 20px 20px 20px -8px rgba(0, 0, 0, 0.2);"
                                                             class="sub__menu sub__dept--menu">
                                                             @foreach ($category->subcategories as $subcategory)
@@ -340,7 +346,7 @@
                                                                 </li>
                                                             @endforeach
                                                         </ul>
-                                                    @endif
+                                                    @endif --}}
                                                 </li>
                                             @endforeach
 
@@ -378,14 +384,14 @@
                                                 <li>
                                                     <a
                                                         href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                                                    @foreach ($category->subcategories as $subcategory)
+                                                    {{-- @foreach ($category->subcategories as $subcategory)
                                                         <ul class="submenu">
                                                             <li>
                                                                 <a
                                                                     href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $subcategory->name }}</a>
                                                             </li>
                                                         </ul>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </li>
                                             </ul>
                                         @endforeach

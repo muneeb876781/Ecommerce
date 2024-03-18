@@ -5,7 +5,12 @@ use App\Models\SellerShop;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Review;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\SubCategory;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -13,6 +18,8 @@ class SellerShopController extends Controller
 {
     public function createShop(Request $request)
     {
+        $shopInfo = SellerShop::where('user_id', auth()->id())->first();
+
         $validatedData = $request->validate([
             'shopname' => 'required|string|max:255',
             'shopdescription' => 'required|string',
@@ -26,19 +33,17 @@ class SellerShopController extends Controller
         if ($request->hasFile('shopLogo')) {
             $image = $request->file('shopLogo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $logoImagePath = 'images/' . $imageName;
+            $logoImagePath = $image->storeAs('public/uploads', $imageName);
         } else {
-            $imagePath = null;
+            $logoImagePath = null;
         }
 
         if ($request->hasFile('shopBanner')) {
             $image = $request->file('shopBanner');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $bannerImagePath = 'images/' . $imageName;
+            $bannerImagePath = $image->storeAs( 'public/uploads', $imageName);
         } else {
-            $imagePath = null;
+            $bannerImagePath = null;
         }
 
         $userId = Auth::id();
@@ -60,28 +65,37 @@ class SellerShopController extends Controller
         $user->role = 'seller';
         $user->save();
 
-        $shopInfo = SellerShop::where('user_id', auth()->id())->first();
-        $shopId = SellerShop::where('user_id', Auth::id())->value('id');
-        $categories = Category::where('seller_shop_id', $shopId)->get();
-        $cat_count = $categories->count();
+        $Orders = []; 
 
-        $shopId = SellerShop::where('user_id', Auth::id())->value('id');
-        $products = Product::where('shop_id', $shopId)->get();
-        $pro_count = $products->count();
+        if ($shopInfo) {
+            $shopId = SellerShop::where('user_id', Auth::id())->value('id');
+            $categories = Category::where('seller_shop_id', $shopId)->get();
+            $cat_count = $categories->count();
 
-        $reviews = collect();
-        foreach ($products as $product) {
-            $productReviews = Review::where('product_id', $product->id)->get();
-            $reviews = $reviews->merge($productReviews);
+            $shopId = SellerShop::where('user_id', Auth::id())->value('id');
+            $products = Product::where('shop_id', $shopId)->get();
+            $pro_count = $products->count();
+
+            $reviews = collect();
+            foreach ($products as $product) {
+                $productReviews = Review::where('product_id', $product->id)->get();
+                $reviews = $reviews->merge($productReviews);
+            }
+            $rev_count = $reviews->count();
+
+            $Orders = Order::where('shop_id', $shopId)->get();
+            $ord_count = $Orders->count();
+        } else {
+            $cat_count = 0;
+            $pro_count = 0;
+            $rev_count = 0;
+            $ord_count = 0;
+            $categories = [];
+            $products = [];
+            $reviews = [];
         }
 
-        $rev_count = $reviews->count();
-
-        
-
-
-        return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'products', 'categories'));
-
+        return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'products', 'categories', 'ord_count', 'Orders'));
     }
 
     public function delete($id)

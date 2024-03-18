@@ -159,7 +159,7 @@
                                                 <td style="width: 12%">
                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}">
                                                         <img style="widows: 70px; height: 70px;"
-                                                            src="{{ asset($product->image_url) }}"
+                                                        src="{{ asset('storage/uploads/'.$product->image_url) }}"
                                                             alt="{{ $product->name }}" class="rounded-circle">
                                                     </a>
                                                 </td>

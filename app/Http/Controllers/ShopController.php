@@ -84,7 +84,7 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('shopPage', compact('products', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('ShopPage', compact('products', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function searchProducts(Request $request)

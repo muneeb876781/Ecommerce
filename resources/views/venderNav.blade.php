@@ -109,7 +109,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="{{ asset($shopInfo->logo) }}" alt="">
+                        <img src="{{ Storage::url($shopInfo->logo) }}" alt="">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="my-profile.html"><i class="fa fa-user size-icon-1"></i> <span>My
@@ -131,7 +131,7 @@
 
                 <!-- Logo -->
                 <div style="display: flex; flex-direction: row; width: 100%; margin: 10px; justify-content: center; align-items: center;" class="logo">
-                    <img style="width: 20%; heigth: 100%; border-radius: 100%;" src="{{ asset($shopInfo->logo) }}" alt="">
+                    {{-- <img style="width: 20%; heigth: 100%; border-radius: 100%;" src="{{ asset($shopInfo->logo) }}" alt=""> --}}
                     <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0"> {{ auth()->user()->name }}</h2>
                 </div>
 
@@ -154,11 +154,11 @@
                         </a>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('subCategoryview') }}" class="{{ Request::is('subCategories') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i>Sub Categories
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li>
                         <a href="{{ route('productview') }}" class="{{ Request::is('product*') ? 'active' : '' }}">
