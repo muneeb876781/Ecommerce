@@ -251,18 +251,18 @@
                                 <div class="tab-pane fade show active" id="home5" role="tabpanel"
                                     aria-labelledby="home-tab5">
                                     <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
-                                    src="{{ Storage::url($product->image_url) }}" class="img-fluid" alt="">
+                                    src="{{ asset('storage/uploads/'. $product->image_url) }}" class="img-fluid" alt="">
 
                                 </div>
 
                                 <div class="tab-pane fade" id="profile5" role="tabpanel"
                                     aria-labelledby="profile-tab5">
-                                    src="{{ Storage::url($product->image_url) }}" class="img-fluid" alt="">
+                                    src="{{ asset('storage/uploads/'. $product->image_url) }}" class="img-fluid" alt="">
                                 </div>
 
                                 <div class="tab-pane fade" id="contact5" role="tabpanel"
                                     aria-labelledby="contact-tab5">
-                                    src="{{ Storage::url($product->image_url) }}" class="img-fluid" alt="">
+                                    src="{{ asset('storage/uploads/'. $product->image_url) }}" class="img-fluid" alt="">
                                 </div>
                             </div>
                             <ul class="nav" id="myTab1" role="tablist">
@@ -270,21 +270,21 @@
                                     <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5"
                                         role="tab" aria-controls="home5" aria-selected="true">
                                         <img style="widows: 110px; height: 110px;"
-                                        src="{{ Storage::url($product->image_url) }}" class="img-fluid" alt="">
+                                        src="{{ asset('storage/uploads/'. $product->image_url) }}" class="img-fluid" alt="">
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5"
                                         role="tab" aria-controls="profile5" aria-selected="false">
                                         <img style="widows: 110px; height: 110px;"
-                                        src="{{ Storage::url($product->image_url) }}" class="img-fluid" alt="">
+                                        src="{{ asset('storage/uploads/'. $product->image_url) }}" class="img-fluid" alt="">
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab5" data-toggle="tab" href="#contact5"
                                         role="tab" aria-controls="contact5" aria-selected="false">
                                         <img style="widows: 110px; height: 110px;"
-                                        src="{{ Storage::url($product->image_url) }}" class="img-fluid" alt="">
+                                        src="{{ asset('storage/uploads/'. $product->image_url) }}" class="img-fluid" alt="">
                                     </a>
                                 </li>
                             </ul>
@@ -654,9 +654,9 @@
                                             <a href="{{ route('singleProduct', ['id' => $relProduct->id]) }}"
                                                 class="img-wrapper">
                                                 <img style="height: 220px;" class="img"
-                                                src="{{ Storage::url($product->image_url) }}" alt="">
+                                                src="{{ asset('storage/uploads/'. $product->image_url) }}" alt="">
                                                 <img style="height: 220px;" class="img secondary-img"
-                                                src="{{ Storage::url($product->image_url) }}" alt="">
+                                                src="{{ asset('storage/uploads/'. $product->image_url) }}" alt="">
                                                 @if ($relProduct->discountedPrice)
                                                     @php
                                                         $salePercentage =
