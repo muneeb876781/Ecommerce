@@ -228,7 +228,7 @@
 
         <!-- Shop-details start -->
         <section class="shop-details-area pb-80">
-            <div style="padding: 0px 70px 0px 70px;" class="container">
+            <div class="container">
                 {{-- <div class="row">
                     <div class="col-sm-12">
                         <div class="shop-bred pt-35 pb-35">
