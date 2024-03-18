@@ -125,7 +125,7 @@
 
         .panel .content {
             position: absolute;
-            width: 100vw;
+            width: 90vw;
             min-height: 400px;
             color: #FFF;
             /* Set text color to white */
@@ -143,7 +143,7 @@
             box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
             width: auto;
             /* Adjust image width */
-            height: 300px;
+            height: 70%;
             /* Maintain aspect ratio */
             position: absolute;
             top: 50%;
@@ -218,11 +218,7 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .main--wrapper {
-                margin: 0;
-            }
-        }
+        
     </style>
 
 
@@ -355,7 +351,7 @@
         <!-- hero end -->
 
 
-        <div class="splitview skewed">
+        <div class="splitview skewed hero">
             <div class="panel bottom">
                 <div class="content">
                     <div class="description">
@@ -425,7 +421,7 @@
                     </div>
                     <div class="col-xl-6">
                         <div class="features mb-25">
-                            <div class="row">
+                            <div class="row offers">
                                 <div class="col-xl-6 col-lg-4 col-md-6">
                                     <div class="features-box d-flex align-items-center justify-content-between mb-10">
                                         <div class="features--box__text">
@@ -518,7 +514,7 @@
                                             id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                             role="tab" aria-controls="nav-profile"
                                             aria-selected="false">Discounted Items</a>
-                                        <a class="nav-item nav-link btn gray-bg-btn pure__black-color"
+                                        <a class="  nav-item nav-link btn gray-bg-btn pure__black-color"
                                             id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
                                             role="tab" aria-controls="nav-contact" aria-selected="false">Popular
                                             Product</a>
@@ -551,7 +547,7 @@
                                                             class="img-wrapper">
                                                             <img class="img"
                                                                 src="{{ asset('storage/uploads/'. $product->image_url) }}"
-                                                                alt="product Image" style="height: 220px;">
+                                                                alt="product Image" style="height: 220px; width: auto; margin: 0 auto;">
 
                                                             @if ($product->quantity == 0)
                                                                 <span class="out-of-stock-tag">Out of Stock</span>
@@ -889,8 +885,8 @@
                                     <div class="categories-box position-relative">
                                         <div class="categories-thumb">
                                             <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                                <img src="{{ asset('storage/uploads/'. $category->image_url) }}"
-                                                    alt="Category Image" style="height: 200px;">
+                                                <img class="pb-3" src="{{ asset('storage/uploads/'. $category->image_url) }}"
+                                                    alt="Category Image" style="height: 200px; width: auto; margin: 0 auto;">
                                             </a>
                                             <br>
 

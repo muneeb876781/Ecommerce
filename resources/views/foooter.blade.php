@@ -14,7 +14,7 @@
     <title>Document</title>
 </head>
 <body>
-    <footer style="padding: 0px 70px 0px 70px; background: #f4f4f4;" class="footer--area">
+    <footer class="foooter" style=" background: #f4f4f4;" class="footer--area">
         <div class="footer--top pt-70 pb-25">
             <div class="container">
                 <div class="row">
