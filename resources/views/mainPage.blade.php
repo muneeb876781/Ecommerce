@@ -1268,9 +1268,9 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="product__single mb-30">
                                     <div class="product__box featured__box--item">
-                                        <div class="product__thumb">
+                                        <div style="width: 50%;" class="product__thumb">
                                             <a href="product-details.html"><img class="img"
-                                                    style="height: 180px; width: 200px; padding-right: 20px;"
+                                                    style="height: 160px; padding-right: 20px;"
                                                     src="{{ asset('storage/uploads/'.$product->image_url) }}" alt=""></a>
                                             @if ($product->discountedPrice)
                                                 @php
@@ -1286,8 +1286,8 @@
                                                 @endif
                                             @endif
                                         </div>
-                                        <div class="product--flex__right">
-                                            <div class="product__content--top">
+                                        <div style="width: 50%;" class="product--flex__right">
+                                            <div  class="product__content--top">
                                                 <span class="cate-name">{{ $product->category->name }}</span>
                                                 <h6 class="product__title mine__shaft-color f-700 mb-30"><a
                                                         href="product-details.html">{{ $product->name }}</a></h6>
