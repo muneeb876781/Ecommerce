@@ -262,6 +262,24 @@
             });
         </script>
     @endif
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('shop_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Shop Successfully created!',
+                text: '{{ session('success') }}',
+                showCancelButton: true,
+                confirmButtonText: 'Visit Dashboard',
+                cancelButtonText: 'Close'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to view cart page
+                    window.location.href = '{{ route('dashboard') }}';
+                }
+            });
+        </script>
+    @endif
 
     <!-- Main -->
     <main class="main--wrapper">

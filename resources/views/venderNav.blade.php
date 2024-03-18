@@ -28,7 +28,7 @@
             transition: 0.2s ease-in-out;
         }
 
-        .logout:hover{
+        .logout:hover {
             background: blue;
             border: none;
         }
@@ -107,17 +107,22 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="{{ Storage::url($shopInfo->logo) }}" alt="">
-                    </a>
+                    @if (isset($shopInfo))
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
+                        </a>
+                    @endif
+
+
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="my-profile.html"><i class="fa fa-user size-icon-1"></i> <span>My
                                 Profile</span></a>
                         <a class="dropdown-item" href="settings.html"><i class="fa fa-cog size-icon-1"></i>
                             <span>Delete Store</span></a>
                         <hr class="dropdown-divider">
-                        <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out-alt  size-icon-1"></i> <span>Log out</span></a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"><i
+                                class="fa fa-sign-out-alt  size-icon-1"></i> <span>Log out</span></a>
                     </ul>
                 </li>
             </ul>
@@ -130,10 +135,17 @@
             <div id="sidebar">
 
                 <!-- Logo -->
-                <div style="display: flex; flex-direction: row; width: 100%; margin: 10px; justify-content: center; align-items: center;" class="logo">
-                    {{-- <img style="width: 20%; heigth: 100%; border-radius: 100%;" src="{{ asset($shopInfo->logo) }}" alt=""> --}}
-                    <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0"> {{ auth()->user()->name }}</h2>
-                </div>
+                @if ($shopInfo)
+                    <div style="display: flex; flex-direction: row; width: 100%; margin: 10px; justify-content: center; align-items: center;"
+                        class="logo">
+                        <img style="width: 20%; height: 100%; border-radius: 100%;"
+                            src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
+                        <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2>
+                    </div>
+                @else
+                    <h2 style="font-size: 20px; text-align: center;">{{ auth()->user()->name }}</h2>
+                @endif
+
 
                 <ul class="side-menu">
                     <li>
@@ -149,7 +161,8 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('categoryview') }}" class="{{ Request::is('categories*') ? 'active' : '' }}">
+                        <a href="{{ route('categoryview') }}"
+                            class="{{ Request::is('categories*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Categories
                         </a>
                     </li>
@@ -167,7 +180,8 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('productAttributes') }}" class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
+                        <a href="{{ route('productAttributes') }}"
+                            class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Product Attributes
                         </a>
                     </li>
@@ -184,6 +198,20 @@
                             <button class="logout" type="submit">Logout</button>
                         </form>
                     </li>
+
+                    @if (isset($shopInfo))
+                        <li>
+                            <form action="{{ route('deleteStore', ['id' => $shopInfo->id]) }}" method="post"
+                                onsubmit="return confirm('Are you sure you want to delete your store? This action cannot be undone.');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="logout"><span class="fa fa-support mr-3"></span>Delete
+                                    Store</button>
+                            </form>
+                        </li>
+                    @endif
+
+
 
 
             </div>
