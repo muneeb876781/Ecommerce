@@ -34,6 +34,7 @@ class SellerShopController extends Controller
             $image = $request->file('shopLogo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $logoImagePath = $image->storeAs('public/uploads', $imageName);
+            $logoImagePath = $imageName;
         } else {
             $logoImagePath = null;
         }
@@ -41,7 +42,8 @@ class SellerShopController extends Controller
         if ($request->hasFile('shopBanner')) {
             $image = $request->file('shopBanner');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $bannerImagePath = $image->storeAs( 'public/uploads', $imageName);
+            $bannerImagePath = $image->storeAs('public/uploads', $imageName);
+            $bannerImagePath = $imageName;
         } else {
             $bannerImagePath = null;
         }
@@ -65,7 +67,7 @@ class SellerShopController extends Controller
         $user->role = 'seller';
         $user->save();
 
-        $Orders = []; 
+        $Orders = [];
 
         if ($shopInfo) {
             $shopId = SellerShop::where('user_id', Auth::id())->value('id');
@@ -95,7 +97,26 @@ class SellerShopController extends Controller
             $reviews = [];
         }
 
-        return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'products', 'categories', 'ord_count', 'Orders'));
+        $products = Product::all();
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+
+        $user_id = auth()->id();
+
+        $cart = Cart::where('user_id', $user_id)->get();
+
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            if ($item->product->discountedPrice) {
+                $totalPrice += $item->product->discountedPrice * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+        }
+
+        $totalItems = $cart->sum('quantity');
+
+        return view('mainPage', compact('products', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'))->with('shop_success', 'Your shop is created sucessfully');
     }
 
     public function delete($id)
@@ -120,6 +141,25 @@ class SellerShopController extends Controller
 
         $shop->delete();
 
-        return view('indexPage');
+        $products = Product::all();
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+
+        $user_id = auth()->id();
+
+        $cart = Cart::where('user_id', $user_id)->get();
+
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            if ($item->product->discountedPrice) {
+                $totalPrice += $item->product->discountedPrice * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+        }
+
+        $totalItems = $cart->sum('quantity');
+
+        return view('mainPage', compact('products', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 }
