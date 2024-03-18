@@ -85,7 +85,7 @@
 
 <body>
     <header class="header" id="header">
-        <div style="padding-right: 70px; padding-left: 70px;"" class="top header__top gray-bg d-none d-md-block">
+        <div class="top header__top gray-bg d-none d-md-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div style="padding-right: 70px; padding-left: 70px; background: #f2f2f2;"
+        <div style=" background: #f2f2f2;"
             class="middle header__middle bg--header__middle pt-15 pb-15">
             <div class="container">
                 <div class="row">
@@ -272,7 +272,7 @@
                 </div>
             </div>
         </div>
-        <div class="mnu" style="padding-right: 70px; padding-left: 70px; background: rgba(255, 255, 255, 0.8);"
+        <div class="mnu" style=" background: rgba(255, 255, 255, 0.8);"
             class="bottom header__bottom header__bottom--border custom-header-bottom">
             <div class="container">
                 <div class="row">
