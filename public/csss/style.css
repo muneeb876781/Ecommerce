@@ -2166,16 +2166,16 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
     }
 
     .hero{
-        min-height: 300px;
+        min-height: 200px;
     }
 
     .hero .panel{
-        min-height: 300px;
+        min-height: 200px;
         width: 100vw;
     }
 
     .hero .panel .content{
-        min-height: 300px;
+        min-height: 200px;
         width: 100vw;
 
     }
