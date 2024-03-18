@@ -268,7 +268,7 @@
     @endif
 
     <!-- Main -->
-    <main class="main--wrapper">
+    <main style="margin: 0px 0px 0px 0px" class="main--wrapper">
         <!-- hero  -->
         {{-- <section class="hero hero__area" style="max-height: 400px;">
             <div class="hero__active slider-active">
