@@ -2131,6 +2131,49 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 .blog-details-area .main-wrapper {
     margin-right: 50px;
 }
+<<<<<<< Updated upstream
+=======
+
+.main--wrapper{
+    margin: 0px 70px 0px 70px;
+}
+
+@media (max-width: 768px) {
+    .main--wrapper {
+        margin: 0;
+    }
+
+    .hero{
+        min-height: 200px;
+    }
+
+    .hero .panel{
+        min-height: 200px;
+        width: 100vw;
+    }
+
+    .hero .panel .content{
+        min-height: 200px;
+        width: 100vw;
+
+    }
+
+    .hero .panel img{
+        height: 2;
+    }    
+
+    .all__product--menu{
+        font-size: 8px;
+    }
+
+    .all__product--menu .nav-tabs a.nav-link{
+        font-size: 10px;
+    }
+}
+
+
+
+>>>>>>> Stashed changes
 .blog-details-img-active .left,
 .blog-details-img-active .right {
     position: absolute;
