@@ -60,6 +60,12 @@
             opacity: 1;
 
         }
+
+        @media (max-width: 850px){
+            .dropbtn{
+                display: none;
+            }
+        }
     </style>
     <style>
         .logout_button {
