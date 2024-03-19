@@ -33,12 +33,17 @@
             border-radius: 0 0 20px 0;
             z-index: 1;
         }
+
+        .maiin{
+            margin: 0 70px;
+            margin: auto;
+        }
     </style>
 </head>
 
 <body>
-    <main style="margin: 0px 70px 0px 70px" class="main--wrapper">
-        <div class="col-md-12">
+    {{-- <main style="margin: 0px 70px 0px 70px" class="main--wrapper"> --}}
+        <div class="col-lg-11 m-auto">
             <div id="pendings" class="card">
                 <div class="card-header">
                     <h4>Orders</h4>
@@ -98,7 +103,7 @@
         <br>
         <br>
         
-    </main>
+    {{-- </main> --}}
 
     <!-- JS here -->
     <script src="{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}">

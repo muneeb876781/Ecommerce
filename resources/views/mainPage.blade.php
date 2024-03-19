@@ -1763,8 +1763,7 @@
 
     <!-- JS here -->
     <script src="{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}">
-        < script src = "{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}" >
-    </script>
+    <script src = "{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}"></script>
     <script src="{{ asset('javascript/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('javascript/popper.min.js') }}"></script>
     <script src="{{ asset('javascript/bootstrap.min.js') }}"></script>
