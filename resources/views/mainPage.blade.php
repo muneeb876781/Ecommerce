@@ -255,7 +255,7 @@
             }
         }
 
-        
+
 
         @keyframes round {
             25% {
@@ -283,6 +283,152 @@
             animation-delay: 0s;
         }
     </style>
+
+    <style>
+        .cats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            height: auto;
+            padding: 10px;
+        }
+
+        .cat_card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 12%;
+            height: 180px;
+            padding: 10px;
+        }
+
+
+        .cat_card img {
+            width: auto;
+            height: 60%;
+        }
+
+        .cat_card h2 {
+            font-size: 17px;
+            font-weight: 400;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .cat_card {
+                width: 15%;
+            }
+        }
+
+        @media (max-width: 1050px) {
+            .cat_card {
+                width: 18%;
+            }
+        }
+
+        @media (max-width: 1050px) {
+            .cat_card {
+                height: 150px;
+            }
+
+            .cat_card h2 {
+                font-size: 16px;
+               
+            }
+        }
+
+        @media (max-width: 750px) {
+            .cat_card {
+                height: 120px;
+            }
+
+            .cat_card h2 {
+                font-size: 12px;
+               
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cat_card {
+                height: 90px;
+            }
+
+            .cat_card h2 {
+                font-size: 10px;
+               
+            }
+        }
+    </style>
+
+<style>
+    .product__thumb {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product__thumb:hover .product-action {
+        display: flex;
+    }
+
+    .product__thumb:hover img {
+        filter: blur(8px);
+    }
+
+    .product-action {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    .product-action a {
+        margin-right: 10px;
+        color: #fff;
+        font-size: 20px;
+        box-shadow: 20px 20px 30px -4px rgba(0, 0, 0, 0.2);
+
+    }
+
+    /* Add this CSS */
+    .product-action {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .product-s {
+        width: 20%;
+        min-height: 400px;
+        float: left;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 1200px) {
+        .product-s {
+            width: 25%;
+        }
+    }
+
+    @media (max-width: 958px) {
+        .product-s {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .product-s {
+            width: 100%;
+        }
+    }
+
+    
+</style>
 
 
 </head>
@@ -508,7 +654,7 @@
         </script>
 
         <!-- what shop-max offer -->
-        <section class="offer pt-60 pb-50">
+        {{-- <section class="offer pt-60 pb-50">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-6">
@@ -596,11 +742,50 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <!-- what shop-max offer end -->
 
+        <div class="cats">
+            <div class="cat_card">
+                <img src="../images/c1.png" alt="">
+                <h2>Free Delivery</h2>
+            </div>
+            <div class="cat_card">
+                <img src="../images/c5.png" alt="">
+                <h2>Beauty</h2>
+            </div>
+            <div class="cat_card">
+                <img src="../images/c2.png" alt="">
+                <h2>Mart</h2>
+            </div>
+            <div class="cat_card">
+                <img src="../images/c3.png" alt="">
+                <h2>Fashion</h2>
+            </div>
+            <div class="cat_card">
+                <img src="../images/c4.png" alt="">
+                <h2>Furniture</h2>
+            </div>
+        </div>
+
+        <!-- offer heading  -->
+        <div class="offer__heading" style="background: #efefef; color: black;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="offer__heading--title text-center">
+                            <p class="mb-0"><a href="#">Don’t Miss Our Furniture,
+                                    Lighting & Decorative
+                                    Piece Discount 70% Special Offer - <strong class="f-800">‘NEW01’</strong></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- offer heading end -->
+
         <!-- Discover All Product  -->
-        <section class="all__product pt-80 pb-20">
+        <section class="all__product pt-20 pb-20">
             <div class="all__product--nav">
                 <div class="container">
                     <div class="row all__product--row align-items-center justify-content-between">
@@ -612,12 +797,11 @@
                                             id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                                             aria-controls="nav-home" aria-selected="true">Trending Items</a>
                                         <a class="nav-item nav-link btn gray-bg-btn pure__black-color"
-                                            id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                            role="tab" aria-controls="nav-profile"
-                                            aria-selected="false">Discounted Items</a>
+                                            id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                                            aria-controls="nav-profile" aria-selected="false">Discounted Items</a>
                                         <a class="  nav-item nav-link btn gray-bg-btn pure__black-color"
-                                            id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-                                            role="tab" aria-controls="nav-contact" aria-selected="false">Popular
+                                            id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                                            aria-controls="nav-contact" aria-selected="false">Popular
                                             Product</a>
                                     </div>
                                 </nav>
@@ -942,7 +1126,26 @@
                                             }
                                         }
                                     </script>
-
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="offer-banner offer--banner__bg mb-30" data-background="../img/offer/offer2.jpeg">
+                                <div class="offer--banner__text">
+                                    <span class="f-200 white-color">Solid Wooden Furniture</span>
+                                    <h4 class="white-color f-900 mb-40">40% Flate</h4>
+                                    <a href="shop-collection.html">View Collection<i
+                                            class="icofont-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="offer-banner offer--banner__bg mb-30" data-background="../img/offer/offer1.jpeg">
+                                <div class="offer--banner__text">
+                                    <span class="f-200 white-color">Ceiling Floor Lighting</span>
+                                    <h4 class="white-color f-900 mb-40">50% Flate</h4>
+                                    <a href="shop-collection.html">View Collection<i
+                                            class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -952,21 +1155,7 @@
         </section>
         <!-- Discover All Product end -->
 
-        <!-- offer heading  -->
-        <div class="offer__heading grenadier-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="offer__heading--title text-center">
-                            <p class="mb-0"><a class="white-color" href="#">Don’t Miss Our Furniture,
-                                    Lighting & Decorative
-                                    Piece Discount 70% Special Offer - <strong class="f-800">‘NEW01’</strong></a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- offer heading end -->
+        
 
         <!-- Top Featured Area  -->
         <div class="top__featured--area pt-80 pb-80">
@@ -1209,124 +1398,80 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="product__active owl-carousel">
-                            @foreach ($products as $product)
-                                <div class="product__single">
-                                    <div class="product__box">
-                                        <div class="product__thumb">
-                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                class="img-wrapper">
-                                                <img class="img"
-                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                    alt="product Image" style="height: 220px;">
-
-                                                {{-- <img style="height: 220px;" class="img secondary-img"
-                                                    src="{{ asset($product->media1_url) }}"
-                                                    alt=""> --}}
-                                                @if ($product->discountedPrice)
-                                                    @php
-                                                        $salePercentage =
-                                                            (($product->price - $product->discountedPrice) /
-                                                                $product->price) *
-                                                            100;
-                                                    @endphp
-                                                    @if ($salePercentage > 0)
-                                                        <span class="sale-tag">Sale
-                                                            {{ round($salePercentage) }}% Off</span>
-                                                    @endif
-                                                @endif
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#"><span class="fas fa-heart"></span></a>
-                                                <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                        class="fas fa-eye"></span></a>
-                                                <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                        class="fas fa-shopping-cart"></span></a>
-                                            </div>
-                                        </div>
-                                        <div class="product__content--top">
-                                            <span class="cate-name">{{ $product->category->name }}</span>
-                                            <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                    href="product-details.html">{{ $product->name }}</a>
-                                            </h6>
-                                            <div class="rating" style="padding-top: 5px;">
-                                                <ul class="list-inline">
-                                                    <li class="rating-active"><i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li class="rating-active"><i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li class="rating-active"><i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                            <br>
-                                            <div class="product__content--rating d-flex justify-content-between">
-                                                <div class="price">
-                                                    @if ($product->discountedPrice)
-                                                        <span class="original-price"
-                                                            style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">Rs.{{ $product->price }}</span>
-                                                        <span
-                                                            class="discounted-price"><strong>Rs.{{ $product->discountedPrice }}</strong></span>
-                                                    @else
-                                                        <span>Rs.{{ $product->price }}</span>
-                                                    @endif
+                <div class="row mt-30">
+                    <div class="col-sm-12" id="product-list">
+                        @if ($products->isEmpty())
+                            <div class="text-center">No products in this category.</div>
+                        @else
+                            <div class="row">
+                                @foreach ($products as $product)
+                                    <div class="product-s">
+                                        <div class="product__single">
+                                            <div class="product__box">
+                                                <div class="product__thumb">
+                                                    <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                        class="img-wrapper">
+                                                        <img style="height: 220px; width: auto; margin: 0 auto;" class="img"
+                                                            src="{{ asset( 'storage/uploads/' . $product->image_url) }}" alt="">
+                                                        @if ($product->discountedPrice)
+                                                            @php
+                                                                $salePercentage =
+                                                                    (($product->price - $product->discountedPrice) /
+                                                                        $product->price) *
+                                                                    100;
+                                                            @endphp
+                                                            @if ($salePercentage > 0)
+                                                                <span class="sale-tag">Sale
+                                                                    {{ round($salePercentage) }}% Off</span>
+                                                            @endif
+                                                        @endif
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a href="#"><span class="fas fa-heart"></span></a>
+                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                                class="fas fa-eye"></span></a>
+                                                        <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
+                                                                class="fas fa-shopping-cart"></span></a>
+                                                    </div>
                                                 </div>
-                                                {{-- <div class="quantity">
-                                                    <button class="btn btn-sm btn-primary"
-                                                        onclick="decrementQuantity()">-</button>
-                                                    <input type="text"
-                                                        class="form-control form-control-sm"
-                                                        id="quantity" name="quantity" value="1"
-                                                        readonly>
-                                                    <button class="btn btn-sm btn-primary"
-                                                        onclick="incrementQuantity()">+</button>
-                                                </div> --}}
+                                                <div class="product__content--top">
+                                                    <span class="cate-name">{{ $product->category->name }}</span>
+                                                    <h6 class="product__title mine__shaft-color f-700 mb-0"><a
+                                                            href="product-details.html">{{ $product->name }}</a>
+                                                    </h6>
+                                                    <div class="rating" style="padding-top: 5px;">
+                                                        <ul class="list-inline">
+                                                            <li class="rating-active"><i class="fas fa-star"></i>
+                                                            </li>
+                                                            <li class="rating-active"><i class="fas fa-star"></i>
+                                                            </li>
+                                                            <li class="rating-active"><i class="fas fa-star"></i>
+                                                            </li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <br>
+                                                    <div
+                                                        class="product__content--rating d-flex justify-content-between">
+                                                        <div class="price">
+                                                            @if ($product->discountedPrice)
+                                                                <span class="original-price"
+                                                                    style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">Rs.{{ $product->price }}</span>
+                                                                <span
+                                                                    class="discounted-price"><strong>Rs.{{ $product->discountedPrice }}</strong></span>
+                                                            @else
+                                                                <span>Rs.{{ $product->price }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <script>
-                            function incrementQuantity() {
-                                var quantityInput = document.getElementById('quantity');
-                                var currentQuantity = parseInt(quantityInput.value);
-                                quantityInput.value = currentQuantity + 1;
-                            }
-
-                            function decrementQuantity() {
-                                var quantityInput = document.getElementById('quantity');
-                                var currentQuantity = parseInt(quantityInput.value);
-                                if (currentQuantity > 1) {
-                                    quantityInput.value = currentQuantity - 1;
-                                }
-                            }
-                        </script>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="offer-banner offer--banner__bg mb-30" data-background="../img/offer/offer3.jpeg">
-                            <div class="offer--banner__text">
-                                <span class="f-200 white-color">Student Table Lamps</span>
-                                <h4 class="white-color f-900 mb-40">55% Flate</h4>
-                                <a href="shop-collection.html">View Collection<i
-                                        class="icofont-long-arrow-right"></i></a>
+                                @endforeach
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="offer-banner offer--banner__bg mb-30" data-background="../img/offer/offer5.jpg">
-                            <div class="offer--banner__text">
-                                <span class="f-200 white-color">Flower Pot Decorative</span>
-                                <h4 class="white-color f-900 mb-40">75% Flate</h4>
-                                <a href="shop-collection.html">View Collection<i
-                                        class="icofont-long-arrow-right"></i></a>
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -1334,7 +1479,7 @@
         <!-- Product end -->
 
         <!-- Product  -->
-        <div class="product pt-50 feature-h-one">
+        {{-- <div class="product pt-50 feature-h-one">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-lg-9 col-sm-6">
@@ -1410,24 +1555,14 @@
                         @endif
                     @endforeach
 
-                    {{-- <div class="col-sm-12">
-                        <div class="offer-banner offer--banner__bg bg-one mb-30 mt-25">
-                            <a href="#">
-                                <img src="../img/bg/bg2.jpg" style="width: 100%; height: 300px;" class="img-fluid" alt="">
-                                <div class="offer--banner__text text-one">
-                                    <h4 class="f-800 white-color mb-0">End Season Sale</h4>
-                                    <h2 class="white-color f-200 mb-0">Wooden Furniture</h2>
-                                </div>
-                            </a>
-                        </div>
-                    </div> --}}
+                    
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Product end -->
 
         <!-- Product  -->
-        <div class="product pt-50 pb-40">
+        {{-- <div class="product pt-50 pb-40">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-lg-9 col-sm-6">
@@ -1466,9 +1601,7 @@
                                                 <img style="height: 220px;" class="img"
                                                     src="{{ asset('storage/uploads/' . $product->image_url) }}"
                                                     alt="">
-                                                {{-- <img style="height: 220px;" class="img secondary-img"
-                                                    src="{{ asset($product->media1_url) }}"
-                                                    alt=""> --}}
+                                                
                                                 @if ($product->discountedPrice)
                                                     @php
                                                         $salePercentage =
@@ -1519,27 +1652,17 @@
                                                         <span>Rs.{{ $product->price }}</span>
                                                     @endif
                                                 </div>
-                                                {{-- <div class="quantity">
-                                                    <button class="btn btn-sm btn-primary"
-                                                        onclick="decrementQuantity()">-</button>
-                                                    <input type="text"
-                                                        class="form-control form-control-sm"
-                                                        id="quantity" name="quantity" value="1"
-                                                        readonly>
-                                                    <button class="btn btn-sm btn-primary"
-                                                        onclick="incrementQuantity()">+</button>
-                                                </div> --}}
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Product end -->
 
         <!-- Product  -->
@@ -1768,36 +1891,7 @@
         <!-- Brand End -->
 
         <!-- Subscribe -->
-        <div class="subscribe subscribe--area grenadier-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div
-                            class="newsletter newsletter--box d-flex justify-content-between align-items-center pos-rel">
-                            <div class="left d-flex justify-content-between align-items-center">
-                                <div class="newsletter__title">
-                                    <span class="notification--icon"><img src="../img/icon/notification-icon.png"
-                                            alt="notification"></span>
-                                    <span class="notification__title--heading f-800 white-color">Subscribe for Join
-                                        Us!</span>
-                                </div>
-                                <div class="newsletter--message d-none d-xl-block">
-                                    <p class="newsletter__message__title mb-0">.... & receive $20 coupne for first
-                                        Shopping &
-                                        free delivery.</p>
-                                </div>
-                            </div>
-                            <form class="right newsletter--form pos-rel">
-                                <input class="newsletter--input" type="text"
-                                    placeholder="Enter Your Email Address ...">
-                                <button class="btn newsletter--button" type="button"><img
-                                        src="../img/icon/plan-icon.png" alt=""></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Subscribe End -->
 
         <!-- modal area start --
@@ -1840,6 +1934,35 @@
         -- modal area end -->
 
     </main>
+    <div class="subscribe subscribe--area grenadier-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="newsletter newsletter--box d-flex justify-content-between align-items-center pos-rel">
+                        <div class="left d-flex justify-content-between align-items-center">
+                            <div class="newsletter__title">
+                                <span class="notification--icon"><img src="../img/icon/notification-icon.png"
+                                        alt="notification"></span>
+                                <span class="notification__title--heading f-800 white-color">Subscribe for Join
+                                    Us!</span>
+                            </div>
+                            <div class="newsletter--message d-none d-xl-block">
+                                <p class="newsletter__message__title mb-0">.... & receive $20 coupne for first
+                                    Shopping &
+                                    free delivery.</p>
+                            </div>
+                        </div>
+                        <form class="right newsletter--form pos-rel">
+                            <input class="newsletter--input" type="text"
+                                placeholder="Enter Your Email Address ...">
+                            <button class="btn newsletter--button" type="button"><img
+                                    src="../img/icon/plan-icon.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Main End -->
 
     <!-- Footer -->
