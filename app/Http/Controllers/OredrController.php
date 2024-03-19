@@ -127,8 +127,8 @@ class OredrController extends Controller
         $orderId = $order->id;
         $orderItems = OrderItem::where('order_id', $orderId)->get();
 
-        $mail = new OrderPlacedVendor($order, $orderItems);
-        Mail::to($vendorEmail)->send($mail);
+        // $mail = new OrderPlacedVendor($order, $orderItems);
+        // Mail::to($vendorEmail)->send($mail);
 
         Cart::where('user_id', auth()->id())->delete();
 
