@@ -419,6 +419,8 @@
         .product-s {
             width: 50%;
         }
+
+        
     }
 
     @media (max-width: 576px) {
