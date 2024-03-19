@@ -220,7 +220,68 @@
     </style>
 
     <style>
+        .containerr {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo {
+            position: absolute;
+            animation: round 16s infinite;
+            opacity: 0;
+            width: 100%;
+            height: 400px;
+        }
+
+        @media (max-width: 1000px) {
+            .containerr {
+                height: 300px;
+            }
+
+            .photo {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .containerr {
+                height: 200px;
+            }
+
+            .photo {
+                height: 200px;
+            }
+        }
+
         
+
+        @keyframes round {
+            25% {
+                opacity: 1;
+            }
+
+            40% {
+                opacity: 0;
+            }
+        }
+
+        img:nth-child(1) {
+            animation-delay: 12s;
+        }
+
+        img:nth-child(2) {
+            animation-delay: 8s;
+        }
+
+        img:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        img:nth-child(4) {
+            animation-delay: 0s;
+        }
     </style>
 
 
@@ -371,7 +432,7 @@
         <!-- hero end -->
 
 
-        <div class="splitview skewed hero">
+        {{-- <div class="splitview skewed hero">
             <div class="panel bottom">
                 <div class="content">
                     <div class="description">
@@ -392,9 +453,31 @@
             </div>
 
             <div class="handle"></div>
+        </div> --}}
+
+        <div class="her0_section">
+            <section>
+                <div class="rt-container">
+                    <div class="col-rt-12">
+                        <div class="Scriptcontent">
+
+                            <!-- partial:index.partial.html -->
+                            <div class="containerr">
+                                <img class='photo' src="../images/banner1.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/banner3.png" alt="Image 2" />
+                                <img class='photo' src="../images/banner.jpeg" alt="Image 3" />
+                                <img class='photo' src="../images/banner4.jpg" alt="Image 4" />
+
+                            </div>
+                            <!-- partial -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
-        
+
 
 
 
