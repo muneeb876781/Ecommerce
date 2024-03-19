@@ -65,6 +65,11 @@
             .dropbtn{
                 display: none;
             }
+
+            .mnu{
+                padding: 0;
+                margin: 0;
+            }
         }
     </style>
     <style>
@@ -119,7 +124,7 @@
         /* Add margin top on 800px width */
         @media (max-width: 800px) {
             .mnu {
-                margin-top: 40px;
+                margin-top: 25px;
                 padding: 0;
             }
 
