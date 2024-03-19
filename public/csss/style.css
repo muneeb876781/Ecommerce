@@ -2163,6 +2163,7 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 @media (max-width: 768px) {
     .main--wrapper {
         margin: 0;
+        padding: 0;
     }
 
     .hero{

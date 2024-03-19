@@ -69,7 +69,7 @@
                                                     <figure class="itemside align-items-center">
                                                         <div class="aside"> <a
                                                                 href="{{ route('singleProduct', ['id' => $item->product->id]) }}"><img
-                                                                    src="{{ asset($item->product->image_url) }}"
+                                                                    src="{{ asset( 'storage/uploads/' . $item->product->image_url) }}"
                                                                     class="book-img"></a></div>
                                                         <figcaption class="info"> <a href="#"
                                                                 class="title text-dark" data-abc="true">

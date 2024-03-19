@@ -74,13 +74,13 @@
     }
 
     /* Media query for smaller screens */
-    @media (max-width: 1100px) {
+    @media (max-width: 1200px) {
         .product-s {
             width: 25%;
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 958px) {
         .product-s {
             width: 50%;
         }
@@ -91,6 +91,8 @@
             width: 100%;
         }
     }
+
+    
 </style>
 
 
@@ -114,7 +116,7 @@
         </script>
     @endif
     <!-- Main -->
-    <main style="padding: 0px 70px 0px 70px;" class="main--wrapper">
+    <main class="main--wrapper">
 
         <!-- shop area start -->
         <div class="product shop-page pt-80 pb-80 fix">
@@ -127,7 +129,7 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Blog.</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Shop.</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -135,7 +137,8 @@
                         <div class="col-lg-7 col-md-8">
                             <div class="bar-wrapper">
                                 <div class="select-text">
-                                    <span>Showing 1–11 of 23 Results</span>
+                                    <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
+                                        Results</span>
                                 </div>
                                 <div class="shop-select">
                                     <select name="select" id="shop-select-one">
@@ -193,8 +196,8 @@
                                                 <div class="product__thumb">
                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                         class="img-wrapper">
-                                                        <img style="height: 220px;" class="img"
-                                                            src="{{ asset($product->image_url) }}" alt="">
+                                                        <img style="height: 220px; width: auto; margin: 0 auto;" class="img"
+                                                            src="{{ asset( 'storage/uploads/' . $product->image_url) }}" alt="">
                                                         @if ($product->discountedPrice)
                                                             @php
                                                                 $salePercentage =

@@ -18,6 +18,50 @@
 
     <link rel="manifest" href="site.webmanifest">
     <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: white;
+            color: black;
+            padding: 15px 40px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-top: 2px solid rgba(0, 0, 0, 0.9);
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: 250px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 10px 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            z-index: 1000;
+            opacity: 1;
+
+        }
+    </style>
+    <style>
         .logout_button {
             color: black;
             background: transparent;
@@ -124,8 +168,7 @@
                 </div>
             </div>
         </div>
-        <div style=" background: #f2f2f2;"
-            class="middle header__middle bg--header__middle pt-15 pb-15">
+        <div style=" background: #f2f2f2;" class="middle header__middle bg--header__middle pt-15 pb-15">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -225,7 +268,7 @@
                                                         <div class="cart-image">
                                                             <a
                                                                 href="{{ route('singleProduct', ['id' => $item->product->id]) }}"><img
-                                                                    src={{ asset($item->product->image_url) }}
+                                                                    src={{ asset( 'storage/uploads/' . $item->product->image_url) }}
                                                                     alt=""></a>
                                                         </div>
                                                         <div class="cart-text">
@@ -282,10 +325,10 @@
                             <div class="cart--header__list">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                                        <li><a class="mini__cart--link" href="#"><i
-                                                    class="fas fa-shopping-bag"><span
-                                                        class="cart__count">{{ $totalItems }}</span></i><span
-                                                    class="cart__amount">Rs. {{ $totalPrice }}</span></a></li>
+                                    <li><a class="mini__cart--link" href="#"><i
+                                                class="fas fa-shopping-bag"><span
+                                                    class="cart__count">{{ $totalItems }}</span></i><span
+                                                class="cart__amount">Rs. {{ $totalPrice }}</span></a></li>
                                 </ul>
                             </div>
                             @foreach ($cart as $item)
@@ -293,7 +336,7 @@
                                     <ul>
                                         <li class="mb-20">
                                             <div class="cart-image">
-                                                <a href="#"><img src={{ asset($item->product->image_url) }}
+                                                <a href="#"><img src={{ asset( 'storage/uploads/' . $item->product->image_url) }}
                                                         alt=""></a>
                                             </div>
                                             <div class="cart-text">
@@ -326,7 +369,7 @@
                             @endforeach
                         </div>
                         <!-- Extra shopping cart for mobile device end -->
-                        <div class="dept__menu position-relative d-none d-md-block">
+                        {{-- <div class="dept__menu position-relative d-none d-md-block">
                             <nav>
                                 <ul class="dept__menu--list">
                                     <li><a class="dept__menu-mlink f-900 cod__gray-color"
@@ -337,7 +380,7 @@
                                                 <li class="dropdown">
                                                     <a class="dept__menu--dlink"
                                                         href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                                                    {{-- @if ($category->subcategories->count() > 0)
+                                                    @if ($category->subcategories->count() > 0)
                                                         <ul style="box-shadow: 20px 20px 20px -8px rgba(0, 0, 0, 0.2);"
                                                             class="sub__menu sub__dept--menu">
                                                             @foreach ($category->subcategories as $subcategory)
@@ -346,7 +389,7 @@
                                                                 </li>
                                                             @endforeach
                                                         </ul>
-                                                    @endif --}}
+                                                    @endif
                                                 </li>
                                             @endforeach
 
@@ -354,7 +397,19 @@
                                     </li>
                                 </ul>
                             </nav>
+                        </div> --}}
+                        <div class="dropdown">
+                            <button class="dropbtn"> <strong>Shop By Departments</strong> </button>
+                            <div class="dropdown-content">
+                                @foreach ($categories as $category)
+                                    <a
+                                        href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                @endforeach
+                            </div>
                         </div>
+
+
+
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7 col-2">
                         <div class="main-menu">
