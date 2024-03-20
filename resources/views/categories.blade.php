@@ -81,7 +81,7 @@
                                                     src="{{ asset('storage/uploads/'.$category->image_url) }}"
                                                         alt="{{ $category->name }}" class="rounded-circle"></td>
                                                 <td style="width: 18%"><strong>{{ $category->name }}</strong> <br> </td>
-                                                <td style="width: 37%">{{ $category->description }}</td>
+                                                <td style="width: 37%">{!! $category->description !!}</td>
                                                 <td style="width: 20%">
                                                     <a class="btn btn-link text-primary" href="#"
                                                         title="View Details" data-bs-toggle="modal"

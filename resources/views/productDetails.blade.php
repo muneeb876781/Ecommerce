@@ -314,7 +314,7 @@
                             </div>
                             <div class="about-pro">
                                 <ul class="mb-40">
-                                    <li>{{ $product->description }}</li>
+                                    <li>{!! $product->description !!}}</li>
                                 </ul>
                             </div>
 
