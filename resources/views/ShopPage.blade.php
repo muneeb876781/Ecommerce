@@ -119,7 +119,7 @@
     <main class="main--wrapper">
 
         <!-- shop area start -->
-        <div class="product shop-page pt-80 pb-80 fix">
+        <div class="product shop-page pt-20 pb-80 fix">
             <div class="container">
                 <div class="border-b">
                     <div class="row">
@@ -140,7 +140,7 @@
                                     <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
                                         Results</span>
                                 </div>
-                                <div class="shop-select">
+                                <div class="shop-select " >
                                     <select name="select" id="shop-select-one">
                                         <option value="1">Deafult Sorting</option>
                                         <option value="2">Deafult Sorting</option>
@@ -222,7 +222,7 @@
                                                 <div class="product__content--top">
                                                     <span class="cate-name">{{ $product->category->name }}</span>
                                                     <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
                                                             @if (str_word_count($product->name) > 10)
                                                                 ...
                                                             @endif</a>
