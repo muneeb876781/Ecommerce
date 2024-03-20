@@ -61,12 +61,12 @@
 
         }
 
-        @media (max-width: 850px){
-            .dropbtn{
+        @media (max-width: 850px) {
+            .dropbtn {
                 display: none;
             }
 
-            .mnu{
+            .mnu {
                 padding: 0;
                 margin: 0;
             }
@@ -279,7 +279,7 @@
                                                         <div class="cart-image">
                                                             <a
                                                                 href="{{ route('singleProduct', ['id' => $item->product->id]) }}"><img
-                                                                    src={{ asset( 'storage/uploads/' . $item->product->image_url) }}
+                                                                    src={{ asset('storage/uploads/' . $item->product->image_url) }}
                                                                     alt=""></a>
                                                         </div>
                                                         <div class="cart-text">
@@ -347,7 +347,8 @@
                                     <ul>
                                         <li class="mb-20">
                                             <div class="cart-image">
-                                                <a href="#"><img src={{ asset( 'storage/uploads/' . $item->product->image_url) }}
+                                                <a href="#"><img
+                                                        src={{ asset('storage/uploads/' . $item->product->image_url) }}
                                                         alt=""></a>
                                             </div>
                                             <div class="cart-text">
@@ -412,9 +413,11 @@
                         <div class="dropdown">
                             <button class="dropbtn"> <strong>Shop By Departments</strong> </button>
                             <div class="dropdown-content">
-                                @foreach ($categories as $category)
-                                    <a
-                                        href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                @foreach ($categories as $key => $category)
+                                    @if ($key <= 9)
+                                        <a
+                                            href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
