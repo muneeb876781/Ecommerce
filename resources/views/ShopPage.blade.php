@@ -222,7 +222,10 @@
                                                 <div class="product__content--top">
                                                     <span class="cate-name">{{ $product->category->name }}</span>
                                                     <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                            href="product-details.html">{{ $product->name }}</a>
+                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                            @if (str_word_count($product->name) > 10)
+                                                                ...
+                                                            @endif</a>
                                                     </h6>
                                                     <div class="rating" style="padding-top: 5px;">
                                                         <ul class="list-inline">

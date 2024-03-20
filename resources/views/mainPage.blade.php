@@ -337,7 +337,7 @@
 
             .cat_card h2 {
                 font-size: 16px;
-               
+
             }
         }
 
@@ -348,7 +348,7 @@
 
             .cat_card h2 {
                 font-size: 12px;
-               
+
             }
         }
 
@@ -359,78 +359,78 @@
 
             .cat_card h2 {
                 font-size: 10px;
-               
+
             }
         }
     </style>
 
-<style>
-    .product__thumb {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .product__thumb:hover .product-action {
-        display: flex;
-    }
-
-    .product__thumb:hover img {
-        filter: blur(8px);
-    }
-
-    .product-action {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-    }
-
-    .product-action a {
-        margin-right: 10px;
-        color: #fff;
-        font-size: 20px;
-        box-shadow: 20px 20px 30px -4px rgba(0, 0, 0, 0.2);
-
-    }
-
-    /* Add this CSS */
-    .product-action {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .product-s {
-        width: 20%;
-        min-height: 400px;
-        float: left;
-    }
-
-    /* Media query for smaller screens */
-    @media (max-width: 1200px) {
-        .product-s {
-            width: 25%;
-        }
-    }
-
-    @media (max-width: 958px) {
-        .product-s {
-            width: 50%;
+    <style>
+        .product__thumb {
+            position: relative;
+            overflow: hidden;
         }
 
-        
-    }
-
-    @media (max-width: 576px) {
-        .product-s {
-            width: 100%;
+        .product__thumb:hover .product-action {
+            display: flex;
         }
-    }
 
-    
-</style>
+        .product__thumb:hover img {
+            filter: blur(8px);
+        }
+
+        .product-action {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .product-action a {
+            margin-right: 10px;
+            color: #fff;
+            font-size: 20px;
+            box-shadow: 20px 20px 30px -4px rgba(0, 0, 0, 0.2);
+
+        }
+
+        /* Add this CSS */
+        .product-action {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-s {
+            width: 16%;
+            min-height: 400px;
+            float: left;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 1200px) {
+            .product-s {
+                width: 25%;
+            }
+        }
+
+        @media (max-width: 958px) {
+            .product-s {
+                width: 50%;
+            }
+
+
+        }
+
+        @media (max-width: 576px) {
+            .product-s {
+                width: 50%;
+            }
+
+            
+        }
+    </style>
 
 
 </head>
@@ -624,10 +624,6 @@
             </section>
 
         </div>
-
-
-
-
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -864,9 +860,16 @@
                                                     </div>
                                                     <div class="product__content--top">
                                                         <span class="cate-name">{{ $product->category->name }}</span>
-                                                        <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                                href="product-details.html">{{ $product->name }}</a>
+                                                        <h6 class="product__title mine__shaft-color f-700 mb-0">
+                                                            <a
+                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}">
+                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                                @if (str_word_count($product->name) > 10)
+                                                                    ...
+                                                                @endif
+                                                            </a>
                                                         </h6>
+
                                                         <div class="rating" style="padding-top: 5px;">
                                                             <ul class="list-inline">
                                                                 <li class="rating-active"><i class="fas fa-star"></i>
@@ -962,7 +965,11 @@
                                                             <span
                                                                 class="cate-name">{{ $product->category->name }}</span>
                                                             <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                                    href="product-details.html">{{ $product->name }}</a>
+                                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                                    @if (str_word_count($product->name) > 10)
+                                                                        ...
+                                                                    @endif
+                                                                </a>
                                                             </h6>
                                                             <div class="rating" style="padding-top: 5px;">
                                                                 <ul class="list-inline">
@@ -1069,7 +1076,8 @@
                                                     <div class="product__content--top">
                                                         <span class="cate-name">{{ $product->category->name }}</span>
                                                         <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                                href="product-details.html">{{ $product->name }}</a>
+                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                                @if(str_word_count($product->name) > 10) ... @endif</a>
                                                         </h6>
                                                         <div class="rating" style="padding-top: 5px;">
                                                             <ul class="list-inline">
@@ -1132,7 +1140,8 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
-                            <div class="offer-banner offer--banner__bg mb-30" data-background="../img/offer/offer2.jpeg">
+                            <div class="offer-banner offer--banner__bg mb-30"
+                                data-background="../img/offer/offer2.jpeg">
                                 <div class="offer--banner__text">
                                     <span class="f-200 white-color">Solid Wooden Furniture</span>
                                     <h4 class="white-color f-900 mb-40">40% Flate</h4>
@@ -1142,7 +1151,8 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
-                            <div class="offer-banner offer--banner__bg mb-30" data-background="../img/offer/offer1.jpeg">
+                            <div class="offer-banner offer--banner__bg mb-30"
+                                data-background="../img/offer/offer1.jpeg">
                                 <div class="offer--banner__text">
                                     <span class="f-200 white-color">Ceiling Floor Lighting</span>
                                     <h4 class="white-color f-900 mb-40">50% Flate</h4>
@@ -1157,7 +1167,7 @@
         </section>
         <!-- Discover All Product end -->
 
-        
+
 
         <!-- Top Featured Area  -->
         <div class="top__featured--area pt-80 pb-80">
@@ -1413,8 +1423,10 @@
                                                 <div class="product__thumb">
                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                         class="img-wrapper">
-                                                        <img style="height: 220px; width: auto; margin: 0 auto;" class="img"
-                                                            src="{{ asset( 'storage/uploads/' . $product->image_url) }}" alt="">
+                                                        <img style="height: 160px; width: auto; margin: 0 auto;"
+                                                            class="img"
+                                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                            alt="">
                                                         @if ($product->discountedPrice)
                                                             @php
                                                                 $salePercentage =
@@ -1430,7 +1442,8 @@
                                                     </a>
                                                     <div class="product-action">
                                                         <a href="#"><span class="fas fa-heart"></span></a>
-                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                        <a
+                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
                                                                 class="fas fa-eye"></span></a>
                                                         <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
                                                                 class="fas fa-shopping-cart"></span></a>
@@ -1438,8 +1451,9 @@
                                                 </div>
                                                 <div class="product__content--top">
                                                     <span class="cate-name">{{ $product->category->name }}</span>
-                                                    <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                            href="product-details.html">{{ $product->name }}</a>
+                                                    <h6 style="font-size: 13px;" class="product__title mine__shaft-color f-700 mb-0"><a
+                                                            href="product-details.html">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                            @if(str_word_count($product->name) > 10) ... @endif</a>
                                                     </h6>
                                                     <div class="rating" style="padding-top: 5px;">
                                                         <ul class="list-inline">

@@ -251,18 +251,21 @@
                                 <div class="tab-pane fade show active" id="home5" role="tabpanel"
                                     aria-labelledby="home-tab5">
                                     <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
-                                        src="{{ asset( 'storage/uploads/' . $product->image_url) }}" class="img-fluid" alt="">
+                                        src="{{ asset('storage/uploads/' . $product->image_url) }}" class="img-fluid"
+                                        alt="">
 
                                 </div>
 
                                 <div class="tab-pane fade" id="profile5" role="tabpanel"
                                     aria-labelledby="profile-tab5">
-                                    <img src="{{ asset( 'storage/uploads/' . $product->image_url) }}" class="img-fluid" alt="">
+                                    <img src="{{ asset('storage/uploads/' . $product->image_url) }}" class="img-fluid"
+                                        alt="">
                                 </div>
 
                                 <div class="tab-pane fade" id="contact5" role="tabpanel"
                                     aria-labelledby="contact-tab5">
-                                    <img src="{{ asset( 'storage/uploads/' . $product->image_url) }}" class="img-fluid" alt="">
+                                    <img src="{{ asset('storage/uploads/' . $product->image_url) }}" class="img-fluid"
+                                        alt="">
                                 </div>
                             </div>
                             <ul class="nav" id="myTab1" role="tablist">
@@ -270,21 +273,24 @@
                                     <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5"
                                         role="tab" aria-controls="home5" aria-selected="true">
                                         <img style="widows: 110px; height: 110px;"
-                                        src="{{ asset( 'storage/uploads/' . $product->image_url) }}" class="img-fluid" alt="">
+                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                            class="img-fluid" alt="">
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5"
                                         role="tab" aria-controls="profile5" aria-selected="false">
                                         <img style="widows: 110px; height: 110px;"
-                                        src="{{ asset( 'storage/uploads/' . $product->image_url) }}" class="img-fluid" alt="">
+                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                            class="img-fluid" alt="">
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab5" data-toggle="tab" href="#contact5"
                                         role="tab" aria-controls="contact5" aria-selected="false">
                                         <img style="widows: 110px; height: 110px;"
-                                        src="{{ asset( 'storage/uploads/' . $product->image_url) }}" class="img-fluid" alt="">
+                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                            class="img-fluid" alt="">
                                     </a>
                                 </li>
                             </ul>
@@ -452,7 +458,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab11" data-toggle="tab" href="#contact11"
                                         role="tab" aria-controls="contact11"
-                                        aria-selected="false">Reviews({{$reviews->count()}})</a>
+                                        aria-selected="false">Reviews({{ $reviews->count() }})</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent1">
@@ -654,9 +660,11 @@
                                             <a href="{{ route('singleProduct', ['id' => $relProduct->id]) }}"
                                                 class="img-wrapper">
                                                 <img style="height: 220px;" class="img"
-                                                src="{{ asset( 'storage/uploads/' . $product->image_url) }}" alt="">
+                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                    alt="">
                                                 <img style="height: 220px;" class="img secondary-img"
-                                                src="{{ asset( 'storage/uploads/' . $product->image_url) }}" alt="">
+                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                    alt="">
                                                 @if ($relProduct->discountedPrice)
                                                     @php
                                                         $salePercentage =
@@ -675,7 +683,11 @@
                                         <div class="product__content--top">
                                             <span class="cate-name">{{ $relProduct->category->name }}</span>
                                             <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                    href="product-details.html">{{ $relProduct->name }}</a>
+                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                    @if (str_word_count($product->name) > 10)
+                                                        ...
+                                                    @endif
+                                                </a>
                                             </h6>
                                             <div class="rating" style="padding-top: 5px;">
                                                 <ul class="list-inline">
