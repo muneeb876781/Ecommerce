@@ -169,7 +169,7 @@
                                                     @if (str_word_count($product->name) > 10)
                                                         ...
                                                     @endif</td>
-                                                <td style="width: 20%">{{ implode(' ', array_slice(explode(' ', $product->description), 0, 6)) }}
+                                                <td style="width: 20%">{!! implode(' ', array_slice(explode(' ', $product->description), 0, 6)) !!}}
                                                     @if (str_word_count($product->description) > 10)
                                                         ...
                                                     @endif</td>
