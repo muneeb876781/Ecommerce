@@ -404,7 +404,7 @@
 
         .product-s {
             width: 16%;
-            min-height: 400px;
+            /* min-height: 400px; */
             float: left;
         }
 
