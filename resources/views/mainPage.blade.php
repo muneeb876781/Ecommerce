@@ -29,6 +29,18 @@
             z-index: 1;
         }
 
+        @media (max-width: 500px) {
+            .sale-tag{
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 412px) {
+            .sale-tag{
+                font-size: 10px;
+            }
+        }
+
         .out-of-stock-tag {
             position: absolute;
             top: 10px;
