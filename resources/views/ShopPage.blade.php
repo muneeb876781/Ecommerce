@@ -68,8 +68,8 @@
     }
 
     .product-s {
-        width: 20%;
-        min-height: 400px;
+        width: 16%;
+        /* min-height: 400px; */
         float: left;
     }
 
@@ -88,7 +88,7 @@
 
     @media (max-width: 576px) {
         .product-s {
-            width: 100%;
+            width: 50%;
         }
     }
 
@@ -196,7 +196,7 @@
                                                 <div class="product__thumb">
                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                         class="img-wrapper">
-                                                        <img style="height: 220px; width: auto; margin: 0 auto;" class="img"
+                                                        <img style="height: auto; width: auto; margin: 0 auto;" class="img"
                                                             src="{{ asset( 'storage/uploads/' . $product->image_url) }}" alt="">
                                                         @if ($product->discountedPrice)
                                                             @php
