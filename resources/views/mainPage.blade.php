@@ -1240,10 +1240,10 @@
                     </div>
                 </div>
             </div>
-            <div class="cats">
+            <div class="categoriess">
                 @foreach ($categories as $key => $category)
                     @if ($key <= 15)
-                        <div class="cat_card">
+                        <div class="cats_card">
                             <img style="width: auto; border-radius: 20px;" src="{{ asset('storage/uploads/' . $category->image_url) }}"
                                 alt="">
                             <h2 style="text-align: center;">{{ $category->name }}</h2>
@@ -1252,6 +1252,86 @@
                 @endforeach
             </div>
         </div>
+
+        <style>
+            .categoriess {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+                height: auto;
+                padding: 10px;
+            }
+    
+            .cats_card {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 12%;
+                height: 180px;
+                padding: 10px;
+            }
+    
+    
+            .cats_card img {
+                width: auto;
+                height: 70%;
+            }
+    
+            .cats_card h2 {
+                font-size: 14px;
+                font-weight: 400;
+                padding: 10px 0;
+            }
+    
+            @media (max-width: 1200px) {
+                .cats_card {
+                    width: 15%;
+                }
+            }
+    
+            @media (max-width: 1050px) {
+                .cats_card {
+                    width: 18%;
+                }
+            }
+    
+            @media (max-width: 1050px) {
+                .cats_card {
+                    height: 150px;
+                }
+    
+                .cats_card h2 {
+                    font-size: 16px;
+    
+                }
+            }
+    
+            @media (max-width: 750px) {
+                .cats_card {
+                    height: 120px;
+                }
+    
+                .cats_card h2 {
+                    font-size: 12px;
+    
+                }
+            }
+    
+            @media (max-width: 500px) {
+                .cats_card {
+                    height: 90px;
+                }
+    
+                .cats_card h2 {
+                    font-size: 10px;
+    
+                }
+            }
+        </style>
 
         
         
