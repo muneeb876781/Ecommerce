@@ -1226,33 +1226,37 @@
         </div> --}}
         <!-- Top Featured Area end -->
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="product-section mb-30">
-                    <h6 class="product--section__title f-800 white-color grenadier-bg">Categories</h6>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="all__product--link text-right mb-30">
-                    <a class="all-link" href="{{ route('shop') }}">Discover All Products<span
-                            class="lnr lnr-arrow-right"></span></a>
-                </div>
-            </div>
-        </div>
-        <div class="cats">
-
-            @foreach ($categories as $key => $category)
-                @if ($key <= 15)
-                    <div class="cat_card">
-                        <img style="width: auto;" src="{{ asset('storage/uploads/' . $category->image_url) }}"
-                            alt="">
-                        <h2 style="text-align: center;">{{ $category->name }}</h2>
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-sm-6">
+                    <div class="product-section mb-30">
+                        <h6 class="product--section__title f-800 white-color grenadier-bg">Categories</h6>
                     </div>
-                @endif
-            @endforeach
+                </div>
+                <div class="col-sm-6">
+                    <div class="all__product--link text-right mb-30">
+                        <a class="all-link" href="{{ route('shop') }}">Discover All Products<span
+                                class="lnr lnr-arrow-right"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="cats">
+                @foreach ($categories as $key => $category)
+                    @if ($key <= 15)
+                        <div class="cat_card">
+                            <img style="width: auto; border-radius: 20px;" src="{{ asset('storage/uploads/' . $category->image_url) }}"
+                                alt="">
+                            <h2 style="text-align: center;">{{ $category->name }}</h2>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
 
-        <!-- Weekly Deals -->
+        
+        
+
+        {{-- <!-- Weekly Deals -->
         <div class="offer-deals">
             <div class="offer--deals__main offer-deals--bg pt-75 pb-45" data-background="../img/offer/offer10.jpg"
                 style="background-position: center; background-size: cover; background-attachment: fixed;">
@@ -1435,7 +1439,7 @@
                 </div>
             </div>
         </div>
-        <!-- Weekly Deals end -->
+        <!-- Weekly Deals end --> --}}
 
         <!-- Product  -->
         <div class="product pt-60 fix">
