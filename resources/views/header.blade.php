@@ -51,7 +51,12 @@
             padding: 10px 20px;
             text-decoration: none;
             display: block;
+        }
 
+        .dropdown-content a:hover {
+            color: black;
+            background: #efefef;
+            border-radius: 10px;
         }
 
         .dropdown:hover .dropdown-content {

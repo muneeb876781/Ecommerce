@@ -234,7 +234,7 @@
     <style>
         .containerr {
             width: 100%;
-            height: 400px;
+            height: 600px;
             overflow: hidden;
             position: relative;
         }
@@ -244,20 +244,80 @@
             animation: round 16s infinite;
             opacity: 0;
             width: 100%;
-            height: 400px;
+            height: 600px;
+        }
+
+        @media (max-width: 1800px) {
+            .containerr {
+                height: 450px;
+            }
+
+            .photo {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .containerr {
+                height: 400px;
+            }
+
+            .photo {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .containerr {
+                height: 350px;
+            }
+
+            .photo {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .containerr {
+                height: 300px;
+            }
+
+            .photo {
+                height: 300px;
+            }
         }
 
         @media (max-width: 1000px) {
             .containerr {
-                height: 300px;
+                height: 250px;
             }
 
             .photo {
-                height: 300px;
+                height: 250px;
             }
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 800px) {
+            .containerr {
+                height: 220px;
+            }
+
+            .photo {
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .containerr {
+                height: 250px;
+            }
+
+            .photo {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 600px) {
             .containerr {
                 height: 200px;
             }
@@ -266,6 +326,20 @@
                 height: 200px;
             }
         }
+
+        @media (max-width: 500px) {
+            .containerr {
+                height: 150px;
+            }
+
+            .photo {
+                height: 150px;
+            }
+        }
+
+
+
+        
 
 
 
