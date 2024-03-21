@@ -191,7 +191,7 @@
                         <div class="content--header__middle d-flex align-items-center justify-content-between">
                             <div class="logo--header__middle">
                                 <div class="logo">
-                                    <a class="logo__link" href="{{ route('home') }}"><img src="img/logo/h1__logo.png"
+                                    <a class="logo__link" href="index.html"><img src="img/logo/h1__logo.png"
                                             alt=""></a>
                                 </div>
                             </div>

@@ -116,7 +116,7 @@ class SellerShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return redirect()->back()->with('shop_success', 'Your shop is created sucessfully');
+        return view('mainPage', compact('products', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'))->with('shop_success', 'Your shop is created sucessfully');
     }
 
     public function delete($id)
