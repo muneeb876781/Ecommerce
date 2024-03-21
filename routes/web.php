@@ -47,7 +47,7 @@ require __DIR__.'/auth.php';
 
     Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
     Route::get('/single/{id}', [ShopController::class, 'singleProduct'])->name('singleProduct');
-
+    Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard')->middleware('seller');
@@ -60,6 +60,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/products/{id}', [ProductController::class, 'destroy'])->name('productdestroy')->middleware('seller');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('productupdate')->middleware('seller');
 
+    Route::post('/storeProductsFile', [ProductController::class, 'storeProductsFile'])->name('storeProductsFile')->middleware('seller');
+
+
     Route::post('/products/reviews/{id}', [ReviewController::class, 'store'])->name('productreviewstore');
     Route::get('/reviews', [SellerController::class, 'reviews'])->name('reviews')->middleware('seller');
 
@@ -70,7 +73,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('categorydestroy')->middleware('seller');
     Route::put('/categories/{id}', [CategoryController::class, 'edit'])->name('categoriesedit')->middleware('seller');
 
-    Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
 
     Route::get('/subCategories', [SubCategoryController::class, 'index'])->name('subCategoryview')->middleware('seller');
     Route::get('/addsubCategories', [SubCategoryController::class, 'add'])->name('addsubCategory')->middleware('seller');

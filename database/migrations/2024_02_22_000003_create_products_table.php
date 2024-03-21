@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 10, 2);
             $table->decimal('discountedPrice')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade')->nullable();
+            $table->string('remote_image_url', 1024)->nullable();
             $table->string('image_url')->nullable();
             $table->string('media1_url')->nullable();
             $table->string('media2_url')->nullable();

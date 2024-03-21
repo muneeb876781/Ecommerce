@@ -171,6 +171,9 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+
     ])->toArray(),
 
     /*
@@ -189,6 +192,9 @@ return [
 
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS1DFacade::class,
+
+        'Excel' =>Maatwebsite\Excel\Facades\Excel::class,
+
 
     ])->toArray(),
 
