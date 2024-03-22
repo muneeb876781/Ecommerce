@@ -421,6 +421,30 @@
                     </form>
                 </div>
 
+                <div class="uploadProducts" >
+                    <form action="{{ route('storeProductsFile') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Upload Products</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <label for="productFile">Product File Upload:</label>
+                                        <div class="photo">
+                                            <input class="form-control" style="border: none" type="file"
+                                                id="productFile" name="productFile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <button class="btn btn-primary">Upload File</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
