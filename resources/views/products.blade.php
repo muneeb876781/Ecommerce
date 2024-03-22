@@ -421,7 +421,7 @@
                     </form>
                 </div>
 
-                <div class="uploadProducts" >
+                {{-- <div class="uploadProducts" >
                     <form action="{{ route('storeProductsFile') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -444,7 +444,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
