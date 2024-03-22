@@ -132,7 +132,7 @@
                 <h1>Products</h1>
                 <button id="showAllProductsBtn" class="btn btn-primary">ALL Products</button>
                 <button id="showAddProductFormBtn" class="btn btn-primary">Add Product</button>
-                {{-- <button id="showAddProductFile" class="btn btn-primary">Upload Products File</button> --}}
+                <button id="showAddProductFile" class="btn btn-primary">Upload Products File</button>
 
                 <br>
 
@@ -448,7 +448,7 @@
                     </form>
                 </div>
 
-                {{-- <div class="uploadProducts" >
+                <div class="uploadProducts" >
                     <form action="{{ route('storeProductsFile') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -471,7 +471,7 @@
                             </div>
                         </div>
                     </form>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

@@ -288,14 +288,14 @@ class ProductController extends Controller
         return redirect()->back()->with('update_success', 'Attribute updated successfully.');
     }
 
-    // public function storeProductsFile(Request $request)
-    // {
-    //     $userId = Auth::id();
-    //     $shopId = SellerShop::where('user_id', auth()->id())->value('id');
-    //     $categoryid = 2;
+    public function storeProductsFile(Request $request)
+    {
+        $userId = Auth::id();
+        $shopId = SellerShop::where('user_id', auth()->id())->value('id');
+        $categoryid = 2;
 
-    //     Excel::import(new products($userId, $shopId, $categoryid), $request->file('productFile'));
+        Excel::import(new products($userId, $shopId, $categoryid), $request->file('productFile'));
 
-    //     return redirect()->back()->with('success', 'All good!');
-    // }
+        return redirect()->back()->with('success', 'All good!');
+    }
 }

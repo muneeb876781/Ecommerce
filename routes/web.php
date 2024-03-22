@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/products/{id}', [ProductController::class, 'destroy'])->name('productdestroy')->middleware('seller');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('productupdate')->middleware('seller');
 
-    // Route::post('/storeProductsFile', [ProductController::class, 'storeProductsFile'])->name('storeProductsFile')->middleware('seller');
+    Route::post('/storeProductsFile', [ProductController::class, 'storeProductsFile'])->name('storeProductsFile')->middleware('seller');
 
 
     Route::post('/products/reviews/{id}', [ReviewController::class, 'store'])->name('productreviewstore');
