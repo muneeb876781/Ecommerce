@@ -127,6 +127,7 @@ class ProductController extends Controller
         $product->category_id = $request->input('productCategory');
         $product->quantity = $request->input('productQuantity');
         $product->sku = $request->input('productSKU');
+        $product->remote_image_url = $request->input('productImageURL');
         $product->image_url = $imagePath;
         $product->media1_url = $media1Path;
         $product->media2_url = $media2Path;
