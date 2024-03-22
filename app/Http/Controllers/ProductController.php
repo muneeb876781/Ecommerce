@@ -13,8 +13,6 @@ use App\Models\Cart;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValue;
 use Illuminate\Support\Facades\Storage;
-use App\Imports\products;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -130,7 +128,6 @@ class ProductController extends Controller
         $product->quantity = $request->input('productQuantity');
         $product->sku = $request->input('productSKU');
         $product->image_url = $imagePath;
-        $product->remote_image_url = $request->input('productImageURL');
         $product->media1_url = $media1Path;
         $product->media2_url = $media2Path;
         $product->media3_url = $media3Path;
@@ -290,7 +287,6 @@ class ProductController extends Controller
 
     public function storeProductsFile(Request $request)
     {
-        
         $userId = Auth::id();
         $shopId = SellerShop::where('user_id', auth()->id())->value('id');
         $categoryid = 2;
