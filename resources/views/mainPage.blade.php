@@ -489,7 +489,7 @@
         }
 
         .product-s {
-            width: 16%;
+            width: 20%;
             /* min-height: 400px; */
             float: left;
         }
@@ -1627,7 +1627,7 @@
                                                         <a href="{{ route('singleProduct', ['id' => $product->id]) }}" class="img-wrapper">
                                                             @if ($product->image_url )
                                                                 <img class="img" src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                    alt="product Image" style="height: auto; width: auto; margin: 0 auto;">
+                                                                    alt="product Image" style="height: 160px; width: auto; margin: 0 auto;">
                                                             @elseif (!$product->image_url  && $product->remote_image_url)
                                                                 <img class="img" src="{{ $product->remote_image_url }}"
                                                                     alt="product Image" style="height: 220px; width: auto; margin: 0 auto;">
