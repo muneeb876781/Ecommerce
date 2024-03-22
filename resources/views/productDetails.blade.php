@@ -250,47 +250,94 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home5" role="tabpanel"
                                     aria-labelledby="home-tab5">
-                                    <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
-                                        src="{{ asset('storage/uploads/' . $product->image_url) }}" class="img-fluid"
-                                        alt="">
+                                    @if ($product->image_url)
+                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                            class="img-fluid" alt="">
+                                    @elseif (!$product->image_url && $product->remote_image_url)
+                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                            src="{{ $product->remote_image_url }}" class="img-fluid" alt="">
+                                    @else
+                                        <span>No image available</span>
+                                    @endif
+
 
                                 </div>
 
+
                                 <div class="tab-pane fade" id="profile5" role="tabpanel"
                                     aria-labelledby="profile-tab5">
-                                    <img src="{{ asset('storage/uploads/' . $product->image_url) }}" class="img-fluid"
-                                        alt="">
+                                    @if ($product->image_url)
+                                        <img src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                            class="img-fluid" alt="">
+                                    @elseif (!$product->image_url && $product->remote_image_url)
+                                        <img src="{{ $product->image_url }}" class="img-fluid" alt="">
+                                    @else
+                                        <span>No image available</span>
+                                    @endif
+
                                 </div>
 
                                 <div class="tab-pane fade" id="contact5" role="tabpanel"
                                     aria-labelledby="contact-tab5">
-                                    <img src="{{ asset('storage/uploads/' . $product->image_url) }}" class="img-fluid"
-                                        alt="">
+                                    @if ($product->image_url)
+                                        <img src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                            class="img-fluid" alt="">
+                                    @elseif (!$product->image_url && $product->remote_image_url)
+                                        <img src="{{ $product->image_url }}" class="img-fluid" alt="">
+                                    @else
+                                        <span>No image available</span>
+                                    @endif
                                 </div>
                             </div>
                             <ul class="nav" id="myTab1" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5"
                                         role="tab" aria-controls="home5" aria-selected="true">
-                                        <img style="widows: 110px; height: 110px;"
-                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                            class="img-fluid" alt="">
+
+                                        @if ($product->image_url)
+                                            <img style="widows: 110px; height: 110px;"
+                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                class="img-fluid" alt="">
+                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                            <img style="widows: 110px; height: 110px;"
+                                                src="{{ $product->remote_image_url }}" class="img-fluid"
+                                                alt="">
+                                        @else
+                                            <span>No image available</span>
+                                        @endif
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5"
                                         role="tab" aria-controls="profile5" aria-selected="false">
-                                        <img style="widows: 110px; height: 110px;"
-                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                            class="img-fluid" alt="">
+                                        @if ($product->image_url)
+                                            <img style="widows: 110px; height: 110px;"
+                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                class="img-fluid" alt="">
+                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                            <img style="widows: 110px; height: 110px;"
+                                                src="{{ $product->remote_image_url }}" class="img-fluid"
+                                                alt="">
+                                        @else
+                                            <span>No image available</span>
+                                        @endif
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab5" data-toggle="tab" href="#contact5"
                                         role="tab" aria-controls="contact5" aria-selected="false">
-                                        <img style="widows: 110px; height: 110px;"
-                                            src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                            class="img-fluid" alt="">
+                                        @if ($product->image_url)
+                                            <img style="widows: 110px; height: 110px;"
+                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                class="img-fluid" alt="">
+                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                            <img style="widows: 110px; height: 110px;"
+                                                src="{{ $product->remote_image_url }}" class="img-fluid"
+                                                alt="">
+                                        @else
+                                            <span>No image available</span>
+                                        @endif
                                     </a>
                                 </li>
                             </ul>
@@ -657,25 +704,33 @@
                                 <div class="product__single">
                                     <div class="product__box">
                                         <div class="product__thumb">
-                                            <a href="{{ route('singleProduct', ['id' => $relProduct->id]) }}"
+                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
                                                 class="img-wrapper">
-                                                <img style="height: 220px;" class="img"
-                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                    alt="">
-                                                <img style="height: 220px;" class="img secondary-img"
-                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                    alt="">
-                                                @if ($relProduct->discountedPrice)
+                                                @if ($product->image_url)
+                                                    <img class="img"
+                                                        src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                        alt="product Image"
+                                                        style="height: 220px; width: auto; margin: 0 auto;">
+                                                @elseif (!$product->image_url && $product->remote_image_url)
+                                                    <img class="img" src="{{ $product->remote_image_url }}"
+                                                        alt="product Image"
+                                                        style="height: 220px; width: auto; margin: 0 auto;">
+                                                @else
+                                                    <span>No image available</span>
+                                                @endif
+
+                                                @if ($product->quantity == 0)
+                                                    <span class="out-of-stock-tag">Out of Stock</span>
+                                                @elseif ($product->discountedPrice)
                                                     @php
                                                         $salePercentage =
-                                                            (($relProduct->price - $relProduct->discountedPrice) /
-                                                                $relProduct->price) *
+                                                            (($product->price - $product->discountedPrice) /
+                                                                $product->price) *
                                                             100;
                                                     @endphp
-
                                                     @if ($salePercentage > 0)
-                                                        <span class="sale-tag">Sale
-                                                            {{ round($salePercentage) }}% Off</span>
+                                                        <span class="sale-tag">Sale {{ round($salePercentage) }}%
+                                                            Off</span>
                                                     @endif
                                                 @endif
                                             </a>

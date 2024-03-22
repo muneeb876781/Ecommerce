@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/apexcharts/apexcharts.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
 
     <style>
@@ -160,19 +161,31 @@
                                                 <td style="width: 5%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 12%">
                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}">
-                                                        <img style="widows: 70px; height: 70px;"
-                                                        src="{{ asset('storage/uploads/'.$product->image_url) }}"
-                                                            alt="{{ $product->name }}" class="rounded-circle">
+
+                                                        @if ($product->image_url)
+                                                            <img style="widows: 70px; height: 70px;"
+                                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                                alt="{{ $product->name }}" class="rounded-circle">
+                                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                                            <img class="img" src="{{ $product->remote_image_url }}"
+                                                                alt="{{ $product->name }}" class="rounded-circle"
+                                                                style="widows: 70px; height: 70px;">
+                                                        @else
+                                                            <span>No image available</span>
+                                                        @endif
                                                     </a>
                                                 </td>
-                                                <td style="width: 10%">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
+                                                <td style="width: 10%">
+                                                    {{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
                                                     @if (str_word_count($product->name) > 10)
                                                         ...
-                                                    @endif</td>
+                                                    @endif
+                                                </td>
                                                 <td style="width: 20%">{!! implode(' ', array_slice(explode(' ', $product->description), 0, 6)) !!}}
                                                     @if (str_word_count($product->description) > 10)
                                                         ...
-                                                    @endif</td>
+                                                    @endif
+                                                </td>
                                                 <td style="width: 7%">{{ $product->price }}</td>
                                                 <td style="width: 7%">{{ $product->category->name }}</td>
                                                 <td style="width: 7%">
@@ -243,24 +256,29 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="productDescription">Product Description:</label>
-                                            <textarea class="form-control" id="editor" name="productDescription"
-                                                placeholder="Enter Product Description"></textarea>
+                                            <textarea class="form-control" id="editor" name="productDescription" placeholder="Enter Product Description"></textarea>
                                         </div>
                                         <script>
                                             tinymce.init({
-                                              selector: 'textarea',
-                                              plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-                                              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                                              tinycomments_mode: 'embedded',
-                                              tinycomments_author: 'Author name',
-                                              height: 250,
-                                              mergetags_list: [
-                                                { value: 'First.Name', title: 'First Name' },
-                                                { value: 'Email', title: 'Email' },
-                                              ],
-                                              ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                                                selector: 'textarea',
+                                                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                                                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                                                tinycomments_mode: 'embedded',
+                                                tinycomments_author: 'Author name',
+                                                height: 250,
+                                                mergetags_list: [{
+                                                        value: 'First.Name',
+                                                        title: 'First Name'
+                                                    },
+                                                    {
+                                                        value: 'Email',
+                                                        title: 'Email'
+                                                    },
+                                                ],
+                                                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
+                                                    "See docs to implement AI Assistant")),
                                             });
-                                          </script>
+                                        </script>
                                         <div class="mb-3">
                                             <label for="productCategory">Product Category:</label>
                                             <select class="form-control" id="productCategory" name="productCategory"
@@ -323,7 +341,7 @@
                                                 var input = document.createElement('input');
                                                 input.type = 'text';
                                                 input.name = 'attributeValues[' + attributeId +
-                                                '][value]'; // Use attribute ID as the key in the input name
+                                                    '][value]'; // Use attribute ID as the key in the input name
                                                 input.id = 'attributeValue_' + attributeId;
                                                 var removeButton = document.createElement('button');
                                                 removeButton.textContent = 'Remove';
@@ -390,9 +408,10 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="productImageURL">Product Image URL (If no file uploaded):</label>
-                                            <input class="form-control" type="text" id="productImageURL" name="productImageURL"
-                                                placeholder="Enter Product Image URL">
+                                            <label for="productImageURL">Product Image URL (If no file
+                                                uploaded):</label>
+                                            <input class="form-control" type="text" id="productImageURL"
+                                                name="productImageURL" placeholder="Enter Product Image URL">
                                         </div>
 
                                         <div class="mb-3">
