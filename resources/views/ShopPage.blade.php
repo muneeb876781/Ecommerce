@@ -68,7 +68,7 @@
     }
 
     .product-s {
-        width: 16%;
+        width: 20%;
         /* min-height: 400px; */
         float: left;
     }
