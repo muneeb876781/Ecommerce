@@ -269,11 +269,11 @@
 
         @media (max-width: 1400px) {
             .containerr {
-                height: 350px;
+                height: 450px;
             }
 
             .photo {
-                height: 350px;
+                height: 450px;
             }
         }
 
@@ -699,11 +699,11 @@
 
                             <!-- partial:index.partial.html -->
                             <div class="containerr">
-                                <img class='photo' src="../images/banner1.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/banner3.png" alt="Image 2" />
-                                <img class='photo' src="../images/banner.jpeg" alt="Image 3" />
-                                <img class='photo' src="../images/banner4.jpg" alt="Image 4" />
-
+                                <img class='photo' src="../images/bn6.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/bn8.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/bn10.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/bn9.jpg" alt="Image 1" />
+                                
                             </div>
                             <!-- partial -->
                         </div>
