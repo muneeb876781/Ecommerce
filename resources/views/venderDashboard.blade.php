@@ -129,7 +129,7 @@
                                 @if ($key <= 2)
                                     <div class="recent-message d-flex px-4 py-3">
                                         <div class="avatar avatar-lg">
-                                            <img src="{{ asset('storage/uploads/'.$category->image_url) }}">
+                                            <img src="{{ asset('storage/uploads/' . $category->image_url) }}">
                                         </div>
                                         <div class="name ms-4">
                                             <h5 class="mb-1">{{ $category->name }}</h5>
@@ -163,7 +163,13 @@
                                         <a style="padding: 0px;"
                                             href="{{ route('singleProduct', ['id' => $product->id]) }}">
                                             <div class="avatar avatar-lg">
-                                                <img src="{{ asset('storage/uploads/'.$product->image_url) }}">
+                                                @if ($product->image_url)
+                                                    <img src="{{ asset('storage/uploads/' . $product->image_url) }}">
+                                                @elseif (!$product->image_url && $product->remote_image_url)
+                                                    <img src="{{ $product->remote_image_url }}">
+                                                @else
+                                                    <span>No image available</span>
+                                                @endif
                                             </div>
                                         </a>
                                         <div class="name ms-4">
@@ -206,32 +212,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach ($Orders as $key => $order)
-                                                @if ($key <= 4)
-                                                    <tr>
-                                                        <th scope="row">{{ $order->id }}</th>
-                                                        <td>
-                                                            <strong>{{ $order->first_name }}
-                                                                {{ $order->last_name }}</strong>
-                                                            <br>
-                                                            {{ $order->email }} <br>
-                                                            {{ $order->contact_number }}
-                                                        </td>
-                                                        <td>
-                                                            <strong>Address: </strong> {{ $order->delivery_address }}
-                                                            <br>
-                                                            <strong>Postal Code: </strong>{{ $order->postal_code }}
-                                                        </td>
-                                                        <td>{{ $order->total_price }}</td>
-                                                        <td>
-                                                            {{ $order->items->count() }}
-                                                        </td>
-                                                        <td>{{ $order->payment_method }}</td>
-                                                        <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}" class="btn btn-primary">View Details</a></td>
+                                        @foreach ($Orders as $key => $order)
+                                            @if ($key <= 4)
+                                                <tr>
+                                                    <th scope="row">{{ $order->id }}</th>
+                                                    <td>
+                                                        <strong>{{ $order->first_name }}
+                                                            {{ $order->last_name }}</strong>
+                                                        <br>
+                                                        {{ $order->email }} <br>
+                                                        {{ $order->contact_number }}
+                                                    </td>
+                                                    <td>
+                                                        <strong>Address: </strong> {{ $order->delivery_address }}
+                                                        <br>
+                                                        <strong>Postal Code: </strong>{{ $order->postal_code }}
+                                                    </td>
+                                                    <td>{{ $order->total_price }}</td>
+                                                    <td>
+                                                        {{ $order->items->count() }}
+                                                    </td>
+                                                    <td>{{ $order->payment_method }}</td>
+                                                    <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
+                                                            class="btn btn-primary">View Details</a></td>
 
-                                                    </tr>
-                                                @endif
-                                            @endforeach
+                                                </tr>
+                                            @endif
+                                        @endforeach
 
 
 
@@ -250,7 +257,7 @@
 
 
 
-    
+
 
 
 
