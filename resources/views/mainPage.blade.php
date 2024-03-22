@@ -1232,7 +1232,7 @@
                         </div>
                         <div class="col-xl-6 col-lg-6">
                             <div class="offer-banner offer--banner__bg mb-30"
-                                data-background="../img/offer/offer2.jpeg">
+                                data-background="../images/bn12.jpg">
                                 <div class="offer--banner__text">
                                     <span class="f-200 white-color">Solid Wooden Furniture</span>
                                     <h4 class="white-color f-900 mb-40">40% Flate</h4>
@@ -1243,7 +1243,7 @@
                         </div>
                         <div class="col-xl-6 col-lg-6">
                             <div class="offer-banner offer--banner__bg mb-30"
-                                data-background="../img/offer/offer1.jpeg">
+                                data-background="../images/bn13.jpg">
                                 <div class="offer--banner__text">
                                     <span class="f-200 white-color">Ceiling Floor Lighting</span>
                                     <h4 class="white-color f-900 mb-40">50% Flate</h4>
