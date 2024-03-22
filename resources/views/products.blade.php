@@ -448,7 +448,7 @@
                     </form>
                 </div>
 
-                <div class="uploadProducts" >
+                <div class="uploadProducts" style="display: none;">
                     <form action="{{ route('storeProductsFile') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">

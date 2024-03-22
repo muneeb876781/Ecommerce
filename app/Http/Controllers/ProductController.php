@@ -290,6 +290,7 @@ class ProductController extends Controller
 
     public function storeProductsFile(Request $request)
     {
+        
         $userId = Auth::id();
         $shopId = SellerShop::where('user_id', auth()->id())->value('id');
         $categoryid = 2;
