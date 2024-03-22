@@ -388,6 +388,13 @@
                                                     id="productImage" name="productImage">
                                             </div>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="productImageURL">Product Image URL (If no file uploaded):</label>
+                                            <input class="form-control" type="text" id="productImageURL" name="productImageURL"
+                                                placeholder="Enter Product Image URL">
+                                        </div>
+
                                         <div class="mb-3">
                                             <label for="productMediaImage">Product Media Gallery:</label>
                                             <div class="photo">
