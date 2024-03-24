@@ -76,6 +76,14 @@
                 margin: 0;
             }
         }
+
+        @media (max-width: 1100px) {
+            .mnu {
+                display: none;
+            }
+
+
+        }
     </style>
     <style>
         .logout_button {
@@ -139,6 +147,58 @@
 
 
         }
+
+        .sticky-navbar {
+            position: fixed;
+            bottom: 0px;
+            right: 10px;
+            display: none;
+            width: 100%;
+            height: auto;
+            z-index: 9999;
+            background: #fff;
+        }
+
+        .sticky-navbar .buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            padding-bottom: 12px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 5px;
+            margin-left: 6px;
+        }
+
+        .sticky-navbar .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%
+        }
+
+        .sticky-navbar .button-wrapper span{
+            text-align: center;
+            font-size: 12px
+        }
+
+        .sticky-navbar button {
+            background: none;
+            border: none;
+            color: #909090;
+            font-size: 18px;
+            /* margin: px; */
+            cursor: pointer;
+        }
+
+        @media (max-width: 1100px) {
+            .sticky-navbar {
+                display: block;
+            }
+        }
     </style>
     <title>Document</title>
 </head>
@@ -184,7 +244,7 @@
                 </div>
             </div>
         </div>
-        <div style=" background: #f2f2f2;" class="middle header__middle bg--header__middle pt-15 pb-15">
+        <div style="background: #f2f2f2;" class="middle header__middle bg--header__middle pt-15 pb-15">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -535,6 +595,31 @@
                 </div>
             </div>
         </div>
+        <div class="sticky-navbar">
+            <div class="buttons">
+                <div class="button-wrapper">
+                    <button id="home"><i class="fas fa-home"></i></button>
+                    <span>Home</span>
+                </div>
+                <div class="button-wrapper">
+                    <button id="shop"><i class="fas fa-shopping-cart"></i></button>
+                    <span>Shop</span>
+                </div>
+                <div class="button-wrapper">
+                    <button id="cart"><i class="fas fa-shopping-cart"></i></button>
+                    <span>Cart</span>
+                </div>
+                <div class="button-wrapper">
+                    <button id="dashboard"><i class="fas fa-tachometer-alt"></i></button>
+                    <span>Dashboard</span>
+                </div>
+                <div class="button-wrapper">
+                    <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+
     </header>
     <script>
         $(document).ready(function() {
@@ -548,6 +633,27 @@
                     header.removeClass("sticky");
                 }
             });
+        });
+    </script>
+    <script>
+        document.getElementById('home').addEventListener('click', function() {
+            window.location.href = '{{ route('home') }}';
+        });
+
+        document.getElementById('shop').addEventListener('click', function() {
+            window.location.href = '{{ route('shop') }}';
+        });
+
+        document.getElementById('cart').addEventListener('click', function() {
+            window.location.href = '{{ route('cart') }}';
+        });
+
+        document.getElementById('dashboard').addEventListener('click', function() {
+            window.location.href = '{{ route('dashboard') }}';
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+            document.getElementById('logout-form').submit();
         });
     </script>
 </body>
