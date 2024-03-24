@@ -68,7 +68,7 @@
     }
 
     .product-s {
-        width: 20%;
+        width: 16%;
         /* min-height: 400px; */
         float: left;
     }
@@ -194,25 +194,32 @@
                                         <div class="product__single">
                                             <div class="product__box">
                                                 <div class="product__thumb">
-                                                    <a href="{{ route('singleProduct', ['id' => $product->id]) }}" class="img-wrapper">
-                                                        @if ($product->image_url )
-                                                            <img class="img" src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                alt="product Image" style="height: 160px; width: auto; margin: 0 auto;">
-                                                        @elseif (!$product->image_url  && $product->remote_image_url)
-                                                            <img class="img" src="{{ $product->remote_image_url }}"
-                                                                alt="product Image" style="height: 220px; width: auto; margin: 0 auto;">
+                                                    <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                        class="img-wrapper">
+                                                        @if ($product->image_url)
+                                                            <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                class="img"
+                                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                                alt="">
+                                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                                            <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                class="img"
+                                                                src="{{ $product->remote_image_url }}"
+                                                                alt="">
                                                         @else
                                                             <span>No image available</span>
                                                         @endif
-                                                    
-                                                        @if ($product->quantity == 0)
-                                                            <span class="out-of-stock-tag">Out of Stock</span>
-                                                        @elseif ($product->discountedPrice)
+
+                                                        @if ($product->discountedPrice)
                                                             @php
-                                                                $salePercentage = (($product->price - $product->discountedPrice) / $product->price) * 100;
+                                                                $salePercentage =
+                                                                    (($product->price - $product->discountedPrice) /
+                                                                        $product->price) *
+                                                                    100;
                                                             @endphp
                                                             @if ($salePercentage > 0)
-                                                                <span class="sale-tag">Sale {{ round($salePercentage) }}% Off</span>
+                                                                <span class="sale-tag">Sale
+                                                                    {{ round($salePercentage) }}% Off</span>
                                                             @endif
                                                         @endif
                                                     </a>
