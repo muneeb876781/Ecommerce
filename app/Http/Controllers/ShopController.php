@@ -43,6 +43,7 @@ class ShopController extends Controller
             ->where('id', '!=', $product->id)
             ->get();
         $reviews = Review::where('product_id', $id)->get();
+        // dd($relatedProducts);
 
         $user_id = auth()->id();
 

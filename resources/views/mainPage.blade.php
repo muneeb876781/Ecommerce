@@ -841,24 +841,24 @@
 
         <div class="cats">
             <div class="cat_card">
-                <img src="../images/c1.png" alt="">
+                <img src="../images/ct1.jpg" alt="">
                 <h2>Free Delivery</h2>
             </div>
             <div class="cat_card">
-                <img src="../images/c5.png" alt="">
-                <h2>Beauty</h2>
+                <img src="../images/ct5.jpg" alt="">
+                <h2>COD</h2>
             </div>
             <div class="cat_card">
-                <img src="../images/c2.png" alt="">
-                <h2>Mart</h2>
+                <img src="../images/ct2.jpg" alt="">
+                <h2>Gaming</h2>
             </div>
             <div class="cat_card">
-                <img src="../images/c3.png" alt="">
+                <img src="../images/ct3.jpg" alt="">
                 <h2>Fashion</h2>
             </div>
             <div class="cat_card">
-                <img src="../images/c4.png" alt="">
-                <h2>Furniture</h2>
+                <img src="../images/ct4.jpg" alt="">
+                <h2>Mart</h2>
             </div>
         </div>
 
@@ -1268,9 +1268,9 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
-                            <div class="offer-banner offer--banner__bg mb-30" data-background="../images/bn12.jpg">
+                            <div class="offer-banner offer--banner__bg mb-30" data-background="../images/sal1.jpg">
                                 <div class="offer--banner__text">
-                                    <span class="f-200 white-color">Solid Wooden Furniture</span>
+                                    <span class="f-200 white-color">Cosmetics Items</span>
                                     <h4 class="white-color f-900 mb-40">40% Flate</h4>
                                     <a href="shop-collection.html">View Collection<i
                                             class="icofont-long-arrow-right"></i></a>
@@ -1278,9 +1278,9 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
-                            <div class="offer-banner offer--banner__bg mb-30" data-background="../images/bn13.jpg">
+                            <div class="offer-banner offer--banner__bg mb-30" data-background="../images/sal2.jpg">
                                 <div class="offer--banner__text">
-                                    <span class="f-200 white-color">Ceiling Floor Lighting</span>
+                                    <span class="f-200 black-color">Gaming Items</span>
                                     <h4 class="white-color f-900 mb-40">50% Flate</h4>
                                     <a href="shop-collection.html">View Collection<i
                                             class="icofont-long-arrow-right"></i></a>
