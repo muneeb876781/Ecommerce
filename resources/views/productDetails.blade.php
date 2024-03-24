@@ -29,8 +29,8 @@
 
         .left_con {
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
             width: 100%;
             height: 100%;
@@ -43,6 +43,13 @@
             font-size: 22px;
             margin-bottom: 10px;
         }
+
+        .right_con h2{
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        
 
         .stars {
             color: #FFD700;
@@ -540,55 +547,23 @@
                                     aria-labelledby="profile-tab11">
                                     <div class="desc-content mt-60">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            
+                                            <div class="col-md-6">
                                                 <div class="single-content mb-40">
-                                                    <h5 class="title">Perfactly Done</h5>
-                                                    <p>Praesent ornare, ex a interdum consectetur, lectus diam sodales
-                                                        elit, vitae egestas est enim ornare nisl. Nullam in lectus nec
-                                                        sem semper viverra. In lobortis egestas massa. Nam nec
-                                                        massa nisi. Suspendisse potenti. Quisque suscipit vulputate dui
-                                                        quis volutpUt id elit facilisis, feugiat est in, tempus lacus.
-                                                        Ut ultrices dictum meta ultricies ex vulputate ac. Ut id
-                                                        cursus tellus, non tempor quam. Morbi porta diam nisi, id
-                                                        finibus ntincidunt eu.</p>
+                                                    <h5 class="title">About the product</h5>
+                                                    <p>{!! $product->description !!}</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-content mb-40">
-                                                    <h5 class="title">Freshly Design</h5>
-                                                    <p>Praesent ornare, ex a interdum consectetur, lectus diam sodales
-                                                        elit, vitae egestas massa nisi. Suspendisse potenti. Quisque
-                                                        suscipit vulputate dui quis volutpat.Ut id cursus tellus, non
-                                                        tempor quam. Morbi.</p>
+                                                    <div class="right_con">
+                                                        <iframe width="560" height="315"
+                                                            src="https://www.youtube.com/embed/hHqW0gtiMy4?autoplay=1"
+                                                            frameborder="0" autoplay muted allowfullscreen></iframe>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="single-content mb-40">
-                                                    <h5 class="title">Fabolous Sound</h5>
-                                                    <p>Praesent ornare, ex a interdum consectetur, lectus diam sodales
-                                                        elit, vitae egestas massa nisi. Suspendisse potenti. Quisque
-                                                        suscipit vulputate dui quis volutpat.Ut id cursus tellus, non
-                                                        tempor quam. Morbi.</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="single-content mb-40">
-                                                    <h5 class="title">Inteligent Bettery</h5>
-                                                    <p>Praesent ornare, ex a interdum consectetur, lectus diam sodales
-                                                        elit, vitae egestas est enim ornare nisl. Nullam in lectus nec
-                                                        sem semper viverra. In lobortis egestas massa. Nam nec
-                                                        massa nisi. Suspendisse potenti. Quisque suscipit vulputate dui
-                                                        quis volutpat. Ut id elit facilisis, feugiat est in, tempus
-                                                        lacus. Ut ultrices dictum metus, a ultricies ex vulputate ac. Ut
-                                                        id
-                                                        cursus tellus, non tempor quam. Morbi porta diam nisi, id
-                                                        finibus nunc tincidunt eu interdum consectetur, lectus diam
-                                                        sodales elit, vitae egestas est enim ornare nisl. Nullam in
-                                                        lectus
-                                                        nec sem semper viverra. In lobortis egestas massa. Nam nec massa
-                                                        nisi. Suspendisse potenti. Quisque suscipit vulputate</p>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -632,7 +607,14 @@
                                                             <button class="r_btn" type="submit">Submit
                                                                 Review</button>
                                                         </form>
-                                                        <h2>Product Reviews</h2>
+                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-content mb-40">
+                                                <div class="right_con">
+                                                    <h2>Product Reviews</h2>
                                                         @foreach ($reviews as $review)
                                                             <div class="review">
                                                                 <p style="font-weight: 500; font-size: 16px;">
@@ -650,15 +632,6 @@
                                                                 <hr>
                                                             </div>
                                                         @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-content mb-40">
-                                                <div class="right_con">
-                                                    <iframe width="560" height="315"
-                                                        src="https://www.youtube.com/embed/hHqW0gtiMy4?autoplay=1"
-                                                        frameborder="0" autoplay muted allowfullscreen></iframe>
                                                 </div>
                                             </div>
                                         </div>
@@ -704,28 +677,28 @@
                                 <div class="product__single">
                                     <div class="product__box">
                                         <div class="product__thumb">
-                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                            <a href="{{ route('singleProduct', ['id' => $relProduct->id]) }}"
                                                 class="img-wrapper">
-                                                @if ($product->image_url)
+                                                @if ($relProduct->image_url)
                                                     <img class="img"
-                                                        src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                        src="{{ asset('storage/uploads/' . $relProduct->image_url) }}"
                                                         alt="product Image"
                                                         style="height: 220px; width: auto; margin: 0 auto;">
-                                                @elseif (!$product->image_url && $product->remote_image_url)
-                                                    <img class="img" src="{{ $product->remote_image_url }}"
+                                                @elseif (!$relProduct->image_url && $relProduct->remote_image_url)
+                                                    <img class="img" src="{{ $relProduct->remote_image_url }}"
                                                         alt="product Image"
-                                                        style="height: 220px; width: auto; margin: 0 auto;">
+                                                        style="height: 200px; width: auto; margin: 0 auto;">
                                                 @else
                                                     <span>No image available</span>
                                                 @endif
 
-                                                @if ($product->quantity == 0)
+                                                @if ($relProduct->quantity == 0)
                                                     <span class="out-of-stock-tag">Out of Stock</span>
-                                                @elseif ($product->discountedPrice)
+                                                @elseif ($relProduct->discountedPrice)
                                                     @php
                                                         $salePercentage =
-                                                            (($product->price - $product->discountedPrice) /
-                                                                $product->price) *
+                                                            (($relProduct->price - $relProduct->discountedPrice) /
+                                                                $relProduct->price) *
                                                             100;
                                                     @endphp
                                                     @if ($salePercentage > 0)
@@ -738,8 +711,8 @@
                                         <div class="product__content--top">
                                             <span class="cate-name">{{ $relProduct->category->name }}</span>
                                             <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
-                                                    @if (str_word_count($product->name) > 10)
+                                                    href="{{ route('singleProduct', ['id' => $relProduct->id]) }}">{{ implode(' ', array_slice(explode(' ', $relProduct->name), 0, 6)) }}
+                                                    @if (str_word_count($relProduct->name) > 10)
                                                         ...
                                                     @endif
                                                 </a>
