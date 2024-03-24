@@ -1397,45 +1397,61 @@
             }
 
             @media (max-width: 1200px) {
-                .cats_card {
-                    width: 15%;
+                .categoriess .cats_card {
+                    width: 17%;
                 }
             }
 
             @media (max-width: 1050px) {
-                .cats_card {
-                    width: 18%;
+                .categoriess .cats_card {
+                    width: 20%;
                 }
             }
 
+            @media (max-width: 800px) {
+                .categoriess .cats_card {
+                    width: 25%;
+                }
+            }
+
+            @media (max-width: 500px) {
+                .categoriess .cats_card {
+                    width: 30%;
+                }
+            }
+
+            
+
+            
+
             @media (max-width: 1050px) {
-                .cats_card {
+                .categoriess .cats_card {
                     height: 150px;
                 }
 
-                .cats_card h2 {
+                .categoriess .cats_card h2 {
                     font-size: 16px;
 
                 }
             }
 
             @media (max-width: 750px) {
-                .cats_card {
+                .categoriess .cats_card {
                     height: 120px;
                 }
 
-                .cats_card h2 {
+                .categoriess .cats_card h2 {
                     font-size: 12px;
 
                 }
             }
 
             @media (max-width: 500px) {
-                .cats_card {
+                .categoriess .cats_card {
                     height: 90px;
                 }
 
-                .cats_card h2 {
+                .categoriess .cats_card h2 {
                     font-size: 10px;
 
                 }
