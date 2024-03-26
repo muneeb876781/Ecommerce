@@ -919,8 +919,9 @@
                                     href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                             @endif
                         </li>
-                        <a class="visit_shop" href="{{ route('shop') }}">View All</a>
                     @endforeach
+                    <a class="visit_shop" href="{{ route('shop') }}">View All</a>
+
 
                 </div>
 
