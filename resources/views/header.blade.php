@@ -300,12 +300,13 @@
             align-items: flex-start;
             flex-direction: column;
             width: 100%;
-            height: 20%;
+            height: 30%;
             background: #efefef;
         }
 
         .top_sidenav a {
             padding: 20px;
+            color: black;
         }
 
         .side_nav_logout {
@@ -322,7 +323,15 @@
         .side_nav_trackorder {
             display: flex;
             flex-direction: row;
-            /* margin-top: 10px; */
+            align-items: center;
+        }
+
+        .side_nav_trackorder i {
+            /* margin-right: 5px; */
+            margin-left: 20px;
+            color: #909090;
+
+            /* Adjust the margin as needed */
         }
 
         .sidenav_login {
@@ -342,7 +351,7 @@
             align-items: flex-start;
             flex-direction: column;
             width: 100%;
-            height: 80%;
+            height: 70%;
             background: #fff;
         }
 
@@ -352,6 +361,20 @@
             padding-top: 14px;
             font-weight: 400;
             letter-spacing: 2px;
+        }
+
+        .visit_shop{
+            display: block;
+            padding: 12px 24px;
+            color: #333;
+            font-size: 20px;
+            text-decoration: none;
+            transition-duration: .25s;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         .menu__item {
@@ -399,14 +422,11 @@
         }
 
         .menu__box {
-            /* Other styles */
             left: -100%;
-            /* Hidden by default */
         }
 
         .menu__box.show {
             left: 0;
-            /* Show when 'show' class is applied */
         }
     </style>
 
@@ -884,8 +904,8 @@
                         </li>
                     @endauth
                     <div class="side_nav_trackorder">
-                        {{-- <i class="fas fa-map-marker-alt"></i> --}}
-                        <a href="{{ route('userOrders') }}">Track Orders</a>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{{ route('userOrders') }}">Track My Orders</a>
                     </div>
 
                 </div>
@@ -894,11 +914,12 @@
 
                     @foreach ($categories as $key => $category)
                         <li>
-                            @if ($key <= 9)
+                            @if ($key <= 5)
                                 <a class="menu__item"
                                     href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                             @endif
                         </li>
+                        <a class="visit_shop" href="{{ route('shop') }}">View All</a>
                     @endforeach
 
                 </div>
