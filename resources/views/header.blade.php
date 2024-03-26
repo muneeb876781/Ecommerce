@@ -180,7 +180,7 @@
             width: 20%
         }
 
-        .sticky-navbar .button-wrapper span{
+        .sticky-navbar .button-wrapper span {
             text-align: center;
             font-size: 12px
         }
@@ -343,13 +343,25 @@
                                                         </a>
                                                         <div class="cart-image">
                                                             <a
-                                                                href="{{ route('singleProduct', ['id' => $item->product->id]) }}"><img
-                                                                    src={{ asset('storage/uploads/' . $item->product->image_url) }}
-                                                                    alt=""></a>
+                                                                href="{{ route('singleProduct', ['id' => $item->product->id]) }}">
+                                                                @if ($item->product->image_url)
+                                                                    <img src={{ asset('storage/uploads/' . $item->product->image_url) }}
+                                                                        alt="">
+                                                                @elseif (!$item->product->image_url && $item->product->remote_image_url)
+                                                                    <img src={{ $item->product->remote_image_url }}
+                                                                        alt="">
+                                                                @else
+                                                                    <span>No image available</span>
+                                                                @endif
+                                                            </a>
                                                         </div>
                                                         <div class="cart-text">
                                                             <a href="#"
-                                                                class="title f-400 cod__black-color">{{ $item->product->name }}</a>
+                                                                class="title f-400 cod__black-color">{{ implode(' ', array_slice(explode(' ', $item->product->name), 0, 4)) }}
+                                                                @if (str_word_count($item->product->name) > 10)
+                                                                    ...
+                                                                @endif
+                                                            </a>
                                                             <span
                                                                 class="cart-price f-400 dusty__gray-color">{{ $item->quantity }}
                                                                 x </span>
@@ -412,13 +424,27 @@
                                     <ul>
                                         <li class="mb-20">
                                             <div class="cart-image">
-                                                <a href="#"><img
-                                                        src={{ asset('storage/uploads/' . $item->product->image_url) }}
-                                                        alt=""></a>
+                                                <a href="#">
+
+                                                    @if ($item->product->image_url)
+                                                        <img src={{ asset('storage/uploads/' . $item->product->image_url) }}
+                                                            alt="">
+                                                    @elseif (!$item->product->image_url && $item->product->remote_image_url)
+                                                        <img src={{ $item->product->remote_image_url }}
+                                                            alt="">
+                                                    @else
+                                                        <span>No image available</span>
+                                                    @endif
+                                                </a>
                                             </div>
                                             <div class="cart-text">
                                                 <a href="#"
-                                                    class="title f-400 cod__black-color">{{ $item->product->name }}</a>
+                                                    class="title f-400 cod__black-color">{{ implode(' ', array_slice(explode(' ', $item->product->name), 0, 4)) }}
+                                                    @if (str_word_count($item->product->name) > 10)
+                                                        ...
+                                                    @endif
+                                                </a>
+
                                                 <span
                                                     class="cart-price f-400 dusty__gray-color">{{ $item->quantity }}<span
                                                         class="price f-800 cod__black-color">Rs
@@ -619,6 +645,7 @@
                 </div>
             </div>
         </div>
+        
 
     </header>
     <script>
@@ -636,26 +663,50 @@
         });
     </script>
     <script>
+        // Function to remove active class from all buttons
+        function removeActiveClass() {
+            var buttons = document.querySelectorAll('.button-wrapper button');
+            buttons.forEach(function(button) {
+                button.classList.remove('active');
+            });
+        }
+    
         document.getElementById('home').addEventListener('click', function() {
+            removeActiveClass();
+            this.classList.add('active');
             window.location.href = '{{ route('home') }}';
         });
-
+    
         document.getElementById('shop').addEventListener('click', function() {
+            removeActiveClass();
+            this.classList.add('active');
             window.location.href = '{{ route('shop') }}';
         });
-
+    
         document.getElementById('cart').addEventListener('click', function() {
+            removeActiveClass();
+            this.classList.add('active');
             window.location.href = '{{ route('cart') }}';
         });
-
+    
         document.getElementById('dashboard').addEventListener('click', function() {
+            removeActiveClass();
+            this.classList.add('active');
             window.location.href = '{{ route('dashboard') }}';
         });
-
+    
         document.getElementById('logout').addEventListener('click', function() {
+            removeActiveClass();
+            this.classList.add('active');
             document.getElementById('logout-form').submit();
         });
     </script>
+    
+    <style>
+        .button-wrapper button.active {
+            background-color: #f0f0f0; /* Change to your desired active color */
+        }
+    </style>
 </body>
 
 </html>

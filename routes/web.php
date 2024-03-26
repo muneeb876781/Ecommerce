@@ -13,9 +13,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\OredrController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,50 +30,82 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-    Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
-    Route::get('/blog', function () {
-        return view('indexPage');
-    })->name('blog');
+Route::get('/blog', function () {
+    return view('indexPage');
+})->name('blog');
 
-    Route::get('/contact', function () {
-        return view('indexPage');
-    })->name('contact');
+Route::get('/contact', function () {
+    return view('indexPage');
+})->name('contact');
 
-    Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
-    Route::get('/single/{id}', [ShopController::class, 'singleProduct'])->name('singleProduct');
-
+Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
+Route::get('/single/{id}', [ShopController::class, 'singleProduct'])->name('singleProduct');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard')->middleware('seller');
+    Route::get('/dashboard', [SellerController::class, 'index'])
+        ->name('dashboard')
+        ->middleware('seller');
     Route::get('/sellerShop', [SellerController::class, 'sellerShop'])->name('sellerShop');
     Route::delete('/deleteStore/{id}', [SellerShopController::class, 'delete'])->name('deleteStore');
 
-    Route::get('/products', [ProductController::class, 'index'])->name('productview')->middleware('seller');
-    Route::get('/addProducts', [ProductController::class, 'add'])->name('addproduct')->middleware('seller');
-    Route::post('/storeProducts', [ProductController::class, 'store'])->name('storeproduct')->middleware('seller');
-    Route::post('/products/{id}', [ProductController::class, 'destroy'])->name('productdestroy')->middleware('seller');
-    Route::put('/products/{id}', [ProductController::class, 'update'])->name('productupdate')->middleware('seller');
+    Route::get('/products', [ProductController::class, 'index'])
+        ->name('productview')
+        ->middleware('seller');
+    Route::get('/addProducts', [ProductController::class, 'add'])
+        ->name('addproduct')
+        ->middleware('seller');
+    Route::post('/storeProducts', [ProductController::class, 'store'])
+        ->name('storeproduct')
+        ->middleware('seller');
+    Route::post('/products/{id}', [ProductController::class, 'destroy'])
+        ->name('productdestroy')
+        ->middleware('seller');
+    Route::put('/products/{id}', [ProductController::class, 'update'])
+        ->name('productupdate')
+        ->middleware('seller');
 
     Route::post('/products/reviews/{id}', [ReviewController::class, 'store'])->name('productreviewstore');
-    Route::get('/reviews', [SellerController::class, 'reviews'])->name('reviews')->middleware('seller');
+    Route::get('/reviews', [SellerController::class, 'reviews'])
+        ->name('reviews')
+        ->middleware('seller');
 
-
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categoryview')->middleware('seller');
-    Route::get('/addCategories', [CategoryController::class, 'add'])->name('addcategory')->middleware('seller');
-    Route::post('/storeCategories', [CategoryController::class, 'store'])->name('storeCategories')->middleware('seller');
-    Route::post('/categories/{id}', [CategoryController::class, 'destroy'])->name('categorydestroy')->middleware('seller');
-    Route::put('/categories/{id}', [CategoryController::class, 'edit'])->name('categoriesedit')->middleware('seller');
+    Route::get('/categories', [CategoryController::class, 'index'])
+        ->name('categoryview')
+        ->middleware('seller');
+    Route::get('/addCategories', [CategoryController::class, 'add'])
+        ->name('addcategory')
+        ->middleware('seller');
+    Route::post('/storeCategories', [CategoryController::class, 'store'])
+        ->name('storeCategories')
+        ->middleware('seller');
+    Route::post('/categories/{id}', [CategoryController::class, 'destroy'])
+        ->name('categorydestroy')
+        ->middleware('seller');
+    Route::put('/categories/{id}', [CategoryController::class, 'edit'])
+        ->name('categoriesedit')
+        ->middleware('seller');
 
     Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
 
-    Route::get('/subCategories', [SubCategoryController::class, 'index'])->name('subCategoryview')->middleware('seller');
-    Route::get('/addsubCategories', [SubCategoryController::class, 'add'])->name('addsubCategory')->middleware('seller');
-    Route::post('/storesubCategories', [SubCategoryController::class, 'store'])->name('storesubCategories')->middleware('seller');
-    Route::post('/subCategories/{id}', [SubCategoryController::class, 'destroy'])->name('subCategorydestroy')->middleware('seller');
-    Route::put('/subCategories/{id}', [SubCategoryController::class, 'edit'])->name('subCategoriesedit')->middleware('seller');
+    Route::get('/subCategories', [SubCategoryController::class, 'index'])
+        ->name('subCategoryview')
+        ->middleware('seller');
+    Route::get('/addsubCategories', [SubCategoryController::class, 'add'])
+        ->name('addsubCategory')
+        ->middleware('seller');
+    Route::post('/storesubCategories', [SubCategoryController::class, 'store'])
+        ->name('storesubCategories')
+        ->middleware('seller');
+    Route::post('/subCategories/{id}', [SubCategoryController::class, 'destroy'])
+        ->name('subCategorydestroy')
+        ->middleware('seller');
+    Route::put('/subCategories/{id}', [SubCategoryController::class, 'edit'])
+        ->name('subCategoriesedit')
+        ->middleware('seller');
 
     Route::post('/storesellershop', [SellerShopController::class, 'createShop'])->name('storesellershop');
 
@@ -92,6 +121,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Order', [OredrController::class, 'index'])->name('Order');
     Route::get('/orderDetails/{id}', [OredrController::class, 'orderDetails'])->name('orderDetails');
 
+    Route::post('/cardOrder', [OredrController::class, 'cardOrder'])->name('cardOrder');
+
+
+    
+
     Route::get('/trackOrders/{id}', [OredrController::class, 'trackOrders'])->name('trackOrders');
     Route::get('/userOrders', [OredrController::class, 'userOrders'])->name('userOrders');
 
@@ -99,10 +133,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pAttributes', [ProductController::class, 'productAttributes'])->name('productAttributes');
     Route::post('/storeAttribute', [ProductController::class, 'storeAttribute'])->name('storeAttribute');
-    Route::put('/pAttributes/{id}', [ProductController::class, 'edit'])->name('attributesEdit')->middleware('seller');
+    Route::put('/pAttributes/{id}', [ProductController::class, 'edit'])
+        ->name('attributesEdit')
+        ->middleware('seller');
 
     Route::get('/order/{id}/downloadPDF', [OredrController::class, 'downloadPDF'])->name('downloadPDF');
-
-
-
 });

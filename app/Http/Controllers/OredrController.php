@@ -20,6 +20,9 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Writer;
 use Milon\Barcode\DNS1D;
 use BaconQrCode\Renderer\RendererStyle\Image;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
+use Stripe\Exception\CardException;
 
 use Illuminate\Http\Request;
 
@@ -101,6 +104,97 @@ class OredrController extends Controller
         $order->special_instructions = $request->input('instructions');
         $order->tracking_number = Str::random(10);
         $order->Total_price = $totalPrice;
+
+        $order->save();
+
+        foreach ($cartItems as $cartItem) {
+            $product = Product::find($cartItem->product_id);
+            if ($product) {
+                $orderItem = new OrderItem();
+                $orderItem->order_id = $order->id;
+                $orderItem->product_id = $product->id;
+                $orderItem->quantity = $cartItem->quantity;
+                $orderItem->product_name = $product->name;
+                $orderItem->image_url = $product->image_url;
+                $orderItem->price = $product->discountedPrice ? $product->discountedPrice : $product->price;
+                $orderItem->save();
+            }
+        }
+
+        $shopOwners = SellerShop::whereIn('id', $shopIds)->get(['user_id']);
+        $userIds = $shopOwners->pluck('user_id')->toArray();
+        $users = User::whereIn('id', $userIds)->get(['email']);
+
+        $vendorEmail = $users->first()->email;
+
+        $orderId = $order->id;
+        $orderItems = OrderItem::where('order_id', $orderId)->get();
+
+        // $mail = new OrderPlacedVendor($order, $orderItems);
+        // Mail::to($vendorEmail)->send($mail);
+
+        Cart::where('user_id', auth()->id())->delete();
+
+        return redirect()->route('home')->with('checkout_sucess', 'Order has been placed successfully');
+    }
+
+    public function cardOrder(Request $request)
+    {
+        $validatedData = $request->validate([
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'email' => 'required|email',
+            'address' => 'required|string',
+            'postalCode' => 'required|string|max:10',
+            'phone' => 'required|string|max:15',
+            'instructions' => 'nullable|string',
+        ]);
+
+        $order = new Order();
+        $order->user_id = auth()->id();
+
+        $user_id = auth()->id();
+
+        $cartItems = Cart::where('user_id', $user_id)->get();
+
+        $totalPrice = 0;
+
+        foreach ($cartItems as $item) {
+            if ($item->product->discountedPrice) {
+                $totalPrice += $item->product->discountedPrice * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+        }
+
+        $shopIds = $cartItems->pluck('product.shop_id')->unique();
+
+        $order->shop_id = $shopIds->first();
+
+        $order->payment_method = 'Card Payment';
+        $order->order_status = 'Pending';
+        $order->delivery_address = $request->input('address');
+        $order->postal_code = $request->input('postalCode');
+        $order->contact_number = $request->input('phone');
+        $order->email = $request->input('email');
+        $order->first_name = $request->input('firstName');
+        $order->last_name = $request->input('lastName');
+        $order->special_instructions = $request->input('instructions');
+        $order->tracking_number = Str::random(10);
+        $order->Total_price = $totalPrice;
+
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $description = 'New order payment from ' . $request->input('firstName') . ' - Tracking ID: ' . $order->tracking_number;
+
+        // Create a PaymentIntent
+        $paymentIntent = \Stripe\PaymentIntent::create([
+            'amount' => $totalPrice * 100, // Amount in cents
+            'currency' => 'pkr',
+            'payment_method_types' => ['card'],
+            'payment_method' => $request->input('stripeToken'),
+            'description' => $description,
+        ]); 
 
         $order->save();
 
@@ -227,7 +321,6 @@ class OredrController extends Controller
         // $writer = new Writer($renderer);
 
         // $qrCode = $writer->writeString($order->tracking_number);
-
 
         // Generate Barcode
         // $barcode = new DNS1D();

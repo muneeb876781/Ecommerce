@@ -17,6 +17,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}">
         < script src = "{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}" >
     </script>
@@ -61,16 +62,9 @@
             <div class="checkout col-lg-10 mx-auto">
                 <div class="card ">
                     <div style="background: white;" class="card-header">
-                        <div class="bg-white shadow-sm pt-0 pl-2 pr-2 pb-2">
-                            <div class="row">
-                                <div class="col-lg-8 mx-auto text-center">
-                                    <h1 class="">Checkout</h1>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="container">
                             <div class="row">
-                                
                                 <div class="col-md-6">
                                     <!-- Payment Methods Navbar -->
                                     <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mt-4 mb-3">
@@ -82,52 +76,124 @@
                                                 <i class="fas fa-money-bill mr-2"></i> Cash on Delivery
                                             </a>
                                         </li>
-                                        <li class="nav-item"> <a data-toggle="pill" href="#net-banking"
-                                                class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net
-                                            </a> </li>
                                     </ul>
+
+
 
                                     <!-- Payment Methods Content -->
                                     <div class="tab-content">
                                         <div id="credit-card" class="tab-pane fade show active pt-3">
                                             <!-- Credit Card Form -->
-                                            <form role="form" onsubmit="event.preventDefault()">
-                                                <div class="form-group"> <label for="username">
-                                                        <h6>Card Owner</h6>
-                                                    </label> <input type="text" name="username"
-                                                        placeholder="Card Owner Name" required class="form-control ">
+                                            <form action="{{ route('cardOrder') }}" method="POST">
+                                                @csrf
+                                                <div id="card-element">
+                                                    <!-- A Stripe Element will be inserted here. -->
                                                 </div>
-                                                <div class="form-group"> <label for="cardNumber">
+                                                <input type="hidden" name="stripeToken" />
+                                                <input type="hidden" name="payment_method" id="payment_method" />
+
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="firstName">
+                                                            <h6>First Name</h6>
+                                                        </label>
+                                                        <input type="text" name="firstName"
+                                                            placeholder="Your First Name" required class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="lastName">
+                                                            <h6>Last Name</h6>
+                                                        </label>
+                                                        <input type="text" name="lastName"
+                                                            placeholder="Your Last Name" required class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">
+                                                        <h6>Email</h6>
+                                                    </label>
+                                                    <input type="email" name="email" placeholder="Your Email"
+                                                        required class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="address">
+                                                        <h6>Address</h6>
+                                                    </label>
+                                                    <textarea name="address" placeholder="Your Address" required class="form-control"></textarea>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="postalCode">
+                                                            <h6>Postal Code</h6>
+                                                        </label>
+                                                        <input type="text" name="postalCode"
+                                                            placeholder="Your Postal Code" required
+                                                            class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="phone">
+                                                            <h6>Phone Number</h6>
+                                                        </label>
+                                                        <input type="tel" name="phone"
+                                                            placeholder="Your Phone Number" required
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="instructions">
+                                                        <h6>Special Instructions</h6>
+                                                    </label>
+                                                    <textarea name="instructions" placeholder="Any special instructions" class="form-control"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="username">
+                                                        <h6>Card Owner</h6>
+                                                    </label>
+                                                    <input type="text" id="username" name="username"
+                                                        placeholder="Card Owner Name" required class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cardNumber">
                                                         <h6>Card number</h6>
                                                     </label>
-                                                    <div class="input-group"> <input type="text" name="cardNumber"
-                                                            placeholder="Valid card number" class="form-control "
+                                                    <div class="input-group">
+                                                        <input type="text" id="cardNumber" name="cardNumber"
+                                                            placeholder="Valid card number" class="form-control"
                                                             required>
-                                                        <div class="input-group-append"> <span
-                                                                class="input-group-text text-muted">
-                                                                <i class="fab fa-cc-visa mx-1"></i> <i
-                                                                    class="fab fa-cc-mastercard mx-1"></i> <i
-                                                                    class="fab fa-cc-amex mx-1"></i> </span> </div>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text text-muted">
+                                                                <i class="fab fa-cc-visa mx-1"></i>
+                                                                <i class="fab fa-cc-mastercard mx-1"></i>
+                                                                <i class="fab fa-cc-amex mx-1"></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-8">
-                                                        <div class="form-group"> <label><span class="hidden-xs">
+                                                        <div class="form-group">
+                                                            <label>
+                                                                <span class="hidden-xs">
                                                                     <h6>Expiration Date</h6>
-                                                                </span></label>
-                                                            <div class="input-group"> <input type="number"
-                                                                    placeholder="MM" name="" class="form-control"
-                                                                    required> <input type="number" placeholder="YY"
-                                                                    name="" class="form-control" required>
+                                                                </span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="number" id="expMonth" placeholder="MM"
+                                                                    name="expMonth" class="form-control" required>
+                                                                <input type="number" id="expYear" placeholder="YY"
+                                                                    name="expYear" class="form-control" required>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <div class="form-group mb-4"> <label data-toggle="tooltip"
+                                                        <div class="form-group mb-4">
+                                                            <label data-toggle="tooltip"
                                                                 title="Three digit CV code on the back of your card">
                                                                 <h6>CVV <i class="fa fa-question-circle d-inline"></i>
                                                                 </h6>
-                                                            </label> <input type="text" required
+                                                            </label>
+                                                            <input type="text" id="cvv" required
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -135,13 +201,89 @@
                                                 <div class="card-footer"
                                                     style="background: white; justify-content: center;">
                                                     <button style="background: #cd3301; color: #fff; width: 50%;"
-                                                        type="button"
-                                                        class="subscribe btn btn-primary btn-block shadow-sm">
-                                                        Confirm Order
-                                                    </button>
+                                                        type="submit"
+                                                        class="subscribe btn btn-primary btn-block shadow-sm">Confirm
+                                                        Order</button>
                                                 </div>
                                             </form>
+
+
                                         </div>
+
+                                        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+                                        <script type="text/javascript">
+                                            $(function() {
+
+                                                /*------------------------------------------
+                                                --------------------------------------------
+                                                Stripe Payment Code
+                                                --------------------------------------------
+                                                --------------------------------------------*/
+
+                                                var $form = $(".require-validation");
+
+                                                $('form.require-validation').bind('submit', function(e) {
+                                                    var $form = $(".require-validation"),
+                                                        inputSelector = ['input[type=email]', 'input[type=password]',
+                                                            'input[type=text]', 'input[type=file]',
+                                                            'textarea'
+                                                        ].join(', '),
+                                                        $inputs = $form.find('.required').find(inputSelector),
+                                                        $errorMessage = $form.find('div.error'),
+                                                        valid = true;
+                                                    $errorMessage.addClass('hide');
+
+                                                    $('.has-error').removeClass('has-error');
+                                                    $inputs.each(function(i, el) {
+                                                        var $input = $(el);
+                                                        if ($input.val() === '') {
+                                                            $input.parent().addClass('has-error');
+                                                            $errorMessage.removeClass('hide');
+                                                            e.preventDefault();
+                                                        }
+                                                    });
+
+                                                    if (!$form.data('cc-on-file')) {
+                                                        e.preventDefault();
+                                                        Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                                                        Stripe.createToken({
+                                                            number: $('.card-number').val(),
+                                                            cvc: $('.card-cvc').val(),
+                                                            exp_month: $('.card-expiry-month').val(),
+                                                            exp_year: $('.card-expiry-year').val()
+                                                        }, stripeResponseHandler);
+                                                    }
+
+                                                });
+
+                                                /*------------------------------------------
+                                                --------------------------------------------
+                                                Stripe Response Handler
+                                                --------------------------------------------
+                                                --------------------------------------------*/
+                                                function stripeResponseHandler(status, response) {
+                                                    if (response.error) {
+                                                        $('.error')
+                                                            .removeClass('hide')
+                                                            .find('.alert')
+                                                            .text(response.error.message);
+                                                    } else {
+                                                        /* token contains id, last4, and card type */
+                                                        var token = response['id'];
+
+                                                        $form.find('input[type=text]').empty();
+                                                        $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+                                                        $form.get(0).submit();
+                                                    }
+                                                }
+
+                                            });
+                                        </script>
+
+
+
+
+
                                         <div id="Cash" class="tab-pane fade pt-3">
                                             <form action="{{ route('order') }}" method="POST">
                                                 @csrf
@@ -213,40 +355,7 @@
 
 
 
-                                        <div id="net-banking" class="tab-pane fade pt-3">
-                                            <div class="form-group "> <label for="Select Your Bank">
-                                                    <h6>Select your Bank</h6>
-                                                </label> <select class="form-control" id="ccmonth">
-                                                    <option value="" selected disabled>--Please select your
-                                                        Bank--
-                                                    </option>
-                                                    <option>Bank 1</option>
-                                                    <option>Bank 2</option>
-                                                    <option>Bank 3</option>
-                                                    <option>Bank 4</option>
-                                                    <option>Bank 5</option>
-                                                    <option>Bank 6</option>
-                                                    <option>Bank 7</option>
-                                                    <option>Bank 8</option>
-                                                    <option>Bank 9</option>
-                                                    <option>Bank 10</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <p> <button type="button" class="btn btn-primary "><i
-                                                            class="fas fa-mobile-alt mr-2"></i> Proceed
-                                                        Payment</button>
-                                                </p>
-                                            </div>
-                                            <p class="text-muted">Note: After clicking on the button, you will be
-                                                directed
-                                                to a
-                                                secure
-                                                gateway for payment. After completing the payment process, you will be
-                                                redirected back
-                                                to the website to view details of your order.
-                                            </p>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -262,13 +371,28 @@
                                                         class="list-group-item d-flex justify-content-between align-items-center">
                                                         <div>
                                                             <a
-                                                                href="{{ route('singleProduct', ['id' => $item->product->id]) }}"><img
-                                                                    src="{{ asset( 'storage/uploads/' . $item->product->image_url) }}"
-                                                                    alt="{{ $item->product->name }}"
-                                                                    class="img-thumbnail mr-2"
-                                                                    style="width: 80px; height: 80px; border-radius: 50%;"></a>
-                                                            <span><strong>{{ $item->product->name }}</strong></span>
+                                                                href="{{ route('singleProduct', ['id' => $item->product->id]) }}">
+                                                                @if ($item->product->image_url)
+                                                                    <img src="{{ asset('storage/uploads/' . $item->product->image_url) }}"
+                                                                        alt="{{ $item->product->name }}"
+                                                                        class="img-thumbnail mr-2"
+                                                                        style="width: 80px; height: 80px; border-radius: 50%;">
+                                                                @elseif (!$item->product->image_url && $item->product->remote_image_url)
+                                                                    <img src="{{ $item->product->remote_image_url }}"
+                                                                        alt="{{ $item->product->name }}"
+                                                                        class="img-thumbnail mr-2"
+                                                                        style="width: 80px; height: 80px; border-radius: 50%;">
+                                                                @else
+                                                                    <span>No image available</span>
+                                                                @endif
+                                                                <span><strong>{{ implode(' ', array_slice(explode(' ', $item->product->name), 0, 6)) }}
+                                                                        @if (str_word_count($item->product->name) > 10)
+                                                                            ...
+                                                                        @endif
+                                                                    </strong></span>
                                                         </div>
+                                                        </a>
+
                                                         <span>
                                                             @if ($item->product->discountedPrice)
                                                                 Rs.
@@ -290,7 +414,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <script>

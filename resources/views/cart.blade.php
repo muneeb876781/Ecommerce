@@ -68,12 +68,26 @@
                                                 <td>
                                                     <figure class="itemside align-items-center">
                                                         <div class="aside"> <a
-                                                                href="{{ route('singleProduct', ['id' => $item->product->id]) }}"><img
-                                                                    src="{{ asset( 'storage/uploads/' . $item->product->image_url) }}"
-                                                                    class="book-img"></a></div>
+                                                                href="{{ route('singleProduct', ['id' => $item->product->id]) }}">
+
+                                                                @if ($item->product->image_url)
+                                                                    <img src="{{ asset('storage/uploads/' . $item->product->image_url) }}"
+                                                                        class="book-img">
+                                                                @elseif (!$item->product->image_url && $item->product->remote_image_url)
+                                                                    <img src="{{ $item->product->remote_image_url }}"
+                                                                        class="book-img">
+                                                                @else
+                                                                    <span>No image available</span>
+                                                                @endif
+                                                            </a></div>
                                                         <figcaption class="info"> <a href="#"
                                                                 class="title text-dark" data-abc="true">
-                                                                <h6 class="mob-text">{{ $item->product->name }}</h6>
+                                                                <h6 class="mob-text">
+                                                                    {{ implode(' ', array_slice(explode(' ', $item->product->name), 0, 6)) }}
+                                                                    @if (str_word_count($item->product->name) > 10)
+                                                                        ...
+                                                                    @endif
+                                                                </h6>
                                                             </a>
                                                             <p class="text-muted small">
                                                                 {{ $item->product->category->name }}
