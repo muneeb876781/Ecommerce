@@ -356,7 +356,7 @@
         }
 
         .bottom_sidenav h4 {
-            font-size: 20px;
+            font-size: 14px;
             padding-left: 20px;
             padding-top: 14px;
             font-weight: 400;
@@ -367,7 +367,7 @@
             display: block;
             padding: 12px 24px;
             color: #333;
-            font-size: 20px;
+            font-size: 16px;
             text-decoration: none;
             transition-duration: .25s;
             width: 90%;
@@ -381,7 +381,7 @@
             display: block;
             padding: 12px 24px;
             color: #333;
-            font-size: 20px;
+            font-size: 16px;
             text-decoration: none;
             transition-duration: .25s;
             width: 100%;
