@@ -27,7 +27,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
@@ -36,7 +37,8 @@
             background-color: #f2f2f2;
         }
 
-        th:first-child, td:first-child {
+        th:first-child,
+        td:first-child {
             width: 50%;
         }
 
@@ -70,6 +72,23 @@
                     <td class="barcode">
                         {!! DNS2D::getBarcodeHTML("http://127.0.0.1:8000/trackOrders/$order->tracking_id", 'QRCODE') !!}
                     </td>
+                </tr>
+                <tr>
+                    <th>
+                        Product Details
+                    </th>
+                </tr>
+                <tr>
+                    @foreach ($order->items as $item)
+                        <td class="list-group-item"> <strong style="font-size: 20px;">{{ $item->product_name }}</strong>
+                            <br>
+                            - <strong>Quantity:</strong> {{ $item->quantity }} <br>
+                            - <strong>Product color:</strong> {{ $item->product_color }} <br>
+                            - <strong>Product size:</strong> {{ $item->product_size }} <br>
+                            - <strong>Price:</strong> {{ $item->price }} <br>
+                            - <strong>Sub Total:</strong> {{ $item->price * $item->quantity }}
+                        </td>
+                    @endforeach
                 </tr>
             </tbody>
         </table>

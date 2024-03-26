@@ -218,6 +218,9 @@ class ProductController extends Controller
         $cart = Cart::where('user_id', $user_id)->where('product_id', $id)->first();
 
         $quantity = $request->input('quantity') ?? 1;
+        $color = $request->input('color');
+        $size = $request->input('size');
+
 
         if ($cart) {
             $cart->increment('quantity');
@@ -226,6 +229,8 @@ class ProductController extends Controller
             $cart->user_id = $user_id;
             $cart->product_id = $id;
             $cart->quantity = $quantity;
+            $cart->color = $color;
+            $cart->size = $size;
             $cart->save();
         }
 
