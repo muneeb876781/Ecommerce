@@ -248,8 +248,19 @@
                     @foreach ($trackOrders->items as $orderitems)
                         <li class="col-md-4">
                             <figure class="itemside mb-3">
-                                <div class="aside"><img src="{{ asset('storage/uploads/' . $orderitems->image_url) }}"
-                                        class="img-sm border">
+                                <div class="aside">
+                                    {{-- <img src="{{ asset('storage/uploads/' . $orderitems->image_url) }}"
+                                        class="img-sm border"> --}}
+s
+                                    @if ($orderitems->image_url)
+                                        <img src="{{ asset('storage/uploads/' . $orderitems->image_url) }}"
+                                            class="img-sm border">
+                                    @elseif (!$orderitems->image_url && $orderitems->remote_image_url)
+                                        <img src="{{$orderitems->remote_image_url}}"
+                                            class="img-sm border">
+                                    @else
+                                        <span>No image available</span>
+                                    @endif
                                 </div>
                                 <figcaption class="info align-self-center">
                                     <p class="title"> <strong>{{ $orderitems->product_name }}</strong> </p> <span
