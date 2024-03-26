@@ -77,12 +77,10 @@
             }
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .mnu {
                 display: none;
             }
-
-
         }
     </style>
     <style>
@@ -194,16 +192,230 @@
             cursor: pointer;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 760px) {
             .sticky-navbar {
                 display: block;
             }
         }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #48afff;
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1rem;
+            right: -5px;
+            top: -5px;
+            padding: 9px;
+        }
     </style>
+    <style>
+        #menu__toggle {
+            opacity: 0;
+            display: none;
+        }
+
+        #menu__toggle:checked+.menu__btn>span {
+            transform: rotate(45deg);
+        }
+
+        #menu__toggle:checked+.menu__btn>span::before {
+            top: 0;
+            transform: rotate(0deg);
+        }
+
+        #menu__toggle:checked+.menu__btn>span::after {
+            top: 0;
+            transform: rotate(90deg);
+        }
+
+        #menu__toggle:checked~.menu__box {
+            left: 0 !important;
+        }
+
+        .menu__btn {
+            display: none;
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .menu__btn>span,
+        .menu__btn>span::before,
+        .menu__btn>span::after {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #616161;
+            transition-duration: .25s;
+        }
+
+        .menu__btn>span::before {
+            content: '';
+            top: -8px;
+        }
+
+        .menu__btn>span::after {
+            content: '';
+            top: 8px;
+        }
+
+        .menu__box {
+            display: block;
+            display: flex;
+            justify-content: left;
+            align-content: flex-start;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 300px;
+            height: 100%;
+            margin: 0;
+            padding: 80px 0;
+            list-style: none;
+            background-color: #ECEFF1;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+            transition-duration: .25s;
+            z-index: 999;
+        }
+
+        .top_sidenav {
+            display: flex;
+            justify-content: left;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+            height: 20%;
+            background: #efefef;
+        }
+
+        .top_sidenav a {
+            padding: 20px;
+        }
+
+        .side_nav_logout {
+            font-size: 15px;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            padding: 5px 40px;
+            text-align: center;
+            background: #fff;
+            color: #49aefb;
+            margin-left: 20px;
+        }
+
+        .side_nav_trackorder {
+            display: flex;
+            flex-direction: row;
+            /* margin-top: 10px; */
+        }
+
+        .sidenav_login {
+            font-size: 15px;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            padding: 5px 40px;
+            text-align: center;
+            background: #fff;
+            color: #49aefb;
+            margin-left: 20px;
+        }
+
+        .bottom_sidenav {
+            display: flex;
+            justify-content: left;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+            height: 80%;
+            background: #fff;
+        }
+
+        .bottom_sidenav h4 {
+            font-size: 20px;
+            padding-left: 20px;
+            padding-top: 14px;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .menu__item {
+            display: block;
+            padding: 12px 24px;
+            color: #333;
+            font-size: 20px;
+            text-decoration: none;
+            transition-duration: .25s;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .menu__item:hover {
+            background-color: #efefef;
+        }
+
+        @media screen and (max-width: 1200px) {
+            #menu__toggle {
+                display: block;
+            }
+
+            .menu__btn {
+                display: block;
+            }
+
+            /* Move the menu box to the left to make it visible */
+            #menu__toggle:checked+.menu__btn>span {
+                transform: rotate(45deg);
+            }
+
+            #menu__toggle:checked+.menu__btn>span::before {
+                top: 0;
+                transform: rotate(0deg);
+            }
+
+            #menu__toggle:checked+.menu__btn>span::after {
+                top: 0;
+                transform: rotate(90deg);
+            }
+
+            #menu__toggle:checked~.menu__box {
+                left: 0 !important;
+            }
+        }
+
+        .menu__box {
+            /* Other styles */
+            left: -100%;
+            /* Hidden by default */
+        }
+
+        .menu__box.show {
+            left: 0;
+            /* Show when 'show' class is applied */
+        }
+    </style>
+
+
     <title>Document</title>
 </head>
 
 <body>
+
     <header class="header" id="header">
         <div class="top header__top gray-bg d-none d-md-block">
             <div class="container">
@@ -628,24 +840,74 @@
                     <span>Home</span>
                 </div>
                 <div class="button-wrapper">
-                    <button id="shop"><i class="fas fa-shopping-cart"></i></button>
-                    <span>Shop</span>
+                    <button id="shop" onclick="toggleSideNav()"><i class="fas fa-list-alt"></i></button>
+                    <span>Categories</span>
                 </div>
                 <div class="button-wrapper">
-                    <button id="cart"><i class="fas fa-shopping-cart"></i></button>
+                    <button id="cart" class="cart-icon"><i class="fas fa-shopping-cart"></i><span
+                            class="badge">{{ $totalItems }}</span></button>
                     <span>Cart</span>
                 </div>
                 <div class="button-wrapper">
-                    <button id="dashboard"><i class="fas fa-tachometer-alt"></i></button>
+                    <button id="dashboard"><i class="fas fa-chart-line"></i></button>
                     <span>Dashboard</span>
                 </div>
                 <div class="button-wrapper">
-                    <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
-                    <span>Logout</span>
+                    <button id="logout"><i class="fas fa-user-circle"></i></button>
+                    <span>Account</span>
                 </div>
             </div>
         </div>
-        
+        <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+                <span></span>
+            </label>
+
+            <ul class="menu__box">
+                <div class="top_sidenav">
+                    <a class="logo__link" href="index.html"><img src="img/logo/h1__logo.png" alt=""></a>
+                    @guest
+                        <li class="nav-item">
+                            <a class="sidenav_login mt-2" href="{{ route('register') }}">Login</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="side_nav_logout" href="{{ route('register') }}">Register</a>
+                        </li> --}}
+                    @endguest
+                    @auth
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="side_nav_logout" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    @endauth
+                    <div class="side_nav_trackorder">
+                        {{-- <i class="fas fa-map-marker-alt"></i> --}}
+                        <a href="{{ route('userOrders') }}">Track Orders</a>
+                    </div>
+
+                </div>
+                <div class="bottom_sidenav">
+                    <h4>Categories</h4>
+
+                    @foreach ($categories as $key => $category)
+                        <li>
+                            @if ($key <= 9)
+                                <a class="menu__item"
+                                    href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                            @endif
+                        </li>
+                    @endforeach
+
+                </div>
+
+            </ul>
+        </div>
+
+
+
 
     </header>
     <script>
@@ -663,50 +925,31 @@
         });
     </script>
     <script>
-        // Function to remove active class from all buttons
-        function removeActiveClass() {
-            var buttons = document.querySelectorAll('.button-wrapper button');
-            buttons.forEach(function(button) {
-                button.classList.remove('active');
-            });
-        }
-    
         document.getElementById('home').addEventListener('click', function() {
-            removeActiveClass();
-            this.classList.add('active');
             window.location.href = '{{ route('home') }}';
         });
-    
-        document.getElementById('shop').addEventListener('click', function() {
-            removeActiveClass();
-            this.classList.add('active');
-            window.location.href = '{{ route('shop') }}';
-        });
-    
+
+        // document.getElementById('shop').addEventListener('click', function() {
+        //     window.location.href = '{{ route('shop') }}';
+        // });
+
+        function toggleSideNav() {
+            var menuBox = document.querySelector('.menu__box');
+            menuBox.classList.toggle('show');
+        }
+
         document.getElementById('cart').addEventListener('click', function() {
-            removeActiveClass();
-            this.classList.add('active');
             window.location.href = '{{ route('cart') }}';
         });
-    
+
         document.getElementById('dashboard').addEventListener('click', function() {
-            removeActiveClass();
-            this.classList.add('active');
             window.location.href = '{{ route('dashboard') }}';
         });
-    
+
         document.getElementById('logout').addEventListener('click', function() {
-            removeActiveClass();
-            this.classList.add('active');
             document.getElementById('logout-form').submit();
         });
     </script>
-    
-    <style>
-        .button-wrapper button.active {
-            background-color: #f0f0f0; /* Change to your desired active color */
-        }
-    </style>
 </body>
 
 </html>
