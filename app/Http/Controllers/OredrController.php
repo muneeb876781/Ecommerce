@@ -114,6 +114,8 @@ class OredrController extends Controller
                 $orderItem->order_id = $order->id;
                 $orderItem->product_id = $product->id;
                 $orderItem->quantity = $cartItem->quantity;
+                $orderItem->product_size = $cartItem->size;
+                $orderItem->product_color = $cartItem->color;
                 $orderItem->product_name = $product->name;
                 $orderItem->image_url = $product->image_url;
                 $orderItem->price = $product->discountedPrice ? $product->discountedPrice : $product->price;
@@ -205,6 +207,8 @@ class OredrController extends Controller
                 $orderItem->order_id = $order->id;
                 $orderItem->product_id = $product->id;
                 $orderItem->quantity = $cartItem->quantity;
+                $orderItem->product_size = $cartItem->size;
+                $orderItem->product_color = $cartItem->color;
                 $orderItem->product_name = $product->name;
                 $orderItem->image_url = $product->image_url;
                 $orderItem->price = $product->discountedPrice ? $product->discountedPrice : $product->price;

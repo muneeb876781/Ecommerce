@@ -263,8 +263,11 @@ s
                                     @endif
                                 </div>
                                 <figcaption class="info align-self-center">
-                                    <p class="title"> <strong>{{ $orderitems->product_name }}</strong> </p> <span
-                                        class="text-muted">Rs {{ $orderitems->price }} </span><br>
+                                    <p class="title"> <strong>{{ $orderitems->product_name }}</strong> </p> 
+                                    <span class="text-muted">Color {{ $orderitems->product_color }} </span><br>
+                                    <span class="text-muted">Size {{ $orderitems->product_size }} </span><br>
+                                    <span class="text-muted">Rs {{ $orderitems->price }} </span><br>
+
                                     <span class="text-muted"> Quantity: {{ $orderitems->quantity }} </span>
                                 </figcaption>
                             </figure>

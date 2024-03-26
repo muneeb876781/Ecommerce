@@ -88,6 +88,8 @@
                                             <li class="list-group-item"> <strong
                                                     style="font-size: 20px;">{{ $item->product_name }}</strong> <br>
                                                 - <strong>Quantity:</strong> {{ $item->quantity }} <br>
+                                                - <strong>Product color:</strong> {{ $item->product_color }} <br>
+                                                - <strong>Product size:</strong> {{ $item->product_size }} <br>
                                                 - <strong>Price:</strong> {{ $item->price }} <br>
                                                 - <strong>Sub Total:</strong> {{ $item->price * $item->quantity }}</li>
                                         @endforeach

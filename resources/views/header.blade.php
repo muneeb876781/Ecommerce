@@ -275,7 +275,7 @@
         }
 
         .menu__box {
-            display: block;
+            display: none;
             display: flex;
             justify-content: left;
             align-content: flex-start;
@@ -378,7 +378,7 @@
         }
 
         .menu__item {
-            display: block;
+            display: none;
             padding: 12px 24px;
             color: #333;
             font-size: 16px;
@@ -398,6 +398,14 @@
             }
 
             .menu__btn {
+                display: block;
+            }
+
+            .menu__item{
+                display: block;
+            }
+
+            .menu__box{
                 display: block;
             }
 
@@ -788,7 +796,7 @@
                                             </ul>
                                         @endforeach
                                     </li>
-                                    <li class="dropdown-icon">
+                                    {{-- <li class="dropdown-icon">
                                         <a href="#">Pages</a>
                                         <ul class="submenu">
                                             <li>
@@ -804,12 +812,12 @@
                                                 <a href="{{ route('register') }}">Register</a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="{{ route('shop') }}">Top Product</a>
                                     </li>
 
-                                    <li class="dropdown-icon">
+                                    {{-- <li class="dropdown-icon">
                                         <a href="blog.html">Blog</a>
                                         <ul class="submenu  level-1">
                                             <li>
@@ -822,7 +830,7 @@
                                                 <a href="blog-details.html">Blog Details</a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <div class="shop_button">
                                             @if (auth()->check())

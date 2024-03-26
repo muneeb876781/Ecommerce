@@ -44,12 +44,12 @@
             margin-bottom: 10px;
         }
 
-        .right_con h2{
+        .right_con h2 {
             font-size: 22px;
             margin-bottom: 10px;
         }
 
-        
+
 
         .stars {
             color: #FFD700;
@@ -401,9 +401,6 @@
                                 @endif
 
                             </div>
-
-
-
                             <form action="{{ route('addToCart', ['id' => $product->id]) }}" method="POST">
                                 @csrf
                                 <div class="row">
@@ -411,24 +408,35 @@
                                         <div class="field">
                                             <div class="attributes-section">
                                                 @foreach ($product->attributeValues->unique('product_attribute_id') as $attribute)
-                                                    @if ($attribute->productAttribute->name != 'Color')
+                                                    @if ($attribute->productAttribute->name == 'Size')
                                                         <div class="row attribute-row">
                                                             <div class="col-md-3 col-sm-4">
                                                                 <p class="attribute-name">
-                                                                    {{ $attribute->productAttribute->name }}</p>
+                                                                    {{ $attribute->productAttribute->name }}
+                                                                </p>
                                                             </div>
                                                             <div class="col-md-9 col-sm-8">
                                                                 <select class="form-select attribute-value-select"
-                                                                    name="attribute_values[{{ $attribute->id }}]">
+                                                                    name="size">
                                                                     @foreach ($attribute->productAttribute->attributeValues->where('product_id', $product->id) as $val)
-                                                                        <option value="{{ $val->id }}">
-                                                                            {{ $val->value }}</option>
+                                                                        <option value="{{ $val->value }}">
+                                                                            {{ $val->value }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
+                                                                <input type="hidden" class="size-hidden"
+                                                                    name="size_hidden[]" value="">
                                                             </div>
                                                         </div>
                                                     @endif
                                                 @endforeach
+
+                                                <script>
+                                                    $('.attribute-value-select').change(function() {
+                                                        var size = $(this).val();
+                                                        $(this).closest('.attribute-row').find('.size-hidden').val(size);
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -455,6 +463,16 @@
                                                     @endif
                                                 @endforeach
                                             </div>
+                                            <input type="hidden" id="color" name="color" value="">
+                                            <script>
+                                                $('.color-option').click(function() {
+                                                    var color = $(this).data('color');
+                                                    $('.color-option').removeClass('selected');
+                                                    $(this).addClass('selected');
+                                                    $('#color').val(color);
+                                                });
+                                            </script>
+
                                         </div>
                                     </div>
                                 </div>
@@ -547,7 +565,7 @@
                                     aria-labelledby="profile-tab11">
                                     <div class="desc-content mt-60">
                                         <div class="row">
-                                            
+
                                             <div class="col-md-6">
                                                 <div class="single-content mb-40">
                                                     <h5 class="title">About the product</h5>
@@ -563,7 +581,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -607,7 +625,7 @@
                                                             <button class="r_btn" type="submit">Submit
                                                                 Review</button>
                                                         </form>
-                                                        
+
                                                 </div>
                                             </div>
                                         </div>
@@ -615,23 +633,23 @@
                                             <div class="single-content mb-40">
                                                 <div class="right_con">
                                                     <h2>Product Reviews</h2>
-                                                        @foreach ($reviews as $review)
-                                                            <div class="review">
-                                                                <p style="font-weight: 500; font-size: 16px;">
-                                                                    {{ $review->user->name }}</p>
-                                                                <p>{{ $review->comment }}</p>
-                                                                <p class="stars">
-                                                                    @for ($i = 1; $i <= 5; $i++)
-                                                                        @if ($i <= $review->rating)
-                                                                            <i class="fas fa-star"></i>
-                                                                        @else
-                                                                            <i class="far fa-star"></i>
-                                                                        @endif
-                                                                    @endfor
-                                                                </p>
-                                                                <hr>
-                                                            </div>
-                                                        @endforeach
+                                                    @foreach ($reviews as $review)
+                                                        <div class="review">
+                                                            <p style="font-weight: 500; font-size: 16px;">
+                                                                {{ $review->user->name }}</p>
+                                                            <p>{{ $review->comment }}</p>
+                                                            <p class="stars">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $review->rating)
+                                                                        <i class="fas fa-star"></i>
+                                                                    @else
+                                                                        <i class="far fa-star"></i>
+                                                                    @endif
+                                                                @endfor
+                                                            </p>
+                                                            <hr>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
