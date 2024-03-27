@@ -196,7 +196,7 @@ class OredrController extends Controller
             'payment_method_types' => ['card'],
             'payment_method' => $request->input('stripeToken'),
             'description' => $description,
-        ]); 
+        ]);
 
         $order->save();
 
@@ -350,5 +350,12 @@ class OredrController extends Controller
         $pdf->render();
 
         return $pdf->stream('order_details.pdf');
+    }
+
+    public function delete($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return redirect()->back()->with('update_success', 'Order deleted successfully.');
     }
 }

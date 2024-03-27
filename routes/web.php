@@ -120,6 +120,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/udateOrderStatus/{id}', [OredrController::class, 'udateOrderStatus'])->name('udateOrderStatus');
     Route::get('/Order', [OredrController::class, 'index'])->name('Order');
     Route::get('/orderDetails/{id}', [OredrController::class, 'orderDetails'])->name('orderDetails');
+    Route::delete('/orderDetails/{id}', [OredrController::class, 'delete'])->name('deleteOrder');
+
 
     Route::post('/cardOrder', [OredrController::class, 'cardOrder'])->name('cardOrder');
 
