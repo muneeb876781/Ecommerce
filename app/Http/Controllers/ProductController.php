@@ -128,6 +128,10 @@ class ProductController extends Controller
         $product->quantity = $request->input('productQuantity');
         $product->sku = $request->input('productSKU');
         $product->remote_image_url = $request->input('productImageURL');
+        $product->remote_media1_url = $request->input('media11mageURL');
+        $product->remote_media2_url = $request->input('media12mageURL');
+        $product->remote_media3_url = $request->input('media13mageURL');
+        $product->remote_video_url = $request->input('productVideoURL');
         $product->image_url = $imagePath;
         $product->media1_url = $media1Path;
         $product->media2_url = $media2Path;
