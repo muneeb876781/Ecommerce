@@ -22,9 +22,18 @@
 </head>
 
 <body>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @include('venderNav');
-
+    @if (session('update_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Order Successfully Deleted!',
+                text: '{{ session('update_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
 
 
 
@@ -234,7 +243,18 @@
                                                     </td>
                                                     <td>{{ $order->payment_method }}</td>
                                                     <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                            class="btn btn-primary">View Details</a></td>
+                                                            class="btn btn-primary">View Details</a>
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                            Delete Order
+                                                        </a>
+                                                        <form id="delete-order-{{ $order->id }}"
+                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
 
                                                 </tr>
                                             @endif
