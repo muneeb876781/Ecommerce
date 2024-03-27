@@ -44,7 +44,7 @@
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-        <div class="menu">
+        {{-- <div class="menu">
             <ul>
                 <li class="nav-item dropdown dropdown-list-toggle">
                     <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -126,7 +126,7 @@
                     </ul>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </div>
 
     <!--Sidebar-->
