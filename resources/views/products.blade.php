@@ -399,38 +399,208 @@
                                         <h4>Media</h4>
                                     </div>
                                     <div class="card-body">
+                                        <style>
+                                            .uploadd-wrapper {
+                                                position: relative;
+                                                display: inline-block;
+                                                width: 220px;
+                                                height: 100px;
+                                                margin-bottom: 15px;
+                                                border: 2px dotted #ccc;
+                                            }
+
+                                            .uploadd-wrapper input[type=file] {
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 100%;
+                                                opacity: 0;
+                                                cursor: pointer;
+                                            }
+
+                                            .uploadd-wrapper label {
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+                                                color: #333;
+                                                font-size: 16px;
+                                            }
+
+                                           
+                                        </style>
+
+                                        <label for="productImage">Product Main Image:</label>
                                         <div class="mb-3">
-                                            <label for="productImage">Product Main Image:</label>
-                                            <div class="photo">
+                                            <div class="upload-wrapper">
                                                 <input class="form-control" style="border: none" type="file"
-                                                    id="productImage" name="productImage">
+                                                    id="productImage" name="productImage"
+                                                    onchange="updateLabel(this, 'imagePreview')">
+                                                <label id="uploadLabel" for="productImage">Add Image</label>
+                                                <img id="imagePreview" src="#"
+                                                    style="display: none; width: auto; height: 100%;" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productImageURL">Product Image URL (If no file
+                                                    uploaded):</label>
+                                                <input class="form-control" type="text" id="productImageURL"
+                                                    name="productImageURL" placeholder="Enter Product Image URL">
                                             </div>
                                         </div>
 
+                                        <script>
+                                            function updateLabel(input, previewId) {
+                                                var label = document.getElementById('uploadLabel');
+                                                var preview = document.getElementById(previewId);
+                                                if (input.files.length > 0) {
+                                                    var reader = new FileReader();
+                                                    reader.onload = function(e) {
+                                                        preview.src = e.target.result;
+                                                        preview.style.display = 'block';
+                                                        label.style.display = 'none';
+                                                    };
+                                                    reader.readAsDataURL(input.files[0]);
+                                                } else {
+                                                    preview.src = '#';
+                                                    preview.style.display = 'none';
+                                                    label.style.display = 'block';
+                                                }
+                                            }
+                                        </script>
+
+
+
+
+
+                                        <style>
+                                            .mb-3 {
+                                                margin-bottom: 15px;
+                                            }
+
+                                            .upload-wrapper {
+                                                position: relative;
+                                                width: 200px;
+                                                height: 100px;
+                                                margin: 0 auto;
+                                                border: 2px dotted #ccc;
+                                                border-radius: 5px;
+                                                overflow: hidden;
+                                            }
+
+                                            .upload-wrapper input[type=file] {
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 100%;
+                                                opacity: 0;
+                                                cursor: pointer;
+                                            }
+
+                                            .upload-wrapper label {
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+                                                color: #333;
+                                                font-size: 16px;
+                                            }
+
+                                            .upload-wrapper {
+                                                display: inline-block;
+                                                width: calc(31.33% - 10px);
+                                                margin-right: 10px;
+                                                position: relative;
+                                            }
+
+                                            .upload-wrapper input[type=file] {
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 100%;
+                                                opacity: 0;
+                                                cursor: pointer;
+                                            }
+
+                                            .upload-wrapper label {
+                                                position: absolute;
+                                                top: 50%;
+                                                left: 50%;
+                                                transform: translate(-50%, -50%);
+                                                color: #333;
+                                                font-size: 16px;
+                                            }
+                                        </style>
+
+                                        <div class="mb-3">
+                                            <label for="productMediaImage">Product Media Gallery:</label>
+                                            <div>
+                                                <div class="upload-wrapper">
+                                                    <input class="form-control" style="border: none" type="file"
+                                                        id="productMedia1Image" name="productMedia1Image"
+                                                        onchange="updateLabel(this, 'imagePreview1')">
+                                                    <label for="productMedia1Image">Image 1</label>
+                                                    <img id="imagePreview1" src="#"
+                                                        style="display: none; width: 100px; height: 100px;" />
+                                                </div>
+                                                <div class="upload-wrapper">
+                                                    <input class="form-control" style="border: none" type="file"
+                                                        id="productMedia2Image" name="productMedia2Image"
+                                                        onchange="updateLabel(this, 'imagePreview2')">
+                                                    <label for="productMedia2Image">Image 2</label>
+                                                    <img id="imagePreview2" src="#"
+                                                        style="display: none; width: 100px; height: 100px;" />
+                                                </div>
+                                                <div class="upload-wrapper">
+                                                    <input class="form-control" style="border: none" type="file"
+                                                        id="productMedia3Image" name="productMedia3Image"
+                                                        onchange="updateLabel(this, 'imagePreview3')">
+                                                    <label for="productMedia3Image">Image 3</label>
+                                                    <img id="imagePreview3" src="#"
+                                                        style="display: none; width: 100px; height: 100px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function updateLabel(input, previewId) {
+                                                var label = input.previousElementSibling;
+                                                var preview = document.getElementById(previewId);
+                                                if (input.files.length > 0) {
+                                                    var reader = new FileReader();
+                                                    reader.onload = function(e) {
+                                                        preview.src = e.target.result;
+                                                        preview.style.display = 'block';
+                                                        label.style.display = 'none';
+                                                    };
+                                                    reader.readAsDataURL(input.files[0]);
+                                                } else {
+                                                    preview.src = '#';
+                                                    preview.style.display = 'none';
+                                                    label.style.display = 'block';
+                                                }
+                                            }
+                                        </script>
                                         <div class="mb-3">
                                             <label for="productImageURL">Product Image URL (If no file
                                                 uploaded):</label>
                                             <input class="form-control" type="text" id="productImageURL"
                                                 name="productImageURL" placeholder="Enter Product Image URL">
                                         </div>
-
                                         <div class="mb-3">
-                                            <label for="productMediaImage">Product Media Gallery:</label>
-                                            <div class="photo">
-                                                <input class="form-control" style="border: none" type="file"
-                                                    id="productMedia1Image" name="productMedia1Image">
-                                            </div>
-                                            <br>
-                                            <div class="photo">
-                                                <input class="form-control" style="border: none" type="file"
-                                                    id="productMedia2Image" name="productMedia2Image">
-                                            </div>
-                                            <br>
-                                            <div class="photo">
-                                                <input class="form-control" style="border: none" type="file"
-                                                    id="productMedia3Image" name="productMedia3Image">
-                                            </div>
-                                            <br>
+                                            <label for="productImageURL">Product Image URL (If no file
+                                                uploaded):</label>
+                                            <input class="form-control" type="text" id="productImageURL"
+                                                name="productImageURL" placeholder="Enter Product Image URL">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productImageURL">Product Image URL (If no file
+                                                uploaded):</label>
+                                            <input class="form-control" type="text" id="productImageURL"
+                                                name="productImageURL" placeholder="Enter Product Image URL">
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="productVideo">Product Video:</label>
                                             <div class="photo">
                                                 <input class="form-control" style="border: none" type="file"

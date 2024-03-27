@@ -18,14 +18,48 @@
 <style>
     .sale-tag {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 10px;
+        left: 10px;
         background-color: #f00;
         color: #fff;
         padding: 5px 10px;
-        font-size: 12px;
-        border-radius: 0 0 20px 0;
+        border-radius: 5px;
         z-index: 1;
+    }
+
+    @media (max-width: 500px) {
+        .sale-tag {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 412px) {
+        .sale-tag {
+            font-size: 10px;
+        }
+    }
+
+    .out-of-stock-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff0000;
+        color: #ffffff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 1;
+    }
+
+    @media (max-width: 500px) {
+        .out-of-stock-tag {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 412px) {
+        .out-of-stock-tag {
+            font-size: 10px;
+        }
     }
 </style>
 
@@ -91,8 +125,6 @@
             width: 50%;
         }
     }
-
-    
 </style>
 
 
@@ -140,7 +172,7 @@
                                     <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
                                         Results</span>
                                 </div>
-                                <div class="shop-select " >
+                                <div class="shop-select ">
                                     <select name="select" id="shop-select-one">
                                         <option value="1">Deafult Sorting</option>
                                         <option value="2">Deafult Sorting</option>
@@ -203,14 +235,15 @@
                                                                 alt="">
                                                         @elseif (!$product->image_url && $product->remote_image_url)
                                                             <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                class="img"
-                                                                src="{{ $product->remote_image_url }}"
+                                                                class="img" src="{{ $product->remote_image_url }}"
                                                                 alt="">
                                                         @else
                                                             <span>No image available</span>
                                                         @endif
 
-                                                        @if ($product->discountedPrice)
+                                                        @if ($product->quantity == 0)
+                                                            <span class="out-of-stock-tag">Out of Stock</span>
+                                                        @elseif ($product->discountedPrice)
                                                             @php
                                                                 $salePercentage =
                                                                     (($product->price - $product->discountedPrice) /
@@ -237,7 +270,8 @@
                                                             href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
                                                             @if (str_word_count($product->name) > 10)
                                                                 ...
-                                                            @endif</a>
+                                                            @endif
+                                                        </a>
                                                     </h6>
                                                     <div class="rating" style="padding-top: 5px;">
                                                         <ul class="list-inline">

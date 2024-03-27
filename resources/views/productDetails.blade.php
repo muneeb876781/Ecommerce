@@ -206,6 +206,29 @@
             transform: translate(-50%, -50%);
             color: #fff;
         }
+
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .video-container iframe {
+                width: 100%;
+                height: 100%;
+            }
+        }
     </style>
     <title>Document</title>
 </head>
@@ -267,41 +290,46 @@
                                     @else
                                         <span>No image available</span>
                                     @endif
-
-
                                 </div>
+
+                                
 
 
                                 <div class="tab-pane fade" id="profile5" role="tabpanel"
                                     aria-labelledby="profile-tab5">
-                                    @if ($product->image_url)
-                                        <img src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                    @if ($product->media2_url)
+                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                            src="{{ asset('storage/uploads/' . $product->media2_url) }}"
                                             class="img-fluid" alt="">
-                                    @elseif (!$product->image_url && $product->remote_image_url)
-                                        <img src="{{ $product->image_url }}" class="img-fluid" alt="">
+                                    @elseif (!$product->media2_url && $product->remote_image_url)
+                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                            src="{{ $product->remote_image_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
                                     @endif
-
                                 </div>
+
+
 
                                 <div class="tab-pane fade" id="contact5" role="tabpanel"
                                     aria-labelledby="contact-tab5">
-                                    @if ($product->image_url)
-                                        <img src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                    @if ($product->media3_url)
+                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                            src="{{ asset('storage/uploads/' . $product->media3_url) }}"
                                             class="img-fluid" alt="">
-                                    @elseif (!$product->image_url && $product->remote_image_url)
-                                        <img src="{{ $product->image_url }}" class="img-fluid" alt="">
+                                    @elseif (!$product->media3_url && $product->remote_image_url)
+                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                            src="{{ $product->remote_image_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
                                     @endif
                                 </div>
                             </div>
+
                             <ul class="nav" id="myTab1" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5"
                                         role="tab" aria-controls="home5" aria-selected="true">
-
                                         @if ($product->image_url)
                                             <img style="widows: 110px; height: 110px;"
                                                 src="{{ asset('storage/uploads/' . $product->image_url) }}"
@@ -318,11 +346,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5"
                                         role="tab" aria-controls="profile5" aria-selected="false">
-                                        @if ($product->image_url)
+                                        @if ($product->media2_url)
                                             <img style="widows: 110px; height: 110px;"
-                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                src="{{ asset('storage/uploads/' . $product->media2_url) }}"
                                                 class="img-fluid" alt="">
-                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                        @elseif (!$product->media2_url && $product->remote_image_url)
                                             <img style="widows: 110px; height: 110px;"
                                                 src="{{ $product->remote_image_url }}" class="img-fluid"
                                                 alt="">
@@ -334,11 +362,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab5" data-toggle="tab" href="#contact5"
                                         role="tab" aria-controls="contact5" aria-selected="false">
-                                        @if ($product->image_url)
+                                        @if ($product->media3_url)
                                             <img style="widows: 110px; height: 110px;"
-                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                src="{{ asset('storage/uploads/' . $product->media3_url) }}"
                                                 class="img-fluid" alt="">
-                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                        @elseif (!$product->media3_url && $product->remote_image_url)
                                             <img style="widows: 110px; height: 110px;"
                                                 src="{{ $product->remote_image_url }}" class="img-fluid"
                                                 alt="">
@@ -574,10 +602,10 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-content mb-40">
-                                                    <div class="right_con">
+                                                    <div class="video-container">
                                                         <iframe width="560" height="315"
                                                             src="https://www.youtube.com/embed/hHqW0gtiMy4?autoplay=1"
-                                                            frameborder="0" autoplay muted allowfullscreen></iframe>
+                                                            frameborder="0" allowfullscreen></iframe>
                                                     </div>
                                                 </div>
                                             </div>
@@ -666,7 +694,7 @@
         <!-- Shop-details tab end -->
 
         <!-- Product  -->
-        <div style="padding: 0px 70px 0px 70px; margin-top: 20px;" class="product pt-75 product-h-two">
+        <div class="product pt-75 product-h-two">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-sm-12">
