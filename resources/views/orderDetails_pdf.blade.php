@@ -70,8 +70,9 @@
                         <p><strong>Sub Total:</strong> {{ $order->total_price }}</p>
                     </td>
                     <td class="barcode">
-                        {!! DNS2D::getBarcodeHTML("https://primetechnology.online/trackOrders/$order->tracking_id", 'QRCODE') !!}
+                        {!! DNS2D::getBarcodeHTML("https://primetechnology.online/trackOrders/" . $order->tracking_id, 'QRCODE') !!}
                     </td>
+                    
                 </tr>
                 <tr>
                     <th>
