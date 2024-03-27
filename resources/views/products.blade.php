@@ -583,22 +583,22 @@
                                             }
                                         </script>
                                         <div class="mb-3">
-                                            <label for="productImageURL">Product Image URL (If no file
+                                            <label for="media11mageURL">Product Media Image 1 URL (If no file
                                                 uploaded):</label>
-                                            <input class="form-control" type="text" id="productImageURL"
-                                                name="productImageURL" placeholder="Enter Product Image URL">
+                                            <input class="form-control" type="text" id="media11mageURL"
+                                                name="media11mageURL" placeholder="Enter Product Image URL">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productImageURL">Product Image URL (If no file
+                                            <label for="media12mageURL">Product Media Image 2 URL (If no file
                                                 uploaded):</label>
-                                            <input class="form-control" type="text" id="productImageURL"
-                                                name="productImageURL" placeholder="Enter Product Image URL">
+                                            <input class="form-control" type="text" id="media12mageURL"
+                                                name="media12mageURL" placeholder="Enter Product Image URL">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productImageURL">Product Image URL (If no file
+                                            <label for="media13mageURL">Product Media Image 3 URL (If no file
                                                 uploaded):</label>
-                                            <input class="form-control" type="text" id="productImageURL"
-                                                name="productImageURL" placeholder="Enter Product Image URL">
+                                            <input class="form-control" type="text" id="media13mageURL"
+                                                name="media13mageURL" placeholder="Enter Product Image URL">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productVideo">Product Video:</label>
@@ -606,6 +606,12 @@
                                                 <input class="form-control" style="border: none" type="file"
                                                     id="productVideo" name="productVideo" accept="video/*">
                                             </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productVideoURL">Product Video URL (If no file
+                                                uploaded):</label>
+                                            <input class="form-control" type="text" id="productVideoURL"
+                                                name="productVideoURL" placeholder="Enter Product Image URL">
                                         </div>
                                     </div>
                                     <div class="card-footer text-right">

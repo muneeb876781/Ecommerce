@@ -292,7 +292,7 @@
                                     @endif
                                 </div>
 
-                                
+
 
 
                                 <div class="tab-pane fade" id="profile5" role="tabpanel"
@@ -301,9 +301,9 @@
                                         <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ asset('storage/uploads/' . $product->media2_url) }}"
                                             class="img-fluid" alt="">
-                                    @elseif (!$product->media2_url && $product->remote_image_url)
+                                    @elseif (!$product->media2_url && $product->remote_media2_url)
                                         <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
-                                            src="{{ $product->remote_image_url }}" class="img-fluid" alt="">
+                                            src="{{ $product->remote_media2_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
                                     @endif
@@ -317,9 +317,9 @@
                                         <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ asset('storage/uploads/' . $product->media3_url) }}"
                                             class="img-fluid" alt="">
-                                    @elseif (!$product->media3_url && $product->remote_image_url)
+                                    @elseif (!$product->media3_url && $product->remote_media3_url)
                                         <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
-                                            src="{{ $product->remote_image_url }}" class="img-fluid" alt="">
+                                            src="{{ $product->remote_media3_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
                                     @endif
@@ -350,9 +350,9 @@
                                             <img style="widows: 110px; height: 110px;"
                                                 src="{{ asset('storage/uploads/' . $product->media2_url) }}"
                                                 class="img-fluid" alt="">
-                                        @elseif (!$product->media2_url && $product->remote_image_url)
+                                        @elseif (!$product->media2_url && $product->remote_media2_url)
                                             <img style="widows: 110px; height: 110px;"
-                                                src="{{ $product->remote_image_url }}" class="img-fluid"
+                                                src="{{ $product->remote_media2_url }}" class="img-fluid"
                                                 alt="">
                                         @else
                                             <span>No image available</span>
@@ -366,9 +366,9 @@
                                             <img style="widows: 110px; height: 110px;"
                                                 src="{{ asset('storage/uploads/' . $product->media3_url) }}"
                                                 class="img-fluid" alt="">
-                                        @elseif (!$product->media3_url && $product->remote_image_url)
+                                        @elseif (!$product->media3_url && $product->remote_media3_url)
                                             <img style="widows: 110px; height: 110px;"
-                                                src="{{ $product->remote_image_url }}" class="img-fluid"
+                                                src="{{ $product->remote_media3_url }}" class="img-fluid"
                                                 alt="">
                                         @else
                                             <span>No image available</span>
@@ -602,11 +602,28 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-content mb-40">
-                                                    <div class="video-container">
-                                                        <iframe width="560" height="315"
-                                                            src="https://www.youtube.com/embed/hHqW0gtiMy4?autoplay=1"
-                                                            frameborder="0" allowfullscreen></iframe>
-                                                    </div>
+                                                    @php
+                                                        $videoId = '';
+                                                        if (
+                                                            preg_match(
+                                                                '/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+                                                                $product->remote_video_url,
+                                                                $matches,
+                                                            )
+                                                        ) {
+                                                            $videoId = $matches[1];
+                                                        }
+                                                    @endphp
+
+                                                    @if (!empty($videoId))
+                                                        <div class="video-container">
+                                                            <iframe width="560" height="315"
+                                                                src="https://www.youtube.com/embed/{{ $videoId }}"
+                                                                frameborder="0" allowfullscreen></iframe>
+                                                        </div>
+                                                    @else
+                                                        <p>Invalid YouTube URL</p>
+                                                    @endif
                                                 </div>
                                             </div>
 
