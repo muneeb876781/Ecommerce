@@ -51,6 +51,18 @@
             border-radius: 5px;
             z-index: 1;
         }
+
+        @media (max-width: 500px) {
+            .out-of-stock-tag {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 412px) {
+            .out-of-stock-tag {
+                font-size: 10px;
+            }
+        }
     </style>
 
     <style>
@@ -893,10 +905,10 @@
                                         <a class="nav-item nav-link btn gray-bg-btn pure__black-color"
                                             id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                                             aria-controls="nav-profile" aria-selected="false">Discounted Items</a>
-                                        <a class="  nav-item nav-link btn gray-bg-btn pure__black-color"
+                                        {{-- <a class="  nav-item nav-link btn gray-bg-btn pure__black-color"
                                             id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                                             aria-controls="nav-contact" aria-selected="false">Popular
-                                            Product</a>
+                                            Product</a> --}}
                                     </div>
                                 </nav>
                             </div>
@@ -917,7 +929,7 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                     aria-labelledby="nav-home-tab">
-                                    <div class="product__active owl-carousel">
+                                    <div class="product__active owl-carousel ">
                                         @foreach ($products as $product)
                                             <div class="product__single">
                                                 <div class="product__box">
@@ -928,12 +940,12 @@
                                                                 <img class="img"
                                                                     src="{{ asset('storage/uploads/' . $product->image_url) }}"
                                                                     alt="product Image"
-                                                                    style="height: 220px; width: auto; margin: 0 auto;">
+                                                                    style="height: auto; width: auto; margin: 0 auto;">
                                                             @elseif (!$product->image_url && $product->remote_image_url)
                                                                 <img class="img"
                                                                     src="{{ $product->remote_image_url }}"
                                                                     alt="product Image"
-                                                                    style="height: 220px; width: auto; margin: 0 auto;">
+                                                                    style="height: auto; width: auto; margin: 0 auto;">
                                                             @else
                                                                 <span>No image available</span>
                                                             @endif
@@ -1008,26 +1020,10 @@
                                         @endforeach
 
                                     </div>
-
-                                    <script>
-                                        function incrementQuantity() {
-                                            var quantityInput = document.getElementById('quantity');
-                                            var currentQuantity = parseInt(quantityInput.value);
-                                            quantityInput.value = currentQuantity + 1;
-                                        }
-
-                                        function decrementQuantity() {
-                                            var quantityInput = document.getElementById('quantity');
-                                            var currentQuantity = parseInt(quantityInput.value);
-                                            if (currentQuantity > 1) {
-                                                quantityInput.value = currentQuantity - 1;
-                                            }
-                                        }
-                                    </script>
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                     aria-labelledby="nav-profile-tab">
-                                    <div class="product__active owl-carousel">
+                                    <div class="product__active owl-carousel ">
                                         @foreach ($products as $product)
                                             @if ($product->discountedPrice !== null)
                                                 <div class="product__single">
@@ -1039,12 +1035,12 @@
                                                                     <img class="img"
                                                                         src="{{ asset('storage/uploads/' . $product->image_url) }}"
                                                                         alt="product Image"
-                                                                        style="height: 220px; width: auto; margin: 0 auto;">
+                                                                        style="height: auto; width: auto; margin: 0 auto;">
                                                                 @elseif (!$product->image_url && $product->remote_image_url)
                                                                     <img class="img"
                                                                         src="{{ $product->remote_image_url }}"
                                                                         alt="product Image"
-                                                                        style="height: 220px; width: auto; margin: 0 auto;">
+                                                                        style="height: auto; width: auto; margin: 0 auto;">
                                                                 @else
                                                                     <span>No image available</span>
                                                                 @endif
@@ -1132,27 +1128,10 @@
                                             @endif
                                         @endforeach
                                     </div>
-
-                                    <script>
-                                        function incrementQuantity() {
-                                            var quantityInput = document.getElementById('quantity');
-                                            var currentQuantity = parseInt(quantityInput.value);
-                                            quantityInput.value = currentQuantity + 1;
-                                        }
-
-                                        function decrementQuantity() {
-                                            var quantityInput = document.getElementById('quantity');
-                                            var currentQuantity = parseInt(quantityInput.value);
-                                            if (currentQuantity > 1) {
-                                                quantityInput.value = currentQuantity - 1;
-                                            }
-                                        }
-                                    </script>
-
                                 </div>
                                 <div class="tab-pane fade" id="nav-contact" role="tabpanel"
                                     aria-labelledby="nav-contact-tab">
-                                    <div class="product__active owl-carousel">
+                                    <div class="product__active owl-carousel ">
                                         @foreach ($products as $product)
                                             <div class="product__single">
                                                 <div class="product__box">
@@ -1248,23 +1227,8 @@
                                             </div>
                                         @endforeach
                                     </div>
-
-                                    <script>
-                                        function incrementQuantity() {
-                                            var quantityInput = document.getElementById('quantity');
-                                            var currentQuantity = parseInt(quantityInput.value);
-                                            quantityInput.value = currentQuantity + 1;
-                                        }
-
-                                        function decrementQuantity() {
-                                            var quantityInput = document.getElementById('quantity');
-                                            var currentQuantity = parseInt(quantityInput.value);
-                                            if (currentQuantity > 1) {
-                                                quantityInput.value = currentQuantity - 1;
-                                            }
-                                        }
-                                    </script>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
@@ -1335,7 +1299,7 @@
         </div> --}}
         <!-- Top Featured Area end -->
 
-        <div class="container">
+        <div class="container categs">
             <div class="row align-items-center justify-content-between">
                 <div class="col-sm-6">
                     <div class="product-section mb-30">
@@ -1396,6 +1360,12 @@
                 padding: 10px 0;
             }
 
+            @media (max-width: 530px) {
+                .categs {
+                    display: none;
+                }
+            }
+
             @media (max-width: 1200px) {
                 .categoriess .cats_card {
                     width: 17%;
@@ -1420,9 +1390,9 @@
                 }
             }
 
-            
 
-            
+
+
 
             @media (max-width: 1050px) {
                 .categoriess .cats_card {
@@ -1647,7 +1617,7 @@
         <!-- Weekly Deals end --> --}}
 
         <!-- Product  -->
-        <div class="product pt-60 fix">
+        <div class="product pt-10 fix">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-sm-6">
@@ -1690,7 +1660,9 @@
                                                                 <span>No image available</span>
                                                             @endif
 
-                                                            @if ($product->discountedPrice)
+                                                            @if ($product->quantity == 0)
+                                                                <span class="out-of-stock-tag">Out of Stock</span>
+                                                            @elseif ($product->discountedPrice)
                                                                 @php
                                                                     $salePercentage =
                                                                         (($product->price - $product->discountedPrice) /

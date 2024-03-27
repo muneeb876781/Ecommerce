@@ -82,27 +82,27 @@ class ProductController extends Controller
 
         if ($request->hasFile('productMedia1Image')) {
             $image1 = $request->file('productMedia1Image');
-            $imageName1 = time() . '.' . $image1->getClientOriginalExtension();
+            $imageName1 = time() . '_1.' . $image1->getClientOriginalExtension();
             $media1Path = $image1->storeAs('public/uploads', $imageName1);
-            $imagePath = $imageName1;
+            $media1Path = $imageName1;
         } else {
             $media1Path = null;
         }
 
         if ($request->hasFile('productMedia2Image')) {
             $image2 = $request->file('productMedia2Image');
-            $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
-            $media2Path = $image1->storeAs('public/uploads', $imageName2);
-            $imagePath = $imageName2;
+            $imageName2 = time() . '_2.' . $image2->getClientOriginalExtension();
+            $media2Path = $image2->storeAs('public/uploads', $imageName2);
+            $media2Path = $imageName2;
         } else {
             $media2Path = null;
         }
 
         if ($request->hasFile('productMedia3Image')) {
             $image3 = $request->file('productMedia3Image');
-            $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
-            $media3Path = $image1->storeAs('public/uploads', $imageName3);
-            $imagePath = $imageName3;
+            $imageName3 = time() . '_3.' . $image3->getClientOriginalExtension();
+            $media3Path = $image3->storeAs('public/uploads', $imageName3);
+            $media3Path = $imageName3;
         } else {
             $media3Path = null;
         }
@@ -220,7 +220,6 @@ class ProductController extends Controller
         $quantity = $request->input('quantity') ?? 1;
         $color = $request->input('color');
         $size = $request->input('size');
-
 
         if ($cart) {
             $cart->increment('quantity');
