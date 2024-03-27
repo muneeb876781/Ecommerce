@@ -228,9 +228,8 @@
                                                     <td>
                                                         <a href="{{ route('orderDetails', ['id' => $order->id]) }}"
                                                             class="btn btn-primary">View Details</a>
-                                                        <a href="{{ route('deleteOrder', ['id' => $order->id]) }}"
-                                                            class="btn btn-danger"
-                                                            onclick="event.preventDefault(); document.getElementById('delete-order-{{ $order->id }}').submit();">
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
                                                             Delete Order
                                                         </a>
                                                         <form id="delete-order-{{ $order->id }}"
@@ -298,7 +297,18 @@
                                                     <td>{{ $order->order_status }}</td>
 
                                                     <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                            class="btn btn-primary">View Details</a></td>
+                                                            class="btn btn-primary">View Details</a>
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                            Delete Order
+                                                        </a>
+                                                        <form id="delete-order-{{ $order->id }}"
+                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 @php $serialNumber++; @endphp
                                             @endif
@@ -355,7 +365,18 @@
                                                     <td>{{ $order->order_status }}</td>
 
                                                     <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                            class="btn btn-primary">View Details</a></td>
+                                                            class="btn btn-primary">View Details</a>
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                            Delete Order
+                                                        </a>
+                                                        <form id="delete-order-{{ $order->id }}"
+                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 @php $serialNumber++; @endphp
                                             @endif
@@ -412,7 +433,18 @@
                                                     <td>{{ $order->order_status }}</td>
 
                                                     <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                            class="btn btn-primary">View Details</a></td>
+                                                            class="btn btn-primary">View Details</a>
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                            Delete Order
+                                                        </a>
+                                                        <form id="delete-order-{{ $order->id }}"
+                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 @php $serialNumber++; @endphp
                                             @endif
@@ -468,7 +500,18 @@
                                                 <td>{{ $order->order_status }}</td>
 
                                                 <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                        class="btn btn-primary">View Details</a></td>
+                                                        class="btn btn-primary">View Details</a>
+                                                    <a href="#" class="btn btn-danger"
+                                                        onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                        Delete Order
+                                                    </a>
+                                                    <form id="delete-order-{{ $order->id }}"
+                                                        action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                        method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </td>
                                             </tr>
                                             @php $serialNumber++; @endphp
                                         @endforeach
