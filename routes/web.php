@@ -125,9 +125,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/cardOrder', [OredrController::class, 'cardOrder'])->name('cardOrder');
 
-
-    
-
     Route::get('/trackOrders/{id}', [OredrController::class, 'trackOrders'])->name('trackOrders');
     Route::get('/userOrders', [OredrController::class, 'userOrders'])->name('userOrders');
 
@@ -140,4 +137,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('seller');
 
     Route::get('/order/{id}/downloadPDF', [OredrController::class, 'downloadPDF'])->name('downloadPDF');
+
+    Route::get('/venderProfile', [SellerController::class, 'venderProfile'])->name('venderProfile');
+    Route::post('/editShop/{id}', [SellerShopController::class, 'editShop'])->name('editShop');
+
+    Route::get('/brands', [SellerController::class, 'brands'])->name('brands');
+
 });

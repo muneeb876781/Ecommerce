@@ -57,7 +57,7 @@
         }
 
         .review {
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .review p {
@@ -230,6 +230,7 @@
             }
         }
     </style>
+    
     <title>Document</title>
 </head>
 
@@ -277,6 +278,11 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-6 order-1 order-lg-1">
                         <div class="pro-img" style="margin-right: 0px;">
+
+                            <p class="p_name"
+                                style="text-align: left; padding-top: 10px; font-weight: bold;">
+                                {{ $product->name }}
+                            </p>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home5" role="tabpanel"
                                     aria-labelledby="home-tab5">
@@ -401,7 +407,8 @@
                             </div>
                             <div class="about-pro">
                                 <ul class="mb-40">
-                                    <li>{!! $product->description !!}}</li>
+                                    <li>{!! $product->description !!}</li>
+                                    {{-- <li>{!! $product->specification !!}</li> --}}
                                 </ul>
                             </div>
 
@@ -550,28 +557,38 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="desc-wrapper">
-                            <ul class="nav custom-tabs" id="myTab" role="tablist">
+                            <ul class="nav custom-tabs " id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="home-tab11" data-toggle="tab" href="#home11"
+                                    <a class="nav-link active abc" id="home-tab11" data-toggle="tab" href="#home11"
                                         role="tab" aria-controls="home11" aria-selected="true">Specification</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="profile-tab11" data-toggle="tab"
-                                        href="#profile11" role="tab" aria-controls="profile11"
-                                        aria-selected="false">Description </a>
+                                    <a class="nav-link abc" id="profile-tab11" data-toggle="tab" href="#profile11"
+                                        role="tab" aria-controls="profile11" aria-selected="false">Description
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab11" data-toggle="tab" href="#contact11"
+                                    <a class="nav-link abc" id="contact-tab11" data-toggle="tab" href="#contact11"
                                         role="tab" aria-controls="contact11"
                                         aria-selected="false">Reviews({{ $reviews->count() }})</a>
                                 </li>
                             </ul>
+
                             <div class="tab-content" id="myTabContent1">
-                                <div class="tab-pane fade" id="home11" role="tabpanel"
+                                <div class="tab-pane fade show active" id="home11" role="tabpanel"
                                     aria-labelledby="home-tab11">
                                     <div class="desc-content mt-60">
+
+                                        <style>
+                                            @media (max-width: 576px) {
+                                                .specification {
+                                                    font-size: 10px;
+                                                }
+                                            }
+                                        </style>
+
                                         <div class="row">
-                                            <div class="col-md-12 mb-30">
+                                            <div class="col-md-4 col-sm-12 mb-30">
                                                 <div class="spe-wrapper">
                                                     <ul>
                                                         <li class="title">Additional information</li>
@@ -586,15 +603,25 @@
                                                                 @endforeach
                                                             </li>
                                                         @endforeach
+
                                                     </ul>
-
-
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-sm-12 mb-30">
+                                                <div class="spe-wrapper specs">
+                                                    <ul>
+                                                        <li class="title">Specifications</li>
+                                                        <li class="specification">{!! $product->specification !!}</li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
+
+
+
                                     </div>
                                 </div>
-                                <div class="tab-pane fade show active" id="profile11" role="tabpanel"
+                                <div class="tab-pane fade show " id="profile11" role="tabpanel"
                                     aria-labelledby="profile-tab11">
                                     <div class="desc-content mt-60">
                                         <div class="row">
@@ -684,8 +711,8 @@
                                                 <div class="right_con">
                                                     <h2>Product Reviews</h2>
                                                     @foreach ($reviews as $review)
-                                                        <div class="review">
-                                                            <p style="font-weight: 500; font-size: 16px;">
+                                                        <div class="review pb-0">
+                                                            <p style="font-weight: bold; font-size: 16px;">
                                                                 {{ $review->user->name }}</p>
                                                             <p>{{ $review->comment }}</p>
                                                             <p class="stars">

@@ -140,10 +140,14 @@
                         class="logo">
                         <img style="width: 20%; height: 100%; border-radius: 100%;"
                             src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
-                        <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2>
+                        {{-- <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2> --}}
+                        <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ $shopInfo->name }}</h2>
+
                     </div>
                 @else
-                    <h2 style="font-size: 20px; text-align: center;">{{ auth()->user()->name }}</h2>
+                    {{-- <h2 style="font-size: 20px; text-align: center;">{{ auth()->user()->name }}</h2> --}}
+                    <h2 style="font-size: 20px; text-align: center;">{{ $shopInfo->name }}</h2>
+
                 @endif
 
 
@@ -180,6 +184,12 @@
                     </li>
 
                     <li>
+                        <a href="{{ route('brands') }}" class="{{ Request::is('brands*') ? 'active' : '' }}">
+                            <i class='bx bxs-meh-blank icon'></i> Brands
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{ route('productAttributes') }}"
                             class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Product Attributes
@@ -193,13 +203,19 @@
                     </li>
 
                     <li>
+                        <a href="{{ route('venderProfile') }}" class="{{ Request::is('venderProfile*') ? 'active' : '' }}">
+                            <i class='bx bxs-meh-blank icon'></i> My Profile
+                        </a>
+                    </li>
+
+                    <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button class="logout" type="submit">Logout</button>
                         </form>
                     </li>
 
-                    @if (isset($shopInfo))
+                    {{-- @if (isset($shopInfo))
                         <li>
                             <form action="{{ route('deleteStore', ['id' => $shopInfo->id]) }}" method="post"
                                 onsubmit="return confirm('Are you sure you want to delete your store? This action cannot be undone.');">
@@ -209,7 +225,7 @@
                                     Store</button>
                             </form>
                         </li>
-                    @endif
+                    @endif --}}
 
 
 

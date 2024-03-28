@@ -32,7 +32,7 @@ class SellerShopController extends Controller
 
         if ($request->hasFile('shopLogo')) {
             $image = $request->file('shopLogo');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time() . '_1.' . $image->getClientOriginalExtension();
             $logoImagePath = $image->storeAs('public/uploads', $imageName);
             $logoImagePath = $imageName;
         } else {
@@ -41,7 +41,7 @@ class SellerShopController extends Controller
 
         if ($request->hasFile('shopBanner')) {
             $image = $request->file('shopBanner');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time() . '_2.' . $image->getClientOriginalExtension();
             $bannerImagePath = $image->storeAs('public/uploads', $imageName);
             $bannerImagePath = $imageName;
         } else {
@@ -117,6 +117,41 @@ class SellerShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         return view('mainPage', compact('products', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'))->with('shop_success', 'Your shop is created sucessfully');
+    }
+
+    public function editShop(Request $request, $id)
+    {
+        $shopInfo = SellerShop::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'shopname' => 'required|string|max:255',
+            'shopdescription' => 'required|string',
+            'shopaddress' => 'required|string',
+            'sellerphone' => 'required|string',
+            'selleraddress' => 'required|string',
+            'shopLogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $logoImagePath = $shopInfo->logo;
+        $bannerImagePath = $shopInfo->banner;
+
+        if ($request->hasFile('shopLogo')) {
+            $image = $request->file('shopLogo');
+            $imageName = time() . '_1.' . $image->getClientOriginalExtension();
+            $logoImagePath = $image->storeAs('public/uploads', $imageName);
+            $logoImagePath = $imageName;
+        }
+
+        $shopInfo->name = $request->input('shopname');
+        $shopInfo->description = $request->input('shopdescription');
+        $shopInfo->address = $request->input('shopaddress');
+        $shopInfo->logo = $logoImagePath;
+        $shopInfo->seller_phone = $request->input('sellerphone');
+        $shopInfo->seller_address = $request->input('selleraddress');
+
+        $shopInfo->save();
+
+        return redirect()->back()->with('success', 'Your shop information has been updated successfully');
     }
 
     public function delete($id)
