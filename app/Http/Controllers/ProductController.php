@@ -62,6 +62,7 @@ class ProductController extends Controller
             'productPrice' => 'required|numeric',
             'productDiscountPrice' => 'nullable|numeric',
             'productCategory' => 'required|exists:categories,id',
+            'productSubCategory' => 'required|numeric',
             'productImage' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'productMedia1Image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'productMedia2Image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -125,6 +126,7 @@ class ProductController extends Controller
         $product->price = $request->input('productPrice');
         $product->discountedPrice = $request->input('productDiscountPrice');
         $product->category_id = $request->input('productCategory');
+        $product->sub_category_id = $request->input('productSubCategory');
         $product->quantity = $request->input('productQuantity');
         $product->sku = $request->input('productSKU');
         $product->remote_image_url = $request->input('productImageURL');

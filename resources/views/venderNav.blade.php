@@ -167,11 +167,11 @@
                         </a>
                     </li>
 
-                    {{-- <li>
+                    <li>
                         <a href="{{ route('subCategoryview') }}" class="{{ Request::is('subCategories') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i>Sub Categories
                         </a>
-                    </li> --}}
+                    </li>
 
                     <li>
                         <a href="{{ route('productview') }}" class="{{ Request::is('product*') ? 'active' : '' }}">
