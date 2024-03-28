@@ -974,7 +974,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product__content--top">
-                                                        <span class="cate-name">{{ $product->category->name }}</span>
+                                                        <span class="cate-name">{{ $product->category->name }} </span>
                                                         <h6 class="product__title mine__shaft-color f-700 mb-0">
                                                             <a
                                                                 href="{{ route('singleProduct', ['id' => $product->id]) }}">

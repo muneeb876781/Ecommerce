@@ -380,7 +380,12 @@
                     </div>
                     <div class="col-lg-4 col-md-12 order-3 order-lg-2">
                         <div class="pro-content">
-                            <span>{{ $product->category->name }}</span>
+                            @php
+                                $subCategory = \App\Models\SubCategory::find($product->sub_category_id);
+                                $subCategoryName = $subCategory ? $subCategory->name : 'Unknown';
+                            @endphp
+
+                            <span>{{ $product->category->name }} / {{ $subCategoryName }}</span>
                             <h5 class="title">{{ $product->name }}</h5>
                             <div class="pro-rating pb-15">
                                 <a href="#" class="active"><i class="fas fa-star"></i></a>

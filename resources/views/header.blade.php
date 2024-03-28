@@ -363,7 +363,7 @@
             letter-spacing: 2px;
         }
 
-        .visit_shop{
+        .visit_shop {
             display: block;
             padding: 12px 24px;
             color: #333;
@@ -401,11 +401,11 @@
                 display: block;
             }
 
-            .menu__item{
+            .menu__item {
                 display: block;
             }
 
-            .menu__box{
+            .menu__box {
                 display: block;
             }
 
@@ -742,16 +742,57 @@
                             </nav>
                         </div> --}}
                         <div class="dropdown">
-                            <button class="dropbtn"> <strong>Shop By Departments</strong> </button>
+                            <button class="dropbtn"><strong>Shop By Departments</strong></button>
                             <div class="dropdown-content">
                                 @foreach ($categories as $key => $category)
                                     @if ($key <= 9)
-                                        <a
-                                            href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                        <div class="category">
+                                            <a
+                                                href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                            @if (count($category->subcategories) > 0)
+                                                <div class="subcategory">
+                                                    @foreach ($category->subcategories as $subcategory)
+                                                        <a
+                                                            href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $subcategory->name }}</a>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
                                     @endif
                                 @endforeach
                             </div>
                         </div>
+                        <style>
+                            .category {
+                                position: relative;
+                            }
+
+                            .subcategory {
+                                display: none;
+                                position: absolute;
+                                top: 0;
+                                left: 100%;
+                                background-color: #f9f9f9;
+                                min-width: 160px;
+                                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                                z-index: 1;
+                            }
+
+                            .category:hover .subcategory {
+                                display: block;
+                            }
+                        </style>
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $('.category').hover(function() {
+                                    $(this).find('.subcategory').stop(true, true).slideDown(200);
+                                }, function() {
+                                    $(this).find('.subcategory').stop(true, true).slideUp(200);
+                                });
+                            });
+                        </script>
 
 
 
