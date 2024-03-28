@@ -149,7 +149,7 @@
 
                 <ul class="side-menu">
                     <li>
-                        <a href="{{ route('home') }}" class="{{ Request::is('/') ? 'active' : '' }}">
+                        <a href="{{ route('home') }}" target="_blank" class="{{ Request::is('/') ? 'active' : '' }}">
                             <i class='bx bxs-dashboard icon'></i> Go to home
                         </a>
                     </li>

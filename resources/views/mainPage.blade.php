@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="{{ asset('csss/responsive.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <link rel="manifest" href="site.webmanifest">
-
-
 
     <title>Document</title>
     <style>
@@ -988,16 +985,24 @@
                                                             </a>
                                                         </h6>
 
+                                                        <style>
+                                                            .star-gold{
+                                                                color: gold;
+                                                            }
+                                                        </style>
+                                                        @php
+                                                            $averageRating = $product->reviews->avg('rating');
+                                                        @endphp
                                                         <div class="rating" style="padding-top: 5px;">
                                                             <ul class="list-inline">
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <li class="rating-active"><i
+                                                                                class="fas fa-star star-gold"></i></li>
+                                                                    @else
+                                                                        <li><i class="far fa-star"></i></li>
+                                                                    @endif
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                         <br>
@@ -1083,19 +1088,24 @@
                                                                     @endif
                                                                 </a>
                                                             </h6>
+                                                            <style>
+                                                                .star-gold{
+                                                                    color: gold;
+                                                                }
+                                                            </style>
+                                                            @php
+                                                                $averageRating = $product->reviews->avg('rating');
+                                                            @endphp
                                                             <div class="rating" style="padding-top: 5px;">
                                                                 <ul class="list-inline">
-                                                                    <li class="rating-active"><i
-                                                                            class="fas fa-star"></i>
-                                                                    </li>
-                                                                    <li class="rating-active"><i
-                                                                            class="fas fa-star"></i>
-                                                                    </li>
-                                                                    <li class="rating-active"><i
-                                                                            class="fas fa-star"></i>
-                                                                    </li>
-                                                                    <li><i class="fas fa-star"></i></li>
-                                                                    <li><i class="fas fa-star"></i></li>
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        @if ($i <= $averageRating)
+                                                                            <li class="rating-active"><i
+                                                                                    class="fas fa-star star-gold"></i></li>
+                                                                        @else
+                                                                            <li><i class="far fa-star"></i></li>
+                                                                        @endif
+                                                                    @endfor
                                                                 </ul>
                                                             </div>
                                                             <br>
@@ -1186,16 +1196,24 @@
                                                                 @endif
                                                             </a>
                                                         </h6>
+                                                        <style>
+                                                            .star-gold{
+                                                                color: gold;
+                                                            }
+                                                        </style>
+                                                        @php
+                                                            $averageRating = $product->reviews->avg('rating');
+                                                        @endphp
                                                         <div class="rating" style="padding-top: 5px;">
                                                             <ul class="list-inline">
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <li class="rating-active"><i
+                                                                                class="fas fa-star star-gold"></i></li>
+                                                                    @else
+                                                                        <li><i class="far fa-star"></i></li>
+                                                                    @endif
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                         <br>
@@ -1228,7 +1246,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6">
@@ -1695,16 +1713,24 @@
                                                                 @endif
                                                             </a>
                                                         </h6>
+                                                        <style>
+                                                            .star-gold{
+                                                                color: gold;
+                                                            }
+                                                        </style>
+                                                        @php
+                                                            $averageRating = $product->reviews->avg('rating');
+                                                        @endphp
                                                         <div class="rating" style="padding-top: 5px;">
                                                             <ul class="list-inline">
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li class="rating-active"><i class="fas fa-star"></i>
-                                                                </li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <li class="rating-active"><i
+                                                                                class="fas fa-star star-gold"></i></li>
+                                                                    @else
+                                                                        <li><i class="far fa-star"></i></li>
+                                                                    @endif
+                                                                @endfor
                                                             </ul>
                                                         </div>
                                                         <br>

@@ -14,6 +14,8 @@ class ShopController extends Controller
     {
         $products = Product::all();
         $categories = Category::all();
+        $reviews = Review::all();
+
 
         $user_id = auth()->id();
 
@@ -30,7 +32,7 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('ShopPage', compact('products', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('ShopPage', compact('products', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function singleProduct(Request $request, $id)
