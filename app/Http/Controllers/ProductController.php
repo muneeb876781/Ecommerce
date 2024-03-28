@@ -59,6 +59,7 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'productName' => 'required|string',
             'productDescription' => 'required|string',
+            'productSpecification' => 'required|string',
             'productPrice' => 'required|numeric',
             'productDiscountPrice' => 'nullable|numeric',
             'productCategory' => 'required|exists:categories,id',
@@ -123,6 +124,7 @@ class ProductController extends Controller
         $product->shop_id = $shopId;
         $product->name = $request->input('productName');
         $product->description = $request->input('productDescription');
+        $product->specification = $request->input('productSpecification');
         $product->price = $request->input('productPrice');
         $product->discountedPrice = $request->input('productDiscountPrice');
         $product->category_id = $request->input('productCategory');
