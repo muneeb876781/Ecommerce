@@ -135,7 +135,7 @@
         @media (max-width: 940px) {
             .container {
                 flex-direction: column;
-                margin-top: 60px;
+                /* margin-top: 60px; */
             }
 
             .left-column,
@@ -780,16 +780,24 @@
                                                     @endif
                                                 </a>
                                             </h6>
+                                            <style>
+                                                .star-gold {
+                                                    color: gold;
+                                                }
+                                            </style>
+                                            @php
+                                                $averageRating = $product->reviews->avg('rating');
+                                            @endphp
                                             <div class="rating" style="padding-top: 5px;">
                                                 <ul class="list-inline">
-                                                    <li class="rating-active"><i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li class="rating-active"><i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li class="rating-active"><i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $averageRating)
+                                                            <li class="rating-active"><i
+                                                                    class="fas fa-star star-gold"></i></li>
+                                                        @else
+                                                            <li><i class="far fa-star"></i></li>
+                                                        @endif
+                                                    @endfor
                                                 </ul>
                                             </div>
 

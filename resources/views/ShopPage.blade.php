@@ -107,6 +107,10 @@
         float: left;
     }
 
+    .star-gold {
+        color: gold;
+    }
+
     /* Media query for smaller screens */
     @media (max-width: 1200px) {
         .product-s {
@@ -273,18 +277,25 @@
                                                             @endif
                                                         </a>
                                                     </h6>
+
+                                                    @php
+                                                        $averageRating = $product->reviews->avg('rating');
+                                                    @endphp
                                                     <div class="rating" style="padding-top: 5px;">
                                                         <ul class="list-inline">
-                                                            <li class="rating-active"><i class="fas fa-star"></i>
-                                                            </li>
-                                                            <li class="rating-active"><i class="fas fa-star"></i>
-                                                            </li>
-                                                            <li class="rating-active"><i class="fas fa-star"></i>
-                                                            </li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $averageRating)
+                                                                    <li class="rating-active"><i
+                                                                            class="fas fa-star star-gold"></i></li>
+                                                                @else
+                                                                    <li><i class="far fa-star"></i></li>
+                                                                @endif
+                                                            @endfor
                                                         </ul>
                                                     </div>
+
+
+
                                                     <br>
                                                     <div
                                                         class="product__content--rating d-flex justify-content-between">
