@@ -329,6 +329,19 @@
                                         </div>
 
                                         <div class="mb-3">
+                                            <label for="productBrand">Product Brand</label>
+                                            <select class="form-control" id="productBrand"
+                                                name="productBrand" class="form-control">
+                                                <option value="">Select Product Brand</option>
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{ $brand->id }}">
+                                                        {{ $brand->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
                                             <label for="productAttribute" class="me-3">Product Attribute:</label>
                                             <div class="d-flex align-items-center">
                                                 <select class="form-control me-3" id="productAttribute"
