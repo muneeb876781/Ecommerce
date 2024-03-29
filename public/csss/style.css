@@ -2768,7 +2768,7 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 }
 
 .footer-menu>ul>li>a::before {
-    content: "\eaa0";
+    content: "";
     font-family: 'icofont';
     font-size: 19px;
     color: #686868;
@@ -4007,11 +4007,13 @@ html .ui-button.ui-state-disabled:active {
 /*contact area css end*/
 
 .foooter {
-    padding: 0 70px;
+    padding: 0 0;
 }
 
 @media (max-width: 768px) {
     .foooter {
         padding: 0;
+        margin-bottom: 45px;
     }
 }
+

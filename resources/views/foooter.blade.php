@@ -12,6 +12,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Document</title>
+    <style>
+        .fas,.fab{
+            padding-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <footer class="foooter" style=" background: #f4f4f4;" class="footer--area">
@@ -25,7 +30,7 @@
                             </div>
                             <div class="contacts-address">
                                 <div class="contacts-icon">
-                                    <i class="icofont-headphone-alt-3"></i>
+                                    <i class="fas fa-headphones"></i>
                                 </div>
                                 <div class="contacts-address--text">
                                     <span>Got Questions? Call Us 24/7</span>
@@ -45,14 +50,14 @@
                             </div>
                             <div class="footer-menu">
                                 <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Careers</a></li>
-                                    <li><a href="#">Press Releases</a></li>
-                                    <li><a href="#">Cart Cares</a></li>
-                                    <li><a href="#">Gift a Smile</a></li>
-                                    <li><a href="#">Your Account</a></li>
-                                    <li><a href="#">Returns Center</a></li>
-                                    <li><a href="#">100% Purchase Protection</a></li>
+                                    <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                                    <li><a href="#"><i class="fas fa-briefcase"></i> Careers</a></li>
+                                    <li><a href="#"><i class="fas fa-newspaper"></i> Press Releases</a></li>
+                                    <li><a href="#"><i class="fas fa-hand-holding-heart"></i> Cart Cares</a></li>
+                                    <li><a href="#"><i class="fas fa-gift"></i> Gift a Smile</a></li>
+                                    <li><a href="#"><i class="fas fa-user-circle"></i> Your Account</a></li>
+                                    <li><a href="#"><i class="fas fa-undo"></i> Returns Center</a></li>
+                                    <li><a href="#"><i class="fas fa-shield-alt"></i> 100% Purchase Protection</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -64,13 +69,14 @@
                             </div>
                             <div class="footer-menu h1foote-menu2">
                                 <ul>
-                                    <li><a href="#">Facebook</a></li>
-                                    <li><a href="#">Twitter</a></li>
-                                    <li><a href="#">Instagram</a></li>
-                                    <li><a href="#">Youtube</a></li>
-                                    <li><a href="#">Pintrest</a></li>
+                                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                                    <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
+                                    <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
                                 </ul>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="col-xl-2 col-lg-6 col-md-4 mb-30 order-md-4 order-lg-4 col-sm-6">
@@ -80,11 +86,11 @@
                             </div>
                             <div class="footer-menu h1foote-menu2">
                                 <ul>
-                                    <li><a href="#">Your Account</a></li>
-                                    <li><a href="#">Returns Centre</a></li>
-                                    <li><a href="#">100% Purchase Protection</a></li>
-                                    <li><a href="#">Cartbit App Download</a></li>
-                                    <li><a href="#">Help</a></li>
+                                    <li><a href="#"><i class="fas fa-user-circle"></i> Your Account</a></li>
+                                    <li><a href="#"><i class="fas fa-undo"></i> Returns Centre</a></li>
+                                    <li><a href="#"><i class="fas fa-shield-alt"></i> 100% Purchase Protection</a></li>
+                                    <li><a href="#"><i class="fas fa-download"></i> Cartbit App Download</a></li>
+                                    <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
                                 </ul>
                             </div>
                         </div>
