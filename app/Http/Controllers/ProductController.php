@@ -10,6 +10,7 @@ use App\Models\SellerShop;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use App\Models\Brand;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValue;
 use Illuminate\Support\Facades\Storage;
@@ -30,6 +31,8 @@ class ProductController extends Controller
             $subCategory = $subCategory->merge($subCategories);
         }
 
+        $brands = Brand::where('seller_shop_id', $shopId)->get();
+
         $shopId = SellerShop::where('user_id', Auth::id())->value('id');
         $products = Product::where('shop_id', $shopId)->get();
         $pro_count = $products->count();
@@ -44,7 +47,7 @@ class ProductController extends Controller
 
         $productAttributes = ProductAttribute::all();
 
-        return view('products', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory', 'productAttributes'));
+        return view('products', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory', 'brands',  'productAttributes'));
     }
 
     public function add()
@@ -64,6 +67,7 @@ class ProductController extends Controller
             'productDiscountPrice' => 'nullable|numeric',
             'productCategory' => 'required|exists:categories,id',
             'productSubCategory' => 'required|numeric',
+            'productBrand' => 'required|numeric',
             'productImage' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'productMedia1Image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'productMedia2Image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -128,7 +132,8 @@ class ProductController extends Controller
         $product->price = $request->input('productPrice');
         $product->discountedPrice = $request->input('productDiscountPrice');
         $product->category_id = $request->input('productCategory');
-        $product->sub_category_id = $request->input('productSubCategory');
+        $product->SubCategory_id = $request->input('productSubCategory');
+        $product->Brand_id = $request->input('productBrand');
         $product->quantity = $request->input('productQuantity');
         $product->sku = $request->input('productSKU');
         $product->remote_image_url = $request->input('productImageURL');

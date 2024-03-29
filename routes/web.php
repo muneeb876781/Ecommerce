@@ -12,6 +12,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\OredrController;
+use App\Http\Controllers\BrandController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -141,6 +143,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/venderProfile', [SellerController::class, 'venderProfile'])->name('venderProfile');
     Route::post('/editShop/{id}', [SellerShopController::class, 'editShop'])->name('editShop');
 
-    Route::get('/brands', [SellerController::class, 'brands'])->name('brands');
+    Route::get('/brands', [BrandController::class, 'brands'])->name('brands');
+    Route::post('/storeBrand', [BrandController::class, 'storeBrand'])
+        ->name('storeBrand')
+        ->middleware('seller');
 
 });

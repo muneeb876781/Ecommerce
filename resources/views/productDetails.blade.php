@@ -230,7 +230,7 @@
             }
         }
     </style>
-    
+
     <title>Document</title>
 </head>
 
@@ -279,8 +279,7 @@
                     <div class="col-lg-5 col-md-6 order-1 order-lg-1">
                         <div class="pro-img" style="margin-right: 0px;">
 
-                            <p class="p_name"
-                                style="text-align: left; padding-top: 10px; font-weight: bold;">
+                            <p class="p_name" style="text-align: left; padding-top: 10px; font-weight: bold;">
                                 {{ $product->name }}
                             </p>
                             <div class="tab-content" id="myTabContent">
@@ -386,13 +385,22 @@
                     </div>
                     <div class="col-lg-4 col-md-12 order-3 order-lg-2">
                         <div class="pro-content">
+                            
                             @php
-                                $subCategory = \App\Models\SubCategory::find($product->sub_category_id);
+                                $subCategory = \App\Models\SubCategory::find($product->SubCategory_id );
                                 $subCategoryName = $subCategory ? $subCategory->name : 'Unknown';
                             @endphp
 
-                            <span>{{ $product->category->name }} / {{ $subCategoryName }}</span>
-                            <h5 class="title">{{ $product->name }}</h5>
+                            <span>{{ $product->category->name }} / {{$subCategoryName}} @if ($product->subcategory)
+                                    {{ $product->subcategory->name }}
+                                @endif
+                            </span>
+                            <p class="mb-0 pb-0" style="font-size: 18px;">
+                                @if ($product->brand)
+                                    {{ $product->brand->name }}
+                                @endif
+                            </p>
+                            <h5 class="title pb-0 pt-0">{{ $product->name }}</h5>
                             <div class="pro-rating pb-15">
                                 <a href="#" class="active"><i class="fas fa-star"></i></a>
                                 <a href="#" class="active"><i class="fas fa-star"></i></a>
