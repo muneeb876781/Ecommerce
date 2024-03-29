@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Document</title>
     <style>
-        .fas,.fab{
+        .ficon{
             padding-right: 10px;
         }
     </style>
@@ -50,14 +50,14 @@
                             </div>
                             <div class="footer-menu">
                                 <ul>
-                                    <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
-                                    <li><a href="#"><i class="fas fa-briefcase"></i> Careers</a></li>
-                                    <li><a href="#"><i class="fas fa-newspaper"></i> Press Releases</a></li>
-                                    <li><a href="#"><i class="fas fa-hand-holding-heart"></i> Cart Cares</a></li>
-                                    <li><a href="#"><i class="fas fa-gift"></i> Gift a Smile</a></li>
-                                    <li><a href="#"><i class="fas fa-user-circle"></i> Your Account</a></li>
-                                    <li><a href="#"><i class="fas fa-undo"></i> Returns Center</a></li>
-                                    <li><a href="#"><i class="fas fa-shield-alt"></i> 100% Purchase Protection</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-info-circle"></i> About Us</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-briefcase"></i> Careers</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-newspaper"></i> Press Releases</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-hand-holding-heart"></i> Cart Cares</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-gift"></i> Gift a Smile</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-user-circle"></i> Your Account</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-undo"></i> Returns Center</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-shield-alt"></i> 100% Purchase Protection</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -69,11 +69,11 @@
                             </div>
                             <div class="footer-menu h1foote-menu2">
                                 <ul>
-                                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                                    <li><a href="#"><i class="fab fa-youtube"></i> Youtube</a></li>
-                                    <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                                    <li><a href="#"><i class="ficon fab fa-facebook"></i> Facebook</a></li>
+                                    <li><a href="#"><i class="ficon fab fa-twitter"></i> Twitter</a></li>
+                                    <li><a href="#"><i class="ficon fab fa-instagram"></i> Instagram</a></li>
+                                    <li><a href="#"><i class="ficon fab fa-youtube"></i> Youtube</a></li>
+                                    <li><a href="#"><i class="ficon fab fa-pinterest"></i> Pinterest</a></li>
                                 </ul>
                             </div>
                             
@@ -86,11 +86,11 @@
                             </div>
                             <div class="footer-menu h1foote-menu2">
                                 <ul>
-                                    <li><a href="#"><i class="fas fa-user-circle"></i> Your Account</a></li>
-                                    <li><a href="#"><i class="fas fa-undo"></i> Returns Centre</a></li>
-                                    <li><a href="#"><i class="fas fa-shield-alt"></i> 100% Purchase Protection</a></li>
-                                    <li><a href="#"><i class="fas fa-download"></i> Cartbit App Download</a></li>
-                                    <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-user-circle"></i> Your Account</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-undo"></i> Returns Centre</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-shield-alt"></i> 100% Purchase Protection</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-download"></i> Cartbit App Download</a></li>
+                                    <li><a href="#"><i class="ficon fas fa-question-circle"></i> Help</a></li>
                                 </ul>
                             </div>
                         </div>
