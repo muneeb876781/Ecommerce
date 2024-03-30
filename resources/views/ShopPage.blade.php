@@ -302,11 +302,11 @@
                                                         <div class="price">
                                                             @if ($product->discountedPrice)
                                                                 <span class="original-price"
-                                                                    style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">Rs.{{ $product->price }}</span>
+                                                                    style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.{{ $product->price }}</span>
                                                                 <span
-                                                                    class="discounted-price"><strong>Rs.{{ $product->discountedPrice }}</strong></span>
+                                                                    class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
                                                             @else
-                                                                <span>Rs.{{ $product->price }}</span>
+                                                                <span>AED.{{ $product->price }}</span>
                                                             @endif
                                                         </div>
                                                     </div>

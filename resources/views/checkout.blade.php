@@ -395,10 +395,10 @@
 
                                                         <span>
                                                             @if ($item->product->discountedPrice)
-                                                                Rs.
+                                                                AED
                                                                 {{ $item->quantity * $item->product->discountedPrice }}
                                                             @else
-                                                                Rs. {{ $item->quantity * $item->product->price }}
+                                                                AED {{ $item->quantity * $item->product->price }}
                                                             @endif
                                                         </span>
                                                     </li>

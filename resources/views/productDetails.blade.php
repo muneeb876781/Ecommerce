@@ -421,7 +421,11 @@
                                     @endphp
                                     <li>
                                         Saving:
-                                        <span style="background: #efefef; padding: 5px; border-radius: 20px;">{{ round($salePercentage) }}% Off</span>
+                                        <span style="background: #efefef; padding: 5px; border-radius: 20px;">
+                                            @if ($salePercentage > 0)
+                                                {{ round($salePercentage) }}% Off
+                                            @endif
+                                        </span>
                                     </li>
                                     <li>SKU: <span>{{ $product->sku }}</span></li>
                                     <li>Tag: <span>{{ $product->category->name }}</span></li>
@@ -433,7 +437,8 @@
                                 </ul>
                             </div> --}}
                             <div class="adv">
-                                <img src="https://f.nooncdn.com/mpcms/EN0001/assets/1abeaae7-0765-4bff-a0af-d7af9f716416.png?format=avif" alt="">
+                                <img src="https://f.nooncdn.com/mpcms/EN0001/assets/1abeaae7-0765-4bff-a0af-d7af9f716416.png?format=avif"
+                                    alt="">
                             </div>
 
                             <div class="facs">
@@ -461,7 +466,7 @@
                                     padding: 7px 0;
                                 }
 
-                                .adv{
+                                .adv {
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
@@ -471,9 +476,10 @@
                                     padding: 10px 0;
                                 }
 
-                                .adv img{
+                                .adv img {
                                     width: 100%;
-                                    height: auto;;
+                                    height: auto;
+                                    ;
                                 }
 
                                 .facs_cards {
@@ -500,7 +506,7 @@
                                     font-size: 11px;
                                 }
                             </style>
-                            
+
 
 
 
@@ -518,10 +524,10 @@
                             </div>
                             <div class="price mt-15 mb-20">
                                 @if ($product->discountedPrice)
-                                    <span style="text-decoration: line-through;">Rs {{ $product->price }}</span>
-                                    <h4>Rs {{ $product->discountedPrice }}</h4>
+                                    <span style="text-decoration: line-through;">AED {{ $product->price }}</span>
+                                    <h4>AED {{ $product->discountedPrice }}</h4>
                                 @else
-                                    <h4>Rs {{ $product->price }}</h4>
+                                    <h4>AED {{ $product->price }}</h4>
                                 @endif
 
                             </div>
@@ -924,12 +930,12 @@
                                             <div class="price">
                                                 @if ($relProduct->discountedPrice)
                                                     <span class="original-price"
-                                                        style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">Rs.
+                                                        style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.
                                                         {{ $relProduct->price }}</span>
-                                                    <span class="discounted-price"> <strong>Rs.
+                                                    <span class="discounted-price"> <strong>AED.
                                                             {{ $relProduct->discountedPrice }}</strong></span>
                                                 @else
-                                                    <span>Rs. {{ $relProduct->price }}</span>
+                                                    <span>AED. {{ $relProduct->price }}</span>
                                                 @endif
                                             </div>
 

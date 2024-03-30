@@ -56,8 +56,8 @@
 body {
     /* font-family: "Open Sans", sans-serif; */
     /* font-family: 'Segoe UI', sans-serif; */
-    /* font-family: 'Tahoma', sans-serif; */
-    font-family: 'Roboto-Regular', 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif;
+    font-family: 'Tahoma', sans-serif;
+    /* font-family: 'Roboto-Regular', 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif; */
     font-weight: normal;
     font-style: normal;
     font-size: 14px;
@@ -134,7 +134,8 @@ h4,
 h5,
 h6 {
     /* font-family: 'Muli', sans-serif; */
-    font-family: 'Roboto-Regular', 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif;
+    /* font-family: 'Roboto-Regular', 'Helvetica Neue', Helvetica, Tahoma, Arial, sans-serif; */
+    font-family: 'Tahoma', sans-serif;
     font-weight: normal;
     color: #313131;
     margin-top: 0px;

@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="col-8">
                                         <p class="mb-2">Sales </p>
-                                        <h5>Rs. {{ $totalAmountReceived }}</h5>
+                                        <h5>AED {{ $totalAmountReceived }}</h5>
                                     </div>
                                 </div>
                             </div>
