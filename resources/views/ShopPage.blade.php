@@ -184,28 +184,51 @@
                                         <option value="4">Deafult Sorting</option>
                                     </select>
                                 </div>
-                                <div class="shop-select">
-                                    <select name="select" id="category-select">
-                                        <option value="{{ route('shop') }}">Categories</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                                {{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="shop-select" style="display: flex;">
+                                    <form action="{{ route('shopss') }}" method="GET" style="display: flex; align-items: center;">
+                                        
+                                        <div class="shop-select">
+                                            <select name="category_id" id="category-select">
+                                                <option value="{{ route('shop') }}">Categories</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{$category->id}}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                                        {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="shop-select">
+                                            <select name="brand_id" id="brand-select">
+                                                <option value="{{ route('shop') }}">Brands</option>
+                                                @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}" {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
+                                                    {{ $brand->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary ml-2">Filter</button>
+                                    </form>
                                 </div>
-                                <div class="shop-select">
-                                    <select name="select" id="Brand-select">
-                                        <option value="{{ route('shop') }}">Brands</option>
-                                        @foreach ($brands as $brand)
-                                            <option value="{{ route('shopBrand', ['id' => $brand->id]) }}">
-                                                {{ $brand->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                
+                                
+                                
+                                <script>
+                                    document.getElementById('category-select').addEventListener('change', function() {
+                                        this.form.submit();
+                                    });
+                                
+                                    document.getElementById('brand-select').addEventListener('change', function() {
+                                        this.form.submit();
+                                    });
+                                </script>
+                                
+
                                 
 
 
-                                <div class="shop-select">
+
+                                {{-- <div class="shop-select">
                                     <select name="select" id="category-select">
                                         <option value="{{ route('shop') }}">Categories</option>
                                         @foreach ($categories as $category)
@@ -213,9 +236,9 @@
                                                 {{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
 
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                 <script>
                                     $(document).ready(function() {
                                         $("#category-select").change(function() {
@@ -230,7 +253,7 @@
                                             window.location = $(this).val();
                                         })
                                     })
-                                </script>
+                                </script> --}}
 
 
                             </div>
@@ -291,8 +314,7 @@
                                                     </a>
                                                     <div class="product-action">
                                                         <a href="#"><span class="fas fa-heart"></span></a>
-                                                        <a
-                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
                                                                 class="fas fa-eye"></span></a>
                                                         <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
                                                                 class="fas fa-shopping-cart"></span></a>
