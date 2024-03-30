@@ -48,6 +48,8 @@ Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
 Route::get('/single/{id}', [ShopController::class, 'singleProduct'])->name('singleProduct');
 Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
 Route::get('/shop/brand/{id}', [ShopController::class, 'showProductsByBrand'])->name('shopBrand');
+Route::get('/shop/subcategory/{id}', [ShopController::class, 'showProductsBysubcategory'])->name('shopsubcategory');
+
 
 
 Route::middleware(['auth'])->group(function () {
