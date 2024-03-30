@@ -192,7 +192,7 @@ class OredrController extends Controller
         // Create a PaymentIntent
         $paymentIntent = \Stripe\PaymentIntent::create([
             'amount' => $totalPrice * 100, // Amount in cents
-            'currency' => 'pkr',
+            'currency' => 'AED',
             'payment_method_types' => ['card'],
             'payment_method' => $request->input('stripeToken'),
             'description' => $description,

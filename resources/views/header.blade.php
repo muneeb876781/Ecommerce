@@ -567,7 +567,7 @@
                                         <li><a class="mini__cart--link" href="#"><i
                                                     class="fas fa-shopping-bag"><span
                                                         class="cart__count">{{ $totalItems }}</span></i><span
-                                                    class="cart__amount">Rs. {{ $totalPrice }}</span></a></li>
+                                                    class="cart__amount">AED. {{ $totalPrice }}</span></a></li>
 
                                     </ul>
                                 </div>
@@ -656,7 +656,7 @@
                                     <li><a class="mini__cart--link" href="#"><i
                                                 class="fas fa-shopping-bag"><span
                                                     class="cart__count">{{ $totalItems }}</span></i><span
-                                                class="cart__amount">Rs. {{ $totalPrice }}</span></a></li>
+                                                class="cart__amount">AED. {{ $totalPrice }}</span></a></li>
                                 </ul>
                             </div>
                             @foreach ($cart as $item)

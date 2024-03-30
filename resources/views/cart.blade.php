@@ -103,7 +103,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="price-wrap">
-                                                        <var class="price">Rs
+                                                        <var class="price">AED
                                                             @if ($item->product->discountedPrice)
                                                                 {{ $item->product->discountedPrice * $item->quantity }}
                                                             @else
@@ -111,7 +111,7 @@
                                                             @endif
                                                         </var>
                                                         @if ($item->quantity > 1)
-                                                            <small class="text-muted"> Rs {{ $item->product->price }}
+                                                            <small class="text-muted"> AED {{ $item->product->price }}
                                                                 each </small>
                                                         @endif
                                                     </div>
@@ -162,15 +162,15 @@
                         <div class="card-body">
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
-                                <dd id="totalPrice" class="text-right ml-3">RS 69.97</dd>
+                                <dd id="totalPrice" class="text-right ml-3">AED 69.97</dd>
                             </dl>
                             <dl class="dlist-align">
                                 <dt>Discount:</dt>
-                                <dd id="discount" class="text-right text-danger ml-3">- RS 10.00</dd>
+                                <dd id="discount" class="text-right text-danger ml-3">- AED 10.00</dd>
                             </dl>
                             <dl class="dlist-align">
                                 <dt>Total:</dt>
-                                <dd id="finalTotal" class="text-right text-dark b ml-3"><strong>RS 59.97</strong></dd>
+                                <dd id="finalTotal" class="text-right text-dark b ml-3"><strong>AED 59.97</strong></dd>
                             </dl>
 
                             <hr> <a style="background: #cd3301;color: #fff;" href="{{ route('checkout') }}"
@@ -205,9 +205,9 @@
             finalTotal = totalPrice - discount;
 
             // Update the HTML elements with the calculated values
-            document.getElementById('totalPrice').innerText = `Rs-${totalPrice.toFixed(2)}`;
-            document.getElementById('discount').innerText = `- Rs-${discount.toFixed(2)}`;
-            document.getElementById('finalTotal').innerText = `Rs-${finalTotal.toFixed(2)}`;
+            document.getElementById('totalPrice').innerText = `AED-${totalPrice.toFixed(2)}`;
+            document.getElementById('discount').innerText = `- AED-${discount.toFixed(2)}`;
+            document.getElementById('finalTotal').innerText = `AED-${finalTotal.toFixed(2)}`;
         });
     </script>
 
