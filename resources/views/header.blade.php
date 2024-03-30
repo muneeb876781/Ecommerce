@@ -753,7 +753,7 @@
                                                 <div class="subcategory">
                                                     @foreach ($category->subcategories as $subcategory)
                                                         <a
-                                                            href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $subcategory->name }}</a>
+                                                            href="{{ route('shopsubcategory', ['id' => $subcategory->id]) }}">{{ $subcategory->name }}</a>
                                                     @endforeach
                                                 </div>
                                             @endif

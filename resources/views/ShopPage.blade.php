@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="shop-select">
                                     <select name="select" id="category-select">
-                                        <option value="{{ route('shop') }}">All Categories</option>
+                                        <option value="{{ route('shop') }}">Categories</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
                                                 {{ $category->name }}</option>
@@ -195,25 +195,19 @@
                                 </div>
                                 <div class="shop-select">
                                     <select name="select" id="Brand-select">
-                                        <option value="{{ route('shop') }}">All Brands</option>
+                                        <option value="{{ route('shop') }}">Brands</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ route('shopBrand', ['id' => $brand->id]) }}">
                                                 {{ $brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                
+
+
                                 <div class="shop-select">
                                     <select name="select" id="category-select">
-                                        <option value="{{ route('shop') }}">All Categories</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                                {{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="shop-select">
-                                    <select name="select" id="category-select">
-                                        <option value="{{ route('shop') }}">All Categories</option>
+                                        <option value="{{ route('shop') }}">Categories</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
                                                 {{ $category->name }}</option>
@@ -297,7 +291,8 @@
                                                     </a>
                                                     <div class="product-action">
                                                         <a href="#"><span class="fas fa-heart"></span></a>
-                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                        <a
+                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
                                                                 class="fas fa-eye"></span></a>
                                                         <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
                                                                 class="fas fa-shopping-cart"></span></a>
