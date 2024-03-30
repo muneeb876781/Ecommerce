@@ -50,6 +50,9 @@ Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategor
 Route::get('/shop/brand/{id}', [ShopController::class, 'showProductsByBrand'])->name('shopBrand');
 Route::get('/shop/subcategory/{id}', [ShopController::class, 'showProductsBysubcategory'])->name('shopsubcategory');
 
+Route::get('/shopss', [ShopController::class, 'showProducts'])->name('shopss');
+
+
 
 
 Route::middleware(['auth'])->group(function () {
