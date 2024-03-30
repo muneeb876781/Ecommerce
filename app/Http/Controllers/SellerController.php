@@ -9,7 +9,9 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\Cart;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -53,6 +55,9 @@ class SellerController extends Controller
     
 
     public function venderProfile(){
+        $user_id = Auth::id();
+        $seller = User::where('id', $user_id)->first();
+        // dd($seller); 
         $shopInfo = SellerShop::where('user_id', auth()->id())->first();
 
         if ($shopInfo) {
@@ -83,7 +88,7 @@ class SellerController extends Controller
             $reviews = [];
         }
 
-        return view('venderProfile', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        return view('venderProfile', compact('shopInfo', 'seller',  'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
 
     }
 

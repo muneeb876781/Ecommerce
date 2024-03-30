@@ -286,11 +286,11 @@
                                 <div class="tab-pane fade show active" id="home5" role="tabpanel"
                                     aria-labelledby="home-tab5">
                                     @if ($product->image_url)
-                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                        <img style="width: 300px; height: 350px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ asset('storage/uploads/' . $product->image_url) }}"
                                             class="img-fluid" alt="">
                                     @elseif (!$product->image_url && $product->remote_image_url)
-                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                        <img style="width: 300px; height: 350px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ $product->remote_image_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
@@ -303,11 +303,11 @@
                                 <div class="tab-pane fade" id="profile5" role="tabpanel"
                                     aria-labelledby="profile-tab5">
                                     @if ($product->media2_url)
-                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                        <img style="width: 300px; height: 350px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ asset('storage/uploads/' . $product->media2_url) }}"
                                             class="img-fluid" alt="">
                                     @elseif (!$product->media2_url && $product->remote_media2_url)
-                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                        <img style="width: 300px; height: 350px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ $product->remote_media2_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
@@ -319,11 +319,11 @@
                                 <div class="tab-pane fade" id="contact5" role="tabpanel"
                                     aria-labelledby="contact-tab5">
                                     @if ($product->media3_url)
-                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                        <img style="width: 300px; height: 350px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ asset('storage/uploads/' . $product->media3_url) }}"
                                             class="img-fluid" alt="">
                                     @elseif (!$product->media3_url && $product->remote_media3_url)
-                                        <img style="width: 300px; height: 300px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
+                                        <img style="width: 300px; height: 350px; margin-left: 20px; margin-bottom: 10px; z-index: -1;"
                                             src="{{ $product->remote_media3_url }}" class="img-fluid" alt="">
                                     @else
                                         <span>No image available</span>
@@ -332,15 +332,15 @@
                             </div>
 
                             <ul class="nav" id="myTab1" role="tablist">
-                                <li class="nav-item">
+                                <li style="border: 1px solid black; border-radius: 10px;" class="nav-item">
                                     <a class="nav-link active" id="home-tab5" data-toggle="tab" href="#home5"
                                         role="tab" aria-controls="home5" aria-selected="true">
                                         @if ($product->image_url)
-                                            <img style="widows: 110px; height: 110px;"
+                                            <img style="width: 110px; height: 110px;"
                                                 src="{{ asset('storage/uploads/' . $product->image_url) }}"
                                                 class="img-fluid" alt="">
                                         @elseif (!$product->image_url && $product->remote_image_url)
-                                            <img style="widows: 110px; height: 110px;"
+                                            <img style="width: 110px; height: 110px;"
                                                 src="{{ $product->remote_image_url }}" class="img-fluid"
                                                 alt="">
                                         @else
@@ -348,15 +348,15 @@
                                         @endif
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li style="border: 1px solid black; border-radius: 10px;" class="nav-item">
                                     <a class="nav-link" id="profile-tab5" data-toggle="tab" href="#profile5"
                                         role="tab" aria-controls="profile5" aria-selected="false">
                                         @if ($product->media2_url)
-                                            <img style="widows: 110px; height: 110px;"
+                                            <img style="width: 110px; height: 110px;"
                                                 src="{{ asset('storage/uploads/' . $product->media2_url) }}"
                                                 class="img-fluid" alt="">
                                         @elseif (!$product->media2_url && $product->remote_media2_url)
-                                            <img style="widows: 110px; height: 110px;"
+                                            <img style="width: 110px; height: 110px;"
                                                 src="{{ $product->remote_media2_url }}" class="img-fluid"
                                                 alt="">
                                         @else
@@ -364,15 +364,15 @@
                                         @endif
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li style="border: 1px solid black; border-radius: 10px;" class="nav-item">
                                     <a class="nav-link" id="contact-tab5" data-toggle="tab" href="#contact5"
                                         role="tab" aria-controls="contact5" aria-selected="false">
                                         @if ($product->media3_url)
-                                            <img style="widows: 110px; height: 110px;"
+                                            <img style="width: 110px; height: 110px;"
                                                 src="{{ asset('storage/uploads/' . $product->media3_url) }}"
                                                 class="img-fluid" alt="">
                                         @elseif (!$product->media3_url && $product->remote_media3_url)
-                                            <img style="widows: 110px; height: 110px;"
+                                            <img style="width: 110px; height: 110px;"
                                                 src="{{ $product->remote_media3_url }}" class="img-fluid"
                                                 alt="">
                                         @else
@@ -385,13 +385,13 @@
                     </div>
                     <div class="col-lg-4 col-md-12 order-3 order-lg-2">
                         <div class="pro-content">
-                            
+
                             @php
-                                $subCategory = \App\Models\SubCategory::find($product->SubCategory_id );
+                                $subCategory = \App\Models\SubCategory::find($product->SubCategory_id);
                                 $subCategoryName = $subCategory ? $subCategory->name : 'Unknown';
                             @endphp
 
-                            <span>{{ $product->category->name }} / {{$subCategoryName}} @if ($product->subcategory)
+                            <span>{{ $product->category->name }} / {{ $subCategoryName }} @if ($product->subcategory)
                                     {{ $product->subcategory->name }}
                                 @endif
                             </span>
@@ -413,22 +413,98 @@
                                 <a href="#"><img src="../img/payment/pro-details-social.jpg" class="img-fluid"
                                         alt=""></a>
                             </div>
-                            <div class="about-pro">
-                                <ul class="mb-40">
-                                    <li>{!! $product->description !!}</li>
-                                    {{-- <li>{!! $product->specification !!}</li> --}}
-                                </ul>
-                            </div>
-
-
-
-
-                            <div class="pro-code pt-10">
+                            <div class="pro-code mt-1 mb-1">
                                 <ul>
+                                    @php
+                                        $salePercentage =
+                                            (($product->price - $product->discountedPrice) / $product->price) * 100;
+                                    @endphp
+                                    <li>
+                                        Saving:
+                                        <span style="background: #efefef; padding: 5px; border-radius: 20px;">{{ round($salePercentage) }}% Off</span>
+                                    </li>
                                     <li>SKU: <span>{{ $product->sku }}</span></li>
                                     <li>Tag: <span>{{ $product->category->name }}</span></li>
                                 </ul>
                             </div>
+                            {{-- <div class="about-pro">
+                                <ul class="mb-0">
+                                    <li>{!! $product->description !!}</li>
+                                </ul>
+                            </div> --}}
+                            <div class="adv">
+                                <img src="https://f.nooncdn.com/mpcms/EN0001/assets/1abeaae7-0765-4bff-a0af-d7af9f716416.png?format=avif" alt="">
+                            </div>
+
+                            <div class="facs">
+                                <div class="facs_cards">
+                                    <i class="fas fa-truck"></i>
+                                    <p>Free Delivery</p>
+                                </div>
+                                <div class="facs_cards">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <p>Cash on Delivery</p>
+                                </div>
+                                <div class="facs_cards">
+                                    <i class="fas fa-lock"></i>
+                                    <p>Safe Transactions</p>
+                                </div>
+                            </div>
+                            <style>
+                                .facs {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    flex-direction: row;
+                                    height: auto;
+                                    width: 120%;
+                                    padding: 7px 0;
+                                }
+
+                                .adv{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    flex-direction: row;
+                                    height: auto;
+                                    width: 120%;
+                                    padding: 10px 0;
+                                }
+
+                                .adv img{
+                                    width: 100%;
+                                    height: auto;;
+                                }
+
+                                .facs_cards {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    flex-direction: column;
+                                    height: auto;
+                                    width: 33%;
+                                    /* border: 1px solid rgba(0, 0, 0, 0.6); */
+                                    border-radius: 10px;
+                                    margin: 0 5px;
+                                    padding: 0 5px;
+                                }
+
+                                .facs_cards .fas {
+                                    font-size: 20px;
+                                    color: #909090;
+                                    padding: 7px;
+                                }
+
+                                .facs_cards p {
+                                    text-align: center;
+                                    font-size: 11px;
+                                }
+                            </style>
+                            
+
+
+
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 order-2 order-lg-3">

@@ -90,12 +90,30 @@
                                         id="shopdescription" value="{{ $shopInfo->description }}" />
                                 </div>
 
+                                {{-- <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">Seller Email</label>
+                                    <input class="form-control" type="text" id="selleremail" name="selleremail"
+                                        value="{{ $seller->email }}" placeholder="Andree@example.com" />
+                                </div>
+
+                                
+
+                                <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">Seller Password</label>
+                                    <input class="form-control" type="password" id="sellerpass" name="sellerpass"
+                                        value="{{ $seller->password }}" placeholder="Andree@example.com" />
+                                </div> --}}
+                                
+
+
 
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">Seller Phone</label>
                                     <input class="form-control" type="text" id="sellerphone" name="sellerphone"
                                         value="{{ $shopInfo->seller_phone }}" placeholder="Andree@example.com" />
                                 </div>
+
+                                
 
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">Seller Address</label>
