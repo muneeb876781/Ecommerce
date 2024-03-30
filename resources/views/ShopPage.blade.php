@@ -187,10 +187,10 @@
                                         </select>
                                     </div>
                                     <div class="shop-select">
-                                        <select name="category_id" id="category-select" class="form-control">
-                                            <option value="{{ route('shop') }}">Categories</option>
+                                        <select name="category_id" id="category-select" class="form-control" >
+                                            <option  value="">Categories</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}"
+                                                <option style="text-align: center; box-shadow: 10 20px 20px -4px rgba(0,0,0,0.2);" value="{{ $category->id }}"
                                                     {{ request('category_id') == $category->id ? 'selected' : '' }}>
                                                     {{ $category->name }}</option>
                                             @endforeach
@@ -198,7 +198,7 @@
                                     </div>
                                     <div class="shop-select">
                                         <select name="brand_id" id="brand-select" class="form-control">
-                                            <option value="{{ route('shop') }}">Brands</option>
+                                            <option value="">Brands</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}"
                                                     {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
