@@ -171,64 +171,72 @@
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-8">
-                            <div class="bar-wrapper">
-                                {{-- <div class="select-text">
+                            <form action="{{ route('shopss') }}" method="GET" id="shop-select-one">
+
+                                <div class="bar-wrapper">
+                                    {{-- <div class="select-text">
                                     <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
                                         Results</span>
                                 </div> --}}
-                                <div class="shop-select ">
-                                    <select name="select" id="shop-select-one">
-                                        <option value="1">Deafult Sorting</option>
-                                        <option value="2">Deafult Sorting</option>
-                                        <option value="3">Deafult Sorting</option>
-                                        <option value="4">Deafult Sorting</option>
-                                    </select>
-                                </div>
-                                <div class="shop-select" style="display: flex;">
-                                    <form action="{{ route('shopss') }}" method="GET" style="display: flex; align-items: center;">
-                                        
-                                        <div class="shop-select">
-                                            <select name="category_id" id="category-select">
-                                                <option value="{{ route('shop') }}">Categories</option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{$category->id}}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                                        {{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="shop-select">
-                                            <select name="brand_id" id="brand-select">
-                                                <option value="{{ route('shop') }}">Brands</option>
-                                                @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}" {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
+                                    <div class="shop-select ">
+                                        <select name="select" id="shop-select-one">
+                                            <option value="1">Deafult Sorting</option>
+                                            <option value="2">Deafult Sorting</option>
+                                            <option value="3">Deafult Sorting</option>
+                                            <option value="4">Deafult Sorting</option>
+                                        </select>
+                                    </div>
+                                    <div class="shop-select">
+                                        <select name="category_id" id="category-select" class="form-control">
+                                            <option value="{{ route('shop') }}">Categories</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="shop-select">
+                                        <select name="brand_id" id="brand-select" class="form-control">
+                                            <option value="{{ route('shop') }}">Brands</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}"
+                                                    {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
                                                     {{ $brand->name }}
                                                 </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        
-                                        <button type="submit" class="btn btn-primary ml-2">Filter</button>
-                                    </form>
-                                </div>
-                                
-                                
-                                
-                                <script>
-                                    document.getElementById('category-select').addEventListener('change', function() {
-                                        this.form.submit();
-                                    });
-                                
-                                    document.getElementById('brand-select').addEventListener('change', function() {
-                                        this.form.submit();
-                                    });
-                                </script>
-                                
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary ml-2">Filter</button>
 
-                                
+                                    <style>
+                                        @media (max-width: 768px) {
+                                            .shop-select {
+                                                flex-basis: 100%;
+                                                margin-bottom: 10px;
+                                            }
+                                        }
+                                    </style>
 
 
 
-                                {{-- <div class="shop-select">
+
+                                    <script>
+                                        document.getElementById('category-select').addEventListener('change', function() {
+                                            this.form.submit();
+                                        });
+
+                                        document.getElementById('brand-select').addEventListener('change', function() {
+                                            this.form.submit();
+                                        });
+                                    </script>
+
+
+
+
+
+
+                                    {{-- <div class="shop-select">
                                     <select name="select" id="category-select">
                                         <option value="{{ route('shop') }}">Categories</option>
                                         @foreach ($categories as $category)
@@ -238,7 +246,7 @@
                                     </select>
                                 </div> --}}
 
-                                {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                 <script>
                                     $(document).ready(function() {
                                         $("#category-select").change(function() {
@@ -256,7 +264,9 @@
                                 </script> --}}
 
 
-                            </div>
+                                </div>
+                            </form>
+
                         </div>
 
 
