@@ -172,16 +172,43 @@
                         </div>
                         <div class="col-lg-7 col-md-8">
                             <div class="bar-wrapper">
-                                <div class="select-text">
+                                {{-- <div class="select-text">
                                     <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
                                         Results</span>
-                                </div>
+                                </div> --}}
                                 <div class="shop-select ">
                                     <select name="select" id="shop-select-one">
                                         <option value="1">Deafult Sorting</option>
                                         <option value="2">Deafult Sorting</option>
                                         <option value="3">Deafult Sorting</option>
                                         <option value="4">Deafult Sorting</option>
+                                    </select>
+                                </div>
+                                <div class="shop-select">
+                                    <select name="select" id="category-select">
+                                        <option value="{{ route('shop') }}">All Categories</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
+                                                {{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="shop-select">
+                                    <select name="select" id="Brand-select">
+                                        <option value="{{ route('shop') }}">All Brands</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ route('shopBrand', ['id' => $brand->id]) }}">
+                                                {{ $brand->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="shop-select">
+                                    <select name="select" id="category-select">
+                                        <option value="{{ route('shop') }}">All Categories</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
+                                                {{ $category->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="shop-select">
@@ -202,13 +229,21 @@
                                         })
                                     })
                                 </script>
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#Brand-select").change(function() {
+                                            window.location = $(this).val();
+                                        })
+                                    })
+                                </script>
 
 
                             </div>
                         </div>
 
 
-                        <div class="col-lg-7 col-md-8">
+                        <div class="col-lg-7 col-md-8 mt-3">
                             <div class="bar-wrapper">
                                 <div class="select-text">
                                     <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
@@ -255,7 +290,7 @@
                                                                     100;
                                                             @endphp
                                                             @if ($salePercentage > 0)
-                                                                <span class="sale-tag">Sale
+                                                                <span class="sale-tag">
                                                                     {{ round($salePercentage) }}% Off</span>
                                                             @endif
                                                         @endif

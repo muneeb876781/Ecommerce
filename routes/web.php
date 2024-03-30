@@ -46,6 +46,9 @@ Route::get('/contact', function () {
 
 Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
 Route::get('/single/{id}', [ShopController::class, 'singleProduct'])->name('singleProduct');
+Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
+Route::get('/shop/brand/{id}', [ShopController::class, 'showProductsByBrand'])->name('shopBrand');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [SellerController::class, 'index'])
@@ -91,7 +94,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('categoriesedit')
         ->middleware('seller');
 
-    Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
 
     Route::get('/subCategories', [SubCategoryController::class, 'index'])
         ->name('subCategoryview')

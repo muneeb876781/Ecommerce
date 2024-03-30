@@ -887,7 +887,7 @@
                                                             100;
                                                     @endphp
                                                     @if ($salePercentage > 0)
-                                                        <span class="sale-tag">Sale {{ round($salePercentage) }}%
+                                                        <span class="sale-tag"> {{ round($salePercentage) }}%
                                                             Off</span>
                                                     @endif
                                                 @endif
