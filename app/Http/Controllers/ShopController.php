@@ -203,11 +203,25 @@ class ShopController extends Controller
 
         $searchText = $request->input('serachProducts');
 
+        // $products = Product::where('name', 'like', "%$searchText%")
+        //     ->orWhereHas('category', function ($query) use ($searchText) {
+        //         $query->where('name', 'like', "%$searchText%");
+        //     })
+        //     ->orWhere('sku', 'like', "%$searchText%")
+        //     ->get();
+
         $products = Product::where('name', 'like', "%$searchText%")
+            ->orWhere('sku', 'like', "%$searchText%")
             ->orWhereHas('category', function ($query) use ($searchText) {
                 $query->where('name', 'like', "%$searchText%");
             })
-            ->orWhere('sku', 'like', "%$searchText%")
+            ->orWhereHas('brand', function ($query) use ($searchText) {
+                $query->where('name', 'like', "%$searchText%");
+            })
+            ->orWhere('description', 'like', "%$searchText%")
+            ->orWhereHas('subcategory', function ($query) use ($searchText) {
+                $query->where('name', 'like', "%$searchText%");
+            })
             ->get();
 
         return view('ShopPage', compact('products', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
