@@ -823,14 +823,16 @@ cart--header__middle.cart--header__two {
     position: absolute;
     top: 100%;
     left: 0;
-    background: #222;
-    width: 250px;
-    border-top: 4px solid #ee3333;
+    background: #fff;
+    width: 300px;
+    border-top: 1px solid #ee3333;
     transition: .3s;
     opacity: 0;
     visibility: hidden;
     z-index: 99999;
     text-align: left;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
 }
 
 .main-menu ul li ul.submenu li {
@@ -846,7 +848,7 @@ cart--header__middle.cart--header__two {
 
 .main-menu ul li ul.submenu li a {
     padding: 16px 20px;
-    color: #fff;
+    color: #000;
     font-size: 12px;
     display: block;
 }
