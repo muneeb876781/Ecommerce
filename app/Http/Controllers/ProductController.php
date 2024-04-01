@@ -201,6 +201,7 @@ class ProductController extends Controller
     public function cart()
     {
         $categories = Category::all();
+        $brands = Brand::all();
 
         $user_id = auth()->id();
 
@@ -217,7 +218,7 @@ class ProductController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('cart', compact('cart', 'categories', 'totalPrice', 'totalItems'));
+        return view('cart', compact('cart', 'categories', 'brands', 'totalPrice', 'totalItems'));
     }
 
     public function addToCart(Request $request, $id)

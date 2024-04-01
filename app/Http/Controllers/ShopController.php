@@ -41,6 +41,7 @@ class ShopController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::all();
+        $brands = Brand::all();
 
         $category = $product->category;
         $relatedProducts = Product::where('category_id', $category->id)
@@ -64,7 +65,7 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('productDetails', compact('product', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('productDetails', compact('product', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProductsByCategory($categoryId)
