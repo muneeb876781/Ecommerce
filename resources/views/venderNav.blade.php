@@ -233,13 +233,19 @@
                         </a>
                     </li> --}}
 
-                    {{-- <li>
+                    <li>
                         <a href="{{ route('Order') }}" class="{{ Request::is('Order*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Orders
                         </a>
-                    </li> --}}
+                    </li>
 
                     <li>
+                        <a href="{{ route('finance') }}" class="{{ Request::is('finance*') ? 'active' : '' }}">
+                            <i class='bx bxs-meh-blank icon'></i> Finance
+                        </a>
+                    </li>
+
+                    {{-- <li>
                         <a href="#">
                             <i class='bx bx-columns icon'></i>
                             Orders
@@ -256,7 +262,7 @@
                                     Pyments
                                 </a></li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                     <li>
                         <a href="{{ route('venderProfile') }}"
