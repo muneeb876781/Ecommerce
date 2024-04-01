@@ -168,6 +168,7 @@ class OredrController extends Controller
                 $orderItem->product_color = $cartItem->color;
                 $orderItem->product_name = $product->name;
                 $orderItem->image_url = $product->image_url;
+                $orderItem->remote_image_url = $product->remote_image_url;
                 $orderItem->price = $product->discountedPrice ? $product->discountedPrice : $product->price;
                 $orderItem->save();
             }
@@ -396,7 +397,7 @@ class OredrController extends Controller
 
         $pdf->loadHtml(view('orderDetails_pdf', compact('order')));
 
-        $pdf->setPaper('A4', 'landscape');
+        $pdf->setPaper('A4', 'portrait');
 
         $pdf->render();
 

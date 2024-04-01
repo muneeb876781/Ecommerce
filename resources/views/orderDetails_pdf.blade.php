@@ -13,7 +13,7 @@
         }
 
         .container {
-            max-width: 80%;
+            max-width: 90%;
             height: 100vh;
             margin: 0 auto;
             background-color: #fff;
@@ -70,28 +70,23 @@
                         <p><strong>Sub Total:</strong> {{ $order->total_price }}</p>
                     </td>
                     <td class="barcode">
-                        
                         {!! DNS2D::getBarcodeHTML("https://primetechnology.online/trackOrders/" . $order->id, 'QRCODE') !!}
                     </td>
-                    
                 </tr>
-                <tr>
-                    <th>
+                    <h2>
                         Product Details
-                    </th>
-                </tr>
-                <tr>
+                    </h2>
                     @foreach ($order->items as $item)
-                        <td class="list-group-item"> <strong style="font-size: 20px;">{{ $item->product_name }}</strong>
+                        <span class="list-group-item"> <strong style="font-size: 20px;">{{ $item->product_name }}</strong>
                             <br>
                             - <strong>Quantity:</strong> {{ $item->quantity }} <br>
                             - <strong>Product color:</strong> {{ $item->product_color }} <br>
                             - <strong>Product size:</strong> {{ $item->product_size }} <br>
                             - <strong>Price:</strong> {{ $item->price }} <br>
                             - <strong>Sub Total:</strong> {{ $item->price * $item->quantity }}
-                        </td>
+                        </span>
+                        <br>
                     @endforeach
-                </tr>
             </tbody>
         </table>
     </div>
