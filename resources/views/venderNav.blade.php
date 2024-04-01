@@ -151,9 +151,10 @@
 
 
                 <ul class="side-menu">
+
                     <li>
                         <a href="{{ route('home') }}" target="_blank" class="{{ Request::is('/') ? 'active' : '' }}">
-                            <i class='bx bxs-dashboard icon'></i> Go to home
+                            <i class='bx bxs-home icon'></i> Go to home
                         </a>
                     </li>
 
@@ -202,13 +203,14 @@
                             <i class='bx bx-chevron-right icon-right'></i>
                         </a>
                         <ul class="side-dropdown">
-                            <li><a href="{{ route('productview') }}" class="{{ Request::is('product*') ? 'active' : '' }}">
-                                 Products
-                            </a></li>
+                            <li><a href="{{ route('productview') }}"
+                                    class="{{ Request::is('product*') ? 'active' : '' }}">
+                                    Products
+                                </a></li>
                             <li><a href="{{ route('productAttributes') }}"
-                                class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
-                                 Product Attributes
-                            </a></li>
+                                    class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
+                                    Product Attributes
+                                </a></li>
                         </ul>
                     </li>
 
@@ -245,16 +247,14 @@
                         </a>
                         <ul class="side-dropdown">
                             <li><a href="{{ route('Order') }}" class="{{ Request::is('Order*') ? 'active' : '' }}">
-                                Orders
-                            </a></li>
-                            <li><a href=""
-                                class="{{ Request::is('*') ? 'active' : '' }}">
-                                 Finance
-                            </a></li>
-                            <li><a href=""
-                                class="{{ Request::is('*') ? 'active' : '' }}">
-                                 Pyments
-                            </a></li>
+                                    Orders
+                                </a></li>
+                            <li><a href="" class="{{ Request::is('*') ? 'active' : '' }}">
+                                    Finance
+                                </a></li>
+                            <li><a href="" class="{{ Request::is('*') ? 'active' : '' }}">
+                                    Pyments
+                                </a></li>
                         </ul>
                     </li>
 
@@ -283,7 +283,7 @@
                             </form>
                         </li>
                     @endif --}}
-
+                </ul>
 
 
 
