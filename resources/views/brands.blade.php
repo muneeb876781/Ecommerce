@@ -79,7 +79,7 @@
                                         @foreach ($brands as $brand)
                                             <tr>
                                                 <td style="width: 10%" class="serial-number">{{ $serialNumber++ }}</td>
-                                                <td style="width: 15%"><img style="width: 100px; height: 100px;"
+                                                <td style="width: 15%"><img style="width: 100px; height: auto;"
                                                         src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                                         alt="{{ $brand->name }}" class="rounded-circle"></td>
                                                 <td style="width: 18%"><strong>{{ $brand->name }}</strong> <br> </td>

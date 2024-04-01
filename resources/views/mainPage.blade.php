@@ -986,7 +986,7 @@
                                                         </h6>
 
                                                         <style>
-                                                            .star-gold{
+                                                            .star-gold {
                                                                 color: gold;
                                                             }
                                                         </style>
@@ -1089,7 +1089,7 @@
                                                                 </a>
                                                             </h6>
                                                             <style>
-                                                                .star-gold{
+                                                                .star-gold {
                                                                     color: gold;
                                                                 }
                                                             </style>
@@ -1101,7 +1101,8 @@
                                                                     @for ($i = 1; $i <= 5; $i++)
                                                                         @if ($i <= $averageRating)
                                                                             <li class="rating-active"><i
-                                                                                    class="fas fa-star star-gold"></i></li>
+                                                                                    class="fas fa-star star-gold"></i>
+                                                                            </li>
                                                                         @else
                                                                             <li><i class="far fa-star"></i></li>
                                                                         @endif
@@ -1197,7 +1198,7 @@
                                                             </a>
                                                         </h6>
                                                         <style>
-                                                            .star-gold{
+                                                            .star-gold {
                                                                 color: gold;
                                                             }
                                                         </style>
@@ -1714,7 +1715,7 @@
                                                             </a>
                                                         </h6>
                                                         <style>
-                                                            .star-gold{
+                                                            .star-gold {
                                                                 color: gold;
                                                             }
                                                         </style>
@@ -2145,27 +2146,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="brand-active">
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo1.png" alt="">
-                            </div>
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo2.png" alt="">
-                            </div>
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo3.png" alt="">
-                            </div>
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo4.png" alt="">
-                            </div>
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo5.png" alt="">
-                            </div>
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo2.png" alt="">
-                            </div>
-                            <div class="single-brand">
-                                <img src="../img/brand/brand-logo1.png" alt="">
-                            </div>
+                            @foreach ($brands as $brand)
+                                <div class="single-brand">
+                                    <img src="{{ asset('storage/uploads/' . $brand->image_url) }}" style="width: 100px; height: auto;" alt="">
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>

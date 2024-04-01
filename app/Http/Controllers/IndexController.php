@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\Cart;
 use App\Models\Review;
+use App\Models\Brand;
+
 
 class IndexController extends Controller
 {
@@ -23,6 +25,7 @@ class IndexController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $reviews = Review::all();
+        $brands = Brand::all();
 
 
         $user_id = auth()->id();
@@ -42,6 +45,6 @@ class IndexController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('mainPage', compact('products', 'reviews', 'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
+        return view('mainPage', compact('products', 'reviews', 'brands',  'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 }
