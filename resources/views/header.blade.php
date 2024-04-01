@@ -747,13 +747,16 @@
                                 @foreach ($categories as $key => $category)
                                     @if ($key <= 9)
                                         <div class="category">
-                                            <a
-                                                href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                            <a href="{{ route('shopcategory', ['id' => $category->id]) }}"><img
+                                                    src="{{ asset('storage/uploads/' . $category->image_url) }}"
+                                                    alt="{{ $category->name }}"
+                                                    style="max-width: 50px; max-height: 50px; border-radius: 100px; margin-right: 15px;">{{ $category->name }}</a>
                                             @if (count($category->subcategories) > 0)
                                                 <div class="subcategory">
                                                     @foreach ($category->subcategories as $subcategory)
                                                         <a
-                                                            href="{{ route('shopsubcategory', ['id' => $subcategory->id]) }}">{{ $subcategory->name }}</a>
+                                                            href="{{ route('shopsubcategory', ['id' => $subcategory->id]) }}">
+                                                            {{ $subcategory->name }}</a>
                                                     @endforeach
                                                 </div>
                                             @endif
@@ -820,18 +823,22 @@
                                     <li>
                                         <a href="">Brands</a>
                                         <ul class="submenu">
-                                            @foreach ($brands as $brand)
-                                                <li>
-                                                    <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
-                                                        <img src="{{ asset( 'storage/uploads/' . $brand->image_url) }}" alt="{{ $brand->name }}" style="max-width: 70px; max-height: 70px;">
-                                                        {{ $brand->name }}
-                                                    </a>
-                                                </li>
+                                            @foreach ($brands as $key => $brand)
+                                                @if ($key <= 9)
+                                                    <li>
+                                                        <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                                                alt="{{ $brand->name }}"
+                                                                style="max-width: 70px; max-height: 70px;">
+                                                            {{ $brand->name }}
+                                                        </a>
+                                                    </li>
+                                                @endif
                                             @endforeach
                                         </ul>
                                     </li>
-                                    
-                                    
+
+
 
 
                                     <li class="mega-menu static dropdown-icon">
