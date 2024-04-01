@@ -60,6 +60,56 @@ class OredrController extends Controller
         return view('order', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
     }
 
+    public function finance()
+    {
+        $user_id = auth()->id();
+        $shopInfo = SellerShop::where('user_id', auth()->id())->first();
+        $shopId = SellerShop::where('user_id', Auth::id())->value('id');
+
+        $Orders = Order::where('shop_id', $shopId)->get();
+
+        $totalOrdersCount = $Orders->count();
+
+        $cOrders = Order::where('shop_id', $shopId)->where('order_status', 'Completed')->get();
+        $completedOrders = $cOrders->count();
+
+        $rOrders = Order::where('shop_id', $shopId)->where('order_status', 'Rejected')->get();
+        $rejectedOrders = $rOrders->count();
+
+        $pOrders = Order::where('shop_id', $shopId)->where('order_status', 'Pending')->get();
+        $pendingOrders = $pOrders->count();
+
+        $aOrders = Order::where('shop_id', $shopId)->where('order_status', 'Accepted')->get();
+        $acceptedOrders = $aOrders->count();
+
+        $totalOrdersCount = $Orders->count();
+
+        $totalOrdersCodCount = $cOrders
+            ->filter(function ($order) {
+                return $order->payment_method === 'cash on delivery';
+            })
+            ->count();
+
+        $totalOrdersCardCount = $cOrders
+            ->filter(function ($order) {
+                return $order->payment_method === 'Card Payment';
+            })
+            ->count();
+
+        $totalProductsOrdered = $cOrders->sum(function ($order) {
+            return $order->items->sum('quantity');
+        });
+
+        $totalAmountReceived = $cOrders->sum(function ($order) {
+            return $order->total_price;
+        });
+
+        $totalAmountReceivedCard = $cOrders->where('payment_method', 'Card Payment')->sum('total_price');
+        $totalAmountReceivedCashOnDelivery = $cOrders->where('payment_method', 'cash on delivery')->sum('total_price');
+
+        return view('finance', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalOrdersCodCount', 'totalOrdersCardCount', 'totalProductsOrdered', 'totalAmountReceived', 'totalAmountReceivedCard', 'totalAmountReceivedCashOnDelivery', 'rejectedOrders', 'acceptedOrders', 'completedOrders', 'pendingOrders'));
+    }
+
     public function placeOrder(Request $request)
     {
         $validatedData = $request->validate([

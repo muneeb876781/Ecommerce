@@ -151,4 +151,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/brands/{id}', [BrandController::class, 'edit'])
         ->name('brandsEdit')
         ->middleware('seller');
+
+    Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
+
 });
