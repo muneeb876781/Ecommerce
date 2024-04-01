@@ -22,7 +22,7 @@ class ProductController extends Controller
         $shopInfo = SellerShop::where('user_id', auth()->id())->first();
 
         $shopId = SellerShop::where('user_id', Auth::id())->value('id');
-        $categories = Category::where('seller_shop_id', $shopId)->get();
+        $categories = Category::where('seller_shop_id', $shopId)->orderBy('created_at', 'desc')->get();
         $cat_count = $categories->count();
 
         $subCategory = collect();
@@ -34,7 +34,7 @@ class ProductController extends Controller
         $brands = Brand::where('seller_shop_id', $shopId)->get();
 
         $shopId = SellerShop::where('user_id', Auth::id())->value('id');
-        $products = Product::where('shop_id', $shopId)->get();
+        $products = Product::where('shop_id', $shopId)->orderBy('created_at', 'desc')->get();
         $pro_count = $products->count();
 
         $reviews = collect();
@@ -47,7 +47,7 @@ class ProductController extends Controller
 
         $productAttributes = ProductAttribute::all();
 
-        return view('products', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory', 'brands',  'productAttributes'));
+        return view('products', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory', 'brands', 'productAttributes'));
     }
 
     public function add()
