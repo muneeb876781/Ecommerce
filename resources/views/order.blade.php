@@ -172,23 +172,24 @@
 
                 </div>
                 {{-- <h1>Orders</h1> --}}
-                <button id="showPendings" class="btn btn-primary">Pending Orders</button>
+                <button id="showAll" class="btn btn-primary">All Orders</button>
                 <button id="showAccepted" class="btn btn-primary">Accepted Orders</button>
                 <button id="showRejected" class="btn btn-primary">Rejected Orders</button>
                 <button id="showCompleted" class="btn btn-primary">Completed Orders</button>
-                <button id="showAll" class="btn btn-primary">All Orders</button>
+                <button id="showPendings" class="btn btn-primary">Pending Orders</button>
+
 
 
                 <br>
 
                 <div class="col-md-12">
-                    <div id="pendings" class="card">
+                    <div id="allOrders" class="card">
                         <div class="card-header">
-                            <h4>Pending Orders</h4>
+                            <h4>All Orders</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="pendingTable" class="table table-striped">
+                                <table id="allTable" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th class="serial-number">Tracking No.</th>
@@ -204,45 +205,43 @@
                                     <tbody>
                                         @php $serialNumber = 1; @endphp
                                         @foreach ($Orders as $order)
-                                            @if ($order->order_status === 'Pending')
-                                                <tr>
-                                                    <td scope="row">{{ $order->tracking_number }}</td>
-                                                    <td>
-                                                        <strong>{{ $order->first_name }}
-                                                            {{ $order->last_name }}</strong>
-                                                        <br>
-                                                        {{ $order->email }} <br>
-                                                        {{ $order->contact_number }}
-                                                    </td>
-                                                    <td>
-                                                        <strong>Address: </strong> {{ $order->delivery_address }} <br>
-                                                        <strong>Postal Code: </strong>{{ $order->postal_code }}
-                                                    </td>
-                                                    <td>{{ $order->total_price }}</td>
-                                                    <td>
-                                                        {{ $order->items->count() }}
-                                                    </td>
-                                                    <td>{{ $order->payment_method }}</td>
-                                                    <td>{{ $order->order_status }}</td>
+                                            <tr>
+                                                <td scope="row">{{ $order->tracking_number }}</td>
+                                                <td>
+                                                    <strong>{{ $order->first_name }}
+                                                        {{ $order->last_name }}</strong>
+                                                    <br>
+                                                    {{ $order->email }} <br>
+                                                    {{ $order->contact_number }}
+                                                </td>
+                                                <td>
+                                                    <strong>Address: </strong> {{ $order->delivery_address }} <br>
+                                                    <strong>Postal Code: </strong>{{ $order->postal_code }}
+                                                </td>
+                                                <td>{{ $order->total_price }}</td>
+                                                <td>
+                                                    {{ $order->items->count() }}
+                                                </td>
+                                                <td>{{ $order->payment_method }}</td>
+                                                <td>{{ $order->order_status }}</td>
 
-                                                    <td>
-                                                        <a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                            class="btn btn-primary">View Details</a>
-                                                        <a href="#" class="btn btn-danger"
-                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
-                                                            Delete Order
-                                                        </a>
-                                                        <form id="delete-order-{{ $order->id }}"
-                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
-                                                            method="POST" style="display: none;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
-                                                    </td>
+                                                <td>
+                                                    <a href="{{ route('orderDetails', ['id' => $order->id]) }}"
+                                                        class="btn btn-primary">View Details</a>
+                                                    <a href="#" class="btn btn-danger"
+                                                        onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                        Delete Order
+                                                    </a>
+                                                    <form id="delete-order-{{ $order->id }}"
+                                                        action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                        method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </td>
 
-                                                </tr>
-                                                @php $serialNumber++; @endphp
-                                            @endif
+                                            </tr>
+                                            @php $serialNumber++; @endphp
                                         @endforeach
                                     </tbody>
 
@@ -456,14 +455,14 @@
                     </div>
                 </div>
 
-                <div id="allOrders" class="col-md-12" style="display: none;">
+                <div id="pendings" class="col-md-12" style="display: none;">
                     <div class="card">
                         <div class="card-header">
-                            <h4>All Orders</h4>
+                            <h4>Pending Orders</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="allTable" class="table table-striped">
+                                <table id="pendingTable" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th class="serial-number">No.</th>
@@ -479,41 +478,43 @@
                                     <tbody>
                                         @php $serialNumber = 1; @endphp
                                         @foreach ($Orders as $order)
-                                            <tr>
-                                                <th scope="row">{{ $serialNumber }}</th>
-                                                <td>
-                                                    <strong>{{ $order->first_name }}
-                                                        {{ $order->last_name }}</strong>
-                                                    <br>
-                                                    {{ $order->email }} <br>
-                                                    {{ $order->contact_number }}
-                                                </td>
-                                                <td>
-                                                    <strong>Address: </strong> {{ $order->delivery_address }} <br>
-                                                    <strong>Postal Code: </strong>{{ $order->postal_code }}
-                                                </td>
-                                                <td>{{ $order->total_price }}</td>
-                                                <td>
-                                                    {{ $order->items->count() }}
-                                                </td>
-                                                <td>{{ $order->payment_method }}</td>
-                                                <td>{{ $order->order_status }}</td>
+                                            @if ($order->order_status === 'Pending')
+                                                <tr>
+                                                    <th scope="row">{{ $serialNumber }}</th>
+                                                    <td>
+                                                        <strong>{{ $order->first_name }}
+                                                            {{ $order->last_name }}</strong>
+                                                        <br>
+                                                        {{ $order->email }} <br>
+                                                        {{ $order->contact_number }}
+                                                    </td>
+                                                    <td>
+                                                        <strong>Address: </strong> {{ $order->delivery_address }} <br>
+                                                        <strong>Postal Code: </strong>{{ $order->postal_code }}
+                                                    </td>
+                                                    <td>{{ $order->total_price }}</td>
+                                                    <td>
+                                                        {{ $order->items->count() }}
+                                                    </td>
+                                                    <td>{{ $order->payment_method }}</td>
+                                                    <td>{{ $order->order_status }}</td>
 
-                                                <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
-                                                        class="btn btn-primary">View Details</a>
-                                                    <a href="#" class="btn btn-danger"
-                                                        onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
-                                                        Delete Order
-                                                    </a>
-                                                    <form id="delete-order-{{ $order->id }}"
-                                                        action="{{ route('deleteOrder', ['id' => $order->id]) }}"
-                                                        method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @php $serialNumber++; @endphp
+                                                    <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
+                                                            class="btn btn-primary">View Details</a>
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                            Delete Order
+                                                        </a>
+                                                        <form id="delete-order-{{ $order->id }}"
+                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @php $serialNumber++; @endphp
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
