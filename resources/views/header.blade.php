@@ -815,17 +815,33 @@
                                             </li>
                                         </ul> --}}
                                     </li>
+
+
                                     <li>
-                                        <a href="about.html">About Us</a>
+                                        <a href="">Brands</a>
+                                        <ul class="submenu">
+                                            @foreach ($brands as $brand)
+                                                <li>
+                                                    <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                                        <img src="{{ asset( 'storage/uploads/' . $brand->image_url) }}" alt="{{ $brand->name }}" style="max-width: 70px; max-height: 70px;">
+                                                        {{ $brand->name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </li>
+                                    
+                                    
+
+
                                     <li class="mega-menu static dropdown-icon">
                                         <a href="{{ route('shop') }}">Shop</a>
-                                        @foreach ($categories as $category)
+                                        {{-- @foreach ($categories as $category)
                                             <ul class="submenu">
                                                 <li>
                                                     <a
-                                                        href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                                                    {{-- @foreach ($category->subcategories as $subcategory)
+                                                        href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a> --}}
+                                        {{-- @foreach ($category->subcategories as $subcategory)
                                                         <ul class="submenu">
                                                             <li>
                                                                 <a
@@ -833,9 +849,9 @@
                                                             </li>
                                                         </ul>
                                                     @endforeach --}}
-                                                </li>
+                                        {{-- </li>
                                             </ul>
-                                        @endforeach
+                                        @endforeach --}}
                                     </li>
                                     {{-- <li class="dropdown-icon">
                                         <a href="#">Pages</a>

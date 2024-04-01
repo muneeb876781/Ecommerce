@@ -93,6 +93,8 @@ class ShopController extends Controller
         return view('ShopPage', compact('products', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
+    
+
     public function showProductsByBrand($brandId)
     {
         $brand = Brand::findOrFail($brandId);

@@ -151,6 +151,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/brands/{id}', [BrandController::class, 'edit'])
         ->name('brandsEdit')
         ->middleware('seller');
+    Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
+
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
 
