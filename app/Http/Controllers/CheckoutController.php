@@ -8,6 +8,8 @@ use App\Models\SellerShop;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use App\Models\Brand;
+
 
 use Illuminate\Http\Request;
 
@@ -16,6 +18,7 @@ class CheckoutController extends Controller
     public function checkout()
     {
         $categories = Category::all();
+        $brands = Brand::all();
 
         $user_id = auth()->id();
 
@@ -32,6 +35,6 @@ class CheckoutController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('checkout', compact('cart', 'categories', 'totalPrice', 'totalItems'));
+        return view('checkout', compact('cart', 'brands', 'categories', 'totalPrice', 'totalItems'));
     }
 }

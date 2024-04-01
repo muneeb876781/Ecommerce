@@ -12,6 +12,7 @@ use App\Models\Cart;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderPlacedVendor;
 use Dompdf\Dompdf;
@@ -324,6 +325,7 @@ class OredrController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
+        $brands = Brand::all();
 
         $cart = Cart::where('user_id', $user_id)->get();
 
@@ -339,7 +341,7 @@ class OredrController extends Controller
         $totalItems = $cart->sum('quantity');
         $trackOrders = Order::find($id);
 
-        return view('trackOrders', compact('trackOrders', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
+        return view('trackOrders', compact('trackOrders', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
     }
 
     public function userOrders()
@@ -349,6 +351,8 @@ class OredrController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
+        $brands = Brand::all();
+
 
         $cart = Cart::where('user_id', $user_id)->get();
 
@@ -364,7 +368,7 @@ class OredrController extends Controller
         $totalItems = $cart->sum('quantity');
         $userOrders = Order::where('user_id', $user_id)->get();
 
-        return view('userOrders', compact('userOrders', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
+        return view('userOrders', compact('userOrders', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
     }
 
     public function downloadPDF($id)
