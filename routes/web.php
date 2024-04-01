@@ -14,7 +14,6 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\OredrController;
 use App\Http\Controllers\BrandController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,9 +50,6 @@ Route::get('/shop/brand/{id}', [ShopController::class, 'showProductsByBrand'])->
 Route::get('/shop/subcategory/{id}', [ShopController::class, 'showProductsBysubcategory'])->name('shopsubcategory');
 
 Route::get('/shopss', [ShopController::class, 'showProducts'])->name('shopss');
-
-
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [SellerController::class, 'index'])
@@ -99,7 +95,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('categoriesedit')
         ->middleware('seller');
 
-
     Route::get('/subCategories', [SubCategoryController::class, 'index'])
         ->name('subCategoryview')
         ->middleware('seller');
@@ -131,7 +126,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orderDetails/{id}', [OredrController::class, 'orderDetails'])->name('orderDetails');
     Route::delete('/orderDetails/{id}', [OredrController::class, 'delete'])->name('deleteOrder');
 
-
     Route::post('/cardOrder', [OredrController::class, 'cardOrder'])->name('cardOrder');
 
     Route::get('/trackOrders/{id}', [OredrController::class, 'trackOrders'])->name('trackOrders');
@@ -154,5 +148,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/storeBrand', [BrandController::class, 'storeBrand'])
         ->name('storeBrand')
         ->middleware('seller');
-
+    Route::put('/brands/{id}', [BrandController::class, 'edit'])
+        ->name('brandsEdit')
+        ->middleware('seller');
 });

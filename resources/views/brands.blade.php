@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/apexcharts/apexcharts.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
 
 
@@ -38,22 +39,33 @@
         </script>
     @endif
 
+    @if (session('success_update'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Brand Successfully Updated!',
+                text: '{{ session('success_update') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
+
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
             <div class="content-header">
                 <h1>Brands</h1>
-                <button id="showAllCategoriesBtn" class="btn btn-primary">ALL Brands</button>
-                <button id="showAddCategoryFormBtn" class="btn btn-primary">Add Brand</button>
+                <button id="showAllBrandsBtn" class="btn btn-primary">ALL Brands</button>
+                <button id="showAddBrandsFormBtn" class="btn btn-primary">Add Brand</button>
                 <br>
 
                 <div class="col-md-12">
-                    <div id="allCategories" class="card">
+                    <div id="allBrands" class="card">
                         <div class="card-header">
                             <h4>Brands</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="categoryTable" class="table table-striped">
+                                <table id="brandTable" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th class="serial-number">No.</th>
@@ -68,7 +80,7 @@
                                             <tr>
                                                 <td style="width: 10%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 15%"><img style="width: 100px; height: 100px;"
-                                                    src="{{ asset('storage/uploads/'.$brand->image_url) }}"
+                                                        src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                                         alt="{{ $brand->name }}" class="rounded-circle"></td>
                                                 <td style="width: 18%"><strong>{{ $brand->name }}</strong> <br> </td>
                                                 <td style="width: 20%">
@@ -79,10 +91,11 @@
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                     <a class="btn btn-link text-warning" href="#" title="Edit"
-                                                        data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                                        onclick="prepareEditCategoryModal('{{ $brand->id }}', '{{ $brand->name }}', '{{ $brand->description }}')">
+                                                        data-bs-toggle="modal" data-bs-target="#editBrandModal"
+                                                        onclick="prepareEditBrandModal('{{ $brand->id }}', '{{ $brand->name }}', '{{ $brand->image_url }}')">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
+
 
 
                                                     <a class="btn btn-link text-warning" href="#" title="Edit">
@@ -108,7 +121,7 @@
                     </div>
                 </div>
 
-                <div id="addCategoryForm" class="row" style="display: none">
+                <div id="addBrandsForm" class="row" style="display: none">
                     <form class="main_form" action="{{ route('storeBrand') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
@@ -162,12 +175,12 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="categoryDetailsModalLabel">Category Details</h5>
+                    <h5 class="modal-title" id="categoryDetailsModalLabel">Brand Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p><strong>Name:</strong> <span id="categoryName"></span></p>
-                    <p><strong>Description:</strong> <span id="categoryDescription"></span></p>
+                    {{-- <p><strong>Description:</strong> <span id="categoryDescription"></span></p> --}}
                     <!-- Add other category details here -->
                 </div>
             </div>
@@ -175,26 +188,27 @@
     </div>
 
     <!-- Edit Category Modal -->
-    <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel"
+    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                    <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editCategoryForm" action="#" method="post">
+                    <form id="editBrandForm" action="#" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="editCategoryName" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="editCategoryName"
-                                name="editCategoryName">
+                            <label for="editBrandName" class="form-label">Brand Name</label>
+                            <input type="text" class="form-control" id="editBrandName" name="editBrandName"
+                                value="">
                         </div>
                         <div class="mb-3">
-                            <label for="editCategoryDescription" class="form-label">Category Description</label>
-                            <textarea class="form-control" id="editCategoryDescription" name="editCategoryDescription"></textarea>
+                            <label for="editBrandImage" class="form-label">Brand Image</label>
+                            <input type="file" class="form-control" id="editBrandImage"
+                                name="editBrandImage"></input>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
@@ -204,32 +218,33 @@
     </div>
 
 
-   
+
+
     <!-- DataTables Script -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            var toolsTable = $('#categoryTable').DataTable({
+            var toolsTable = $('#brandTable').DataTable({
                 "lengthMenu": [5, 10, 25, 50, -1],
                 "pageLength": 50,
             });
 
             // Search input event
-            $('#categoryTable').on('keyup', function() {
+            $('#brandTable').on('keyup', function() {
                 toolsTable.search(this.value).draw();
             });
         });
     </script>
     <script>
         $(document).ready(function() {
-            $('#showAllCategoriesBtn').on('click', function() {
-                $('#allCategories').show();
-                $('#addCategoryForm').hide();
+            $('#showAllBrandsBtn').on('click', function() {
+                $('#allBrands').show();
+                $('#addBrandsForm').hide();
             });
 
-            $('#showAddCategoryFormBtn').on('click', function() {
-                $('#allCategories').hide();
-                $('#addCategoryForm').show();
+            $('#showAddBrandsFormBtn').on('click', function() {
+                $('#allBrands').hide();
+                $('#addBrandsForm').show();
             });
         });
     </script>
@@ -241,15 +256,15 @@
         }
     </script>
     <script>
-        function prepareEditCategoryModal(categoryId, categoryName, categoryDescription) {
-            document.getElementById('editCategoryName').value = categoryName;
-            document.getElementById('editCategoryDescription').value = categoryDescription;
+        function prepareEditBrandModal(brandId, brandName, brandImage) {
+            document.getElementById('editBrandName').value = brandName;
+            // document.getElementById('editBrandImage').value = brandImage;
 
-            document.getElementById('editCategoryForm').action = `/categories/${categoryId}`;
+            document.getElementById('editBrandForm').action = `/brands/${brandId}`;
         }
     </script>
 
-    
+
 
     <div class="sidebar-overlay"></div>
 

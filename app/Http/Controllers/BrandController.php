@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
-    public function brands(){
+    public function brands()
+    {
         $shopInfo = SellerShop::where('user_id', auth()->id())->first();
 
         if ($shopInfo) {
@@ -50,7 +51,7 @@ class BrandController extends Controller
             $brand_count = 0;
         }
 
-        return view('brands', compact('shopInfo', 'brands', 'brand_count',  'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        return view('brands', compact('shopInfo', 'brands', 'brand_count', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function storeBrand(Request $request)
@@ -63,7 +64,7 @@ class BrandController extends Controller
         if ($request->hasFile('BrandImage')) {
             $image = $request->file('BrandImage');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->storeAs( 'public/uploads', $imageName);
+            $imagePath = $image->storeAs('public/uploads', $imageName);
             $imagePath = $imageName;
         } else {
             $imagePath = null;
@@ -84,5 +85,27 @@ class BrandController extends Controller
         $brands = Brand::where('seller_shop_id', $shopId)->get();
 
         return redirect()->back()->with('success', 'Brns added to collection successfully!');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $brand = Brand::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'editBrandName' => 'required|string',
+            'editBrandImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('editBrandImage')) {
+            $image = $request->file('editBrandImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('public/uploads', $imageName);
+            $brand->image_url = $imageName;
+        }
+
+        $brand->name = $request->input('editBrandName');
+        $brand->save();
+
+        return redirect()->back()->with('success', 'Brand updated successfully!');
     }
 }
