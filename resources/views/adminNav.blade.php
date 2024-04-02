@@ -135,20 +135,19 @@
             <div id="sidebar">
 
                 <!-- Logo -->
-                @if ($shopInfo)
+                @if ($admin)
                     <div style="display: flex; flex-direction: row; width: 100%; margin: 10px; justify-content: center; align-items: center;"
                         class="logo">
-                        <img style="width: 20%; height: 100%; border-radius: 100%;"
-                            src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
+                        {{-- <img style="width: 20%; height: 100%; border-radius: 100%;"
+                            src="{{ asset('storage/uploads/' . $admin->logo) }}" alt=""> --}}
                         {{-- <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2> --}}
-                        <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ $shopInfo->name }}</h2>
+                        <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ $admin->name }}</h2>
 
                     </div>
                 @else
                     {{-- <h2 style="font-size: 20px; text-align: center;">{{ auth()->user()->name }}</h2> --}}
-                    <h2 style="font-size: 20px; text-align: center;">{{ $shopInfo->name }}</h2>
+                    <h2 style="font-size: 20px; text-align: center;">{{ $admin->name }}</h2>
                 @endif
-
 
                 <ul class="side-menu">
 
@@ -159,148 +158,20 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('adminDashboard') }}" target="_blank" class="{{ Request::is('adminDashboard') ? 'active' : '' }}">
-                            <i class='bx bxs-home icon'></i> Admin
+                        <a href="{{ route('adminDashboard') }}" class="{{ Request::is('adminDashboard') ? 'active' : '' }}">
+                            <i class='bx bxs-home icon'></i> Dashboard
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard*') ? 'active' : '' }}">
-                            <i class='bx bxs-dashboard icon'></i> Dashboard
+                        <a href="{{ route('users') }}" class="{{ Request::is('users') ? 'active' : '' }}">
+                            <i class='bx bxs-home icon'></i> Users
                         </a>
                     </li>
 
-                    {{-- <li>
-                        <a href="{{ route('categoryview') }}"
-                            class="{{ Request::is('categories*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Categories
-                        </a>
-                    </li> --}}
-
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-columns icon'></i>
-                            Categories
-                            <i class='bx bx-chevron-right icon-right'></i>
-                        </a>
-                        <ul class="side-dropdown">
-                            <li><a href="{{ route('categoryview') }}"
-                                    class="{{ Request::is('categories*') ? 'active' : '' }}">
-                                    Categories
-                                </a></li>
-                            <li><a href="{{ route('subCategoryview') }}"
-                                    class="{{ Request::is('subCategories') ? 'active' : '' }}">
-                                    Sub Categories
-                                </a></li>
-                        </ul>
-                    </li>
-
-                    {{-- <li>
-                        <a href="{{ route('subCategoryview') }}"
-                            class="{{ Request::is('subCategories') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i>Sub Categories
-                        </a>
-                    </li> --}}
-
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-columns icon'></i>
-                            Products
-                            <i class='bx bx-chevron-right icon-right'></i>
-                        </a>
-                        <ul class="side-dropdown">
-                            <li><a href="{{ route('productview') }}"
-                                    class="{{ Request::is('product*') ? 'active' : '' }}">
-                                    Products
-                                </a></li>
-                            <li><a href="{{ route('productAttributes') }}"
-                                    class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
-                                    Product Attributes
-                                </a></li>
-                        </ul>
-                    </li>
-
-                    {{-- <li>
-                        <a href="{{ route('productview') }}" class="{{ Request::is('product*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Products
-                        </a>
-                    </li> --}}
-
-                    <li>
-                        <a href="{{ route('brands') }}" class="{{ Request::is('brands*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Brands
-                        </a>
-                    </li>
-
-                    {{-- <li>
-                        <a href="{{ route('productAttributes') }}"
-                            class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Product Attributes
-                        </a>
-                    </li> --}}
-
-                    <li>
-                        <a href="{{ route('Order') }}" class="{{ Request::is('Order*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Orders
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('finance') }}" class="{{ Request::is('finance*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Finance
-                        </a>
-                    </li>
-
-                    {{-- <li>
-                        <a href="#">
-                            <i class='bx bx-columns icon'></i>
-                            Orders
-                            <i class='bx bx-chevron-right icon-right'></i>
-                        </a>
-                        <ul class="side-dropdown">
-                            <li><a href="{{ route('Order') }}" class="{{ Request::is('Order*') ? 'active' : '' }}">
-                                    Orders
-                                </a></li>
-                            <li><a href="" class="{{ Request::is('*') ? 'active' : '' }}">
-                                    Finance
-                                </a></li>
-                            <li><a href="" class="{{ Request::is('*') ? 'active' : '' }}">
-                                    Pyments
-                                </a></li>
-                        </ul>
-                    </li> --}}
-
-                    <li>
-                        <a href="{{ route('venderProfile') }}"
-                            class="{{ Request::is('venderProfile*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> My Profile
-                        </a>
-                    </li>
-
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="logout" type="submit">Logout</button>
-                        </form>
-                    </li>
-
-                    {{-- @if (isset($shopInfo))
-                        <li>
-                            <form action="{{ route('deleteStore', ['id' => $shopInfo->id]) }}" method="post"
-                                onsubmit="return confirm('Are you sure you want to delete your store? This action cannot be undone.');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="logout"><span class="fa fa-support mr-3"></span>Delete
-                                    Store</button>
-                            </form>
-                        </li>
-                    @endif --}}
                 </ul>
 
-
-
             </div>
-
         </div>
     </div>
     </div><!-- End Sidebar-->

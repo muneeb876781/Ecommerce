@@ -13,6 +13,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\OredrController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -156,4 +158,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
 
+    Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::put('/users/{id}', [AdminController::class, 'editUser'])->name('editUser');
+    Route::post('/destroyUser/{id}', [AdminController::class, 'destroyUser'])->name('destroyUser');
+
+
 });
+
+
+
+
+        
