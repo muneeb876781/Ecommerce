@@ -217,6 +217,24 @@
             top: -5px;
             padding: 9px;
         }
+
+        .dropdown-menu {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
     </style>
     <style>
         #menu__toggle {
@@ -898,21 +916,66 @@
                                     <li>
                                         <div class="shop_button">
                                             @if (auth()->check())
-                                                @if (auth()->user()->role === 'seller')
-                                                    <a href="{{ route('dashboard') }}">Go
-                                                        to Your Shop</a>
+                                                @php
+                                                    $roles = explode(',', trim(auth()->user()->role));
+                                                    $isAdmin = in_array('admin', $roles);
+                                                    $isSeller = in_array('seller', $roles);
+                                                @endphp
+                                                @if (!$isSeller && $isAdmin)
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            Admin Dashboard
+                                                        </button>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('adminDashboard') }}">Admin
+                                                                Dashboard</a>
+                                                        </div>
+                                                    </div>
+                                                @elseif (!$isAdmin && $isSeller)
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            Seller Dashboard
+                                                        </button>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('dashboard') }}">Seller Dashboard</a>
+                                                        </div>
+                                                    </div>
+                                                @elseif ($isAdmin && $isSeller)
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            Select Dashboard
+                                                        </button>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('adminDashboard') }}">Admin
+                                                                Dashboard</a>
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('dashboard') }}">Seller Dashboard</a>
+                                                        </div>
+                                                    </div>
                                                 @else
-                                                    <a href="{{ route('sellerShop') }}">Create
-                                                        Your Shop</a>
+                                                    <a href="{{ route('sellerShop') }}">Create Your Shop</a>
                                                 @endif
                                             @else
-                                                <a href="{{ route('register') }}">Create
-                                                    Your Shop</a>
+                                                <a href="{{ route('register') }}">Create Your Shop</a>
                                             @endif
                                         </div>
-
                                     </li>
-                                </ul>
+
 
                             </nav>
                         </div>
@@ -937,13 +1000,34 @@
                 </div>
                 <div class="button-wrapper">
                     <button id="cart" class="cart-icon"><i class="fas fa-shopping-cart"></i><span
-                            class="badge">{{ $totalItems }}</span></button>
+                            class="badge">3</span></button>
                     <span>Cart</span>
                 </div>
                 <div class="button-wrapper">
-                    <button id="dashboard"><i class="fas fa-chart-line"></i></button>
+                    <button id="dashboard" onclick="toggleDashboard()"><i class="fas fa-chart-line"></i></button>
                     <span>Dashboard</span>
+                    @php
+                        $roles = explode(',', auth()->user()->role);
+                        $isAdmin = in_array('admin', $roles);
+                        $isSeller = in_array('seller', $roles);
+                    @endphp
+
+                    @if ($isAdmin && $isSeller)
+                        <div class="dropdown">
+                            <div class="dropdown-menu">
+                                <button onclick="window.location.href = '{{ route('adminDashboard') }}';">Admin
+                                    Dashboard</button>
+                                <button onclick="window.location.href = '{{ route('dashboard') }}';">Seller
+                                    Dashboard</button>
+                            </div>
+                        </div>
+                    @elseif ($isAdmin)
+                        <button onclick="window.location.href = '{{ route('adminDashboard') }}';"></button>
+                    @elseif ($isSeller)
+                        <button onclick="window.location.href = '{{ route('dashboard') }}';"></button>
+                    @endif
                 </div>
+
                 <div class="button-wrapper">
                     <button id="logout"><i class="fas fa-user-circle"></i></button>
                     <span>Account</span>
@@ -1005,6 +1089,35 @@
 
     </header>
     <script>
+        function toggleDashboard() {
+            @php
+                $roles = explode(',', auth()->user()->role);
+                $isAdmin = in_array('admin', $roles);
+                $isSeller = in_array('seller', $roles);
+            @endphp
+
+            @if ($isAdmin && $isSeller)
+                Swal.fire({
+                    title: 'Select Dashboard',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Admin Dashboard',
+                    cancelButtonText: 'Seller Dashboard'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ route('adminDashboard') }}";
+                    } else {
+                        window.location.href = "{{ route('dashboard') }}";
+                    }
+                });
+            @elseif ($isAdmin)
+                window.location.href = "{{ route('adminDashboard') }}";
+            @elseif ($isSeller)
+                window.location.href = "{{ route('dashboard') }}";
+            @endif
+        }
+    </script>
+    <script>
         $(document).ready(function() {
             var header = $("#header");
             var sticky = header.offset().top;
@@ -1036,9 +1149,9 @@
             window.location.href = '{{ route('cart') }}';
         });
 
-        document.getElementById('dashboard').addEventListener('click', function() {
-            window.location.href = '{{ route('dashboard') }}';
-        });
+        // document.getElementById('dashboard').addEventListener('click', function() {
+        //     window.location.href = '{{ route('dashboard') }}';
+        // });
 
         document.getElementById('logout').addEventListener('click', function() {
             document.getElementById('logout-form').submit();
