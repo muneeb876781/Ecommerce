@@ -121,12 +121,12 @@
                                 @endif
                             @endforeach
                             <div class="px-4">
-                                <a href="{{ '/categories' }}">
+                                <a href="{{ '/shops' }}">
                                     <button class='btn btn-inline btn-xl btn-primary font-bold mt-3'>View All</button>
                                 </a>
-                                <a href="{{ '/categories' }}">
+                                <a href="{{ '/shops' }}">
                                     <button class='btn btn-inline btn-xl btn-primary font-bold mt-3'>Add
-                                        Category</button>
+                                        Shop</button>
                                 </a>
                             </div>
                         </div>
@@ -135,14 +135,14 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Shops</h4>
+                            <h4>Users</h4>
                         </div>
                         <div class="card-body pb-4">
                             @foreach ($Users as $key => $user)
                                 @if ($key <= 2)
                                     <div class="recent-message d-flex px-4 py-3">
                                         <div class="avatar avatar-lg">
-                                            <img src="{{ asset('storage/uploads/' . $user->logo) }}">
+                                            <img src="../images/avatar.png">
                                         </div>
                                         <div class="name ms-4">
                                             <h5 class="mb-1">{{ $user->name }}</h5>
@@ -152,13 +152,10 @@
                                 @endif
                             @endforeach
                             <div class="px-4">
-                                <a href="{{ '/categories' }}">
+                                <a href="{{ '/users' }}">
                                     <button class='btn btn-inline btn-xl btn-primary font-bold mt-3'>View All</button>
                                 </a>
-                                <a href="{{ '/categories' }}">
-                                    <button class='btn btn-inline btn-xl btn-primary font-bold mt-3'>Add
-                                        Category</button>
-                                </a>
+                                
                             </div>
                         </div>
                     </div>

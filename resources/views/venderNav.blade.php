@@ -141,7 +141,7 @@
                         <img style="width: 20%; height: 100%; border-radius: 100%;"
                             src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
                         {{-- <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2> --}}
-                        <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ $shopInfo->name }}</h2>
+                        <h2 style="font-size: 20px; width: 50%; " class="mb-0 ml-0 pl-0">{{ $shopInfo->name }}</h2>
 
                     </div>
                 @else

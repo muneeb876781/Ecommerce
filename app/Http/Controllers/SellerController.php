@@ -10,6 +10,7 @@ use App\Models\SubCategory;
 use App\Models\Cart;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -97,6 +98,7 @@ class SellerController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
+        $brands = Brand::all();
 
         $user_id = auth()->id();
 
@@ -115,7 +117,7 @@ class SellerController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('sellerShop', compact('products', 'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
+        return view('sellerShop', compact('products', 'brands', 'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 
     public function reviews()

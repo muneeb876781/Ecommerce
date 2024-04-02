@@ -72,6 +72,32 @@ class AdminController extends Controller
 
         $user->delete();
 
-        return redirect()->back()->with('destroy_success', 'User deleted successfully!');
+        return redirect()->back()->with('destroyUser_success', 'User deleted successfully!');
+    }
+
+    public function shops(){
+        $userId = Auth::id();
+        $admin = User::where('id', $userId)->first();
+
+        $shops = SellerShop::all();
+        $totalSellerShops = SellerShop::count();
+
+        return view('shops', compact('shops', 'admin', 'totalSellerShops'));
+    }
+
+    public function destroyShop($id)
+    {
+        $shop = SellerShop::findOrFail($id);
+        $user = auth()->user();
+        $user->role = 'user';
+        $user->save();
+
+        $shop->delete();
+
+        return redirect()->back()->with('destroyShop_success', 'Shop deleted successfully!');
+    }
+
+    public function adminProfile(){
+        return view('adminProfile');
     }
 }
