@@ -158,11 +158,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
 
-    Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard');
-    Route::get('/users', [AdminController::class, 'users'])->name('users');
-    Route::put('/users/{id}', [AdminController::class, 'editUser'])->name('editUser');
-    Route::post('/destroyUser/{id}', [AdminController::class, 'destroyUser'])->name('destroyUser');
-
+    Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard')->middleware('admin');
+    Route::get('/users', [AdminController::class, 'users'])->name('users')->middleware('admin');
+    Route::put('/users/{id}', [AdminController::class, 'editUser'])->name('editUser')->middleware('admin');
+    Route::post('/destroyUser/{id}', [AdminController::class, 'destroyUser'])->name('destroyUser')->middleware('admin');
+    Route::get('/shops', [AdminController::class, 'shops'])->name('shops')->middleware('admin');
+    Route::post('/destroyShop/{id}', [AdminController::class, 'destroyShop'])->name('destroyShop')->middleware('admin');
+    Route::get('/adminProfile', [AdminController::class, 'adminProfile'])->name('adminProfile')->middleware('admin');
 
 });
 

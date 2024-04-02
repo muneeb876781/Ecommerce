@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\SubCategory;
 use App\Models\Cart;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -115,8 +116,9 @@ class SellerShopController extends Controller
         }
 
         $totalItems = $cart->sum('quantity');
+        $brands = Brand::all();
 
-        return view('mainPage', compact('products', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'))->with('shop_success', 'Your shop is created sucessfully');
+        return view('mainPage', compact('products', 'categories', 'brands', 'subcategories', 'totalPrice', 'cart', 'totalItems'))->with('shop_success', 'Your shop is created sucessfully');
     }
 
     public function editShop(Request $request, $id)
