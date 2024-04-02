@@ -158,11 +158,11 @@
                         </a>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('adminDashboard') }}" target="_blank" class="{{ Request::is('adminDashboard') ? 'active' : '' }}">
                             <i class='bx bxs-home icon'></i> Admin
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li>
                         <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard*') ? 'active' : '' }}">

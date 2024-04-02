@@ -1006,27 +1006,34 @@
                 <div class="button-wrapper">
                     <button id="dashboard" onclick="toggleDashboard()"><i class="fas fa-chart-line"></i></button>
                     <span>Dashboard</span>
-                    @php
-                        $roles = explode(',', auth()->user()->role);
-                        $isAdmin = in_array('admin', $roles);
-                        $isSeller = in_array('seller', $roles);
-                    @endphp
+                    @if (auth()->check())
+                        @php
+                            $roles = explode(',', auth()->user()->role);
+                            $isAdmin = in_array('admin', $roles);
+                            $isSeller = in_array('seller', $roles);
+                        @endphp
 
-                    @if ($isAdmin && $isSeller)
-                        <div class="dropdown">
-                            <div class="dropdown-menu">
-                                <button onclick="window.location.href = '{{ route('adminDashboard') }}';">Admin
-                                    Dashboard</button>
-                                <button onclick="window.location.href = '{{ route('dashboard') }}';">Seller
-                                    Dashboard</button>
+                        @if ($isAdmin && $isSeller)
+                            <div class="dropdown">
+                                <div class="dropdown-menu">
+                                    <button onclick="window.location.href = '{{ route('adminDashboard') }}';">Admin
+                                        Dashboard</button>
+                                    <button onclick="window.location.href = '{{ route('dashboard') }}';">Seller
+                                        Dashboard</button>
+                                </div>
                             </div>
-                        </div>
-                    @elseif ($isAdmin)
-                        <button onclick="window.location.href = '{{ route('adminDashboard') }}';"></button>
-                    @elseif ($isSeller)
-                        <button onclick="window.location.href = '{{ route('dashboard') }}';"></button>
+                        @elseif ($isAdmin)
+                            <button onclick="window.location.href = '{{ route('adminDashboard') }}';"></button>
+                        @elseif ($isSeller)
+                            <button onclick="window.location.href = '{{ route('dashboard') }}';"></button>
+                        @else
+                            <button onclick="window.location.href = '{{ route('register') }}';"></button>
+                        @endif
+                    @else
+                        <button onclick="window.location.href = '{{ route('register') }}';"></button>
                     @endif
                 </div>
+
 
                 <div class="button-wrapper">
                     <button id="logout"><i class="fas fa-user-circle"></i></button>
@@ -1090,30 +1097,34 @@
     </header>
     <script>
         function toggleDashboard() {
-            @php
-                $roles = explode(',', auth()->user()->role);
-                $isAdmin = in_array('admin', $roles);
-                $isSeller = in_array('seller', $roles);
-            @endphp
+            @if (auth()->check())
+                @php
+                    $roles = explode(',', auth()->user()->role);
+                    $isAdmin = in_array('admin', $roles);
+                    $isSeller = in_array('seller', $roles);
+                @endphp
 
-            @if ($isAdmin && $isSeller)
-                Swal.fire({
-                    title: 'Select Dashboard',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Admin Dashboard',
-                    cancelButtonText: 'Seller Dashboard'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "{{ route('adminDashboard') }}";
-                    } else {
-                        window.location.href = "{{ route('dashboard') }}";
-                    }
-                });
-            @elseif ($isAdmin)
-                window.location.href = "{{ route('adminDashboard') }}";
-            @elseif ($isSeller)
-                window.location.href = "{{ route('dashboard') }}";
+                @if ($isAdmin && $isSeller)
+                    Swal.fire({
+                        title: 'Select Dashboard',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonText: 'Admin Dashboard',
+                        cancelButtonText: 'Seller Dashboard'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{ route('adminDashboard') }}";
+                        } else {
+                            window.location.href = "{{ route('dashboard') }}";
+                        }
+                    });
+                @elseif ($isAdmin)
+                    window.location.href = "{{ route('adminDashboard') }}";
+                @elseif ($isSeller)
+                    window.location.href = "{{ route('dashboard') }}";
+                @endif
+            @else
+                window.location.href = "{{ route('register') }}";
             @endif
         }
     </script>
