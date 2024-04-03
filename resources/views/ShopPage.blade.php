@@ -332,13 +332,16 @@
                                                 </div>
                                                 <div class="product__content--top">
                                                     <span class="cate-name">{{ $product->category->name }}</span>
-                                                    <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                    <h6 class="product__title mine__shaft-color f-400 mb-0" style="white-space: wrap; overflow-wrap: break-word;">
+                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}" style="display: inline-block; max-width: 100%; ">
+                                                            {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
                                                             @if (str_word_count($product->name) > 5)
                                                                 ...
                                                             @endif
                                                         </a>
                                                     </h6>
+                                                    
+                                                    
 
                                                     @php
                                                         $averageRating = $product->reviews->avg('rating');
