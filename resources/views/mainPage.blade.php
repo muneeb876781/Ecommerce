@@ -1111,13 +1111,13 @@
             <div class="categoriess">
                 @foreach ($categories as $key => $category)
                     @if ($key <= 15)
+                    <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
                         <div class="cats_card">
-                            <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                <img style="width: auto; border-radius: 20px;"
-                                    src="{{ asset('storage/uploads/' . $category->image_url) }}" alt="">
-                                <h2 style="text-align: center;">{{ $category->name }}</h2>
-                            </a>
+                            <img style="width: auto; border-radius: 20px;"
+                                src="{{ asset('storage/uploads/' . $category->image_url) }}" alt="">
+                            <h2 style="text-align: center;">{{ $category->name }}</h2>
                         </div>
+                    </a>
                     @endif
                 @endforeach
             </div>
@@ -1143,26 +1143,12 @@
                 width: 12%;
                 height: 180px;
                 padding: 10px;
-                position: relative;
-                /* Add this */
             }
 
-            .cats_card a {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                width: 100%;
-                /* Change this from 12% to 100% */
-                height: 100%;
-                /* Change this from 180px to 100% */
-            }
 
             .cats_card img {
                 width: auto;
                 height: 70%;
-                border-radius: 20px;
-                /* Move this from img to a tag */
             }
 
             .cats_card h2 {
@@ -1171,7 +1157,11 @@
                 padding: 10px 0;
             }
 
-            /* Add these media queries */
+            @media (max-width: 530px) {
+                .categs {
+                    display: none;
+                }
+            }
 
             @media (max-width: 1200px) {
                 .categoriess .cats_card {
@@ -1194,6 +1184,43 @@
             @media (max-width: 500px) {
                 .categoriess .cats_card {
                     width: 30%;
+                }
+            }
+
+
+
+
+
+            @media (max-width: 1050px) {
+                .categoriess .cats_card {
+                    height: 150px;
+                }
+
+                .categoriess .cats_card h2 {
+                    font-size: 16px;
+
+                }
+            }
+
+            @media (max-width: 750px) {
+                .categoriess .cats_card {
+                    height: 120px;
+                }
+
+                .categoriess .cats_card h2 {
+                    font-size: 12px;
+
+                }
+            }
+
+            @media (max-width: 500px) {
+                .categoriess .cats_card {
+                    height: 90px;
+                }
+
+                .categoriess .cats_card h2 {
+                    font-size: 10px;
+
                 }
             }
         </style>
