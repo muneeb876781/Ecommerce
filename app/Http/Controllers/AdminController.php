@@ -98,6 +98,9 @@ class AdminController extends Controller
     }
 
     public function adminProfile(){
-        return view('adminProfile');
+        $userId = Auth::id();
+        $admin = User::where('id', $userId)->first();
+
+        return view('adminProfile', compact('admin'));
     }
 }

@@ -233,7 +233,7 @@
         }
 
         .dropdown-menu a:hover {
-            background-color: #444;
+            background-color: #efefef;
         }
     </style>
     <style>
@@ -842,7 +842,7 @@
                                         <a href="">Brands</a>
                                         <ul class="submenu">
                                             @foreach ($brands as $key => $brand)
-                                                @if ($key <= 9)
+                                                @if ($key <= 4)
                                                     <li>
                                                         <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
                                                             <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
