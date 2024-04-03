@@ -21,7 +21,8 @@ class IndexController extends Controller
     // }
 
     public function index(){
-        $products = Product::orderBy('created_at', 'desc')->get();
+        // $products = Product::orderBy('created_at', 'desc')->get();
+        $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $reviews = Review::all();

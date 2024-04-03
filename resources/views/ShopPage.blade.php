@@ -288,7 +288,7 @@
                         @else
                             <div class="row">
                                 @foreach ($products as $product)
-                                    <div class="product-s" s>
+                                    <div class="product-s">
                                         <div class="product__single" >
                                             <div class="product__box">
                                                 <div class="product__thumb">
