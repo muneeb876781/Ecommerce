@@ -1434,10 +1434,10 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 }
 
 .product__content--top {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #dddddd;
     margin-bottom: 12px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .product-h-two .product__content--top {
