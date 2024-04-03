@@ -975,11 +975,12 @@
                                                     </div>
                                                     <div class="product__content--top">
                                                         <span class="cate-name">{{ $product->category->name }} </span>
-                                                        <h6 class="product__title mine__shaft-color f-700 mb-0">
-                                                            <a
-                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}">
-                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
-                                                                @if (str_word_count($product->name) > 10)
+                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                            style="white-space: wrap; overflow-wrap: break-word;">
+                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                                style="display: inline-block; max-width: 100%; ">
+                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                @if (str_word_count($product->name) > 5)
                                                                     ...
                                                                 @endif
                                                             </a>
@@ -1081,9 +1082,12 @@
                                                         <div class="product__content--top">
                                                             <span
                                                                 class="cate-name">{{ $product->category->name }}</span>
-                                                            <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
-                                                                    @if (str_word_count($product->name) > 10)
+                                                            <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                                style="white-space: wrap; overflow-wrap: break-word;">
+                                                                <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                                    style="display: inline-block; max-width: 100%; ">
+                                                                    {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                    @if (str_word_count($product->name) > 5)
                                                                         ...
                                                                     @endif
                                                                 </a>
@@ -1190,9 +1194,12 @@
                                                     </div>
                                                     <div class="product__content--top">
                                                         <span class="cate-name">{{ $product->category->name }}</span>
-                                                        <h6 class="product__title mine__shaft-color f-700 mb-0"><a
-                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 6)) }}
-                                                                @if (str_word_count($product->name) > 10)
+                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                            style="white-space: wrap; overflow-wrap: break-word;">
+                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                                style="display: inline-block; max-width: 100%; ">
+                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                @if (str_word_count($product->name) > 5)
                                                                     ...
                                                                 @endif
                                                             </a>
@@ -1659,7 +1666,7 @@
                             <div class="row">
                                 @foreach ($products as $key => $product)
                                     @if ($key <= 11)
-                                        <div class="product-s">
+                                        <div class="product-s" s>
                                             <div class="product__single">
                                                 <div class="product__box">
                                                     <div class="product__thumb">
@@ -1704,21 +1711,21 @@
                                                                     class="fas fa-shopping-cart"></span></a>
                                                         </div>
                                                     </div>
-                                                    <div class="product__content--top">
+                                                    <div class="product__content--top pt-10 pb-10">
                                                         <span class="cate-name">{{ $product->category->name }}</span>
-                                                        <h6 style="font-size: 13px;"
-                                                            class="product__title mine__shaft-color f-700 mb-0"><a
-                                                                href="product-details.html">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                                @if (str_word_count($product->name) > 10)
+                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                            style="white-space: wrap; overflow-wrap: break-word;">
+                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                                style="display: inline-block; max-width: 100%; ">
+                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                @if (str_word_count($product->name) > 5)
                                                                     ...
                                                                 @endif
                                                             </a>
                                                         </h6>
-                                                        <style>
-                                                            .star-gold {
-                                                                color: gold;
-                                                            }
-                                                        </style>
+
+
+
                                                         @php
                                                             $averageRating = $product->reviews->avg('rating');
                                                         @endphp
@@ -1734,13 +1741,16 @@
                                                                 @endfor
                                                             </ul>
                                                         </div>
+
+
+
                                                         <br>
                                                         <div
                                                             class="product__content--rating d-flex justify-content-between">
                                                             <div class="price">
                                                                 @if ($product->discountedPrice)
                                                                     <span class="original-price"
-                                                                        style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.{{ $product->price }}</span>
+                                                                        style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
                                                                     <span
                                                                         class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
                                                                 @else
@@ -2148,7 +2158,8 @@
                         <div class="brand-active">
                             @foreach ($brands as $brand)
                                 <div class="single-brand">
-                                    <img src="{{ asset('storage/uploads/' . $brand->image_url) }}" style="width: 100px; height: auto;" alt="">
+                                    <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                        style="width: 100px; height: auto;" alt="">
                                 </div>
                             @endforeach
 
