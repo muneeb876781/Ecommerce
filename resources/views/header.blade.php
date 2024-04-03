@@ -913,7 +913,18 @@
                                             </li>
                                         </ul>
                                     </li> --}}
-                                    <li>
+                                    <style>
+                                        .shop-btn{
+                                            margin-left: 400px;
+                                        }
+
+                                        @media (max-width: 1400px) {
+                                            .shop-btn {
+                                                margin-left: 300px;
+                                            }
+                                        }
+                                    </style>
+                                    <li class="shop-btn">
                                         <div class="shop_button">
                                             @if (auth()->check())
                                                 @php
@@ -975,6 +986,7 @@
                                             @endif
                                         </div>
                                     </li>
+                                </ul>
 
 
                             </nav>
