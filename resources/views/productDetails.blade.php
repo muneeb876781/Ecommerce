@@ -255,11 +255,9 @@
     @endif
     <!-- Main -->
     <main class="main--wrapper">
-
-
         <!-- Shop-details start -->
         <section class="shop-details-area pb-80">
-            <div style="padding: 0px 20px 0px 20px;" class="container">
+            <div style="padding: 0px 10px 0px 10px;" class="container">
                 {{-- <div class="row">
                     <div class="col-sm-12">
                         <div class="shop-bred pt-35 pb-35">

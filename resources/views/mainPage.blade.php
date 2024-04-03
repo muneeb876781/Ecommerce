@@ -968,7 +968,7 @@
                                                                 class="fas fa-shopping-cart"></span></a>
                                                     </div>
                                                 </div>
-                                                <div class="product__content--top pt-10 pb-10">
+                                                <div class="product__content--top pt-10 pb-10 mt-0">
                                                     <span class="cate-name">{{ $product->category->name }}</span>
                                                     <h6 class="product__title mine__shaft-color f-400 mb-0"
                                                         style="white-space: wrap; overflow-wrap: break-word;">
