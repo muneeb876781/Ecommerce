@@ -896,10 +896,10 @@
                             <div class="all__product--menu mb-30">
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active btn orange-bg-btn pure__black-color"
+                                        {{-- <a class="nav-item nav-link active btn orange-bg-btn pure__black-color"
                                             id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                                            aria-controls="nav-home" aria-selected="true">Trending Items</a>
-                                        <a class="nav-item nav-link btn gray-bg-btn pure__black-color"
+                                            aria-controls="nav-home" aria-selected="true">Trending Items</a> --}}
+                                        <a class="nav-item active nav-link btn gray-bg-btn pure__black-color"
                                             id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                                             aria-controls="nav-profile" aria-selected="false">Discounted Items</a>
                                         {{-- <a class="  nav-item nav-link btn gray-bg-btn pure__black-color"
@@ -922,340 +922,105 @@
             <div class="all__product--body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                    aria-labelledby="nav-home-tab">
-                                    <div class="product__active owl-carousel ">
-                                        @foreach ($products as $product)
-                                            <div class="product__single">
-                                                <div class="product__box">
-                                                    <div class="product__thumb">
-                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                            class="img-wrapper">
-                                                            @if ($product->image_url)
-                                                                <img class="img"
-                                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                    alt="product Image"
-                                                                    style="height: auto; width: auto; margin: 0 auto;">
-                                                            @elseif (!$product->image_url && $product->remote_image_url)
-                                                                <img class="img"
-                                                                    src="{{ $product->remote_image_url }}"
-                                                                    alt="product Image"
-                                                                    style="height: auto; width: auto; margin: 0 auto;">
-                                                            @else
-                                                                <span>No image available</span>
-                                                            @endif
+                        <div class="col-xl-12 col-lg-12">
+                            @foreach ($products as $key => $product)
+                                @if ($key <= 5 && $product->discountedPrice !== null)
+                                    <div class="product-s">
+                                        <div class="product__single">
+                                            <div class="product__box">
+                                                <div class="product__thumb">
+                                                    <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                        class="img-wrapper">
+                                                        @if ($product->image_url)
+                                                            <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                class="img"
+                                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                                alt="">
+                                                        @elseif (!$product->image_url && $product->remote_image_url)
+                                                            <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                class="img" src="{{ $product->remote_image_url }}"
+                                                                alt="">
+                                                        @else
+                                                            <span>No image available</span>
+                                                        @endif
 
-                                                            @if ($product->quantity == 0)
-                                                                <span class="out-of-stock-tag">Out of Stock</span>
-                                                            @elseif ($product->discountedPrice)
-                                                                @php
-                                                                    $salePercentage =
-                                                                        (($product->price - $product->discountedPrice) /
-                                                                            $product->price) *
-                                                                        100;
-                                                                @endphp
-                                                                @if ($salePercentage > 0)
-                                                                    <span class="sale-tag">
-                                                                        {{ round($salePercentage) }}% Off</span>
-                                                                @endif
-                                                            @endif
-                                                        </a>
-
-                                                        <div class="product-action">
-                                                            <a href="#"><span class="fas fa-heart"></span></a>
-                                                            <a
-                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                                    class="fas fa-eye"></span></a>
-                                                            <a
-                                                                href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                                    class="fas fa-shopping-cart"></span></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product__content--top">
-                                                        <span class="cate-name">{{ $product->category->name }} </span>
-                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
-                                                            style="white-space: wrap; overflow-wrap: break-word;">
-                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                style="display: inline-block; max-width: 100%; ">
-                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                                @if (str_word_count($product->name) > 5)
-                                                                    ...
-                                                                @endif
-                                                            </a>
-                                                        </h6>
-
-                                                        <style>
-                                                            .star-gold {
-                                                                color: gold;
-                                                            }
-                                                        </style>
-                                                        @php
-                                                            $averageRating = $product->reviews->avg('rating');
-                                                        @endphp
-                                                        <div class="rating" style="padding-top: 5px;">
-                                                            <ul class="list-inline">
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $averageRating)
-                                                                        <li class="rating-active"><i
-                                                                                class="fas fa-star star-gold"></i></li>
-                                                                    @else
-                                                                        <li><i class="far fa-star"></i></li>
-                                                                    @endif
-                                                                @endfor
-                                                            </ul>
-                                                        </div>
-                                                        <br>
-                                                        <div
-                                                            class="product__content--rating d-flex justify-content-between">
-                                                            <div class="price">
-                                                                @if ($product->discountedPrice)
-                                                                    <span class="original-price"
-                                                                        style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.{{ $product->price }}</span>
-                                                                    <span
-                                                                        class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
-                                                                @else
-                                                                    <span>AED.{{ $product->price }}</span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                    aria-labelledby="nav-profile-tab">
-                                    <div class="product__active owl-carousel ">
-                                        @foreach ($products as $product)
-                                            @if ($product->discountedPrice !== null)
-                                                <div class="product__single">
-                                                    <div class="product__box">
-                                                        <div class="product__thumb">
-                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                class="img-wrapper">
-                                                                @if ($product->image_url)
-                                                                    <img class="img"
-                                                                        src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                        alt="product Image"
-                                                                        style="height: auto; width: auto; margin: 0 auto;">
-                                                                @elseif (!$product->image_url && $product->remote_image_url)
-                                                                    <img class="img"
-                                                                        src="{{ $product->remote_image_url }}"
-                                                                        alt="product Image"
-                                                                        style="height: auto; width: auto; margin: 0 auto;">
-                                                                @else
-                                                                    <span>No image available</span>
-                                                                @endif
-
-                                                                @if ($product->quantity == 0)
-                                                                    <span class="out-of-stock-tag">Out of Stock</span>
-                                                                @elseif ($product->discountedPrice)
-                                                                    @php
-                                                                        $salePercentage =
-                                                                            (($product->price -
-                                                                                $product->discountedPrice) /
-                                                                                $product->price) *
-                                                                            100;
-                                                                    @endphp
-                                                                    @if ($salePercentage > 0)
-                                                                        <span class="sale-tag">
-                                                                            {{ round($salePercentage) }}% Off</span>
-                                                                    @endif
-                                                                @endif
-                                                            </a>
-
-                                                            <div class="product-action">
-                                                                <a href="#"><span
-                                                                        class="fas fa-heart"></span></a>
-                                                                <a
-                                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                                        class="fas fa-eye"></span></a>
-                                                                <a
-                                                                    href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                                        class="fas fa-shopping-cart"></span></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product__content--top">
-                                                            <span
-                                                                class="cate-name">{{ $product->category->name }}</span>
-                                                            <h6 class="product__title mine__shaft-color f-400 mb-0"
-                                                                style="white-space: wrap; overflow-wrap: break-word;">
-                                                                <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                    style="display: inline-block; max-width: 100%; ">
-                                                                    {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                                    @if (str_word_count($product->name) > 5)
-                                                                        ...
-                                                                    @endif
-                                                                </a>
-                                                            </h6>
-                                                            <style>
-                                                                .star-gold {
-                                                                    color: gold;
-                                                                }
-                                                            </style>
+                                                        @if ($product->quantity == 0)
+                                                            <span class="out-of-stock-tag">Out of Stock</span>
+                                                        @elseif ($product->discountedPrice)
                                                             @php
-                                                                $averageRating = $product->reviews->avg('rating');
+                                                                $salePercentage =
+                                                                    (($product->price - $product->discountedPrice) /
+                                                                        $product->price) *
+                                                                    100;
                                                             @endphp
-                                                            <div class="rating" style="padding-top: 5px;">
-                                                                <ul class="list-inline">
-                                                                    @for ($i = 1; $i <= 5; $i++)
-                                                                        @if ($i <= $averageRating)
-                                                                            <li class="rating-active"><i
-                                                                                    class="fas fa-star star-gold"></i>
-                                                                            </li>
-                                                                        @else
-                                                                            <li><i class="far fa-star"></i></li>
-                                                                        @endif
-                                                                    @endfor
-                                                                </ul>
-                                                            </div>
-                                                            <br>
-                                                            <div
-                                                                class="product__content--rating d-flex justify-content-between">
-                                                                <div class="price">
-                                                                    @if ($product->discountedPrice)
-                                                                        <span class="original-price"
-                                                                            style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.{{ $product->price }}</span>
-                                                                        <span
-                                                                            class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
-                                                                    @else
-                                                                        <span>AED.{{ $product->price }}</span>
-                                                                    @endif
-                                                                </div>
-                                                                {{-- <div class="quantity">
-                                                                <button class="btn btn-sm btn-primary"
-                                                                    onclick="decrementQuantity()">-</button>
-                                                                <input type="text"
-                                                                    class="form-control form-control-sm"
-                                                                    id="quantity" name="quantity" value="1"
-                                                                    readonly>
-                                                                <button class="btn btn-sm btn-primary"
-                                                                    onclick="incrementQuantity()">+</button>
-                                                            </div> --}}
-                                                            </div>
-                                                        </div>
+                                                            @if ($salePercentage > 0)
+                                                                <span class="sale-tag">
+                                                                    {{ round($salePercentage) }}% Off</span>
+                                                            @endif
+                                                        @endif
+                                                    </a>
+                                                    <div class="product-action">
+                                                        <a href="#"><span class="fas fa-heart"></span></a>
+                                                        <a
+                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                                class="fas fa-eye"></span></a>
+                                                        <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
+                                                                class="fas fa-shopping-cart"></span></a>
                                                     </div>
                                                 </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                    aria-labelledby="nav-contact-tab">
-                                    <div class="product__active owl-carousel ">
-                                        @foreach ($products as $product)
-                                            <div class="product__single">
-                                                <div class="product__box">
-                                                    <div class="product__thumb">
+                                                <div class="product__content--top pt-10 pb-10">
+                                                    <span class="cate-name">{{ $product->category->name }}</span>
+                                                    <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                        style="white-space: wrap; overflow-wrap: break-word;">
                                                         <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                            class="img-wrapper">
-                                                            @if ($product->image_url)
-                                                                <img class="img"
-                                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                    alt="product Image"
-                                                                    style="height: 220px; width: auto; margin: 0 auto;">
-                                                            @elseif (!$product->image_url && $product->remote_image_url)
-                                                                <img class="img"
-                                                                    src="{{ $product->remote_image_url }}"
-                                                                    alt="product Image"
-                                                                    style="height: 220px; width: auto; margin: 0 auto;">
-                                                            @else
-                                                                <span>No image available</span>
-                                                            @endif
-
-                                                            @if ($product->quantity == 0)
-                                                                <span class="out-of-stock-tag">Out of Stock</span>
-                                                            @elseif ($product->discountedPrice)
-                                                                @php
-                                                                    $salePercentage =
-                                                                        (($product->price - $product->discountedPrice) /
-                                                                            $product->price) *
-                                                                        100;
-                                                                @endphp
-                                                                @if ($salePercentage > 0)
-                                                                    <span class="sale-tag">
-                                                                        {{ round($salePercentage) }}% Off</span>
-                                                                @endif
+                                                            style="display: inline-block; max-width: 100%; ">
+                                                            {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                            @if (str_word_count($product->name) > 5)
+                                                                ...
                                                             @endif
                                                         </a>
-                                                        <div class="product-action">
-                                                            <a href="#"><span class="fas fa-heart"></span></a>
-                                                            <a
-                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                                    class="fas fa-eye"></span></a>
-                                                            <a
-                                                                href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                                    class="fas fa-shopping-cart"></span></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product__content--top">
-                                                        <span class="cate-name">{{ $product->category->name }}</span>
-                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
-                                                            style="white-space: wrap; overflow-wrap: break-word;">
-                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                style="display: inline-block; max-width: 100%; ">
-                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                                @if (str_word_count($product->name) > 5)
-                                                                    ...
-                                                                @endif
-                                                            </a>
-                                                        </h6>
-                                                        <style>
-                                                            .star-gold {
-                                                                color: gold;
-                                                            }
-                                                        </style>
-                                                        @php
-                                                            $averageRating = $product->reviews->avg('rating');
-                                                        @endphp
-                                                        <div class="rating" style="padding-top: 5px;">
-                                                            <ul class="list-inline">
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $averageRating)
-                                                                        <li class="rating-active"><i
-                                                                                class="fas fa-star star-gold"></i></li>
-                                                                    @else
-                                                                        <li><i class="far fa-star"></i></li>
-                                                                    @endif
-                                                                @endfor
-                                                            </ul>
-                                                        </div>
-                                                        <br>
-                                                        <div
-                                                            class="product__content--rating d-flex justify-content-between">
-                                                            <div class="price">
-                                                                @if ($product->discountedPrice)
-                                                                    <span class="original-price"
-                                                                        style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.{{ $product->price }}</span>
-                                                                    <span
-                                                                        class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                    </h6>
+
+
+
+                                                    @php
+                                                        $averageRating = $product->reviews->avg('rating');
+                                                    @endphp
+                                                    <div class="rating" style="padding-top: 5px;">
+                                                        <ul class="list-inline">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $averageRating)
+                                                                    <li class="rating-active"><i
+                                                                            class="fas fa-star star-gold"></i></li>
                                                                 @else
-                                                                    <span>AED.{{ $product->price }}</span>
+                                                                    <li><i class="far fa-star"></i></li>
                                                                 @endif
-                                                            </div>
-                                                            {{-- <div class="quantity">
-                                                                <button class="btn btn-sm btn-primary"
-                                                                    onclick="decrementQuantity()">-</button>
-                                                                <input type="text"
-                                                                    class="form-control form-control-sm"
-                                                                    id="quantity" name="quantity" value="1"
-                                                                    readonly>
-                                                                <button class="btn btn-sm btn-primary"
-                                                                    onclick="incrementQuantity()">+</button>
-                                                            </div> --}}
+                                                            @endfor
+                                                        </ul>
+                                                    </div>
+
+
+
+                                                    <br>
+                                                    <div
+                                                        class="product__content--rating d-flex justify-content-between">
+                                                        <div class="price">
+                                                            @if ($product->discountedPrice)
+                                                                <span class="original-price"
+                                                                    style="text-decoration: line-through; font-size: 11px; margin-right: 3px;">AED.{{ $product->price }}</span>
+                                                                <span
+                                                                    class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                            @else
+                                                                <span>AED.{{ $product->price }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        </div>
                                     </div>
-                                </div>
-
-                            </div>
+                                @endif
+                            @endforeach
                         </div>
                         <div class="col-xl-6 col-lg-6">
                             <div class="offer-banner offer--banner__bg mb-30" data-background="../images/sal1.jpg">
