@@ -288,8 +288,8 @@
                         @else
                             <div class="row">
                                 @foreach ($products as $product)
-                                    <div class="product-s">
-                                        <div class="product__single">
+                                    <div class="product-s" s>
+                                        <div class="product__single" >
                                             <div class="product__box">
                                                 <div class="product__thumb">
                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
@@ -334,7 +334,7 @@
                                                     <span class="cate-name">{{ $product->category->name }}</span>
                                                     <h6 class="product__title mine__shaft-color f-700 mb-0"><a
                                                             href="{{ route('singleProduct', ['id' => $product->id]) }}">{{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                            @if (str_word_count($product->name) > 10)
+                                                            @if (str_word_count($product->name) > 5)
                                                                 ...
                                                             @endif
                                                         </a>
@@ -364,7 +364,7 @@
                                                         <div class="price">
                                                             @if ($product->discountedPrice)
                                                                 <span class="original-price"
-                                                                    style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.{{ $product->price }}</span>
+                                                                    style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
                                                                 <span
                                                                     class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
                                                             @else
