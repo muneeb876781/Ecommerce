@@ -155,7 +155,6 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('seller');
     Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
 
-
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard')->middleware('admin');
