@@ -258,7 +258,7 @@
                                             <label for="productDescription">Product Description:</label>
                                             <textarea class="form-control" id="editor" name="productDescription" placeholder="Enter Product Description"></textarea>
                                         </div>
-                                        <script>
+                                        {{-- <script>
                                             tinymce.init({
                                                 selector: 'textarea',
                                                 plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
@@ -278,12 +278,21 @@
                                                 ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
                                                     "See docs to implement AI Assistant")),
                                             });
-                                        </script>
+                                        </script> --}}
                                         <div class="mb-3">
                                             <label for="productSpecification">Product Description:</label>
                                             <textarea class="form-control" id="editor" name="productSpecification" placeholder="Enter Product Specification"></textarea>
                                         </div>
+                                        <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
                                         <script>
+                                            tinymce.init({
+                                                selector: 'textarea', 
+                                                plugins: 'code table lists',
+                                                toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
+                                                height: 250
+                                            });
+                                        </script>
+                                        {{-- <script>
                                             tinymce.init({
                                                 selector: 'textarea',
                                                 plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
@@ -303,7 +312,7 @@
                                                 ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
                                                     "See docs to implement AI Assistant")),
                                             });
-                                        </script>
+                                        </script> --}}
                                         <div class="mb-3">
                                             <label for="productCategory">Product Category:</label>
                                             <select class="form-control" id="productCategory" name="productCategory"
@@ -330,12 +339,12 @@
 
                                         <div class="mb-3">
                                             <label for="productBrand">Product Brand</label>
-                                            <select class="form-control" id="productBrand"
-                                                name="productBrand" class="form-control">
+                                            <select class="form-control" id="productBrand" name="productBrand"
+                                                class="form-control">
                                                 <option value="">Select Product Brand</option>
                                                 @foreach ($brands as $brand)
                                                     <option value="{{ $brand->id }}">
-                                                          {{ $brand->name }}
+                                                        {{ $brand->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -465,8 +474,6 @@
                                                 color: #333;
                                                 font-size: 16px;
                                             }
-
-                                           
                                         </style>
 
                                         <label for="productImage">Product Main Image:</label>
