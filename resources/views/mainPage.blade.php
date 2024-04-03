@@ -926,7 +926,7 @@
             <div class="all__product--body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-12 col-lg-12">
+                        <div class="col-xl-12 col-lg-12 p-0">
                             @foreach ($products as $key => $product)
                                 @if ($key <= 5 && $product->discountedPrice !== null)
                                     <div class="product-s">
