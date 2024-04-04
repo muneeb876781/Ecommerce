@@ -27,7 +27,7 @@
 
 
     <!-- Main -->
-    <main style="padding: 0px 70px 0px 70px;" class="main--wrapper">
+    <main class="main--wrapper">
 
 
 
@@ -116,7 +116,7 @@
         <!-- reg area end -->
 
         <!-- Subscribe -->
-        <div class="subscribe subscribe--area grenadier-bg">
+        {{-- <div class="subscribe subscribe--area grenadier-bg">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -145,7 +145,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Subscribe End -->
 
     </main>
