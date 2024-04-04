@@ -28,4 +28,9 @@ class SellerShop extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function policies()
+    {
+        return $this->hasMany(Policy::class);
+    }
 }

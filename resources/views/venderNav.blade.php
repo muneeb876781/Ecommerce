@@ -269,6 +269,12 @@
                                 </a></li>
                         </ul>
                     </li> --}}
+                    <li>
+                        <a href="{{ route('policies') }}" class="{{ Request::is('policies*') ? 'active' : '' }}">
+                            <i class='bx bxs-meh-blank icon'></i> Policies
+                        </a>
+                    </li>
+
 
                     <li>
                         <a href="{{ route('venderProfile') }}"

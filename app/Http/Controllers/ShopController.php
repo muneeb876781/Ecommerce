@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Review;
 use App\Models\Cart;
 use App\Models\Brand;
+use App\Models\Policy;
 use App\Models\SubCategory;
 
 class ShopController extends Controller
@@ -48,7 +49,32 @@ class ShopController extends Controller
             ->where('id', '!=', $product->id)
             ->get();
         $reviews = Review::where('product_id', $id)->get();
-        // dd($relatedProducts);
+
+        $user_id = auth()->id();
+        $cart = Cart::where('user_id', $user_id)->get();
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            if ($item->product->discountedPrice) {
+                $totalPrice += $item->product->discountedPrice * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+        }
+        $totalItems = $cart->sum('quantity');
+
+        $shopid = $product->shop_id; 
+
+        $policies = Policy::where('shop_id', $shopid)->get();
+        // dd($policies);
+
+        return view('productDetails', compact('product', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart', 'policies'));
+    }
+
+    public function shopPolicies($id){
+        $products = Product::orderBy('created_at', 'desc')->get();
+        $categories = Category::all();
+        $reviews = Review::all();
+        $brands = Brand::all();
 
         $user_id = auth()->id();
 
@@ -64,9 +90,12 @@ class ShopController extends Controller
         }
 
         $totalItems = $cart->sum('quantity');
+ 
+        $policy = Policy::where('id', $id)->first();
 
-        return view('productDetails', compact('product', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('shopPolicy', compact('products', 'policy',  'brands', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
+
 
     public function showProductsByCategory($categoryId)
     {
@@ -93,8 +122,6 @@ class ShopController extends Controller
 
         return view('ShopPage', compact('products', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
-
-    
 
     public function showProductsByBrand($brandId)
     {

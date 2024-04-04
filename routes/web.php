@@ -141,6 +141,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('attributesEdit')
         ->middleware('seller');
 
+
     Route::get('/order/{id}/downloadPDF', [OredrController::class, 'downloadPDF'])->name('downloadPDF');
 
     Route::get('/venderProfile', [SellerController::class, 'venderProfile'])->name('venderProfile');
@@ -156,6 +157,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
+    Route::get('/policies', [SellerController::class, 'policies'])->name('policies');
+    Route::post('/storepolicy', [SellerController::class, 'storepolicy'])
+        ->name('storepolicy')
+        ->middleware('seller');
+    Route::get('/shopPolicies/{id}', [ShopController::class, 'shopPolicies'])->name('shopPolicies');
+
+
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard')->middleware('admin');
     Route::get('/users', [AdminController::class, 'users'])->name('users')->middleware('admin');

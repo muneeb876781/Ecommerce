@@ -230,6 +230,108 @@
             }
         }
     </style>
+    <style>
+        .facs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: auto;
+            width: 120%;
+            padding: 7px 0;
+        }
+
+        .adv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: auto;
+            width: 120%;
+            padding: 10px 0;
+        }
+
+        .adv img {
+            width: 100%;
+            height: auto;
+            ;
+        }
+
+        .facs_cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: auto;
+            width: 33%;
+            /* border: 1px solid rgba(0, 0, 0, 0.6); */
+            border-radius: 10px;
+            margin: 0 5px;
+            padding: 0 5px;
+        }
+
+        .facs_cards .fas {
+            font-size: 20px;
+            color: #909090;
+            padding: 7px;
+        }
+
+        .facs_cards p {
+            text-align: center;
+            font-size: 11px;
+        }
+    </style>
+    <style>
+        .policies {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 120%;
+            height: auto;
+            border: 3px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .policy_card {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+            width: 100%;
+            height: auto;
+            padding: 0 10px;
+        }
+
+        .policy_card p {
+            padding: 7px 0;
+            margin: 0;
+            line-height: 20px;
+        }
+
+        .policy_card .fas {
+            padding-right: 10px;
+            color: #909090;
+            font-size: 20px;
+        }
+
+        @media (max-width: 1208px) {
+            .policies {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 1208px) {
+            .adv {
+                width: 100%;
+            }
+
+            .facs {
+                width: 100%;
+            }
+        }
+    </style>
 
     <title>Document</title>
 </head>
@@ -453,57 +555,39 @@
                                     <p>Safe Transactions</p>
                                 </div>
                             </div>
-                            <style>
-                                .facs {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    flex-direction: row;
-                                    height: auto;
-                                    width: 120%;
-                                    padding: 7px 0;
-                                }
+                            <div class="policies">
+                                @if ($policies->isEmpty())
+                                    <p>No policies found.</p>
+                                @else
+                                    @foreach ($policies as $policy)
+                                        <div class="policy_card">
+                                            <i class="fas fa-times-circle"></i>
+                                            <p>{{ $policy->policy_name }} <a style="text-decoration: underline;"
+                                                    href="{{ route('shopPolicies', ['id' => $policy->id]) }}">{{ __('Learn more') }}</a></p>
+                                        </div>
+                                    @endforeach
+                                @endif
 
-                                .adv {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    flex-direction: row;
-                                    height: auto;
-                                    width: 120%;
-                                    padding: 10px 0;
-                                }
+                                
 
-                                .adv img {
-                                    width: 100%;
-                                    height: auto;
-                                    ;
-                                }
+                                <div class="policy_card">
+                                    <i class="fas fa-check-circle"></i>
+                                    <p>FREE RETURNS</p>
+                                </div>
+                                <div class="policy_card">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    <p>TRUSTED SHIPPING</p>
+                                </div>
+                                <div class="policy_card">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                    <p>CONTACTLESS DELIVERY</p>
+                                </div>
+                            </div>
 
-                                .facs_cards {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    flex-direction: column;
-                                    height: auto;
-                                    width: 33%;
-                                    /* border: 1px solid rgba(0, 0, 0, 0.6); */
-                                    border-radius: 10px;
-                                    margin: 0 5px;
-                                    padding: 0 5px;
-                                }
 
-                                .facs_cards .fas {
-                                    font-size: 20px;
-                                    color: #909090;
-                                    padding: 7px;
-                                }
 
-                                .facs_cards p {
-                                    text-align: center;
-                                    font-size: 11px;
-                                }
-                            </style>
+
+
 
 
 
