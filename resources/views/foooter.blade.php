@@ -65,15 +65,15 @@
                     <div class="col-xl-2 mb-30 col-lg-6 col-md-4 order-md-2 order-lg-3 col-sm-6">
                         <div class="footer-widget">
                             <div class="footer-title">
-                                <h6 class="f-800">Get to Know Us</h6>
+                                <h6 class="f-800">Plocies</h6>
                             </div>
                             <div class="footer-menu h1foote-menu2">
                                 <ul>
-                                    <li><a href="#"><i class="ficon fab fa-facebook"></i> Facebook</a></li>
-                                    <li><a href="#"><i class="ficon fab fa-twitter"></i> Twitter</a></li>
-                                    <li><a href="#"><i class="ficon fab fa-instagram"></i> Instagram</a></li>
-                                    <li><a href="#"><i class="ficon fab fa-youtube"></i> Youtube</a></li>
-                                    <li><a href="#"><i class="ficon fab fa-pinterest"></i> Pinterest</a></li>
+                                    <li><a href="#"><i class="fas fa-times-circle"></i> No warranty</a></li>
+                                    <li><a href="#"><i class="fas fa-check-circle"></i> Returns.</a></li>
+                                    <li><a href="#"><i class="fas fa-check-circle"></i> Free Returns</a></li>
+                                    <li><a href="#"><i class="fas fa-shipping-fast"></i> Trusted Shipping</a></li>
+                                    <li><a href="#"><i class="fas fa-hand-holding-usd"></i> ContactLess Delivery</a></li>
                                 </ul>
                             </div>
                             

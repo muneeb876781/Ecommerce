@@ -11,8 +11,8 @@ use App\Models\Cart;
 use App\Models\Review;
 use App\Models\User;
 use App\Models\Brand;
+use App\Models\Policy;
 use Illuminate\Support\Facades\Auth;
-
 
 use Illuminate\Http\Request;
 
@@ -53,12 +53,11 @@ class SellerController extends Controller
         return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
-    
-
-    public function venderProfile(){
+    public function venderProfile()
+    {
         $user_id = Auth::id();
         $seller = User::where('id', $user_id)->first();
-        // dd($seller); 
+        // dd($seller);
         $shopInfo = SellerShop::where('user_id', auth()->id())->first();
 
         if ($shopInfo) {
@@ -89,8 +88,7 @@ class SellerController extends Controller
             $reviews = [];
         }
 
-        return view('venderProfile', compact('shopInfo', 'seller',  'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
-
+        return view('venderProfile', compact('shopInfo', 'seller', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function sellerShop()
@@ -111,17 +109,72 @@ class SellerController extends Controller
             } else {
                 $totalPrice += $item->product->price * $item->quantity;
             }
-            
-            
         }
 
         $totalItems = $cart->sum('quantity');
 
-        return view('sellerShop', compact('products', 'brands', 'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
+        return view('sellerShop', compact('products', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 
     public function reviews()
     {
         return view('sellerReviews');
+    }
+
+    public function policies()
+    {
+        $shopInfo = SellerShop::where('user_id', auth()->id())->first();
+
+        if ($shopInfo) {
+            $shopId = SellerShop::where('user_id', Auth::id())->value('id');
+            $categories = Category::where('seller_shop_id', $shopId)->get();
+            $cat_count = $categories->count();
+
+            $shopId = SellerShop::where('user_id', Auth::id())->value('id');
+            $products = Product::where('shop_id', $shopId)->get();
+            $pro_count = $products->count();
+
+            $reviews = collect();
+            foreach ($products as $product) {
+                $productReviews = Review::where('product_id', $product->id)->get();
+                $reviews = $reviews->merge($productReviews);
+            }
+            $rev_count = $reviews->count();
+
+            $Orders = Order::where('shop_id', $shopId)->get();
+            $ord_count = $Orders->count();
+        } else {
+            $cat_count = 0;
+            $pro_count = 0;
+            $rev_count = 0;
+            $ord_count = 0;
+            $categories = [];
+            $products = [];
+            $reviews = [];
+        }
+
+        $policies = Policy::where('shop_id', $shopId)->get();
+
+        return view('venderPolicies', compact('shopInfo', 'policies', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+    }
+
+    public function storepolicy(Request $request)
+    {
+        $validatedData = $request->validate([
+            'policyName' => 'required|string|max:255',
+            'policyDescription' => 'required|string',
+        ]);
+
+        $shopId = SellerShop::where('user_id', Auth::id())->value('id');
+
+        $policy = new Policy();
+        $policy->user_id = Auth::id();
+        $policy->shop_id = $shopId;
+        $policy->policy_name = $validatedData['policyName'];
+        $policy->policy_description = $validatedData['policyDescription'];
+
+        $policy->save();
+
+        return redirect()->back()->with('success', 'Policy created successfully');
     }
 }
