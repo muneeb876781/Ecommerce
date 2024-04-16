@@ -941,6 +941,8 @@
                     <div class="col-sm-12">
                         <div class="product__active owl-carousel">
                             @foreach ($relatedProducts as $relProduct)
+                            @if ($relProduct->brand->state !== 0)
+
                                 <div class="product__single">
                                     <div class="product__box">
                                         <div class="product__thumb">
@@ -1031,6 +1033,7 @@
                                         <a href="#"><span class="fas fa-sync"></span></a>
                                     </div>
                                 </div>
+                                @endif
                             @endforeach
 
                         </div>
