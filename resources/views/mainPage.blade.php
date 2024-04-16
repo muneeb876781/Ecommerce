@@ -739,6 +739,10 @@
                                     .photo {
                                         height: auto;
                                     }
+
+                                    .navigation div{
+                                        height: 40px;
+                                    }
                                 }
 
                                 @media (max-width: 600px) {
