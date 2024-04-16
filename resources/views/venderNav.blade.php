@@ -180,6 +180,21 @@
                     <li>
                         <a href="#">
                             <i class='bx bx-columns icon'></i>
+                            Banners
+                            <i class='bx bx-chevron-right icon-right'></i>
+                        </a>
+                        <ul class="side-dropdown">
+                            <li><a href="{{ route('banners') }}"
+                                    class="{{ Request::is('banners*') ? 'active' : '' }}">
+                                    Main Banners
+                                </a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-columns icon'></i>
                             Categories
                             <i class='bx bx-chevron-right icon-right'></i>
                         </a>

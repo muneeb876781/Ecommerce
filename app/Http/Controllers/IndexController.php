@@ -9,6 +9,8 @@ use App\Models\SubCategory;
 use App\Models\Cart;
 use App\Models\Review;
 use App\Models\Brand;
+use App\Models\Banner;
+
 
 
 class IndexController extends Controller
@@ -46,6 +48,8 @@ class IndexController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('mainPage', compact('products', 'reviews', 'brands',  'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
+        $banners = Banner::all();
+
+        return view('mainPage', compact('products', 'banners',  'reviews', 'brands',  'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 }
