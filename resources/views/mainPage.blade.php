@@ -720,10 +720,24 @@
 
                             <!-- partial:index.partial.html -->
                             <div class="containerr">
-                                <img class='photo' src="../images/br4.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/br3.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/br2.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/br1.jpg" alt="Image 1" />
+
+                                @foreach ($banners as $key => $banner)
+                                    @if ($key <= 3)
+                                        @if ($banner->image_url)
+                                            <img class='photo'
+                                                src="{{ asset('storage/uploads/' . $banner->image_url) }}"
+                                                alt="Image 1" />
+                                        @elseif (!$banner->image_url && $banner->remote_image_url)
+                                            <img class='photo'
+                                                src="{{ asset('storage/uploads/' . $banner->image_url) }}"
+                                                alt="Image 1" />
+                                        @else
+                                            <span>No image available</span>
+                                        @endif
+                                    @endif
+                                @endforeach
+
+
 
                             </div>
                             <!-- partial -->
@@ -1111,18 +1125,18 @@
             <div class="categoriess">
                 @foreach ($categories as $key => $category)
                     @if ($key <= 15)
-                    <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
-                        <div class="cats_card">
-                            <img style="width: auto; border-radius: 20px;"
-                                src="{{ asset('storage/uploads/' . $category->image_url) }}" alt="">
-                            <h2 style="text-align: center;">{{ $category->name }}</h2>
-                        </div>
-                    </a>
+                        <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
+                            <div class="cats_card">
+                                <img style="width: auto; border-radius: 20px;"
+                                    src="{{ asset('storage/uploads/' . $category->image_url) }}" alt="">
+                                <h2 style="text-align: center;">{{ $category->name }}</h2>
+                            </div>
+                        </a>
                     @endif
                 @endforeach
             </div>
         </div>
-        
+
         <style>
             .categoriess {
                 display: flex;
@@ -1928,12 +1942,12 @@
                     <div class="col-sm-12">
                         <div class="brand-active">
                             @foreach ($brands as $brand)
-                            <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
-                                <div class="single-brand">
-                                    <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                        style="width: 100px; height: auto;" alt="">
-                                </div>
-                            </a>
+                                <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                    <div class="single-brand">
+                                        <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                            style="width: 100px; height: auto;" alt="">
+                                    </div>
+                                </a>
                             @endforeach
 
                         </div>

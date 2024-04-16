@@ -163,6 +163,12 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('seller');
     Route::get('/shopPolicies/{id}', [ShopController::class, 'shopPolicies'])->name('shopPolicies');
 
+    Route::get('/banners', [SellerController::class, 'banners'])->name('banners');
+    Route::post('/storeBanner', [SellerController::class, 'storeBanner'])
+        ->name('storeBanner')
+        ->middleware('seller');
+
+
 
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard')->middleware('admin');
