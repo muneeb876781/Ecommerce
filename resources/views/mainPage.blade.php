@@ -720,10 +720,10 @@
 
                             <!-- partial:index.partial.html -->
                             <div class="containerr">
-                                <img class='photo' src="../images/f1.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/f5.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/f4.jpg" alt="Image 1" />
-                                <img class='photo' src="../images/f6.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/br4.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/br3.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/br2.jpg" alt="Image 1" />
+                                <img class='photo' src="../images/br1.jpg" alt="Image 1" />
 
                             </div>
                             <!-- partial -->
