@@ -170,6 +170,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/storeBanner', [SellerController::class, 'storeBanner'])
         ->name('storeBanner')
         ->middleware('seller');
+    Route::delete('/banners/{id}', [SellerController::class, 'destroy'])->name('bannerDestroy');
+
 
 
 

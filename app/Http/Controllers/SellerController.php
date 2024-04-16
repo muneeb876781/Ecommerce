@@ -227,7 +227,6 @@ class SellerController extends Controller
             'bannerBrand' => 'required|exists:brands,id',
             'BannerImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'bannerRemoteImage' => 'nullable|url',
-
         ]);
 
         $banner = new Banner();
@@ -249,5 +248,13 @@ class SellerController extends Controller
         $banner->save();
 
         return redirect()->back()->with('success', 'Banner added successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $banner = Banner::findOrFail($id);
+        $banner->delete();
+
+        return redirect()->back()->with('banner_del_success', 'Banner deleted successfully.');
     }
 }

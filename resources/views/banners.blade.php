@@ -44,6 +44,16 @@
             });
         </script>
     @endif
+    @if (session('banner_del_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Banner Successfully deleted!',
+                text: '{{ session('banner_del_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -92,17 +102,18 @@
 
                                                     <a class="btn btn-link text-warning" href="#" title="Edit">
                                                         <form style="display: inline"
-                                                            action="{{ route('categorydestroy', ['id' => $banner->id]) }}"
-                                                            method="POST">
+                                                              action="{{ route('bannerDestroy', ['id' => $banner->id]) }}"
+                                                              method="POST">
                                                             @csrf
-                                                            <button
-                                                                onclick="return confirm('Are you sure you want to delete this Category?')"
-                                                                type="submit" class="btn btn-link text-danger"
-                                                                style="padding: 0; border: none; background: none;">
+                                                            @method('DELETE')
+                                                            <button onclick="return confirm('Are you sure you want to delete this Banner?')"
+                                                                    type="submit" class="btn btn-link text-danger"
+                                                                    style="padding: 0; border: none; background: none;">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
                                                     </a>
+                                                    
                                                 </td>
                                             </tr>
                                         @endforeach
