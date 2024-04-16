@@ -108,4 +108,18 @@ class BrandController extends Controller
 
         return redirect()->back()->with('success', 'Brand updated successfully!');
     }
+
+    public function toggleState(Request $request, $id)
+    {
+        $brand = Brand::find($id);
+
+        if (!$brand) {
+            return redirect()->back()->with('error', 'Brand not found.');
+        }
+
+        $brand->state = $request->input('state');
+        $brand->save();
+
+        return redirect()->back()->with('state_success', 'Brand state toggled successfully.');
+    }
 }

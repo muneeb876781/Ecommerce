@@ -942,6 +942,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 p-0">
                             @foreach ($products as $key => $product)
+                            @if ($product->brand->state !== 0)
                                 @if ($key <= 5 && $product->discountedPrice !== null)
                                     <div class="product-s">
                                         <div class="product__single">
@@ -1038,6 +1039,7 @@
                                         </div>
                                     </div>
                                 @endif
+                            @endif
                             @endforeach
                         </div>
                         <div class="col-xl-6 col-lg-6">
@@ -1450,6 +1452,8 @@
                         @else
                             <div class="row">
                                 @foreach ($products as $key => $product)
+                                @if ($product->brand->state !== 0)
+
                                     @if ($key <= 11)
                                         <div class="product-s" s>
                                             <div class="product__single">
@@ -1547,6 +1551,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -1942,12 +1947,15 @@
                     <div class="col-sm-12">
                         <div class="brand-active">
                             @foreach ($brands as $brand)
+                            @if ($brand->state !== 0)
+
                                 <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
                                     <div class="single-brand">
                                         <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                             style="width: 100px; height: auto;" alt="">
                                     </div>
                                 </a>
+                                @endif
                             @endforeach
 
                         </div>

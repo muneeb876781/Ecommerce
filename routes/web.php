@@ -155,6 +155,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('brandsEdit')
         ->middleware('seller');
     Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
+    Route::put('/toggleBrandState/{id}', [BrandController::class, 'toggleState'])
+    ->name('toggleBrandState');
+
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
     Route::get('/policies', [SellerController::class, 'policies'])->name('policies');

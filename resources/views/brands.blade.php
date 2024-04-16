@@ -39,11 +39,11 @@
         </script>
     @endif
 
-    @if (session('success_update'))
+    @if (session('state_success'))
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'Brand Successfully Updated!',
+                title: 'State Successfully Updated!',
                 text: '{{ session('success_update') }}',
                 confirmButtonText: 'Close'
             });
@@ -71,6 +71,7 @@
                                             <th class="serial-number">No.</th>
                                             <th class="title">Image</th>
                                             <th class="title">Name</th>
+                                            <th class="title">State</th>
                                             <th class="ranking">Actions</th>
                                         </tr>
                                     </thead>
@@ -83,6 +84,19 @@
                                                         src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                                         alt="{{ $brand->name }}" class="rounded-circle"></td>
                                                 <td style="width: 18%"><strong>{{ $brand->name }}</strong> <br> </td>
+                                                <td style="width: 18%">
+                                                    <strong>{{ $brand->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
+                                                    <form action="{{ route('toggleBrandState', ['id' => $brand->id]) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="state" value="{{ $brand->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit" class="btn btn-sm {{ $brand->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                            {{ $brand->state == 1 ? 'Deactivate' : 'Activate' }}
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                
+                                                
                                                 <td style="width: 20%">
                                                     <a class="btn btn-link text-primary" href="#"
                                                         title="View Details" data-bs-toggle="modal"
