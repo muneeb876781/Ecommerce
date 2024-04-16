@@ -130,6 +130,152 @@
         }
     }
 </style>
+<style>
+    .containerr {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        /* box-shadow: inset 0 0 10px #f8a100; */
+
+    }
+
+    .photo {
+        position: absolute;
+        animation: round 16s infinite;
+        opacity: 0;
+        width: 100%;
+        height: auto;
+
+    }
+
+    @media (max-width: 1800px) {
+        .containerr {
+            height: 600px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 1600px) {
+        .containerr {
+            height: 200px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .containerr {
+            height: 450px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .containerr {
+            height: 370px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .containerr {
+            height: 300px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .containerr {
+            height: 300px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .containerr {
+            height: 250px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .containerr {
+            height: 220px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .containerr {
+            height: 180px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .containerr {
+            height: 150px;
+        }
+
+        .photo {
+            height: auto;
+        }
+    }
+
+    @keyframes round {
+        25% {
+            opacity: 1;
+        }
+
+        40% {
+            opacity: 0;
+        }
+    }
+
+    img:nth-child(1) {
+        animation-delay: 12s;
+    }
+
+    img:nth-child(2) {
+        animation-delay: 8s;
+    }
+
+    img:nth-child(3) {
+        animation-delay: 4s;
+    }
+
+    img:nth-child(4) {
+        animation-delay: 0s;
+    }
+</style>
+
 
 
 <body>
@@ -157,6 +303,71 @@
         <!-- shop area start -->
         <div class="product shop-page pt-20 pb-80 fix">
             <div class="container">
+                {{-- <div class="her0_section">
+                    <section>
+                        <div class="rt-container">
+                            <div class="col-rt-12">
+                                <div class="Scriptcontent">
+                                    <!-- partial:index.partial.html -->
+                                    <div class="containerr">
+                                        <img class='photo' src="../images/f1.jpg" alt="Image 1" />
+                                        <img class='photo' src="../images/f5.jpg" alt="Image 1" />
+                                        <img class='photo' src="../images/f4.jpg" alt="Image 1" />
+                                        <img class='photo' src="../images/f6.jpg" alt="Image 1" />
+        
+                                    </div>
+                                    <!-- partial -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div> --}}
+                <div class="brand">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="brand-active brand-active1">
+                                    @foreach ($brands as $brand)
+                                    <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                        <div class="single-brand">
+                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                                style="width: 100px; height: auto;" alt="">
+                                        </div>
+                                    </a>
+                                    @endforeach
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {{-- <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var parent = document.querySelector('.splitview'),
+                            topPanel = parent.querySelector('.topp'),
+                            handle = parent.querySelector('.handle'),
+                            skewHack = 0,
+                            delta = 0;
+        
+                        // If the parent has .skewed class, set the skewHack var.
+                        if (parent.className.indexOf('skewed') != -1) {
+                            skewHack = 1000;
+                        }
+        
+                        parent.addEventListener('mousemove', function(event) {
+                            // Get the delta between the mouse position and center point.
+                            delta = (event.clientX - window.innerWidth / 2) * 0.5;
+        
+                            // Move the handle.
+                            handle.style.left = event.clientX + delta + 'px';
+        
+                            // Adjust the top panel width.
+                            topPanel.style.width = event.clientX + skewHack + delta + 'px';
+                        });
+                    });
+                </script> --}}
+
                 <div class="border-b">
                     <div class="row">
                         <div class="col-lg-5 col-md-4">
@@ -269,6 +480,8 @@
 
                         </div>
 
+                        
+
 
                         <div class="col-lg-7 col-md-8 mt-3">
                             <div class="bar-wrapper">
@@ -279,6 +492,7 @@
                                 <!-- Your sorting select options and scripts -->
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="row mt-30">

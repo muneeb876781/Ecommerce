@@ -2114,6 +2114,12 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
     padding-bottom: 70px;
 }
 
+.brand-active1 {
+    padding-top: 15px;
+    /* border-top: 1px solid #e0e0e0; */
+    padding-bottom: 20px;
+}
+
 .brand-two .brand-active {
     border-top: 0px;
     padding-top: 25px;
