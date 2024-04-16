@@ -244,151 +244,7 @@
         }
     </style>
 
-    <style>
-        .containerr {
-            width: 100%;
-            height: 700px;
-            overflow: hidden;
-            position: relative;
-            /* box-shadow: inset 0 0 10px #f8a100; */
 
-        }
-
-        .photo {
-            position: absolute;
-            animation: round 16s infinite;
-            opacity: 0;
-            width: 100%;
-            height: auto;
-
-        }
-
-        @media (max-width: 1800px) {
-            .containerr {
-                height: 600px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 1600px) {
-            .containerr {
-                height: 550px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 1400px) {
-            .containerr {
-                height: 450px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .containerr {
-                height: 370px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 1000px) {
-            .containerr {
-                height: 300px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .containerr {
-                height: 300px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .containerr {
-                height: 250px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .containerr {
-                height: 220px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .containerr {
-                height: 180px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .containerr {
-                height: 150px;
-            }
-
-            .photo {
-                height: auto;
-            }
-        }
-
-        @keyframes round {
-            25% {
-                opacity: 1;
-            }
-
-            40% {
-                opacity: 0;
-            }
-        }
-
-        img:nth-child(1) {
-            animation-delay: 12s;
-        }
-
-        img:nth-child(2) {
-            animation-delay: 8s;
-        }
-
-        img:nth-child(3) {
-            animation-delay: 4s;
-        }
-
-        img:nth-child(4) {
-            animation-delay: 0s;
-        }
-    </style>
 
     <style>
         .cats {
@@ -720,26 +576,242 @@
 
                             <!-- partial:index.partial.html -->
                             <div class="containerr">
-
-                                @foreach ($banners as $key => $banner)
-                                    @if ($key <= 3)
-                                        @if ($banner->image_url)
-                                            <img class='photo'
-                                                src="{{ asset('storage/uploads/' . $banner->image_url) }}"
-                                                alt="Image 1" />
-                                        @elseif (!$banner->image_url && $banner->remote_image_url)
-                                            <img class='photo'
-                                                src="{{ asset('storage/uploads/' . $banner->image_url) }}"
-                                                alt="Image 1" />
-                                        @else
-                                            <span>No image available</span>
+                                <div class="slider">
+                                    @foreach ($banners as $key => $banner)
+                                        @if ($key <= 3)
+                                            @if ($banner->brand->state !== 0)
+                                                @if ($banner->image_url)
+                                                    <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
+                                                        src="{{ asset('storage/uploads/' . $banner->image_url) }}"
+                                                        alt="Image 1" />
+                                                @elseif (!$banner->image_url && $banner->remote_image_url)
+                                                    <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
+                                                        src="{{ asset('storage/uploads/' . $banner->image_url) }}"
+                                                        alt="Image 1" />
+                                                @else
+                                                    <span>No image available</span>
+                                                @endif
+                                            @endif
                                         @endif
-                                    @endif
-                                @endforeach
-
-
-
+                                    @endforeach
+                                </div>
+                                <div class="navigation">
+                                    <div class="prev">&lt;</div>
+                                    <div class="next">&gt;</div>
+                                </div>
                             </div>
+
+
+                            <style>
+                                .containerr {
+                                    position: relative;
+                                    width: 100%;
+                                    height: 700px;
+                                    overflow: hidden;
+                                    /* box-shadow: inset 0 0 10px #f8a100; */
+                                    /* border: 1px solid #e0e0e0; */
+                                }
+
+                                .slider {
+                                    display: flex;
+                                    width: 100%;
+                                    height: 100%;
+                                    position: relative;
+                                }
+
+                                .photo {
+                                    flex: 1;
+                                    animation: round 16s infinite;
+                                    opacity: 0;
+                                    width: 100%;
+                                    height: auto;
+                                }
+
+                                .navigation {
+                                    position: absolute;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    z-index: 1;
+                                }
+
+                                .navigation div {
+                                    background-color: rgba(0, 0, 0, 0.3);
+                                    color: #fff;
+                                    font-size: 24px;
+                                    width: 25px;
+                                    height: 80px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    cursor: pointer;
+                                }
+
+                                .navigation .prev {
+                                    order: -1;
+                                }
+
+                                .navigation .next {
+                                    order: 1;
+                                }
+
+                                @keyframes round {
+
+                                    0%,
+                                    100% {
+                                        opacity: 0;
+                                    }
+
+                                    20% {
+                                        opacity: 1;
+                                    }
+                                }
+
+
+
+                                @media (max-width: 1800px) {
+                                    .containerr {
+                                        height: 600px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 1600px) {
+                                    .containerr {
+                                        height: 550px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 1400px) {
+                                    .containerr {
+                                        height: 450px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 1200px) {
+                                    .containerr {
+                                        height: 370px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 1000px) {
+                                    .containerr {
+                                        height: 300px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 800px) {
+                                    .containerr {
+                                        height: 300px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 700px) {
+                                    .containerr {
+                                        height: 250px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 600px) {
+                                    .containerr {
+                                        height: 220px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 500px) {
+                                    .containerr {
+                                        height: 180px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+
+                                @media (max-width: 400px) {
+                                    .containerr {
+                                        height: 150px;
+                                    }
+
+                                    .photo {
+                                        height: auto;
+                                    }
+                                }
+                            </style>
+
+                            <script>
+                                const slider = document.querySelector('.slider');
+                                const prevBtn = document.querySelector('.prev');
+                                const nextBtn = document.querySelector('.next');
+                                const slides = document.querySelectorAll('.photo');
+                                let currentIndex = 0;
+                                const slideInterval = 6000; // Interval between slides in milliseconds (3 seconds)
+
+                                function showSlide(index) {
+                                    slides.forEach((slide, i) => {
+                                        slide.style.display = i === index ? 'block' : 'none';
+                                    });
+                                }
+
+                                function goToNextSlide() {
+                                    currentIndex = (currentIndex + 1) % slides.length;
+                                    showSlide(currentIndex);
+                                }
+
+                                function goToPrevSlide() {
+                                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                                    showSlide(currentIndex);
+                                }
+
+                                // Automatic slide change
+                                function autoSlide() {
+                                    setInterval(goToNextSlide, slideInterval);
+                                }
+
+                                // Initial slide
+                                showSlide(currentIndex);
+
+                                // Click event listeners for navigation
+                                prevBtn.addEventListener('click', goToPrevSlide);
+                                nextBtn.addEventListener('click', goToNextSlide);
+
+                                // Start automatic sliding
+                                autoSlide();
+                            </script>
+
                             <!-- partial -->
                         </div>
                     </div>
@@ -942,104 +1014,106 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 p-0">
                             @foreach ($products as $key => $product)
-                            @if ($product->brand->state !== 0)
-                                @if ($key <= 5 && $product->discountedPrice !== null)
-                                    <div class="product-s">
-                                        <div class="product__single">
-                                            <div class="product__box">
-                                                <div class="product__thumb">
-                                                    <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                        class="img-wrapper">
-                                                        @if ($product->image_url)
-                                                            <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                class="img"
-                                                                src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                alt="">
-                                                        @elseif (!$product->image_url && $product->remote_image_url)
-                                                            <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                class="img" src="{{ $product->remote_image_url }}"
-                                                                alt="">
-                                                        @else
-                                                            <span>No image available</span>
-                                                        @endif
-
-                                                        @if ($product->quantity == 0)
-                                                            <span class="out-of-stock-tag">Out of Stock</span>
-                                                        @elseif ($product->discountedPrice)
-                                                            @php
-                                                                $salePercentage =
-                                                                    (($product->price - $product->discountedPrice) /
-                                                                        $product->price) *
-                                                                    100;
-                                                            @endphp
-                                                            @if ($salePercentage > 0)
-                                                                <span class="sale-tag">
-                                                                    {{ round($salePercentage) }}% Off</span>
-                                                            @endif
-                                                        @endif
-                                                    </a>
-                                                    <div class="product-action">
-                                                        <a href="#"><span class="fas fa-heart"></span></a>
-                                                        <a
-                                                            href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                                class="fas fa-eye"></span></a>
-                                                        <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                                class="fas fa-shopping-cart"></span></a>
-                                                    </div>
-                                                </div>
-                                                <div class="product__content--top pt-10 pb-10 mt-0">
-                                                    <span class="cate-name">{{ $product->category->name }}</span>
-                                                    <h6 class="product__title mine__shaft-color f-400 mb-0"
-                                                        style="white-space: wrap; overflow-wrap: break-word;">
+                                @if ($product->brand->state !== 0)
+                                    @if ($key <= 5 && $product->discountedPrice !== null)
+                                        <div class="product-s">
+                                            <div class="product__single">
+                                                <div class="product__box">
+                                                    <div class="product__thumb">
                                                         <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                            style="display: inline-block; max-width: 100%; ">
-                                                            {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                            @if (str_word_count($product->name) > 5)
-                                                                ...
+                                                            class="img-wrapper">
+                                                            @if ($product->image_url)
+                                                                <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                    class="img"
+                                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                                    alt="">
+                                                            @elseif (!$product->image_url && $product->remote_image_url)
+                                                                <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                    class="img"
+                                                                    src="{{ $product->remote_image_url }}"
+                                                                    alt="">
+                                                            @else
+                                                                <span>No image available</span>
+                                                            @endif
+
+                                                            @if ($product->quantity == 0)
+                                                                <span class="out-of-stock-tag">Out of Stock</span>
+                                                            @elseif ($product->discountedPrice)
+                                                                @php
+                                                                    $salePercentage =
+                                                                        (($product->price - $product->discountedPrice) /
+                                                                            $product->price) *
+                                                                        100;
+                                                                @endphp
+                                                                @if ($salePercentage > 0)
+                                                                    <span class="sale-tag">
+                                                                        {{ round($salePercentage) }}% Off</span>
+                                                                @endif
                                                             @endif
                                                         </a>
-                                                    </h6>
-
-
-
-                                                    @php
-                                                        $averageRating = $product->reviews->avg('rating');
-                                                    @endphp
-                                                    <div class="rating" style="padding-top: 5px;">
-                                                        <ul class="list-inline">
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= $averageRating)
-                                                                    <li class="rating-active"><i
-                                                                            class="fas fa-star star-gold"></i></li>
-                                                                @else
-                                                                    <li><i class="far fa-star"></i></li>
-                                                                @endif
-                                                            @endfor
-                                                        </ul>
+                                                        <div class="product-action">
+                                                            <a href="#"><span class="fas fa-heart"></span></a>
+                                                            <a
+                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                                    class="fas fa-eye"></span></a>
+                                                            <a
+                                                                href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
+                                                                    class="fas fa-shopping-cart"></span></a>
+                                                        </div>
                                                     </div>
+                                                    <div class="product__content--top pt-10 pb-10 mt-0">
+                                                        <span class="cate-name">{{ $product->category->name }}</span>
+                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                            style="white-space: wrap; overflow-wrap: break-word;">
+                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                                style="display: inline-block; max-width: 100%; ">
+                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                @if (str_word_count($product->name) > 5)
+                                                                    ...
+                                                                @endif
+                                                            </a>
+                                                        </h6>
 
 
 
-                                                    <br>
-                                                    <div
-                                                        class="product__content--rating d-flex justify-content-between">
-                                                        <div class="price">
-                                                            @if ($product->discountedPrice)
-                                                                <span class="original-price"
-                                                                    style="text-decoration: line-through; font-size: 11px; margin-right: 3px;">AED.{{ $product->price }}</span>
-                                                                <span
-                                                                    class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
-                                                            @else
-                                                                <span>AED.{{ $product->price }}</span>
-                                                            @endif
+                                                        @php
+                                                            $averageRating = $product->reviews->avg('rating');
+                                                        @endphp
+                                                        <div class="rating" style="padding-top: 5px;">
+                                                            <ul class="list-inline">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <li class="rating-active"><i
+                                                                                class="fas fa-star star-gold"></i></li>
+                                                                    @else
+                                                                        <li><i class="far fa-star"></i></li>
+                                                                    @endif
+                                                                @endfor
+                                                            </ul>
+                                                        </div>
+
+
+
+                                                        <br>
+                                                        <div
+                                                            class="product__content--rating d-flex justify-content-between">
+                                                            <div class="price">
+                                                                @if ($product->discountedPrice)
+                                                                    <span class="original-price"
+                                                                        style="text-decoration: line-through; font-size: 11px; margin-right: 3px;">AED.{{ $product->price }}</span>
+                                                                    <span
+                                                                        class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                                @else
+                                                                    <span>AED.{{ $product->price }}</span>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 @endif
-                            @endif
                             @endforeach
                         </div>
                         <div class="col-xl-6 col-lg-6">
@@ -1452,106 +1526,109 @@
                         @else
                             <div class="row">
                                 @foreach ($products as $key => $product)
-                                @if ($product->brand->state !== 0)
-
-                                    @if ($key <= 11)
-                                        <div class="product-s" s>
-                                            <div class="product__single">
-                                                <div class="product__box">
-                                                    <div class="product__thumb">
-                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                            class="img-wrapper">
-                                                            @if ($product->image_url)
-                                                                <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                    class="img"
-                                                                    src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                    alt="">
-                                                            @elseif (!$product->image_url && $product->remote_image_url)
-                                                                <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                    class="img"
-                                                                    src="{{ $product->remote_image_url }}"
-                                                                    alt="">
-                                                            @else
-                                                                <span>No image available</span>
-                                                            @endif
-
-                                                            @if ($product->quantity == 0)
-                                                                <span class="out-of-stock-tag">Out of Stock</span>
-                                                            @elseif ($product->discountedPrice)
-                                                                @php
-                                                                    $salePercentage =
-                                                                        (($product->price - $product->discountedPrice) /
-                                                                            $product->price) *
-                                                                        100;
-                                                                @endphp
-                                                                @if ($salePercentage > 0)
-                                                                    <span class="sale-tag">
-                                                                        {{ round($salePercentage) }}% Off</span>
-                                                                @endif
-                                                            @endif
-                                                        </a>
-                                                        <div class="product-action">
-                                                            <a href="#"><span class="fas fa-heart"></span></a>
-                                                            <a
-                                                                href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                                    class="fas fa-eye"></span></a>
-                                                            <a
-                                                                href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                                    class="fas fa-shopping-cart"></span></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product__content--top pt-10 pb-10">
-                                                        <span class="cate-name">{{ $product->category->name }}</span>
-                                                        <h6 class="product__title mine__shaft-color f-400 mb-0"
-                                                            style="white-space: wrap; overflow-wrap: break-word;">
+                                    @if ($product->brand->state !== 0)
+                                        @if ($key <= 11)
+                                            <div class="product-s" s>
+                                                <div class="product__single">
+                                                    <div class="product__box">
+                                                        <div class="product__thumb">
                                                             <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                style="display: inline-block; max-width: 100%; ">
-                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                                @if (str_word_count($product->name) > 5)
-                                                                    ...
+                                                                class="img-wrapper">
+                                                                @if ($product->image_url)
+                                                                    <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                        class="img"
+                                                                        src="{{ asset('storage/uploads/' . $product->image_url) }}"
+                                                                        alt="">
+                                                                @elseif (!$product->image_url && $product->remote_image_url)
+                                                                    <img style="height: auto; width: auto; margin: 0 auto;"
+                                                                        class="img"
+                                                                        src="{{ $product->remote_image_url }}"
+                                                                        alt="">
+                                                                @else
+                                                                    <span>No image available</span>
+                                                                @endif
+
+                                                                @if ($product->quantity == 0)
+                                                                    <span class="out-of-stock-tag">Out of Stock</span>
+                                                                @elseif ($product->discountedPrice)
+                                                                    @php
+                                                                        $salePercentage =
+                                                                            (($product->price -
+                                                                                $product->discountedPrice) /
+                                                                                $product->price) *
+                                                                            100;
+                                                                    @endphp
+                                                                    @if ($salePercentage > 0)
+                                                                        <span class="sale-tag">
+                                                                            {{ round($salePercentage) }}% Off</span>
+                                                                    @endif
                                                                 @endif
                                                             </a>
-                                                        </h6>
-
-
-
-                                                        @php
-                                                            $averageRating = $product->reviews->avg('rating');
-                                                        @endphp
-                                                        <div class="rating" style="padding-top: 5px;">
-                                                            <ul class="list-inline">
-                                                                @for ($i = 1; $i <= 5; $i++)
-                                                                    @if ($i <= $averageRating)
-                                                                        <li class="rating-active"><i
-                                                                                class="fas fa-star star-gold"></i></li>
-                                                                    @else
-                                                                        <li><i class="far fa-star"></i></li>
-                                                                    @endif
-                                                                @endfor
-                                                            </ul>
+                                                            <div class="product-action">
+                                                                <a href="#"><span
+                                                                        class="fas fa-heart"></span></a>
+                                                                <a
+                                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
+                                                                        class="fas fa-eye"></span></a>
+                                                                <a
+                                                                    href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
+                                                                        class="fas fa-shopping-cart"></span></a>
+                                                            </div>
                                                         </div>
+                                                        <div class="product__content--top pt-10 pb-10">
+                                                            <span
+                                                                class="cate-name">{{ $product->category->name }}</span>
+                                                            <h6 class="product__title mine__shaft-color f-400 mb-0"
+                                                                style="white-space: wrap; overflow-wrap: break-word;">
+                                                                <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
+                                                                    style="display: inline-block; max-width: 100%; ">
+                                                                    {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                    @if (str_word_count($product->name) > 5)
+                                                                        ...
+                                                                    @endif
+                                                                </a>
+                                                            </h6>
 
 
 
-                                                        <br>
-                                                        <div
-                                                            class="product__content--rating d-flex justify-content-between">
-                                                            <div class="price">
-                                                                @if ($product->discountedPrice)
-                                                                    <span class="original-price"
-                                                                        style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
-                                                                    <span
-                                                                        class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
-                                                                @else
-                                                                    <span>AED.{{ $product->price }}</span>
-                                                                @endif
+                                                            @php
+                                                                $averageRating = $product->reviews->avg('rating');
+                                                            @endphp
+                                                            <div class="rating" style="padding-top: 5px;">
+                                                                <ul class="list-inline">
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        @if ($i <= $averageRating)
+                                                                            <li class="rating-active"><i
+                                                                                    class="fas fa-star star-gold"></i>
+                                                                            </li>
+                                                                        @else
+                                                                            <li><i class="far fa-star"></i></li>
+                                                                        @endif
+                                                                    @endfor
+                                                                </ul>
+                                                            </div>
+
+
+
+                                                            <br>
+                                                            <div
+                                                                class="product__content--rating d-flex justify-content-between">
+                                                                <div class="price">
+                                                                    @if ($product->discountedPrice)
+                                                                        <span class="original-price"
+                                                                            style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
+                                                                        <span
+                                                                            class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                                    @else
+                                                                        <span>AED.{{ $product->price }}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endif
+                                        @endif
                                     @endif
                                 @endforeach
                             </div>
@@ -1947,14 +2024,13 @@
                     <div class="col-sm-12">
                         <div class="brand-active">
                             @foreach ($brands as $brand)
-                            @if ($brand->state !== 0)
-
-                                <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
-                                    <div class="single-brand">
-                                        <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                            style="width: 100px; height: auto;" alt="">
-                                    </div>
-                                </a>
+                                @if ($brand->state !== 0)
+                                    <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                        <div class="single-brand">
+                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                                style="width: 100px; height: auto;" alt="">
+                                        </div>
+                                    </a>
                                 @endif
                             @endforeach
 
