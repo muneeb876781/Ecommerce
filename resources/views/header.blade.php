@@ -1209,15 +1209,6 @@
         function toggleSideNav() {
             var menuBox = document.querySelector('.menu__box');
             menuBox.classList.toggle('show');
-
-            document.addEventListener('click', function(event) {
-            var menuBox = document.querySelector('.menu__box');
-            var button = document.getElementById('shop');
-
-            // Close the menu if clicking anywhere outside the menu or the button
-            if (!menuBox.contains(event.target) && event.target !== button) {
-                menuBox.classList.remove('show');
-            }
         }
 
         
