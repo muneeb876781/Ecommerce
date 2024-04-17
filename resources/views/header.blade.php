@@ -81,6 +81,26 @@
             .mnu {
                 display: none;
             }
+
+
+        }
+
+        @media (max-width: 760px) {
+            /* .search--header__form {
+                width: 80%;
+                margin-left: 40px;
+            } */
+
+            .logo img {
+                width: 150px;
+                height: auto;
+            }
+
+            .search--header__middle {
+                height: 35px;
+            }
+
+
         }
     </style>
     <style>
@@ -142,8 +162,6 @@
             .top {
                 padding: 0;
             }
-
-
         }
 
         .sticky-navbar {
@@ -265,10 +283,14 @@
             position: fixed;
             top: 25px;
             left: 25px;
-            width: 26px;
-            height: 26px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
             z-index: 1000;
+        }
+
+        .menu__box {
+            display: none;
         }
 
         .menu__btn>span,
@@ -507,7 +529,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="content--header__middle d-flex align-items-center justify-content-between">
-                            <div class="logo--header__middle">
+                            <div class="logo--header__middle ">
                                 <div class="logo">
                                     <a class="logo__link" href="{{ route('home') }}"><img src="../img/logo/h1__logo.png"
                                             alt=""></a>
@@ -914,7 +936,7 @@
                                         </ul>
                                     </li> --}}
                                     <style>
-                                        .shop-btn{
+                                        .shop-btn {
                                             margin-left: 400px;
                                         }
 
@@ -1056,8 +1078,9 @@
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" />
             <label class="menu__btn" for="menu__toggle">
-                <span></span>
+                <span id="menu__icon"></span>
             </label>
+
 
             <ul class="menu__box">
                 <div class="top_sidenav">
@@ -1102,8 +1125,28 @@
 
             </ul>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var menuToggle = document.getElementById('menu__toggle');
+                var menuIcon = document.getElementById('menu__icon');
+                var menuBox = document.querySelector('.menu__box');
 
+                // Close the menu when the menu icon is clicked
+                menuIcon.addEventListener('click', function() {
+                    menuToggle.checked = false;
+                });
 
+                // Close the menu when clicking anywhere outside the menu or the menu icon
+                document.addEventListener('click', function(event) {
+                    if (event.target !== menuToggle && event.target !== menuIcon && !menuBox.contains(event
+                            .target)) {
+                        if (menuToggle.checked) {
+                            menuToggle.checked = false;
+                        }
+                    }
+                });
+            });
+        </script>
 
 
     </header>
@@ -1166,7 +1209,18 @@
         function toggleSideNav() {
             var menuBox = document.querySelector('.menu__box');
             menuBox.classList.toggle('show');
+
+            document.addEventListener('click', function(event) {
+            var menuBox = document.querySelector('.menu__box');
+            var button = document.getElementById('shop');
+
+            // Close the menu if clicking anywhere outside the menu or the button
+            if (!menuBox.contains(event.target) && event.target !== button) {
+                menuBox.classList.remove('show');
+            }
         }
+
+        
 
         document.getElementById('cart').addEventListener('click', function() {
             window.location.href = '{{ route('cart') }}';
