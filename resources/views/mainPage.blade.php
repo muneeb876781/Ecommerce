@@ -1154,7 +1154,7 @@
                             $banner->Category->state !== 0 &&
                             $banner->Product->state !== 0 && 
                             $banner->Type === 'sales')
-                                <div class="col-xl-6 col-lg-6">
+                                <div class="col-xl-6 col-lg-6 mt-10">
                                     <div class="sale_banner">
                                         <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
                                     </div>
