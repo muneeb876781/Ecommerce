@@ -506,7 +506,13 @@
                         @else
                             <div class="row">
                                 @foreach ($products as $product)
-                                    @if ($product->brand->state !== 0)
+                                    @if (
+                                        $product->brand &&
+                                            $product->category &&
+                                            $product &&
+                                            $product->brand->state !== 0 &&
+                                            $product->category->state !== 0 &&
+                                            $product->state !== 0)
                                         <div class="product-s">
                                             <div class="product__single">
                                                 <div class="product__box">

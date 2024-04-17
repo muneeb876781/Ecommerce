@@ -940,8 +940,15 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="product__active owl-carousel">
-                            @foreach ($relatedProducts as $relProduct)
-                            @if ($relProduct->brand->state !== 0)
+                            
+                            @foreach ($relatedProducts->take(5) as $key => $relProduct)
+                                @if (
+                                    $relProduct->brand &&
+                                        $relProduct->category &&
+                                        $relProduct &&
+                                        $relProduct->brand->state !== 0 &&
+                                        $relProduct->category->state !== 0 &&
+                                        $relProduct->state !== 0)
 
                                 <div class="product__single">
                                     <div class="product__box">

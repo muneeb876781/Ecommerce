@@ -1023,15 +1023,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 p-0">
-                            @foreach ($products as $key => $product)
-                                @if (
-                                    $product->brand &&
-                                        $product->category &&
-                                        $product &&
-                                        $product->brand->state !== 0 &&
-                                        $product->category->state !== 0 &&
-                                        $product->state !== 0)
-                                    @if ($key <= 5 && $product->discountedPrice !== null)
+                            @foreach ($products->take(6) as $key => $product)
+                            @if (
+                                $product->brand &&
+                                $product->category &&
+                                $product &&
+                                $product->brand->state !== 0 &&
+                                $product->category->state !== 0 &&
+                                $product->state !== 0
+                                // $product->discountedPrice !== null
+                            )
                                         <div class="product-s">
                                             <div class="product__single">
                                                 <div class="product__box">
@@ -1129,7 +1130,6 @@
                                             </div>
                                         </div>
                                     @endif
-                                @endif
                             @endforeach
                         </div>
                         <div class="col-xl-6 col-lg-6">
@@ -1541,9 +1541,16 @@
                             <div class="text-center">No products in this category.</div>
                         @else
                             <div class="row">
-                                @foreach ($products as $key => $product)
-                                    @if ($product->brand->state !== 0 && $product->Category->state !== 0 && $product->state !== 0)
-                                        @if ($key <= 11)
+                                @foreach ($products->take(20) as $key => $product)
+                            @if (
+                                $product->brand &&
+                                $product->category &&
+                                $product &&
+                                $product->brand->state !== 0 &&
+                                $product->category->state !== 0 &&
+                                $product->state !== 0
+                                // $product->discountedPrice !== null
+                            )
                                             <div class="product-s" s>
                                                 <div class="product__single">
                                                     <div class="product__box">
@@ -1645,7 +1652,6 @@
                                                 </div>
                                             </div>
                                         @endif
-                                    @endif
                                 @endforeach
                             </div>
                         @endif
