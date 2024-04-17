@@ -46,6 +46,17 @@
             });
         </script>
     @endif
+
+    @if (session('state_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Status Successfully updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -69,6 +80,7 @@
                                             <th class="title">Image</th>
                                             <th class="title">Name</th>
                                             <th class="ranking">Description</th>
+                                            <th class="title">State</th>
                                             <th class="ranking">Actions</th>
                                         </tr>
                                     </thead>
@@ -80,8 +92,19 @@
                                                 <td style="width: 15%"><img style="width: 100px; height: 100px;"
                                                     src="{{ asset('storage/uploads/'.$category->image_url) }}"
                                                         alt="{{ $category->name }}" class="rounded-circle"></td>
-                                                <td style="width: 18%"><strong>{{ $category->name }}</strong> <br> </td>
-                                                <td style="width: 37%">{!! $category->description !!}</td>
+                                                <td style="width: 10%"><strong>{{ $category->name }}</strong> <br> </td>
+                                                <td style="width: 35%">{!! $category->description !!}</td>
+                                                <td style="width: 10%">
+                                                    <strong>{{ $category->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
+                                                    <form action="{{ route('toggleCategoryState', ['id' => $category->id]) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="state" value="{{ $category->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit" class="btn btn-sm {{ $category->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                            {{ $category->state == 1 ? 'Deactivate' : 'Activate' }}
+                                                        </button>
+                                                    </form>
+                                                </td>
                                                 <td style="width: 20%">
                                                     <a class="btn btn-link text-primary" href="#"
                                                         title="View Details" data-bs-toggle="modal"

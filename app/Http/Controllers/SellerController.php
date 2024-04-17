@@ -225,6 +225,8 @@ class SellerController extends Controller
 
         $request->validate([
             'bannerBrand' => 'required|exists:brands,id',
+            'bannerCategory' => 'required|exists:categories,id',
+            'bannerProduct' => 'required|exists:products,id',
             'BannerImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'bannerRemoteImage' => 'nullable|url',
         ]);
@@ -233,6 +235,9 @@ class SellerController extends Controller
         $banner->user_id = $user_id;
         $banner->shop_id = $shopId;
         $banner->brand_id = $request->input('bannerBrand');
+        $banner->category_id = $request->input('bannerCategory');
+        $banner->product_id = $request->input('bannerProduct');
+
 
         if ($request->hasFile('BannerImage')) {
             $image = $request->file('BannerImage');
@@ -250,7 +255,7 @@ class SellerController extends Controller
         return redirect()->back()->with('success', 'Banner added successfully.');
     }
 
-    public function destroy($id)
+    public function destroyBanner($id)
     {
         $banner = Banner::findOrFail($id);
         $banner->delete();
