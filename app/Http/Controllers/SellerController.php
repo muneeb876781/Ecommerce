@@ -222,23 +222,24 @@ class SellerController extends Controller
     {
         $user_id = auth()->id();
         $shopId = SellerShop::where('user_id', Auth::id())->value('id');
-
+    
         $request->validate([
             'bannerBrand' => 'required|exists:brands,id',
             'bannerCategory' => 'required|exists:categories,id',
             'bannerProduct' => 'required|exists:products,id',
-            'BannerImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bannerType' => 'required|in:main,sales',
+            'BannerImage' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             'bannerRemoteImage' => 'nullable|url',
         ]);
-
+    
         $banner = new Banner();
         $banner->user_id = $user_id;
         $banner->shop_id = $shopId;
         $banner->brand_id = $request->input('bannerBrand');
         $banner->category_id = $request->input('bannerCategory');
         $banner->product_id = $request->input('bannerProduct');
-
-
+        $banner->type = $request->input('bannerType'); 
+    
         if ($request->hasFile('BannerImage')) {
             $image = $request->file('BannerImage');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -247,13 +248,14 @@ class SellerController extends Controller
         } else {
             $imagePath = null;
         }
-
+    
         $banner->image_url = $imagePath;
         $banner->remote_image_url = $request->input('bannerRemoteImage');
         $banner->save();
-
+    
         return redirect()->back()->with('success', 'Banner added successfully.');
     }
+    
 
     public function destroyBanner($id)
     {

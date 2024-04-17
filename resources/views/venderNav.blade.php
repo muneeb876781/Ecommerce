@@ -188,7 +188,11 @@
                                     class="{{ Request::is('banners*') ? 'active' : '' }}">
                                     Main Banners
                                 </a></li>
-                            
+                            <li><a href="{{ route('banners') }}"
+                                    class="{{ Request::is('banners*') ? 'active' : '' }}">
+                                    Sale Banners
+                                </a></li>
+
                         </ul>
                     </li>
 

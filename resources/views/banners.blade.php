@@ -74,8 +74,8 @@
                                     <thead>
                                         <tr>
                                             <th class="serial-number">No.</th>
-                                            <th class="title">image</th>
                                             <th class="title">Info</th>
+                                            <th class="title">image</th>
                                             <th class="ranking">Actions</th>
                                         </tr>
                                     </thead>
@@ -88,6 +88,7 @@
                                                     <strong>Brand: </strong>{{ $banner->brand ? $banner->brand->name : 'Not added' }} <br>
                                                     <strong>Category: </strong>{{ $banner->Category ? $banner->Category->name : 'Not added' }} <br>
                                                     <strong>Product: </strong>{{ $banner->Product ? $banner->Product->name : 'Not added' }} <br>
+                                                    <strong>Type: </strong>{{ $banner->Type ? $banner->Type : 'Not added' }} <br>
                                                 </td>
                                                 <td style="width: 65%"><img style="width: 100%; height: auto;"
                                                         src="{{ asset('storage/uploads/' . $banner->image_url) }}"
@@ -178,6 +179,16 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="bannerType">Banner Type:</label>
+                                            <select class="form-control" id="bannerType" name="bannerType" class="form-control">
+                                                <option value="">Select Banner Type</option>
+                                                <option value="main">Main Banners</option>
+                                                <option value="sales">Sales Banners</option>
+                                            </select>
+                                        </div>
+                                        
                                     </div>
 
 
