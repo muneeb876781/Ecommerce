@@ -403,11 +403,13 @@
                                         <select name="category_id" id="category-select" class="form-control">
                                             <option value="">Categories</option>
                                             @foreach ($categories as $category)
-                                                <option
-                                                    style="text-align: center; box-shadow: 10 20px 20px -4px rgba(0,0,0,0.2);"
-                                                    value="{{ $category->id }}"
-                                                    {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                                    {{ $category->name }}</option>
+                                                @if ($category->state !== 0)
+                                                    <option
+                                                        style="text-align: center; box-shadow: 10 20px 20px -4px rgba(0,0,0,0.2);"
+                                                        value="{{ $category->id }}"
+                                                        {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                                        {{ $category->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -415,10 +417,12 @@
                                         <select name="brand_id" id="brand-select" class="form-control">
                                             <option value="">Brands</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}"
-                                                    {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
-                                                    {{ $brand->name }}
-                                                </option>
+                                                @if ($brand->state !== 0)
+                                                    <option value="{{ $brand->id }}"
+                                                        {{ request('brand_id') == $brand->id ? 'selected' : '' }}>
+                                                        {{ $brand->name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>

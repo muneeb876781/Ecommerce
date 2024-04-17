@@ -170,6 +170,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('storeBanner')
         ->middleware('seller');
     Route::delete('/banners/{id}', [SellerController::class, 'destroyBanner'])->name('bannerDestroy');
+    // Route::get('/saleBanners', [SellerController::class, 'saleBanners'])->name('saleBanners');
+
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])
         ->name('adminDashboard')

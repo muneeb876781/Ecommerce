@@ -585,7 +585,8 @@
                                                     $banner->Product &&
                                                     $banner->brand->state !== 0 &&
                                                     $banner->Category->state !== 0 &&
-                                                    $banner->Product->state !== 0)
+                                                    $banner->Product->state !== 0 && 
+                                                    $banner->Type === 'main')
                                                 @if ($banner->image_url)
                                                     <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
                                                         src="{{ asset('storage/uploads/' . $banner->image_url) }}"
@@ -1132,26 +1133,36 @@
                                     @endif
                             @endforeach
                         </div>
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="offer-banner offer--banner__bg mb-30" data-background="../images/sal1.jpg">
-                                <div class="offer--banner__text">
-                                    <span class="f-200 white-color">Cosmetics Items</span>
-                                    <h4 class="white-color f-900 mb-40">40% Flate</h4>
-                                    <a href="shop-collection.html">View Collection<i
-                                            class="icofont-long-arrow-right"></i></a>
+                        <style>
+                            .sale_banner{
+
+                            }
+
+                            .sale_banner img{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        </style>
+                        
+                        
+                        @foreach ($banners as $banner)
+                        @if (
+                            $banner->brand &&
+                            $banner->Category &&
+                            $banner->Product &&
+                            $banner->brand->state !== 0 &&
+                            $banner->Category->state !== 0 &&
+                            $banner->Product->state !== 0 && 
+                            $banner->Type === 'sales')
+                                <div class="col-xl-6 col-lg-6">
+                                    <div class="sale_banner">
+                                        <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="offer-banner offer--banner__bg mb-30" data-background="../images/sal2.jpg">
-                                <div class="offer--banner__text">
-                                    <span class="f-200 black-color">Gaming Items</span>
-                                    <h4 class="white-color f-900 mb-40">50% Flate</h4>
-                                    <a href="shop-collection.html">View Collection<i
-                                            class="icofont-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -1216,6 +1227,7 @@
             </div>
             <div class="categoriess">
                 @foreach ($categories as $key => $category)
+                @if($category->state !== 0)
                     @if ($key <= 15)
                         <a href="{{ route('shopcategory', ['id' => $category->id]) }}">
                             <div class="cats_card">
@@ -1225,6 +1237,8 @@
                             </div>
                         </a>
                     @endif
+                    @endif
+
                 @endforeach
             </div>
         </div>

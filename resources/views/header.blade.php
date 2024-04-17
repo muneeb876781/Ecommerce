@@ -549,8 +549,11 @@
                                         <select name="header-search" id="header--search__main">
                                             <option value="{{ route('shop') }}">All Categories</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                                    {{ $category->name }}</option>
+                                            @if($category->state !== 0)
+                                            <option
+                                                        value="{{ route('shopcategory', ['id' => $category->id]) }}">
+                                                        {{ $category->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -785,24 +788,28 @@
                             <button class="dropbtn"><strong>Shop By Departments</strong></button>
                             <div class="dropdown-content">
                                 @foreach ($categories as $key => $category)
-                                    @if ($key <= 9)
-                                        <div class="category">
-                                            <a href="{{ route('shopcategory', ['id' => $category->id]) }}"><img
-                                                    src="{{ asset('storage/uploads/' . $category->image_url) }}"
-                                                    alt="{{ $category->name }}"
-                                                    style="max-width: 50px; max-height: 50px; border-radius: 100px; margin-right: 15px;">{{ $category->name }}</a>
-                                            @if (count($category->subcategories) > 0)
-                                                <div class="subcategory">
-                                                    @foreach ($category->subcategories as $subcategory)
-                                                        <a
-                                                            href="{{ route('shopsubcategory', ['id' => $subcategory->id]) }}">
-                                                            {{ $subcategory->name }}</a>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
+                                    @if ($category->state !== 0)
+                                        @if ($key <= 6)
+                                            <div class="category">
+                                                <a href="{{ route('shopcategory', ['id' => $category->id]) }}"><img
+                                                        src="{{ asset('storage/uploads/' . $category->image_url) }}"
+                                                        alt="{{ $category->name }}"
+                                                        style="max-width: 50px; max-height: 50px; border-radius: 100px; margin-right: 15px;">{{ $category->name }}</a>
+                                                @if (count($category->subcategories) > 0)
+                                                    <div class="subcategory">
+                                                        @foreach ($category->subcategories as $subcategory)
+                                                            <a
+                                                                href="{{ route('shopsubcategory', ['id' => $subcategory->id]) }}">
+                                                                {{ $subcategory->name }}
+                                                            </a>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
                                     @endif
                                 @endforeach
+
                             </div>
                         </div>
                         <style>
@@ -864,15 +871,17 @@
                                         <a href="">Brands</a>
                                         <ul class="submenu">
                                             @foreach ($brands as $key => $brand)
-                                                @if ($key <= 4)
-                                                    <li>
-                                                        <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
-                                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                                                alt="{{ $brand->name }}"
-                                                                style="max-width: 70px; max-height: 70px;">
-                                                            {{ $brand->name }}
-                                                        </a>
-                                                    </li>
+                                                @if ($brand->state !== 0)
+                                                    @if ($key <= 4)
+                                                        <li>
+                                                            <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                                                <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                                                    alt="{{ $brand->name }}"
+                                                                    style="max-width: 70px; max-height: 70px;">
+                                                                {{ $brand->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -1211,7 +1220,7 @@
             menuBox.classList.toggle('show');
         }
 
-        
+
 
         document.getElementById('cart').addEventListener('click', function() {
             window.location.href = '{{ route('cart') }}';
