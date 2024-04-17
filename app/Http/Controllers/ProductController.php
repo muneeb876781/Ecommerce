@@ -314,4 +314,18 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success', 'All good!');
     }
+
+    public function toggleProductState(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect()->back()->with('error', 'product not found.');
+        }
+
+        $product->state = $request->input('state');
+        $product->save();
+
+        return redirect()->back()->with('state_success', 'product state toggled successfully.');
+    }
 }

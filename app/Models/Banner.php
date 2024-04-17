@@ -13,4 +13,14 @@ class Banner extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function Category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function Product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -125,6 +125,16 @@
             });
         </script>
     @endif
+    @if (session('state_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'State Successfully updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -194,6 +204,17 @@
                                                     @else
                                                         Out of Stock
                                                     @endif
+                                                </td>
+                                                <td style="width: 18%">
+                                                    <strong>{{ $product->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
+                                                    <form action="{{ route('toggleProductState', ['id' => $product->id]) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="state" value="{{ $product->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit" class="btn btn-sm {{ $product->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                            {{ $product->state == 1 ? 'Deactivate' : 'Activate' }}
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td style="width: 19%">
                                                     {{-- <a class="btn btn-link text-primary" href="#"

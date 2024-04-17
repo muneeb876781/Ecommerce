@@ -75,6 +75,7 @@
                                         <tr>
                                             <th class="serial-number">No.</th>
                                             <th class="title">image</th>
+                                            <th class="title">Info</th>
                                             <th class="ranking">Actions</th>
                                         </tr>
                                     </thead>
@@ -82,11 +83,17 @@
                                         @php $serialNumber = 1; @endphp
                                         @foreach ($banners as $banner)
                                             <tr>
-                                                <td style="width: 10%" class="serial-number">{{ $serialNumber++ }}</td>
-                                                <td style="width: 70%"><img style="width: 100%; height: auto;"
+                                                <td style="width: 5%" class="serial-number">{{ $serialNumber++ }}</td>
+                                                <td style="width: 20%">
+                                                    <strong>Brand: </strong>{{ $banner->brand ? $banner->brand->name : 'Not added' }} <br>
+                                                    <strong>Category: </strong>{{ $banner->Category ? $banner->Category->name : 'Not added' }} <br>
+                                                    <strong>Product: </strong>{{ $banner->Product ? $banner->Product->name : 'Not added' }} <br>
+                                                </td>
+                                                <td style="width: 65%"><img style="width: 100%; height: auto;"
                                                         src="{{ asset('storage/uploads/' . $banner->image_url) }}"
                                                         alt="{{ $banner->remote_image_url }}"></td>
-                                                <td style="width: 20%">
+
+                                                <td style="width: 10%">
                                                     <a class="btn btn-link text-primary" href="#"
                                                         title="View Details" data-bs-toggle="modal"
                                                         data-bs-target="#categoryDetailsModal"
@@ -102,18 +109,19 @@
 
                                                     <a class="btn btn-link text-warning" href="#" title="Edit">
                                                         <form style="display: inline"
-                                                              action="{{ route('bannerDestroy', ['id' => $banner->id]) }}"
-                                                              method="POST">
+                                                            action="{{ route('bannerDestroy', ['id' => $banner->id]) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button onclick="return confirm('Are you sure you want to delete this Banner?')"
-                                                                    type="submit" class="btn btn-link text-danger"
-                                                                    style="padding: 0; border: none; background: none;">
+                                                            <button
+                                                                onclick="return confirm('Are you sure you want to delete this Banner?')"
+                                                                type="submit" class="btn btn-link text-danger"
+                                                                style="padding: 0; border: none; background: none;">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
                                                     </a>
-                                                    
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -146,7 +154,33 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="bannerCategory">Banner Category:</label>
+                                            <select class="form-control" id="bannerCategory" name="bannerCategory"
+                                                class="form-control">
+                                                <option value="">Select Category</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="bannerProduct">Banner Product:</label>
+                                            <select class="form-control" id="bannerProduct" name="bannerProduct"
+                                                class="form-control">
+                                                <option value="">Select Product</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
+
+
 
                                 </div>
                             </div>
@@ -169,7 +203,7 @@
                                                 name="bannerRemoteImage" placeholder="Enter Banner Image URL">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="card-footer text-right">
                                         <button class="btn btn-primary">Add Banner</button>
                                     </div>

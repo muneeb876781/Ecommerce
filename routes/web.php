@@ -15,7 +15,6 @@ use App\Http\Controllers\OredrController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\AdminController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,11 +74,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/products/{id}', [ProductController::class, 'update'])
         ->name('productupdate')
         ->middleware('seller');
-
     Route::post('/products/reviews/{id}', [ReviewController::class, 'store'])->name('productreviewstore');
     Route::get('/reviews', [SellerController::class, 'reviews'])
         ->name('reviews')
         ->middleware('seller');
+    Route::put('/toggleProductState/{id}', [ProductController::class, 'toggleProductState'])->name('toggleProductState');
+
 
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categoryview')
@@ -96,6 +96,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/categories/{id}', [CategoryController::class, 'edit'])
         ->name('categoriesedit')
         ->middleware('seller');
+    Route::put('/toggleCategoryState/{id}', [CategoryController::class, 'toggleCategoryState'])->name('toggleCategoryState');
+
 
     Route::get('/subCategories', [SubCategoryController::class, 'index'])
         ->name('subCategoryview')
@@ -141,7 +143,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('attributesEdit')
         ->middleware('seller');
 
-
     Route::get('/order/{id}/downloadPDF', [OredrController::class, 'downloadPDF'])->name('downloadPDF');
 
     Route::get('/venderProfile', [SellerController::class, 'venderProfile'])->name('venderProfile');
@@ -155,9 +156,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('brandsEdit')
         ->middleware('seller');
     Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
-    Route::put('/toggleBrandState/{id}', [BrandController::class, 'toggleState'])
-    ->name('toggleBrandState');
-
+    Route::put('/toggleBrandState/{id}', [BrandController::class, 'toggleState'])->name('toggleBrandState');
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
     Route::get('/policies', [SellerController::class, 'policies'])->name('policies');
@@ -170,23 +169,27 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/storeBanner', [SellerController::class, 'storeBanner'])
         ->name('storeBanner')
         ->middleware('seller');
-    Route::delete('/banners/{id}', [SellerController::class, 'destroy'])->name('bannerDestroy');
+    Route::delete('/banners/{id}', [SellerController::class, 'destroyBanner'])->name('bannerDestroy');
 
-
-
-
-
-    Route::get('/adminDashboard', [AdminController::class, 'index'])->name('adminDashboard')->middleware('admin');
-    Route::get('/users', [AdminController::class, 'users'])->name('users')->middleware('admin');
-    Route::put('/users/{id}', [AdminController::class, 'editUser'])->name('editUser')->middleware('admin');
-    Route::post('/destroyUser/{id}', [AdminController::class, 'destroyUser'])->name('destroyUser')->middleware('admin');
-    Route::get('/shops', [AdminController::class, 'shops'])->name('shops')->middleware('admin');
-    Route::post('/destroyShop/{id}', [AdminController::class, 'destroyShop'])->name('destroyShop')->middleware('admin');
-    Route::get('/adminProfile', [AdminController::class, 'adminProfile'])->name('adminProfile')->middleware('admin');
-
+    Route::get('/adminDashboard', [AdminController::class, 'index'])
+        ->name('adminDashboard')
+        ->middleware('admin');
+    Route::get('/users', [AdminController::class, 'users'])
+        ->name('users')
+        ->middleware('admin');
+    Route::put('/users/{id}', [AdminController::class, 'editUser'])
+        ->name('editUser')
+        ->middleware('admin');
+    Route::post('/destroyUser/{id}', [AdminController::class, 'destroyUser'])
+        ->name('destroyUser')
+        ->middleware('admin');
+    Route::get('/shops', [AdminController::class, 'shops'])
+        ->name('shops')
+        ->middleware('admin');
+    Route::post('/destroyShop/{id}', [AdminController::class, 'destroyShop'])
+        ->name('destroyShop')
+        ->middleware('admin');
+    Route::get('/adminProfile', [AdminController::class, 'adminProfile'])
+        ->name('adminProfile')
+        ->middleware('admin');
 });
-
-
-
-
-        

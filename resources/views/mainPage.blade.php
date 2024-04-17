@@ -579,7 +579,13 @@
                                 <div class="slider">
                                     @foreach ($banners as $key => $banner)
                                         @if ($key <= 3)
-                                            @if ($banner->brand->state !== 0)
+                                            @if (
+                                                $banner->brand &&
+                                                    $banner->Category &&
+                                                    $banner->Product &&
+                                                    $banner->brand->state !== 0 &&
+                                                    $banner->Category->state !== 0 &&
+                                                    $banner->Product->state !== 0)
                                                 @if ($banner->image_url)
                                                     <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
                                                         src="{{ asset('storage/uploads/' . $banner->image_url) }}"
@@ -740,7 +746,7 @@
                                         height: auto;
                                     }
 
-                                    .navigation div{
+                                    .navigation div {
                                         height: 40px;
                                     }
                                 }
@@ -1018,7 +1024,13 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 p-0">
                             @foreach ($products as $key => $product)
-                                @if ($product->brand->state !== 0)
+                                @if (
+                                    $product->brand &&
+                                        $product->category &&
+                                        $product &&
+                                        $product->brand->state !== 0 &&
+                                        $product->category->state !== 0 &&
+                                        $product->state !== 0)
                                     @if ($key <= 5 && $product->discountedPrice !== null)
                                         <div class="product-s">
                                             <div class="product__single">
@@ -1530,7 +1542,7 @@
                         @else
                             <div class="row">
                                 @foreach ($products as $key => $product)
-                                    @if ($product->brand->state !== 0)
+                                    @if ($product->brand->state !== 0 && $product->Category->state !== 0 && $product->state !== 0)
                                         @if ($key <= 11)
                                             <div class="product-s" s>
                                                 <div class="product__single">

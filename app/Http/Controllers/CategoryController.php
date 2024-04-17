@@ -93,4 +93,18 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->back();
     }
+
+    public function toggleCategoryState(Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        if (!$category) {
+            return redirect()->back()->with('error', 'category not found.');
+        }
+
+        $category->state = $request->input('state');
+        $category->save();
+
+        return redirect()->back()->with('state_success', 'category state toggled successfully.');
+    }
 }
