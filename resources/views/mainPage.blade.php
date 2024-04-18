@@ -997,14 +997,75 @@
                                         {{-- <a class="nav-item nav-link active btn orange-bg-btn pure__black-color"
                                             id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                                             aria-controls="nav-home" aria-selected="true">Trending Items</a> --}}
-                                        <a class="nav-item active nav-link btn gray-bg-btn pure__black-color"
-                                            id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                                            aria-controls="nav-profile" aria-selected="false">Discounted Items</a>
+                                            <a class=" dtag "
+                                            id="nav-profile-tab" data-toggle="tab" href="#" role="tab"
+                                            aria-controls="nav-profile" aria-selected="false"> <span>Discounted Items</span> </a>
+
                                         {{-- <a class="  nav-item nav-link btn gray-bg-btn pure__black-color"
                                             id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                                             aria-controls="nav-contact" aria-selected="false">Popular
                                             Product</a> --}}
                                     </div>
+                                    <style>
+                                        .dtag {
+                                            cursor: pointer;
+                                            position: relative;
+                                            padding: 14px 30px;
+                                            border-radius: 50px;
+                                            /* line-height: 2.5rem; */
+                                            font-size: 17px;
+                                            font-weight: 600;
+                                            
+                                            border: 1px solid #012880;
+                                            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                                            box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+                                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                                    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+                                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+                                        }
+
+                                        .dtag span {
+                                            color: white;
+                                            background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
+                                            -webkit-background-clip: text;
+                                            background-clip: text;
+                                            filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+                                        }
+
+                                        .dtag::before {
+                                            content: "";
+                                            display: block;
+                                            height: 0.25rem;
+                                            position: absolute;
+                                            top: 0.5rem;
+                                            left: 50%;
+                                            transform: translateX(-50%);
+                                            width: calc(100% - 7.5rem);
+                                            background: #fff;
+                                            border-radius: 100%;
+                                            
+                                            opacity: 0.7;
+                                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                                        }
+
+                                        .dtag::after {
+                                            content: "";
+                                            display: block;
+                                            height: 0.25rem;
+                                            position: absolute;
+                                            bottom: 0.75rem;
+                                            left: 50%;
+                                            transform: translateX(-50%);
+                                            width: calc(100% - 7.5rem);
+                                            background: #fff;
+                                            border-radius: 100%;
+                                            
+                                            filter: blur(1px);
+                                            opacity: 0.05;
+                                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                                        }
+
+                                    </style>
                                 </nav>
                             </div>
                         </div>
@@ -1209,12 +1270,72 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-sm-6">
                     <div class="product-section mb-30">
-                        <h6 class="product--section__title f-800 white-color grenadier-bg">Categories</h6>
+                        <a class="dtag"><span>Categories</span></a>
                     </div>
                 </div>
+                <style>
+                    .dtag {
+                        cursor: pointer;
+                        position: relative;
+                        padding: 14px 30px;
+                        border-radius: 50px;
+                        /* line-height: 2.5rem; */
+                        font-size: 17px;
+                        font-weight: 600;
+                        
+                        border: 1px solid #012880;
+                        background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                        box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+                                                0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+                                                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+                    }
+
+                    .dtag span {
+                        color: white;
+                        background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+                    }
+
+                    .dtag::before {
+                        content: "";
+                        display: block;
+                        height: 0.25rem;
+                        position: absolute;
+                        top: 0.5rem;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: calc(100% - 7.5rem);
+                        background: #fff;
+                        border-radius: 100%;
+                        
+                        opacity: 0.7;
+                        background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                    }
+
+                    .dtag::after {
+                        content: "";
+                        display: block;
+                        height: 0.25rem;
+                        position: absolute;
+                        bottom: 0.75rem;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: calc(100% - 7.5rem);
+                        background: #fff;
+                        border-radius: 100%;
+                        
+                        filter: blur(1px);
+                        opacity: 0.05;
+                        background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                    }
+
+                </style>
                 <div class="col-sm-6">
                     <div class="all__product--link text-right mb-30">
-                        <a class="all-link" href="{{ route('shop') }}">Discover All Products<span
+                        <a class="all-link" href="{{ route('shop') }}">Discover All Categories<span
                                 class="lnr lnr-arrow-right"></span></a>
                     </div>
                 </div>
@@ -1533,9 +1654,69 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-sm-6">
                         <div class="product-section mb-30">
-                            <h6 class="product--section__title f-800 white-color grenadier-bg">Featured Items</h6>
+                            <a class="dtag"><span>Featured Items</span></a>
                         </div>
                     </div>
+                    <style>
+                        .dtag {
+                            cursor: pointer;
+                            position: relative;
+                            padding: 14px 30px;
+                            border-radius: 50px;
+                            /* line-height: 2.5rem; */
+                            font-size: 17px;
+                            font-weight: 600;
+                            
+                            border: 1px solid #012880;
+                            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                            box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+                        }
+    
+                        .dtag span {
+                            color: white;
+                            background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
+                            -webkit-background-clip: text;
+                            background-clip: text;
+                            filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+                        }
+    
+                        .dtag::before {
+                            content: "";
+                            display: block;
+                            height: 0.25rem;
+                            position: absolute;
+                            top: 0.5rem;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: calc(100% - 7.5rem);
+                            background: #fff;
+                            border-radius: 100%;
+                            
+                            opacity: 0.7;
+                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                        }
+    
+                        .dtag::after {
+                            content: "";
+                            display: block;
+                            height: 0.25rem;
+                            position: absolute;
+                            bottom: 0.75rem;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: calc(100% - 7.5rem);
+                            background: #fff;
+                            border-radius: 100%;
+                            
+                            filter: blur(1px);
+                            opacity: 0.05;
+                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                        }
+    
+                    </style>
                     <div class="col-sm-6">
                         <div class="all__product--link text-right mb-30">
                             <a class="all-link" href="{{ route('shop') }}">Discover All Products<span

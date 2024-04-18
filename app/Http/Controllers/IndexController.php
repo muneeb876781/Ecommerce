@@ -10,7 +10,7 @@ use App\Models\Cart;
 use App\Models\Review;
 use App\Models\Brand;
 use App\Models\Banner;
-
+use App\Models\Templates;
 
 
 class IndexController extends Controller
@@ -22,14 +22,14 @@ class IndexController extends Controller
     //     return view('indexPage', compact('products', 'categories'));
     // }
 
-    public function index(){
+    public function index()
+    {
         // $products = Product::orderBy('created_at', 'desc')->get();
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $reviews = Review::all();
         $brands = Brand::all();
-
 
         $user_id = auth()->id();
 
@@ -42,14 +42,22 @@ class IndexController extends Controller
             } else {
                 $totalPrice += $item->product->price * $item->quantity;
             }
-            
-            
         }
 
         $totalItems = $cart->sum('quantity');
 
         $banners = Banner::all();
 
-        return view('mainPage', compact('products', 'banners',  'reviews', 'brands',  'categories','subcategories', 'totalPrice', 'cart', 'totalItems'));
+        $template = Templates::where('state', 1)->first();
+
+        if ($template) {
+            if ($template->name == 'General') {
+                return view('mainPage', compact('products', 'banners', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+            } else {
+                return view('indexPage', compact('products', 'banners', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+            }
+        } else {
+            return view('mainPage', compact('products', 'banners', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+        }
     }
 }
