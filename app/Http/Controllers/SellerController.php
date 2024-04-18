@@ -381,4 +381,26 @@ class SellerController extends Controller
         return redirect()->back()->with('state_success', 'template state toggled successfully.');
     }
 
+    public function edit(Request $request, $id)
+    {
+        $template = Templates::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'editTemplateName' => 'required|string',
+            'editTemplateImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('editTemplateImage')) {
+            $image = $request->file('editTemplateImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('public/uploads', $imageName);
+            $template->image1_url = $imageName;
+        }
+
+        $template->name = $request->input('editTemplateName');
+        $template->save();
+
+        return redirect()->back()->with('update_success', 'Template updated successfully!');
+    }
+
 }
