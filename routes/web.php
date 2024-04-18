@@ -176,6 +176,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/templates', [SellerController::class, 'templates'])->name('templates');
     Route::post('/storeTemplates', [SellerController::class, 'storeTemplates'])->name('storeTemplates');
     Route::post('/activateTemplate/{id}', [SellerController::class, 'activateTemplate'])->name('activateTemplate');
+    Route::put('/templates/{id}', [SellerController::class, 'edit'])->name('templatesedit')->middleware('seller');
+
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])
         ->name('adminDashboard')

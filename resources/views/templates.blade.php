@@ -75,26 +75,78 @@
                                 <div class="card col-xl-4 col-md-6 col-sm-12">
                                     <div class="card-content">
                                         <div class="card-body pb-2 pt-3 mb-3">
-                                            <h4 class="card-title">{{$Template->name}}</h4>
+                                            <h4 class="card-title">
+                                                {{ $Template->name }}
+                                                <a class="btn btn-link text-warning" href="#" title="Edit"
+                                                    data-bs-toggle="modal" data-bs-target="#editTemplateModal"
+                                                    onclick="prepareEditTemplateModal('{{ $Template->id }}', '{{ $Template->name }}', '{{ $Template->image1_url }}')">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            </h4>
+
                                         </div>
-                                        <img class="img-fluid w-100" src="{{ asset('storage/uploads/'.$Template->image1_url) }}"
+                                        <img class="img-fluid w-100"
+                                            src="{{ asset('storage/uploads/' . $Template->image1_url) }}"
                                             alt="Card image cap">
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
                                         <span>Card Footer</span>
-                                        <form style="display: inline;" action="{{ route('activateTemplate', ['id' => $Template->id]) }}" method="POST">
+                                        <form style="display: inline;"
+                                            action="{{ route('activateTemplate', ['id' => $Template->id]) }}"
+                                            method="POST">
                                             @csrf
-                                            <input type="hidden" name="state" value="{{ $Template->state == 1 ? '0' : '1' }}">
-                                            <button type="submit" class="btn btn-{{ $Template->state == 1 ? 'danger' : 'success' }}">
+                                            <input type="hidden" name="state"
+                                                value="{{ $Template->state == 1 ? '0' : '1' }}">
+                                            <button type="submit"
+                                                class="btn btn-{{ $Template->state == 1 ? 'danger' : 'success' }}">
                                                 {{ $Template->state == 1 ? 'Deactivate' : 'Activate' }}
                                             </button>
                                         </form>
                                     </div>
-                                    
-                                    
                                 </div>
                             @endforeach
                         </div>
+                        <div class="modal fade" id="editTemplateModal" tabindex="-1"
+                            aria-labelledby="editTemplateModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editTemplateModalLabel">Edit Template</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editTemplateForm" action="#" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="mb-3">
+                                                <label for="editTemplateName" class="form-label">Template Name</label>
+                                                <input type="text" class="form-control" id="editTemplateName"
+                                                    name="editTemplateName" value="">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="editTemplateImage" class="form-label">Template Image</label>
+                                                <input type="file" class="form-control" id="editTemplateImage"
+                                                    name="editTemplateImage" value="{{ $Template->image1_url }}">
+
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            function prepareEditTemplateModal(TemplateId, TemplateName, TemplateImage) {
+                                document.getElementById('editTemplateName').value = TemplateName;
+                                // document.getElementById('editTemplateImage').value = TemplateImage;
+
+                                document.getElementById('editTemplateForm').action = `/templates/${TemplateId}`;
+                            }
+                        </script>
 
                     </div>
                 </div>
