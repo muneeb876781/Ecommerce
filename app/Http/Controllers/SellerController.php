@@ -224,10 +224,10 @@ class SellerController extends Controller
         $shopId = SellerShop::where('user_id', Auth::id())->value('id');
     
         $request->validate([
-            'bannerBrand' => 'required|exists:brands,id',
-            'bannerCategory' => 'required|exists:categories,id',
-            'bannerProduct' => 'required|exists:products,id',
-            'bannerType' => 'required|in:main,sales',
+            'bannerBrand' => 'nullable|exists:brands,id',
+            'bannerCategory' => 'nullable|exists:categories,id',
+            'bannerProduct' => 'nullable|exists:products,id',
+            'bannerType' => 'nullable|in:main,sales',
             'BannerImage' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             'bannerRemoteImage' => 'nullable|url',
         ]);
@@ -238,7 +238,7 @@ class SellerController extends Controller
         $banner->brand_id = $request->input('bannerBrand');
         $banner->category_id = $request->input('bannerCategory');
         $banner->product_id = $request->input('bannerProduct');
-        $banner->type = $request->input('bannerType'); 
+        $banner->Type = $request->input('bannerType'); 
     
         if ($request->hasFile('BannerImage')) {
             $image = $request->file('BannerImage');
@@ -263,5 +263,19 @@ class SellerController extends Controller
         $banner->delete();
 
         return redirect()->back()->with('banner_del_success', 'Banner deleted successfully.');
+    }
+
+    public function toggleBannerState(Request $request, $id)
+    {
+        $banner = Banner::find($id);
+
+        if (!$banner) {
+            return redirect()->back()->with('error', 'banner not found.');
+        }
+
+        $banner->state = $request->input('state');
+        $banner->save();
+
+        return redirect()->back()->with('state_success', 'banner state toggled successfully.');
     }
 }

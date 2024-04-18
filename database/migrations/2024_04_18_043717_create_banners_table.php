@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('shop_id')->constrained('seller_shops')->onDelete('cascade');
-            $table->string('remote_image_url', 1024)->nullable();
-            $table->string('image_url')->nullable();
+        Schema::table('banners', function (Blueprint $table) {
             $table->foreignId('brand_id')->nullable()->constrained()->onDelete('cascade');
-            $table->timestamps();
+
         });
     }
 
