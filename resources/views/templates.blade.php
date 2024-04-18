@@ -86,8 +86,10 @@
 
                                         </div>
                                         <img class="img-fluid w-100"
+                                            style="border: 1px solid rgba(0, 0, 0, 0.9); box-shadow: 20px 20px 14px -8px rgba(0, 0, 0, 0.2);"
                                             src="{{ asset('storage/uploads/' . $Template->image1_url) }}"
                                             alt="Card image cap">
+
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
                                         <span>Card Footer</span>
