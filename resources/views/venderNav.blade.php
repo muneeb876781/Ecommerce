@@ -197,6 +197,12 @@
                     </li>
 
                     <li>
+                        <a href="{{ route('templates') }}" class="{{ Request::is('templates*') ? 'active' : '' }}">
+                            <i class='bx bxs-meh-blank icon'></i> Templates
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="#">
                             <i class='bx bx-columns icon'></i>
                             Categories

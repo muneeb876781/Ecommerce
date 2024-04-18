@@ -173,7 +173,9 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/saleBanners', [SellerController::class, 'saleBanners'])->name('saleBanners');
     Route::put('/toggleBannerState/{id}', [SellerController::class, 'toggleBannerState'])->name('toggleBannerState');
 
-
+    Route::get('/templates', [SellerController::class, 'templates'])->name('templates');
+    Route::post('/storeTemplates', [SellerController::class, 'storeTemplates'])->name('storeTemplates');
+    Route::post('/activateTemplate/{id}', [SellerController::class, 'activateTemplate'])->name('activateTemplate');
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])
         ->name('adminDashboard')
