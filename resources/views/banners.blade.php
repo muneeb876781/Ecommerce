@@ -54,6 +54,17 @@
             });
         </script>
     @endif
+
+    @if (session('state_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'State Successfully Updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -89,6 +100,15 @@
                                                     <strong>Category: </strong>{{ $banner->Category ? $banner->Category->name : 'Not added' }} <br>
                                                     <strong>Product: </strong>{{ $banner->Product ? $banner->Product->name : 'Not added' }} <br>
                                                     <strong>Type: </strong>{{ $banner->Type ? $banner->Type : 'Not added' }} <br>
+                                                    <strong>State: {{ $banner->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
+                                                    <form action="{{ route('toggleBannerState', ['id' => $banner->id]) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="state" value="{{ $banner->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit" class="btn btn-sm {{ $banner->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                            {{ $banner->state == 1 ? 'Deactivate' : 'Activate' }}
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td style="width: 65%"><img style="width: 100%; height: auto;"
                                                         src="{{ asset('storage/uploads/' . $banner->image_url) }}"

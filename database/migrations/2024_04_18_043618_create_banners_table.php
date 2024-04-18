@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->string(('Type'));
+            $table->dropForeign(['brand_id']);
+    
+            $table->dropColumn('brand_id');
         });
     }
 

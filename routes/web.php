@@ -171,6 +171,8 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('seller');
     Route::delete('/banners/{id}', [SellerController::class, 'destroyBanner'])->name('bannerDestroy');
     // Route::get('/saleBanners', [SellerController::class, 'saleBanners'])->name('saleBanners');
+    Route::put('/toggleBannerState/{id}', [SellerController::class, 'toggleBannerState'])->name('toggleBannerState');
+
 
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])

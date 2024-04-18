@@ -577,30 +577,27 @@
                             <!-- partial:index.partial.html -->
                             <div class="containerr">
                                 <div class="slider">
-                                    @foreach ($banners as $key => $banner)
-                                        @if ($key <= 3)
-                                            @if (
-                                                $banner->brand &&
-                                                    $banner->Category &&
-                                                    $banner->Product &&
-                                                    $banner->brand->state !== 0 &&
-                                                    $banner->Category->state !== 0 &&
-                                                    $banner->Product->state !== 0 && 
-                                                    $banner->Type === 'main')
-                                                @if ($banner->image_url)
-                                                    <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
-                                                        src="{{ asset('storage/uploads/' . $banner->image_url) }}"
-                                                        alt="Image 1" />
-                                                @elseif (!$banner->image_url && $banner->remote_image_url)
-                                                    <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
-                                                        src="{{ asset('storage/uploads/' . $banner->image_url) }}"
-                                                        alt="Image 1" />
-                                                @else
-                                                    <span>No image available</span>
-                                                @endif
-                                            @endif
+                                @foreach ($banners as $key => $banner)
+                                    @if ($key <= 3 && $banner->state !== 0 && $banner->Type === 'main' &&
+                                        (($banner->brand && $banner->brand->state !== 0) ||
+                                         ($banner->Category && $banner->Category->state !== 0) ||
+                                         ($banner->Product && $banner->Product->state !== 0))
+                                    )
+                                        @if ($banner->image_url)
+                                            <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
+                                                src="{{ asset('storage/uploads/' . $banner->image_url) }}"
+                                                alt="Image 1" />
+                                        @elseif (!$banner->image_url && $banner->remote_image_url)
+                                            <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
+                                                src="{{ asset('storage/uploads/' . $banner->remote_image_url) }}"
+                                                alt="Image 1" />
+                                        @else
+                                            <span>No image available</span>
                                         @endif
-                                    @endforeach
+                                    @endif
+                                @endforeach
+                                
+                                
                                 </div>
                                 <div class="navigation">
                                     <div class="prev">&lt;</div>
@@ -1146,14 +1143,11 @@
                         
                         
                         @foreach ($banners as $banner)
-                        @if (
-                            $banner->brand &&
-                            $banner->Category &&
-                            $banner->Product &&
-                            $banner->brand->state !== 0 &&
-                            $banner->Category->state !== 0 &&
-                            $banner->Product->state !== 0 && 
-                            $banner->Type === 'sales')
+                        @if ($banner->Type === 'sales' && $banner->state !== 0 &&
+                                (($banner->brand && $banner->brand->state !== 0) ||
+                                 ($banner->Category && $banner->Category->state !== 0) ||
+                                 ($banner->Product && $banner->Product->state !== 0))
+                            )
                                 <div class="col-xl-6 col-lg-6 mt-10">
                                     <div class="sale_banner">
                                         <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
