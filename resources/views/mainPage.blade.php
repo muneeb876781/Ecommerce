@@ -577,7 +577,7 @@
                                 @if ($brand->state !== 0)
                                     <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
                                             <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                                style="width: 70px; height: auto;" alt="">
+                                                style="width: 100px; height: auto;" alt="">
                                             {{-- <p class="brtext">{{$brand->name}}</p> --}}
                                     </a>
                                 @endif
