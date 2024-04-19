@@ -12,6 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="manifest" href="site.webmanifest">
+    
 
     <title>Document</title>
     <style>
@@ -603,8 +604,13 @@
                                 
                                 </div>
                                 <div class="navigation">
-                                    <div class="prev">&lt;</div>
-                                    <div class="next">&gt;</div>
+                                    <div class="prev">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </div>
+                                    <div class="next">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                
                                 </div>
                             </div>
 
@@ -645,15 +651,21 @@
                                 }
 
                                 .navigation div {
-                                    background-color: rgba(0, 0, 0, 0.3);
+                                    /* background-color: rgba(0, 0, 0, 0.3); */
                                     color: #fff;
-                                    font-size: 24px;
+                                    font-size: 20px;
                                     width: 25px;
                                     height: 80px;
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
                                     cursor: pointer;
+                                    border: 1px solid #012880;
+                                    background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                                    box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+                                                0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+                                                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
                                 }
 
                                 .navigation .prev {
