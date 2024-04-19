@@ -568,6 +568,27 @@
             <div class="handle"></div>
         </div> --}}
 
+        <div class="brand">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="brand-active brand-active1">
+                            @foreach ($brands as $brand)
+                                @if ($brand->state !== 0)
+                                    <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                                style="width: 70px; height: auto;" alt="">
+                                            {{-- <p class="brtext">{{$brand->name}}</p> --}}
+                                    </a>
+                                @endif
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="her0_section">
             <section>
                 <div class="rt-container">
@@ -2229,7 +2250,7 @@
         <!-- Product end -->
 
         <!-- Brand -->
-        <div class="brand">
+        {{-- <div class="brand">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -2249,7 +2270,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Brand End -->
 
         <!-- Subscribe -->

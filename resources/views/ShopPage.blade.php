@@ -332,7 +332,7 @@
                                             <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
                                                 <div class="single-brand">
                                                     <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                                        style="width: 100px; height: auto;" alt="">
+                                                        style="width: 70px; height: auto;" alt="">
                                                 </div>
                                             </a>
                                         @endif
