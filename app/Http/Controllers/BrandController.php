@@ -122,4 +122,18 @@ class BrandController extends Controller
 
         return redirect()->back()->with('state_success', 'Brand state toggled successfully.');
     }
+
+    public function activateAllBrands()
+    {
+        Brand::query()->update(['state' => 1]);
+
+        return redirect()->back()->with('activate_success', 'All Brandz activated successfully.');
+    }
+
+    public function deactivateAllBrands()
+    {
+        Brand::query()->update(['state' => 0]);
+
+        return redirect()->back()->with('deactivate_success', 'All Brands deactivated successfully.');
+    }
 }

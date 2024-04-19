@@ -65,6 +65,26 @@
             });
         </script>
     @endif
+    @if (session('activate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All State Successfully updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
+    @if (session('deactivate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All State Successfully updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -77,7 +97,21 @@
                 <div class="col-md-12">
                     <div id="allCategories" class="card">
                         <div class="card-header">
-                            <h4> Categories</h4>
+                            <h4> Banners</h4>
+                            <div class="btn-group" role="group">
+                                <form action="{{ route('deactivateAllBanners') }}" method="post" class="mr-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="0">
+                                    <button type="submit" class="btn btn-sm btn-danger">Deactivate All</button>
+                                </form>
+                                <form action="{{ route('activateAllBanners') }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="1">
+                                    <button type="submit" class="btn btn-sm btn-success">Activate All</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -96,16 +130,29 @@
                                             <tr>
                                                 <td style="width: 5%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 20%">
-                                                    <strong>Brand: </strong>{{ $banner->brand ? $banner->brand->name : 'Not added' }} <br>
-                                                    <strong>Category: </strong>{{ $banner->Category ? $banner->Category->name : 'Not added' }} <br>
-                                                    <strong>Product: </strong>{{ $banner->Product ? $banner->Product->name : 'Not added' }} <br>
-                                                    <strong>Type: </strong>{{ $banner->Type ? $banner->Type : 'Not added' }} <br>
-                                                    <strong>State: {{ $banner->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
-                                                    <form action="{{ route('toggleBannerState', ['id' => $banner->id]) }}" method="post">
+                                                    <strong>Brand:
+                                                    </strong>{{ $banner->brand ? $banner->brand->name : 'Not added' }}
+                                                    <br>
+                                                    <strong>Category:
+                                                    </strong>{{ $banner->Category ? $banner->Category->name : 'Not added' }}
+                                                    <br>
+                                                    <strong>Product:
+                                                    </strong>{{ $banner->Product ? $banner->Product->name : 'Not added' }}
+                                                    <br>
+                                                    <strong>Type:
+                                                    </strong>{{ $banner->Type ? $banner->Type : 'Not added' }} <br>
+                                                    <strong>State:
+                                                        {{ $banner->state == 1 ? 'Activated' : 'Deactivated' }}</strong>
+                                                    <br>
+                                                    <form
+                                                        action="{{ route('toggleBannerState', ['id' => $banner->id]) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="hidden" name="state" value="{{ $banner->state == 1 ? '0' : '1' }}">
-                                                        <button type="submit" class="btn btn-sm {{ $banner->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                        <input type="hidden" name="state"
+                                                            value="{{ $banner->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit"
+                                                            class="btn btn-sm {{ $banner->state == 1 ? 'btn-danger' : 'btn-success' }}">
                                                             {{ $banner->state == 1 ? 'Deactivate' : 'Activate' }}
                                                         </button>
                                                     </form>
@@ -202,13 +249,14 @@
 
                                         <div class="mb-3">
                                             <label for="bannerType">Banner Type:</label>
-                                            <select class="form-control" id="bannerType" name="bannerType" class="form-control">
+                                            <select class="form-control" id="bannerType" name="bannerType"
+                                                class="form-control">
                                                 <option value="">Select Banner Type</option>
                                                 <option value="main">Main Banners</option>
                                                 <option value="sales">Sales Banners</option>
                                             </select>
                                         </div>
-                                        
+
                                     </div>
 
 

@@ -135,6 +135,26 @@
             });
         </script>
     @endif
+    @if (session('activate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All State Successfully updated!',
+                text: '{{ session('activate_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
+    @if (session('deactivate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All State Successfully updated!',
+                text: '{{ session('deactivate_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -148,6 +168,23 @@
                     <div id="allProducts" class="card">
                         <div class="card-header">
                             <h4>Products</h4>
+                            <div class="btn-group" role="group">
+                                <form action="{{ route('deactivateAllProducts') }}" method="post" class="mr-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="0">
+                                    <button type="submit" class="btn btn-sm btn-danger">Deactivate All</button>
+                                </form>
+                                <form action="{{ route('activateAllProducts') }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="1">
+                                    <button type="submit" class="btn btn-sm btn-success">Activate All</button>
+                                </form>
+                            </div>
+                            
+                            
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -165,8 +202,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php $serialNumber = 1; @endphp
+                                       
                                         @foreach ($products as $product)
+                                        @php $serialNumber = 1; @endphp
+                                        
                                             <tr>
                                                 <td style="width: 5%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 12%">

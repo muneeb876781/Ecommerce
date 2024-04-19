@@ -79,7 +79,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('reviews')
         ->middleware('seller');
     Route::put('/toggleProductState/{id}', [ProductController::class, 'toggleProductState'])->name('toggleProductState');
-
+    Route::put('/activateAllProducts', [ProductController::class, 'activateAllProducts'])->name('activateAllProducts');
+    Route::put('/deactivateAllProducts', [ProductController::class, 'deactivateAllProducts'])->name('deactivateAllProducts');
 
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categoryview')
@@ -97,7 +98,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('categoriesedit')
         ->middleware('seller');
     Route::put('/toggleCategoryState/{id}', [CategoryController::class, 'toggleCategoryState'])->name('toggleCategoryState');
-
+    Route::put('/activateAllCategories', [CategoryController::class, 'activateAllCategories'])->name('activateAllCategories');
+    Route::put('/deactivateAllCategories', [CategoryController::class, 'deactivateAllCategories'])->name('deactivateAllCategories');
+    
 
     Route::get('/subCategories', [SubCategoryController::class, 'index'])
         ->name('subCategoryview')
@@ -157,6 +160,8 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('seller');
     Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
     Route::put('/toggleBrandState/{id}', [BrandController::class, 'toggleState'])->name('toggleBrandState');
+    Route::put('/activateAllBrands', [BrandController::class, 'activateAllBrands'])->name('activateAllBrands');
+    Route::put('/deactivateAllBrands', [BrandController::class, 'deactivateAllBrands'])->name('deactivateAllBrands');
 
     Route::get('/finance', [OredrController::class, 'finance'])->name('finance');
     Route::get('/policies', [SellerController::class, 'policies'])->name('policies');
@@ -172,12 +177,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/banners/{id}', [SellerController::class, 'destroyBanner'])->name('bannerDestroy');
     // Route::get('/saleBanners', [SellerController::class, 'saleBanners'])->name('saleBanners');
     Route::put('/toggleBannerState/{id}', [SellerController::class, 'toggleBannerState'])->name('toggleBannerState');
+    Route::put('/deactivateAllBanners', [SellerController::class, 'deactivateAllBanners'])->name('deactivateAllBanners');
+    Route::put('/activateAllBanners', [SellerController::class, 'activateAllBanners'])->name('activateAllBanners');
 
     Route::get('/templates', [SellerController::class, 'templates'])->name('templates');
     Route::post('/storeTemplates', [SellerController::class, 'storeTemplates'])->name('storeTemplates');
     Route::post('/activateTemplate/{id}', [SellerController::class, 'activateTemplate'])->name('activateTemplate');
-    Route::put('/templates/{id}', [SellerController::class, 'edit'])->name('templatesedit')->middleware('seller');
-
+    Route::put('/templates/{id}', [SellerController::class, 'edit'])
+        ->name('templatesedit')
+        ->middleware('seller');
 
     Route::get('/adminDashboard', [AdminController::class, 'index'])
         ->name('adminDashboard')

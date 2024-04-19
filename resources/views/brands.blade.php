@@ -50,6 +50,27 @@
         </script>
     @endif
 
+    @if (session('activate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All State Successfully updated!',
+                text: '{{ session('activate_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
+    @if (session('deactivate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All State Successfully updated!',
+                text: '{{ session('deactivate_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
+
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
             <div class="content-header">
@@ -62,6 +83,20 @@
                     <div id="allBrands" class="card">
                         <div class="card-header">
                             <h4>Brands</h4>
+                            <div class="btn-group" role="group">
+                                <form action="{{ route('deactivateAllBrands') }}" method="post" class="mr-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="0">
+                                    <button type="submit" class="btn btn-sm btn-danger">Deactivate All</button>
+                                </form>
+                                <form action="{{ route('activateAllBrands') }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="1">
+                                    <button type="submit" class="btn btn-sm btn-success">Activate All</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
