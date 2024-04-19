@@ -2109,15 +2109,24 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 
 /* 9. Brand */
 .brand-active {
-    padding-top: 55px;
-    border-top: 1px solid #e0e0e0;
-    padding-bottom: 70px;
+    /* padding-top: 55px; */
+    /* border-top: 1px solid #e0e0e0; */
+    /* padding-bottom: 70px; */
 }
 
 .brand-active1 {
-    padding-top: 15px;
+    padding-top: 0;
     /* border-top: 1px solid #e0e0e0; */
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.brtext{
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.singlebrand{
 }
 
 .brand-two .brand-active {
