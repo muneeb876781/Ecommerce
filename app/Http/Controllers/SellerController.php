@@ -328,7 +328,7 @@ class SellerController extends Controller
         $shopId = SellerShop::where('user_id', Auth::id())->value('id');
 
         $template = new Templates();
-        $template->user_id = auth()->id(); 
+        $template->user_id = auth()->id();
         $template->shop_id = $shopId;
         $template->name = $validatedData['TemplateName'];
 
@@ -403,4 +403,17 @@ class SellerController extends Controller
         return redirect()->back()->with('update_success', 'Template updated successfully!');
     }
 
+    public function activateAllBanners()
+    {
+        Banner::query()->update(['state' => 1]);
+
+        return redirect()->back()->with('activate_success', 'All Banners activated successfully.');
+    }
+
+    public function deactivateAllBanners()
+    {
+        Banner::query()->update(['state' => 0]);
+
+        return redirect()->back()->with('deactivate_success', 'All Banners deactivated successfully.');
+    }
 }

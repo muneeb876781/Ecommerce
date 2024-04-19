@@ -107,4 +107,18 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('state_success', 'category state toggled successfully.');
     }
+
+    public function activateAllCategories()
+    {
+        Category::query()->update(['state' => 1]);
+
+        return redirect()->back()->with('activate_success', 'All Category activated successfully.');
+    }
+
+    public function deactivateAllCategories()
+    {
+        Category::query()->update(['state' => 0]);
+
+        return redirect()->back()->with('deactivate_success', 'All Category deactivated successfully.');
+    }
 }

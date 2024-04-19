@@ -328,4 +328,18 @@ class ProductController extends Controller
 
         return redirect()->back()->with('state_success', 'product state toggled successfully.');
     }
+
+    public function activateAllProducts()
+    {
+        Product::query()->update(['state' => 1]);
+
+        return redirect()->back()->with('activate_success', 'All products activated successfully.');
+    }
+
+    public function deactivateAllProducts()
+    {
+        Product::query()->update(['state' => 0]);
+
+        return redirect()->back()->with('deactivate_success', 'All products deactivated successfully.');
+    }
 }

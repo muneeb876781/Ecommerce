@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/apexcharts/apexcharts.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
 
 
@@ -57,6 +58,26 @@
             });
         </script>
     @endif
+    @if (session('activate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All States Successfully updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
+    @if (session('deactivate_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'All States Successfully updated!',
+                text: '{{ session('state_success') }}',
+                confirmButtonText: 'Close'
+            });
+        </script>
+    @endif
     @include('venderNav')
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
@@ -70,6 +91,20 @@
                     <div id="allCategories" class="card">
                         <div class="card-header">
                             <h4>Categories</h4>
+                            <div class="btn-group" role="group">
+                                <form action="{{ route('deactivateAllCategories') }}" method="post" class="mr-2">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="0">
+                                    <button type="submit" class="btn btn-sm btn-danger">Deactivate All</button>
+                                </form>
+                                <form action="{{ route('activateAllCategories') }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="state" value="1">
+                                    <button type="submit" class="btn btn-sm btn-success">Activate All</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -90,17 +125,23 @@
                                             <tr>
                                                 <td style="width: 10%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 15%"><img style="width: 100px; height: 100px;"
-                                                    src="{{ asset('storage/uploads/'.$category->image_url) }}"
+                                                        src="{{ asset('storage/uploads/' . $category->image_url) }}"
                                                         alt="{{ $category->name }}" class="rounded-circle"></td>
-                                                <td style="width: 10%"><strong>{{ $category->name }}</strong> <br> </td>
+                                                <td style="width: 10%"><strong>{{ $category->name }}</strong> <br>
+                                                </td>
                                                 <td style="width: 35%">{!! $category->description !!}</td>
                                                 <td style="width: 10%">
-                                                    <strong>{{ $category->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
-                                                    <form action="{{ route('toggleCategoryState', ['id' => $category->id]) }}" method="post">
+                                                    <strong>{{ $category->state == 1 ? 'Activated' : 'Deactivated' }}</strong>
+                                                    <br>
+                                                    <form
+                                                        action="{{ route('toggleCategoryState', ['id' => $category->id]) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="hidden" name="state" value="{{ $category->state == 1 ? '0' : '1' }}">
-                                                        <button type="submit" class="btn btn-sm {{ $category->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                        <input type="hidden" name="state"
+                                                            value="{{ $category->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit"
+                                                            class="btn btn-sm {{ $category->state == 1 ? 'btn-danger' : 'btn-success' }}">
                                                             {{ $category->state == 1 ? 'Deactivate' : 'Activate' }}
                                                         </button>
                                                     </form>
@@ -161,13 +202,13 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="CategoriesDescription">Categories Description:</label>
-                                            <textarea class="form-control" id="editor" name="CategoriesDescription"
-                                                placeholder="Enter Product Description"></textarea>
+                                            <textarea class="form-control" id="editor" name="CategoriesDescription" placeholder="Enter Product Description"></textarea>
                                         </div>
-                                        <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+                                        <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/7/tinymce.min.js"
+                                            referrerpolicy="origin"></script>
                                         <script>
                                             tinymce.init({
-                                                selector: 'textarea', 
+                                                selector: 'textarea',
                                                 plugins: 'code table lists',
                                                 toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
                                                 height: 250
@@ -252,7 +293,7 @@
     </div>
 
 
-   
+
     <!-- DataTables Script -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
