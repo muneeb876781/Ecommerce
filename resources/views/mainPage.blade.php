@@ -1658,20 +1658,15 @@
                                                                 @endif
 
                                                                 @if ($product->quantity == 0)
-                                                                    <span class="out-of-stock-tag">Out of Stock</span>
-                                                                @elseif ($product->discountedPrice)
-                                                                    @php
-                                                                        $salePercentage =
-                                                                            (($product->price -
-                                                                                $product->discountedPrice) /
-                                                                                $product->price) *
-                                                                            100;
-                                                                    @endphp
-                                                                    @if ($salePercentage > 0)
-                                                                        <span class="sale-tag">
-                                                                            {{ round($salePercentage) }}% Off</span>
-                                                                    @endif
+                                                                <span class="out-of-stock-tag out-of-stock-tag-new">Out of Stock</span>
+                                                            @elseif ($product->discountedPrice)
+                                                                @php
+                                                                    $salePercentage = (($product->price - $product->discountedPrice) / $product->price) * 100;
+                                                                @endphp
+                                                                @if ($salePercentage > 0)
+                                                                    <span class="sale-tag sale-tag-new">{{ round($salePercentage) }}% Off</span>
                                                                 @endif
+                                                            @endif
                                                             </a>
                                                             <div class="product-action">
                                                                 <a href="#"><span

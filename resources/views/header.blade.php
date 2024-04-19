@@ -1164,7 +1164,7 @@
                 </div>
                 <div class="button-wrapper">
                     <button id="cart" class="cart-icon"><i class="fas fa-shopping-cart"></i><span
-                            class="badge">3</span></button>
+                            class="badge">{{$totalItems}}</span></button>
                     <span>Cart</span>
                 </div>
                 <div class="button-wrapper">
