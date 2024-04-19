@@ -330,8 +330,11 @@
                                     @foreach ($brands as $brand)
                                         @if ($brand->state !== 0)
                                             <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
-                                                    <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                                        style="width: 100px; height: auto;" alt="">
+                                                <div class="single-brand">
+                                                    <img src="{{ asset('storage/uploads/' . $brand->image_url) }}" class="brand-image" alt="">
+                                                </div>
+                                                
+                                                
                                             </a>
                                         @endif
                                     @endforeach

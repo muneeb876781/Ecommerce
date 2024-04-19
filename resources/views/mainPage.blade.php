@@ -15,54 +15,35 @@
 
     <title>Document</title>
     <style>
-        .sale-tag {
+        .sale-tag-new, .out-of-stock-tag-new {
             position: absolute;
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 1;
+            color: white;
+            border: 1px solid #012880;
+            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+        }
+    
+        .sale-tag-new {
             top: 10px;
             left: 10px;
-            background-color: #f00;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            z-index: 1;
+            background-color: #FF89D6; 
+            color: #fff; 
         }
-
-        @media (max-width: 500px) {
-            .sale-tag {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 412px) {
-            .sale-tag {
-                font-size: 10px;
-            }
-        }
-
-        .out-of-stock-tag {
-            position: absolute;
+    
+        .out-of-stock-tag-new {
             top: 10px;
             right: 10px;
-            background-color: #ff0000;
-            color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            z-index: 1;
+            background-color: #FF89D6; 
+            color: #fff;
         }
-
-        @media (max-width: 500px) {
-            .out-of-stock-tag {
-                font-size: 12px;
+    
+        @media (max-width: 760px) {
+            .sale-tag-new, .out-of-stock-tag-new {
+                font-size: 10px; 
+                padding: 3px 6px; 
             }
-        }
-
-        @media (max-width: 412px) {
-            .out-of-stock-tag {
-                font-size: 10px;
-            }
-        }
-
-        .star-gold {
-            color: gold;
         }
     </style>
 
@@ -576,9 +557,10 @@
                             @foreach ($brands as $brand)
                                 @if ($brand->state !== 0)
                                     <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
-                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
-                                                style="width: 100px; height: auto;" alt="">
-                                            {{-- <p class="brtext">{{$brand->name}}</p> --}}
+                                        <div class="single-brand">
+                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}" class="brand-image" alt="">
+                                        </div>
+                                        
                                     </a>
                                 @endif
                             @endforeach
@@ -1018,7 +1000,7 @@
                                         {{-- <a class="nav-item nav-link active btn orange-bg-btn pure__black-color"
                                             id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                                             aria-controls="nav-home" aria-selected="true">Trending Items</a> --}}
-                                            <a class=" dtag "
+                                            <a class="dtag"
                                             id="nav-profile-tab" data-toggle="tab" href="#" role="tab"
                                             aria-controls="nav-profile" aria-selected="false"> <span>Discounted Items</span> </a>
 
@@ -1032,19 +1014,18 @@
                                             cursor: pointer;
                                             position: relative;
                                             padding: 14px 30px;
-                                            border-radius: 50px;
+                                            border-radius: 10px; /* Change border-radius to make the button rectangular */
                                             /* line-height: 2.5rem; */
                                             font-size: 17px;
                                             font-weight: 600;
-                                            
                                             border: 1px solid #012880;
                                             background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
                                             box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
-                                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
-                                                                    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
-                                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+                                                        0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                        0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+                                                        0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
                                         }
-
+                                    
                                         .dtag span {
                                             color: white;
                                             background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
@@ -1052,7 +1033,7 @@
                                             background-clip: text;
                                             filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
                                         }
-
+                                    
                                         .dtag::before {
                                             content: "";
                                             display: block;
@@ -1064,11 +1045,10 @@
                                             width: calc(100% - 7.5rem);
                                             background: #fff;
                                             border-radius: 100%;
-                                            
                                             opacity: 0.7;
                                             background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
                                         }
-
+                                    
                                         .dtag::after {
                                             content: "";
                                             display: block;
@@ -1080,13 +1060,19 @@
                                             width: calc(100% - 7.5rem);
                                             background: #fff;
                                             border-radius: 100%;
-                                            
                                             filter: blur(1px);
                                             opacity: 0.05;
                                             background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
                                         }
-
+                                    
+                                        @media (max-width: 760px) {
+                                            .dtag {
+                                                padding: 10px 20px;
+                                                font-size: 10px; 
+                                            }
+                                        }
                                     </style>
+                                    
                                 </nav>
                             </div>
                         </div>
@@ -1110,8 +1096,8 @@
                                 $product &&
                                 $product->brand->state !== 0 &&
                                 $product->category->state !== 0 &&
-                                $product->state !== 0
-                                // $product->discountedPrice !== null
+                                $product->state !== 0 &&
+                                $product->discountedPrice !== null
                             )
                                         <div class="product-s">
                                             <div class="product__single">
@@ -1134,17 +1120,13 @@
                                                             @endif
 
                                                             @if ($product->quantity == 0)
-                                                                <span class="out-of-stock-tag">Out of Stock</span>
+                                                                <span class="out-of-stock-tag out-of-stock-tag-new">Out of Stock</span>
                                                             @elseif ($product->discountedPrice)
                                                                 @php
-                                                                    $salePercentage =
-                                                                        (($product->price - $product->discountedPrice) /
-                                                                            $product->price) *
-                                                                        100;
+                                                                    $salePercentage = (($product->price - $product->discountedPrice) / $product->price) * 100;
                                                                 @endphp
                                                                 @if ($salePercentage > 0)
-                                                                    <span class="sale-tag">
-                                                                        {{ round($salePercentage) }}% Off</span>
+                                                                    <span class="sale-tag sale-tag-new">{{ round($salePercentage) }}% Off</span>
                                                                 @endif
                                                             @endif
                                                         </a>
@@ -1294,66 +1276,7 @@
                         <a class="dtag"><span>Categories</span></a>
                     </div>
                 </div>
-                <style>
-                    .dtag {
-                        cursor: pointer;
-                        position: relative;
-                        padding: 14px 30px;
-                        border-radius: 50px;
-                        /* line-height: 2.5rem; */
-                        font-size: 17px;
-                        font-weight: 600;
-                        
-                        border: 1px solid #012880;
-                        background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
-                        box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
-                                                0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
-                                                0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
-                                                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
-                    }
-
-                    .dtag span {
-                        color: white;
-                        background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
-                        -webkit-background-clip: text;
-                        background-clip: text;
-                        filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
-                    }
-
-                    .dtag::before {
-                        content: "";
-                        display: block;
-                        height: 0.25rem;
-                        position: absolute;
-                        top: 0.5rem;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        width: calc(100% - 7.5rem);
-                        background: #fff;
-                        border-radius: 100%;
-                        
-                        opacity: 0.7;
-                        background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
-                    }
-
-                    .dtag::after {
-                        content: "";
-                        display: block;
-                        height: 0.25rem;
-                        position: absolute;
-                        bottom: 0.75rem;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        width: calc(100% - 7.5rem);
-                        background: #fff;
-                        border-radius: 100%;
-                        
-                        filter: blur(1px);
-                        opacity: 0.05;
-                        background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
-                    }
-
-                </style>
+                
                 <div class="col-sm-6">
                     <div class="all__product--link text-right mb-30">
                         <a class="all-link" href="{{ route('shop') }}">Discover All Categories<span
@@ -1678,66 +1601,7 @@
                             <a class="dtag"><span>Featured Items</span></a>
                         </div>
                     </div>
-                    <style>
-                        .dtag {
-                            cursor: pointer;
-                            position: relative;
-                            padding: 14px 30px;
-                            border-radius: 50px;
-                            /* line-height: 2.5rem; */
-                            font-size: 17px;
-                            font-weight: 600;
-                            
-                            border: 1px solid #012880;
-                            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
-                            box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
-                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
-                                                    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
-                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
-                        }
-    
-                        .dtag span {
-                            color: white;
-                            background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
-                            -webkit-background-clip: text;
-                            background-clip: text;
-                            filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
-                        }
-    
-                        .dtag::before {
-                            content: "";
-                            display: block;
-                            height: 0.25rem;
-                            position: absolute;
-                            top: 0.5rem;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            width: calc(100% - 7.5rem);
-                            background: #fff;
-                            border-radius: 100%;
-                            
-                            opacity: 0.7;
-                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
-                        }
-    
-                        .dtag::after {
-                            content: "";
-                            display: block;
-                            height: 0.25rem;
-                            position: absolute;
-                            bottom: 0.75rem;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            width: calc(100% - 7.5rem);
-                            background: #fff;
-                            border-radius: 100%;
-                            
-                            filter: blur(1px);
-                            opacity: 0.05;
-                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
-                        }
-    
-                    </style>
+                    
                     <div class="col-sm-6">
                         <div class="all__product--link text-right mb-30">
                             <a class="all-link" href="{{ route('shop') }}">Discover All Products<span
