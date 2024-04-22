@@ -789,10 +789,11 @@
                                                 <div class="spe-wrapper specs">
                                                     <ul>
                                                         <li class="title">Specifications</li>
-                                                        <li class="specification">{!! $product->specification !!}</li>
+                                                        <li class="specification" style="word-wrap: break-word;">{!! $product->specification !!}</li>
                                                     </ul>
                                                 </div>
                                             </div>
+                                            
                                         </div>
 
 
