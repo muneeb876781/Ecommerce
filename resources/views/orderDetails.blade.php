@@ -74,15 +74,15 @@
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $order->first_name }} {{ $order->last_name }}</h5>
-                                    <p class="card-text"> <strong>Email:</strong> {{ $order->email }}</p>
-                                    <p class="card-text"><strong>Contact Number:</strong> {{ $order->contact_number }}
+                                    <p class="mb-3"> <strong>Email:</strong> {{ $order->email }}</p>
+                                    <p class="mb-3"><strong>Contact Number:</strong> {{ $order->contact_number }}
                                     </p>
-                                    <p class="card-text"><strong>Delivery Address:</strong>
+                                    <p class="mb-3"><strong>Delivery Address:</strong>
                                         {{ $order->delivery_address }}</p>
-                                    <p class="card-text"><strong>Postal Code:</strong> {{ $order->postal_code }}</p>
-                                    <p class="card-text"><strong>Special Instructions:</strong>
+                                    <p class="mb-3"><strong>Postal Code:</strong> {{ $order->postal_code }}</p>
+                                    <p class="mb-3"><strong>Special Instructions:</strong>
                                         {{ $order->special_instructions }}</p>
-                                    <p class="card-text"><strong>Sub Total:</strong> {{ $order->total_price }}</p>
+                                    <p class="mb-3"><strong>Sub Total:</strong> {{ $order->total_price }}</p>
                                 </div>
                             </div>
                         </div>

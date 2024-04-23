@@ -13,7 +13,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="manifest" href="site.webmanifest">
 
-
+    <!-- Meta Pixel Code -->
+    <script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '910992237218488');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=910992237218488&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Meta Pixel Code -->
     <style>
         .sale-tag {
             position: absolute;
@@ -159,52 +185,52 @@
         }
 
         .color-attribute {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
 
-    .color-option {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        border: 1px solid #ccc;
-        cursor: pointer;
-        position: relative;
-    }
+        .color-option {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            position: relative;
+        }
 
-    .color-value {
-        display: block;
-        text-align: center;
-        margin-top: 5px;
-    }
+        .color-value {
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+        }
 
-    .cart-button {
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        text-align: center;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        .cart-button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .cart-button:hover {
-        background-color: #0056b3;
-    }
+        .cart-button:hover {
+            background-color: #0056b3;
+        }
 
-    .color-option.selected::after {
-        content: '\2713';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #fff;
-    }
+        .color-option.selected::after {
+            content: '\2713';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+        }
 
         .video-container {
             position: relative;
@@ -669,9 +695,9 @@
                                                         @foreach ($attribute->productAttribute->attributeValues->where('product_id', $product->id) as $val)
                                                             <div style="text-align: center;">
                                                                 <span class="color-option"
-                                                                      style="background-color: {{ $val->value }}"
-                                                                      data-color="{{ $val->value }}"
-                                                                      title="{{ $val->value }}"></span>
+                                                                    style="background-color: {{ $val->value }}"
+                                                                    data-color="{{ $val->value }}"
+                                                                    title="{{ $val->value }}"></span>
                                                                 <span class="color-value">{{ $val->value }}</span>
                                                             </div>
                                                         @endforeach
@@ -788,13 +814,14 @@
                                                 <div class="spe-wrapper specs">
                                                     <ul>
                                                         <li class="title">Specifications</li>
-                                                        <li class="specification" style="word-wrap: break-word;">{!! $product->specification !!}</li>
+                                                        <li class="specification" style="word-wrap: break-word;">
+                                                            {!! $product->specification !!}</li>
                                                         {{-- <li class="specification" style="word-wrap: break-word;">{{$product->specification}}</li> --}}
 
                                                     </ul>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
 
 
