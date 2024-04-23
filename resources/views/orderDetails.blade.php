@@ -39,6 +39,8 @@
                                     <option value="Accepted" {{ $order->order_status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
                                     <option value="Completed" {{ $order->order_status === 'Completed' ? 'selected' : '' }}>Completed</option>
                                     <option value="Rejected" {{ $order->order_status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                                    <option value="Returned" {{ $order->order_status === 'Returned' ? 'selected' : '' }}>Returned</option>
+
                                 </select>
                                 <button class="btn btn-primary" type="submit">Update Status</button>
                             </div>

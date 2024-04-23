@@ -764,7 +764,6 @@
                                                 }
                                             }
                                         </style>
-
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 mb-30">
                                                 <div class="spe-wrapper">
@@ -790,6 +789,8 @@
                                                     <ul>
                                                         <li class="title">Specifications</li>
                                                         <li class="specification" style="word-wrap: break-word;">{!! $product->specification !!}</li>
+                                                        {{-- <li class="specification" style="word-wrap: break-word;">{{$product->specification}}</li> --}}
+
                                                     </ul>
                                                 </div>
                                             </div>
