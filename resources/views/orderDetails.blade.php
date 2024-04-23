@@ -31,15 +31,21 @@
                 <h1>Orders Details</h1>
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="{{ route('udateOrderStatus', ['id'  => $order->id]) }}" method="POST">
+                        <form action="{{ route('udateOrderStatus', ['id' => $order->id]) }}" method="POST">
                             @csrf
                             <div class="input-group mb-2">
-                                <select class="form-select form-control-lg" name="status" aria-label="Update Order Status">
-                                    <option value="Pending" {{ $order->order_status === 'Pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="Accepted" {{ $order->order_status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
-                                    <option value="Completed" {{ $order->order_status === 'Completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="Rejected" {{ $order->order_status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
-                                    <option value="Returned" {{ $order->order_status === 'Returned' ? 'selected' : '' }}>Returned</option>
+                                <select class="form-select form-control-lg" name="status"
+                                    aria-label="Update Order Status">
+                                    <option value="Pending" {{ $order->order_status === 'Pending' ? 'selected' : '' }}>
+                                        Pending</option>
+                                    <option value="Accepted"
+                                        {{ $order->order_status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
+                                    <option value="Completed"
+                                        {{ $order->order_status === 'Completed' ? 'selected' : '' }}>Completed</option>
+                                    <option value="Rejected"
+                                        {{ $order->order_status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                                    <option value="Returned"
+                                        {{ $order->order_status === 'Returned' ? 'selected' : '' }}>Returned</option>
 
                                 </select>
                                 <button class="btn btn-primary" type="submit">Update Status</button>
@@ -48,12 +54,13 @@
                     </div>
                     <div class="col-md-8 text-md-end"> <!-- Align to the end of the column -->
                         <div class="d-flex justify-content-md-end"> <!-- Align to the end of the column -->
-                            <a href="{{ route('downloadPDF', ['id' => $order->id]) }}" class="btn btn-primary">Download PDF</a>
+                            <a href="{{ route('downloadPDF', ['id' => $order->id]) }}" class="btn btn-primary">Download
+                                PDF</a>
                         </div>
                     </div>
                 </div>
-                
-                
+
+
 
 
 
@@ -87,16 +94,47 @@
                                 <div class="card-body">
                                     <ul class="list-group">
                                         @foreach ($order->items as $item)
-                                            <li class="list-group-item"> <strong
-                                                    style="font-size: 20px;">{{ $item->product_name }}</strong> <br>
-                                                - <strong>Quantity:</strong> {{ $item->quantity }} <br>
-                                                - <strong>Product color:</strong> {{ $item->product_color }} <br>
-                                                - <strong>Product size:</strong> {{ $item->product_size }} <br>
-                                                - <strong>Price:</strong> {{ $item->price }} <br>
-                                                - <strong>Sub Total:</strong> {{ $item->price * $item->quantity }}</li>
+                                            <li class="list-group-item">
+                                                @if ($item->exists())
+                                                    <div style="display: flex;">
+                                                        <div style="margin-right: 10px;">
+                                                            @if ($item->image_url)
+                                                                <img src="{{ asset('storage/uploads/' . $item->image_url) }}"
+                                                                    alt="{{ $item->product_name }}"
+                                                                    style="max-width: 100px; max-height: auto;">
+                                                            @elseif ($item->remote_image_url)
+                                                                <img src="{{ $item->remote_image_url }}"
+                                                                    alt="{{ $item->product_name }}"
+                                                                    style="max-width: 100px; max-height: auto;">
+                                                            @else
+                                                                <span>No Image Available</span>
+                                                            @endif
+                                                        </div>
+
+                                                        <div>
+                                                            <strong
+                                                                style="font-size: 20px;">{{ $item->product_name }}</strong>
+                                                            <br>
+                                                            - <strong>Quantity:</strong> {{ $item->quantity }} <br>
+                                                            - <strong>Product color:</strong>
+                                                            {{ $item->product_color }} <br>
+                                                            - <strong>Product size:</strong> {{ $item->product_size }}
+                                                            <br>
+                                                            - <strong>Price:</strong> {{ $item->price }} <br>
+                                                            - <strong>Sub Total:</strong>
+                                                            {{ $item->price * $item->quantity }}
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div>No longer available</div>
+                                                @endif
+                                            </li>
                                         @endforeach
                                     </ul>
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
