@@ -58,7 +58,9 @@ class OredrController extends Controller
             return $order->total_price;
         });
 
-        return view('order', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
+        $totalAmountReturned = $Orders->where('order_status', 'Returned')->sum('total_price');
+
+        return view('order', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalAmountReturned', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
     }
 
     public function finance()
@@ -308,7 +310,7 @@ class OredrController extends Controller
         }
 
         $status = request('status');
-        if (!in_array($status, ['Pending', 'Accepted', 'Completed', 'Rejected'])) {
+        if (!in_array($status, ['Pending', 'Accepted', 'Completed', 'Rejected', 'Returned'])) {
             return response()->json(['message' => 'Invalid status'], 400);
         }
 

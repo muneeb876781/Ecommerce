@@ -156,6 +156,22 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <i class="fas fa-money-bill  icon-home bg-info text-light"></i>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="mb-2">Returns </p>
+                                        <h5>AED {{ $totalAmountReturned }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
 
 
@@ -177,8 +193,7 @@
                 <button id="showRejected" class="btn btn-primary">Rejected Orders</button>
                 <button id="showCompleted" class="btn btn-primary">Completed Orders</button>
                 <button id="showPendings" class="btn btn-primary">Pending Orders</button>
-
-
+                <button id="showReturns" class="btn btn-primary">Returned Orders</button>
 
                 <br>
 
@@ -522,6 +537,74 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="returned" class="col-md-12" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Returned Orders</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="returnedTable" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="serial-number">No.</th>
+                                            <th scope="col">Buyer info</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Items</th>
+                                            <th scope="col">Payment Method</th>
+                                            <th scope="col">Order Status</th>
+                                            <th scope="col">View Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $serialNumber = 1; @endphp
+                                        @foreach ($Orders as $order)
+                                            @if ($order->order_status === 'Returned')
+                                                <tr>
+                                                    <th scope="row">{{ $serialNumber }}</th>
+                                                    <td>
+                                                        <strong>{{ $order->first_name }}
+                                                            {{ $order->last_name }}</strong>
+                                                        <br>
+                                                        {{ $order->email }} <br>
+                                                        {{ $order->contact_number }}
+                                                    </td>
+                                                    <td>
+                                                        <strong>Address: </strong> {{ $order->delivery_address }} <br>
+                                                        <strong>Postal Code: </strong>{{ $order->postal_code }}
+                                                    </td>
+                                                    <td>{{ $order->total_price }}</td>
+                                                    <td>
+                                                        {{ $order->items->count() }}
+                                                    </td>
+                                                    <td>{{ $order->payment_method }}</td>
+                                                    <td>{{ $order->order_status }}</td>
+
+                                                    <td><a href="{{ route('orderDetails', ['id' => $order->id]) }}"
+                                                            class="btn btn-primary">View Details</a>
+                                                        <a href="#" class="btn btn-danger"
+                                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this order?')) { document.getElementById('delete-order-{{ $order->id }}').submit(); }">
+                                                            Delete Order
+                                                        </a>
+                                                        <form id="delete-order-{{ $order->id }}"
+                                                            action="{{ route('deleteOrder', ['id' => $order->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @php $serialNumber++; @endphp
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -580,7 +663,7 @@
             });
 
             // Search input event
-            $('#pendingTable').on('keyup', function() {
+            $('#completedTable').on('keyup', function() {
                 toolsTable.search(this.value).draw();
             });
         });
@@ -593,7 +676,20 @@
             });
 
             // Search input event
-            $('#pendingTable').on('keyup', function() {
+            $('#allTable').on('keyup', function() {
+                toolsTable.search(this.value).draw();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var toolsTable = $('#returnedTable').DataTable({
+                "lengthMenu": [5, 10, 25, 50, -1],
+                "pageLength": 50,
+            });
+
+            // Search input event
+            $('#returnedTable').on('keyup', function() {
                 toolsTable.search(this.value).draw();
             });
         });
@@ -606,6 +702,7 @@
                 $('#rejected').hide();
                 $('#completed').hide();
                 $('#allOrders').hide();
+                $('#returned').hide();
             });
 
             $('#showAccepted').on('click', function() {
@@ -614,6 +711,7 @@
                 $('#rejected').hide();
                 $('#completed').hide();
                 $('#allOrders').hide();
+                $('#returned').hide();
             });
 
             $('#showRejected').on('click', function() {
@@ -622,6 +720,7 @@
                 $('#rejected').show();
                 $('#completed').hide();
                 $('#allOrders').hide();
+                $('#returned').hide();
             });
 
             $('#showCompleted').on('click', function() {
@@ -630,6 +729,7 @@
                 $('#rejected').hide();
                 $('#completed').show();
                 $('#allOrders').hide();
+                $('#returned').hide();
             });
 
             $('#showAll').on('click', function() {
@@ -638,6 +738,16 @@
                 $('#rejected').hide();
                 $('#completed').hide();
                 $('#allOrders').show();
+                $('#returned').hide();
+            });
+
+            $('#showReturns').on('click', function() {
+                $('#pendings').hide();
+                $('#accepted').hide();
+                $('#rejected').hide();
+                $('#completed').hide();
+                $('#allOrders').hide();
+                $('#returned').show();
             });
         });
     </script>
