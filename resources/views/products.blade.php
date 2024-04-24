@@ -182,9 +182,9 @@
                                     <button type="submit" class="btn btn-sm btn-success">Activate All</button>
                                 </form>
                             </div>
-                            
-                            
-                            
+
+
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -202,10 +202,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+
                                         @foreach ($products as $product)
-                                        @php $serialNumber = 1; @endphp
-                                        
+                                            @php $serialNumber = 1; @endphp
+
                                             <tr>
                                                 <td style="width: 5%" class="serial-number">{{ $serialNumber++ }}</td>
                                                 <td style="width: 12%">
@@ -245,12 +245,17 @@
                                                     @endif
                                                 </td>
                                                 <td style="width: 18%">
-                                                    <strong>{{ $product->state == 1 ? 'Activated' : 'Deactivated' }}</strong> <br>
-                                                    <form action="{{ route('toggleProductState', ['id' => $product->id]) }}" method="post">
+                                                    <strong>{{ $product->state == 1 ? 'Activated' : 'Deactivated' }}</strong>
+                                                    <br>
+                                                    <form
+                                                        action="{{ route('toggleProductState', ['id' => $product->id]) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="hidden" name="state" value="{{ $product->state == 1 ? '0' : '1' }}">
-                                                        <button type="submit" class="btn btn-sm {{ $product->state == 1 ? 'btn-danger' : 'btn-success' }}">
+                                                        <input type="hidden" name="state"
+                                                            value="{{ $product->state == 1 ? '0' : '1' }}">
+                                                        <button type="submit"
+                                                            class="btn btn-sm {{ $product->state == 1 ? 'btn-danger' : 'btn-success' }}">
                                                             {{ $product->state == 1 ? 'Deactivate' : 'Activate' }}
                                                         </button>
                                                     </form>
@@ -268,7 +273,13 @@
                                                     </a>
                                                     <a class="btn btn-link text-warning" href="#" title="Edit"
                                                         data-bs-toggle="modal" data-bs-target="#editProductModal"
-                                                        onclick="prepareEditModal('{{ $product->id }}', '{{ $product->name }}', '{{ $product->description }}', '{{ $product->price }}')">
+                                                        onclick="prepareEditModal('{{ $product->id }}',
+                                                            '{{ $product->name }}',
+                                                            '{{ $product->description }}',
+                                                            '{{ $product->price }}',
+                                                            '{{ $product->discountedPrice }}',
+                                                            '{{ $product->quantity }}',
+                                                            '{{ $product->sku }}')">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
@@ -343,10 +354,11 @@
                                             <label for="productSpecification">Product Description:</label>
                                             <textarea class="form-control" id="editor" name="productSpecification" placeholder="Enter Product Specification"></textarea>
                                         </div>
-                                        <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+                                        <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/7/tinymce.min.js"
+                                            referrerpolicy="origin"></script>
                                         <script>
                                             tinymce.init({
-                                                selector: 'textarea', 
+                                                selector: 'textarea',
                                                 plugins: 'code table lists',
                                                 toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
                                                 height: 250
@@ -775,7 +787,7 @@
 
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
@@ -785,19 +797,42 @@
                     <form id="editProductForm" action="#" method="post">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label for="editProductName" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="editProductName" name="editProductName"
-                                value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="editProductDescription" class="form-label">Product Description</label>
-                            <textarea class="form-control" id="editProductDescription" name="editProductDescription"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editProductPrice" class="form-label">Product Price</label>
-                            <input type="number" class="form-control" id="editProductPrice" name="editProductPrice"
-                                value="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editProductName" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="editProductName"
+                                        name="editProductName" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editProductDescription" class="form-label">Product Description</label>
+                                    <textarea class="form-control" id="editProductDescription"
+                                        name="editProductDescription"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editProductPrice" class="form-label">Product Price</label>
+                                    <input type="number" class="form-control" id="editProductPrice"
+                                        name="editProductPrice" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="editProductDiscountedPrice" class="form-label">Discounted
+                                        Price</label>
+                                    <input type="number" class="form-control" id="editProductDiscountedPrice"
+                                        name="editProductDiscountedPrice" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editProductQuantity" class="form-label">Quantity</label>
+                                    <input type="number" class="form-control" id="editProductQuantity"
+                                        name="editProductQuantity" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editProductSKU" class="form-label">SKU</label>
+                                    <input type="text" class="form-control" id="editProductSKU"
+                                        name="editProductSKU" value="">
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
@@ -851,12 +886,15 @@
         }
     </script>
     <script>
-        function prepareEditModal(productId, productName, productDescription, productPrice) {
+        function prepareEditModal(productId, productName, productDescription, productPrice, discountedPrice, quantity,
+        sku) {
             // Update form fields with product details
             document.getElementById('editProductName').value = productName;
             document.getElementById('editProductDescription').value = productDescription;
             document.getElementById('editProductPrice').value = productPrice;
-
+            document.getElementById('editProductDiscountedPrice').value = discountedPrice;
+            document.getElementById('editProductQuantity').value = quantity;
+            document.getElementById('editProductSKU').value = sku;
 
             // Update form action URL
             document.getElementById('editProductForm').action = `/products/${productId}`;

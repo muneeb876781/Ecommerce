@@ -188,11 +188,20 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        $product->name = $request->editProductName;
-        $product->description = $request->editProductDescription;
-        $product->price = $request->editProductPrice;
-        // Update other fields as needed
+        $product = Product::find($id);
+        $product->name = $request->input('editProductName');
+        $product->description = $request->input('editProductDescription');
+        $product->price = $request->input('editProductPrice');
+        $product->discountedPrice = $request->input('editProductDiscountedPrice');
+        $product->quantity = $request->input('editProductQuantity');
+        $product->sku = $request->input('editProductSKU');
+        
+        if ($request->hasFile('editBrandImage')) {
+            $image = $request->file('editBrandImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('public/uploads', $imageName);
+            $brand->image_url = $imageName;
+        }
         $product->save();
 
         return redirect()->route('productview')->with('update_success', 'Product updated successfully.');
