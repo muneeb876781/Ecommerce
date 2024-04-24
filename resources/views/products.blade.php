@@ -806,8 +806,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="editProductDescription" class="form-label">Product Description</label>
-                                    <textarea class="form-control" id="editProductDescription"
-                                        name="editProductDescription"></textarea>
+                                    <input class="form-control" id="editProductDescription"
+                                        name="editProductDescription" ></input>
                                 </div>
                                 <div class="mb-3">
                                     <label for="editProductPrice" class="form-label">Product Price</label>
