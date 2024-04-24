@@ -46,6 +46,10 @@
                 padding: 3px 6px; 
             }
         }
+
+        .star-gold{
+            color: gold;
+        }
     </style>
 
     <style>
