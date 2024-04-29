@@ -15,7 +15,7 @@ class ShopController extends Controller
 {
     public function shop()
     {
-        $products = Product::orderBy('created_at', 'desc')->get();
+        $products = Product::orderBy('created_at', 'desc')->paginate(24);
         $categories = Category::all();
         $reviews = Review::all();
         $brands = Brand::all();
