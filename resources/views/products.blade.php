@@ -807,7 +807,7 @@
                                 <div class="mb-3">
                                     <label for="editProductDescription" class="form-label">Product Description</label>
                                     <input class="form-control" id="editProductDescription"
-                                        name="editProductDescription" ></input>
+                                        name="editProductDescription"></input>
                                 </div>
                                 <div class="mb-3">
                                     <label for="editProductPrice" class="form-label">Product Price</label>
@@ -887,7 +887,7 @@
     </script>
     <script>
         function prepareEditModal(productId, productName, productDescription, productPrice, discountedPrice, quantity,
-        sku) {
+            sku) {
             // Update form fields with product details
             document.getElementById('editProductName').value = productName;
             document.getElementById('editProductDescription').value = productDescription;
@@ -904,7 +904,10 @@
 
 
 
+
 </body>
 
 
 </html>
+
+
