@@ -1239,7 +1239,7 @@
                     </div>
                     <div class="side_nav_trackorder">
                         <i class="fas fa-comment"></i>
-                        <a href="{{ route('chatify') }}">Messages</a>
+                        <a href="{{ route('chatify') }}" target="_blank">Messages</a>
                         @if ($unseenmessages > 0)
                             <span class="badge">{{ $unseenmessages }}</span>
                         @endif

@@ -722,8 +722,8 @@
                                 </div>
                                 <button type="submit" class="cart-button mt-2 pt-0 pb-0 pb-0 mb-0">Add to
                                     Cart</button>
-
-                            </form>
+                                    <a href="{{ route('chatifyy', ['id' => $userid]) }}" target="_blank" class="cart-button mt-2 pt-0 pb-0 pb-0 mb-0">Message Seller</a>
+                                </form>
 
 
 
