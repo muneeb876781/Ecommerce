@@ -49,12 +49,12 @@
 <body>
 
     <!--Topbar -->
-    {{-- <div class="topbar transition">
+    <div class="topbar transition">
         <div class="bars">
             <button type="button" class="btn transition" id="sidebar-toggle">
                 <i class="fa fa-bars"></i>
             </button>
-        </div> --}}
+        </div>
     {{-- <div class="menu">
             <ul>
                 <li class="nav-item dropdown dropdown-list-toggle">
@@ -184,7 +184,7 @@
                     <li>
                         <a href="/chatify" target="_blank" class="{{ Request::is('chatify*') ? 'active' : '' }}">
                             <i class='bx bxs-dashboard icon'></i> Chats
-                            <span id="unseenMsgCounter" class="badge badge-danger">{{$unseenmessages}}</span>
+                            <span id="unseenMsgCounter" class="badge badge-danger">0</span>
                         </a>
                     </li>
 
