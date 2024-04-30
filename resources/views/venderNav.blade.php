@@ -55,66 +55,13 @@
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-    {{-- <div class="menu">
+        <div class="menu">
             <ul>
                 <li class="nav-item dropdown dropdown-list-toggle">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fa fa-bell size-icon-1"></i><span class="badge bg-danger notif">4</span>
+                    <a class="nav-link" href="/chatify" target="_blank" aria-expanded="false">
+                        <i class="fa fa-bell size-icon-1"></i><span
+                            class="badge bg-danger notif">{{ $unseenmessages }}</span>
                     </a>
-                    <div class="dropdown-menu dropdown-list">
-                        <div class="dropdown-header">Notifications</div>
-                        <div class="dropdown-list-content dropdown-list-icons">
-                            <div class="custome-list-notif">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-icon bg-primary text-white">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        The Atrana template has the latest update!
-                                        <div class="time text-primary">3 Min Ago</div>
-                                    </div>
-                                </a>
-
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-info text-white">
-                                        <i class="far fa-user"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Sri asks you for friendship!
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-danger text-white">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Storage has been cleared, now you can get back to work!
-                                        <div class="time">20 Hours Ago</div>
-                                    </div>
-                                </a>
-
-
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-info text-white">
-                                        <i class="fas fa-bell"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Welcome to Atrana Template, I hope you enjoy using this template!
-                                        <div class="time">Yesterday</div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-
-                        <div class="dropdown-footer text-center">
-                            <a href="#">View All</a>
-                        </div>
-
-
                 </li>
 
                 <li class="nav-item dropdown">
@@ -126,7 +73,7 @@
                     @endif
 
 
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {{-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="my-profile.html"><i class="fa fa-user size-icon-1"></i> <span>My
                                 Profile</span></a>
                         <a class="dropdown-item" href="settings.html"><i class="fa fa-cog size-icon-1"></i>
@@ -134,168 +81,217 @@
                         <hr class="dropdown-divider">
                         <a class="dropdown-item" href="{{ route('logout') }}"><i
                                 class="fa fa-sign-out-alt  size-icon-1"></i> <span>Log out</span></a>
+                    </ul> --}}
+
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{-- <li>
+                            <a class="dd-item" href="{{ route('venderProfile') }}"><i
+                                    class="fa fa-user size-icon-1"></i> <span>My Profile</span></a>
+                        </li> --}}
+                        @if (isset($shopInfo))
+                            <li>
+                                <form action="{{ route('deleteStore', ['id' => $shopInfo->id]) }}" method="post"
+                                    onsubmit="return confirm('Are you sure you want to delete your store? This action cannot be undone.');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="dd-item"><i class="fa fa-cog size-icon-1"></i>
+                                        <span>Delete Store</span></button>
+                                </form>
+                            </li>
+                        @endif
+                        {{-- <hr class="dropdown-divider"> --}}
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dd-item" type="submit"><i class="fa fa-sign-out-alt  size-icon-1"></i>
+                                    <span>Log out</span></button>
+                            </form>
+                        </li>
                     </ul>
+                    <style>
+                        .dd-item {
+                            display: flex;
+                            color: #ffffff;
+                            background: transparent;
+                            width: 100%;
+                            margin-bottom: 15px;
+                            padding-bottom: 5px;
+                            border: none;
+                            font-size: bold;
+                        }
+
+                        .dd-item:hover{
+                            border-bottom: 2px solid blue;
+                        }
+
+                        .dd-item .fa{
+                            font-size: 20px;
+                        }
+                    </style>
+
                 </li>
             </ul>
-        </div> --}}
-    {{-- </div> --}}
+        </div>
 
-    <!--Sidebar-->
-    <div class="sidebar transition overlay-scrollbars animate__animated  animate__slideInLeft">
-        <div class="sidebar-content">
-            <div id="sidebar">
+        <!--Sidebar-->
+        <div class="sidebar transition overlay-scrollbars animate__animated  animate__slideInLeft">
+            <div class="sidebar-content">
+                <div id="sidebar">
 
-                <!-- Logo -->
-                @if ($shopInfo)
-                    <div style="display: flex; flex-direction: row; width: 100%; margin: 10px; justify-content: center; align-items: center;"
-                        class="logo">
-                        <img style="width: 20%; height: 100%; border-radius: 100%;"
-                            src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
-                        {{-- <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2> --}}
-                        <h2 style="font-size: 20px; width: 50%; " class="mb-0 ml-0 pl-0">{{ $shopInfo->name }}</h2>
+                    <!-- Logo -->
+                    @if ($shopInfo)
+                        <div style="display: flex; flex-direction: row; width: 100%; margin: 10px; justify-content: center; align-items: center;"
+                            class="logo">
+                            <img style="width: 20%; height: 100%; border-radius: 100%;"
+                                src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
+                            {{-- <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2> --}}
+                            <h2 style="font-size: 20px; width: 50%; " class="mb-0 ml-0 pl-0">{{ $shopInfo->name }}</h2>
 
-                    </div>
-                @else
-                    {{-- <h2 style="font-size: 20px; text-align: center;">{{ auth()->user()->name }}</h2> --}}
-                    <h2 style="font-size: 20px; text-align: center;">{{ $shopInfo->name }}</h2>
-                @endif
+                        </div>
+                    @else
+                        {{-- <h2 style="font-size: 20px; text-align: center;">{{ auth()->user()->name }}</h2> --}}
+                        <h2 style="font-size: 20px; text-align: center;">{{ $shopInfo->name }}</h2>
+                    @endif
 
 
-                <ul class="side-menu">
+                    <ul class="side-menu">
 
-                    <li>
-                        <a href="{{ route('home') }}" target="_blank" class="{{ Request::is('/') ? 'active' : '' }}">
-                            <i class='bx bxs-home icon'></i> Go to home
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('home') }}" target="_blank"
+                                class="{{ Request::is('/') ? 'active' : '' }}">
+                                <i class='bx bxs-home icon'></i> Go to home
+                            </a>
+                        </li>
 
-                    {{-- <li>
+                        {{-- <li>
                         <a href="{{ route('adminDashboard') }}" target="_blank" class="{{ Request::is('adminDashboard') ? 'active' : '' }}">
                             <i class='bx bxs-home icon'></i> Admin
                         </a>
                     </li> --}}
 
-                    <li>
-                        <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard*') ? 'active' : '' }}">
-                            <i class='bx bxs-dashboard icon'></i> Dashboard
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('dashboard') }}"
+                                class="{{ Request::is('dashboard*') ? 'active' : '' }}">
+                                <i class='bx bxs-dashboard icon'></i> Dashboard
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="/chatify" target="_blank" class="{{ Request::is('chatify*') ? 'active' : '' }}">
-                            <i class='bx bxs-dashboard icon'></i> Chats
-                            <span id="unseenMsgCounter" class="badge badge-danger">0</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="/chatify" target="_blank" class="{{ Request::is('chatify*') ? 'active' : '' }}">
+                                <i class='bx bxs-dashboard icon'></i> Chats
+                                <span id="unseenMsgCounter" class="badge badge-danger">{{ $unseenmessages }}</span>
+                            </a>
+                        </li>
 
 
-                    {{-- <li>
+                        {{-- <li>
                         <a href="{{ route('categoryview') }}"
                             class="{{ Request::is('categories*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Categories
                         </a>
                     </li> --}}
 
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-columns icon'></i>
-                            Banners
-                            <i class='bx bx-chevron-right icon-right'></i>
-                        </a>
-                        <ul class="side-dropdown">
-                            <li><a href="{{ route('banners') }}"
-                                    class="{{ Request::is('banners*') ? 'active' : '' }}">
-                                    Main Banners
-                                </a></li>
-                            <li><a href="{{ route('banners') }}"
-                                    class="{{ Request::is('banners*') ? 'active' : '' }}">
-                                    Sale Banners
-                                </a></li>
+                        <li>
+                            <a href="#">
+                                <i class='bx bx-columns icon'></i>
+                                Banners
+                                <i class='bx bx-chevron-right icon-right'></i>
+                            </a>
+                            <ul class="side-dropdown">
+                                <li><a href="{{ route('banners') }}"
+                                        class="{{ Request::is('banners*') ? 'active' : '' }}">
+                                        Main Banners
+                                    </a></li>
+                                <li><a href="{{ route('banners') }}"
+                                        class="{{ Request::is('banners*') ? 'active' : '' }}">
+                                        Sale Banners
+                                    </a></li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
 
-                    <li>
-                        <a href="{{ route('templates') }}" class="{{ Request::is('templates*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Templates
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('templates') }}"
+                                class="{{ Request::is('templates*') ? 'active' : '' }}">
+                                <i class='bx bxs-meh-blank icon'></i> Templates
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-columns icon'></i>
-                            Categories
-                            <i class='bx bx-chevron-right icon-right'></i>
-                        </a>
-                        <ul class="side-dropdown">
-                            <li><a href="{{ route('categoryview') }}"
-                                    class="{{ Request::is('categories*') ? 'active' : '' }}">
-                                    Categories
-                                </a></li>
-                            <li><a href="{{ route('subCategoryview') }}"
-                                    class="{{ Request::is('subCategories') ? 'active' : '' }}">
-                                    Sub Categories
-                                </a></li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="#">
+                                <i class='bx bx-columns icon'></i>
+                                Categories
+                                <i class='bx bx-chevron-right icon-right'></i>
+                            </a>
+                            <ul class="side-dropdown">
+                                <li><a href="{{ route('categoryview') }}"
+                                        class="{{ Request::is('categories*') ? 'active' : '' }}">
+                                        Categories
+                                    </a></li>
+                                <li><a href="{{ route('subCategoryview') }}"
+                                        class="{{ Request::is('subCategories') ? 'active' : '' }}">
+                                        Sub Categories
+                                    </a></li>
+                            </ul>
+                        </li>
 
-                    {{-- <li>
+                        {{-- <li>
                         <a href="{{ route('subCategoryview') }}"
                             class="{{ Request::is('subCategories') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i>Sub Categories
                         </a>
                     </li> --}}
 
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-columns icon'></i>
-                            Products
-                            <i class='bx bx-chevron-right icon-right'></i>
-                        </a>
-                        <ul class="side-dropdown">
-                            <li><a href="{{ route('productview') }}"
-                                    class="{{ Request::is('product*') ? 'active' : '' }}">
-                                    Products
-                                </a></li>
-                            <li><a href="{{ route('productAttributes') }}"
-                                    class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
-                                    Product Attributes
-                                </a></li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="#">
+                                <i class='bx bx-columns icon'></i>
+                                Products
+                                <i class='bx bx-chevron-right icon-right'></i>
+                            </a>
+                            <ul class="side-dropdown">
+                                <li><a href="{{ route('productview') }}"
+                                        class="{{ Request::is('product*') ? 'active' : '' }}">
+                                        Products
+                                    </a></li>
+                                <li><a href="{{ route('productAttributes') }}"
+                                        class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
+                                        Product Attributes
+                                    </a></li>
+                            </ul>
+                        </li>
 
-                    {{-- <li>
+                        {{-- <li>
                         <a href="{{ route('productview') }}" class="{{ Request::is('product*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Products
                         </a>
                     </li> --}}
 
-                    <li>
-                        <a href="{{ route('brands') }}" class="{{ Request::is('brands*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Brands
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('brands') }}" class="{{ Request::is('brands*') ? 'active' : '' }}">
+                                <i class='bx bxs-meh-blank icon'></i> Brands
+                            </a>
+                        </li>
 
-                    {{-- <li>
+                        {{-- <li>
                         <a href="{{ route('productAttributes') }}"
                             class="{{ Request::is('pAttributes*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> Product Attributes
                         </a>
                     </li> --}}
 
-                    <li>
-                        <a href="{{ route('Order') }}" class="{{ Request::is('Order*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Orders
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('Order') }}" class="{{ Request::is('Order*') ? 'active' : '' }}">
+                                <i class='bx bxs-meh-blank icon'></i> Orders
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="{{ route('finance') }}" class="{{ Request::is('finance*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Finance
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('finance') }}" class="{{ Request::is('finance*') ? 'active' : '' }}">
+                                <i class='bx bxs-meh-blank icon'></i> Finance
+                            </a>
+                        </li>
 
-                    {{-- <li>
+                        {{-- <li>
                         <a href="#">
                             <i class='bx bx-columns icon'></i>
                             Orders
@@ -313,28 +309,29 @@
                                 </a></li>
                         </ul>
                     </li> --}}
-                    <li>
-                        <a href="{{ route('policies') }}" class="{{ Request::is('policies*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> Policies
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('policies') }}"
+                                class="{{ Request::is('policies*') ? 'active' : '' }}">
+                                <i class='bx bxs-meh-blank icon'></i> Policies
+                            </a>
+                        </li>
 
 
-                    <li>
-                        <a href="{{ route('venderProfile') }}"
-                            class="{{ Request::is('venderProfile*') ? 'active' : '' }}">
-                            <i class='bx bxs-meh-blank icon'></i> My Profile
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('venderProfile') }}"
+                                class="{{ Request::is('venderProfile*') ? 'active' : '' }}">
+                                <i class='bx bxs-meh-blank icon'></i> My Profile
+                            </a>
+                        </li>
 
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="logout" type="submit">Logout</button>
-                        </form>
-                    </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="logout" type="submit">Logout</button>
+                            </form>
+                        </li>
 
-                    {{-- @if (isset($shopInfo))
+                        {{-- @if (isset($shopInfo))
                         <li>
                             <form action="{{ route('deleteStore', ['id' => $shopInfo->id]) }}" method="post"
                                 onsubmit="return confirm('Are you sure you want to delete your store? This action cannot be undone.');">
@@ -345,14 +342,14 @@
                             </form>
                         </li>
                     @endif --}}
-                </ul>
+                    </ul>
 
 
+
+                </div>
 
             </div>
-
         </div>
-    </div>
     </div><!-- End Sidebar-->
 
 
