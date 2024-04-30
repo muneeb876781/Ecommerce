@@ -302,6 +302,42 @@
         animation-delay: 0s;
     }
 </style>
+<style>
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination-container ul {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pagination-container ul li {
+        display: inline-block;
+        margin-right: 5px;
+        font-size: 20px;
+    }
+
+    .pagination-container ul li a {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #fff;
+        color: #333;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .pagination-container ul li.active a {
+        background-color: #333;
+        color: #fff;
+    }
+</style>
 
 
 
@@ -651,42 +687,7 @@
                                     {{ $products->onEachSide(1)->links() }}
                                 </div>
                             </div>
-                            <style>
-                                .pagination-container {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    flex-direction: column;
-                                    text-align: center;
-                                    margin-top: 20px;
-                                }
 
-                                .pagination-container ul {
-                                    display: inline-block;
-                                    padding: 0;
-                                    margin: 0;
-                                }
-
-                                .pagination-container ul li {
-                                    display: inline-block;
-                                    margin-right: 5px;
-                                    font-size: 20px;
-                                }
-
-                                .pagination-container ul li a {
-                                    display: inline-block;
-                                    padding: 5px 10px;
-                                    background-color: #fff;
-                                    color: #333;
-                                    text-decoration: none;
-                                    border-radius: 5px;
-                                }
-
-                                .pagination-container ul li.active a {
-                                    background-color: #333;
-                                    color: #fff;
-                                }
-                            </style>
 
 
                         @endif

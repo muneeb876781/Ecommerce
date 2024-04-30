@@ -100,7 +100,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/toggleCategoryState/{id}', [CategoryController::class, 'toggleCategoryState'])->name('toggleCategoryState');
     Route::put('/activateAllCategories', [CategoryController::class, 'activateAllCategories'])->name('activateAllCategories');
     Route::put('/deactivateAllCategories', [CategoryController::class, 'deactivateAllCategories'])->name('deactivateAllCategories');
-    
 
     Route::get('/subCategories', [SubCategoryController::class, 'index'])
         ->name('subCategoryview')

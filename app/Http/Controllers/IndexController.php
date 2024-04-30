@@ -11,6 +11,7 @@ use App\Models\Review;
 use App\Models\Brand;
 use App\Models\Banner;
 use App\Models\Templates;
+use Illuminate\Support\Facades\DB;
 
 
 class IndexController extends Controller
@@ -50,14 +51,16 @@ class IndexController extends Controller
 
         $template = Templates::where('state', 1)->first();
 
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
         if ($template) {
             if ($template->name == 'General') {
-                return view('mainPage', compact('products', 'banners', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+                return view('mainPage', compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
             } else {
-                return view('indexPage', compact('products', 'banners', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+                return view('indexPage', compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
             }
         } else {
-            return view('mainPage', compact('products', 'banners', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+            return view('mainPage', compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
         }
     }
 }
