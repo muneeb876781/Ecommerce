@@ -666,8 +666,9 @@
                                             </li>
                                         @endauth
 
-                                        <li><a class="" href="/chatify"><i
-                                                    class="fas fa-comment"><span class="cart__count">{{$unseenmessages}}</span></i></a>
+                                        <li><a class="" href="{{ route('chatify') }}" target="_blank"><i
+                                                    class="fas fa-comment"><span
+                                                        class="cart__count">{{ $unseenmessages }}</span></i></a>
                                         </li>
                                         <li><a class="mini__cart--link" href="#"><i
                                                     class="fas fa-shopping-bag"><span
@@ -1166,6 +1167,7 @@
                             class="badge">{{ $totalItems }}</span></button>
                     <span>Cart</span>
                 </div>
+                
                 <div class="button-wrapper">
                     <button id="dashboard" onclick="toggleDashboard()"><i class="fas fa-chart-line"></i></button>
                     <span>Dashboard</span>
@@ -1196,11 +1198,10 @@
                         <button onclick="window.location.href = '{{ route('register') }}';"></button>
                     @endif
                 </div>
-
-
                 <div class="button-wrapper">
-                    <button id="logout"><i class="fas fa-user-circle"></i></button>
-                    <span>Account</span>
+                    <button id="messages" class="cart-icon"><i class="fas fa-comment"></i><span
+                            class="badge">{{ $unseenmessages }}</span></button>
+                    <span>Messages</span>
                 </div>
             </div>
         </div>
@@ -1287,8 +1288,7 @@
         });
 
         var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-        });
+        channel.bind('my-event', function(data) {});
     </script>
     <script>
         function toggleDashboard() {
@@ -1342,27 +1342,21 @@
             window.location.href = '{{ route('home') }}';
         });
 
-        // document.getElementById('shop').addEventListener('click', function() {
-        //     window.location.href = '{{ route('shop') }}';
-        // });
-
         function toggleSideNav() {
             var menuBox = document.querySelector('.menu__box');
             menuBox.classList.toggle('show');
         }
 
-
-
         document.getElementById('cart').addEventListener('click', function() {
             window.location.href = '{{ route('cart') }}';
         });
 
-        // document.getElementById('dashboard').addEventListener('click', function() {
-        //     window.location.href = '{{ route('dashboard') }}';
-        // });
-
         document.getElementById('logout').addEventListener('click', function() {
             document.getElementById('logout-form').submit();
+        });
+
+        document.getElementById('messages').addEventListener('click', function() {
+            window.location.href = '{{ route('chatify') }}';
         });
     </script>
 </body>
