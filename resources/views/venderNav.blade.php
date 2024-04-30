@@ -11,11 +11,11 @@
     <title>Dashboard - Atrana</title>
 
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap-5.1.3/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome6.1.1/css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/boxicons/css/boxicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/modules/apexcharts/apexcharts.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/modules/bootstrap-5.1.3/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/modules/fontawesome6.1.1/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/modules/boxicons/css/boxicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/modules/apexcharts/apexcharts.css') }}">
     <style>
         .logout {
             padding: 10px 20px 10px 20px;
@@ -388,14 +388,14 @@
     <div class="loader-overlay"></div>
 
     <!-- General JS Scripts -->
-    <script src="{{ asset('assets/js/atrana.js') }}"></script>
-    <script src="{{ asset('assets/modules/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/bootstrap-5.1.3/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/modules/apexcharts/apexcharts.js') }}"></script>
-    <script src="{{ asset('assets/js/ui-apexcharts.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('../assets/js/atrana.js') }}"></script>
+    <script src="{{ asset('../assets/modules/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('../assets/modules/bootstrap-5.1.3/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('../assets/modules/popper/popper.min.js') }}"></script>
+    <script src="{{ asset('../assets/modules/apexcharts/apexcharts.js') }}"></script>
+    <script src="{{ asset('../assets/js/ui-apexcharts.js') }}"></script>
+    <script src="{{ asset('../assets/js/script.js') }}"></script>
+    <script src="{{ asset('../assets/js/custom.js') }}"></script>
 
     <script>
         $(document).ready(function() {
