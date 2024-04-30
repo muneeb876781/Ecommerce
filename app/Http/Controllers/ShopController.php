@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Brand;
 use App\Models\Policy;
 use App\Models\SubCategory;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -34,8 +35,10 @@ class ShopController extends Controller
         }
 
         $totalItems = $cart->sum('quantity');
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        return view('ShopPage', compact('products', 'brands', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+
+        return view('ShopPage', compact('products', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function singleProduct(Request $request, $id)
@@ -62,7 +65,7 @@ class ShopController extends Controller
         }
         $totalItems = $cart->sum('quantity');
 
-        $shopid = $product->shop_id; 
+        $shopid = $product->shop_id;
 
         $policies = Policy::where('shop_id', $shopid)->get();
         // dd($policies);

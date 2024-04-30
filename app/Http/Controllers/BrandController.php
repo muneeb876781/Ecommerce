@@ -11,6 +11,8 @@ use App\Models\Order;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class BrandController extends Controller
 {
@@ -51,7 +53,10 @@ class BrandController extends Controller
             $brand_count = 0;
         }
 
-        return view('brands', compact('shopInfo', 'brands', 'brand_count', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('brands', compact('shopInfo', 'unseenmessages', 'brands', 'brand_count', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function storeBrand(Request $request)

@@ -15,6 +15,8 @@ use App\Models\Policy;
 use App\Models\Banner;
 use App\Models\Templates;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
 
@@ -52,7 +54,10 @@ class SellerController extends Controller
             $reviews = [];
         }
 
-        return view('venderDashboard', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('venderDashboard', compact('shopInfo', 'unseenmessages', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function venderProfile()
@@ -90,7 +95,9 @@ class SellerController extends Controller
             $reviews = [];
         }
 
-        return view('venderProfile', compact('shopInfo', 'seller', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+        return view('venderProfile', compact('shopInfo', 'unseenmessages', 'seller', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function sellerShop()
@@ -115,7 +122,10 @@ class SellerController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('sellerShop', compact('products', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('sellerShop', compact('products', 'unseenmessages', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
     }
 
     public function reviews()
@@ -157,7 +167,10 @@ class SellerController extends Controller
 
         $policies = Policy::where('shop_id', $shopId)->get();
 
-        return view('venderPolicies', compact('shopInfo', 'policies', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('venderPolicies', compact('shopInfo', 'unseenmessages', 'policies', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function storepolicy(Request $request)
@@ -216,7 +229,10 @@ class SellerController extends Controller
         $banners = Banner::where('shop_id', $shopId)->get();
         $brands = Brand::where('seller_shop_id', $shopId)->get();
 
-        return view('banners', compact('shopInfo', 'policies', 'brands', 'banners', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('banners', compact('shopInfo', 'unseenmessages', 'policies', 'brands', 'banners', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function storeBanner(Request $request)
@@ -313,7 +329,10 @@ class SellerController extends Controller
 
         $Templates = Templates::where('shop_id', Auth::id())->get();
 
-        return view('templates', compact('shopInfo', 'Templates', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('templates', compact('shopInfo', 'unseenmessages', 'Templates', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'ord_count', 'Orders'));
     }
 
     public function storeTemplates(Request $request)

@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -32,7 +34,10 @@ class CategoryController extends Controller
 
         $rev_count = $reviews->count();
 
-        return view('categories', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('categories', compact('shopInfo', 'unseenmessages', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products'));
     }
 
     public function add()

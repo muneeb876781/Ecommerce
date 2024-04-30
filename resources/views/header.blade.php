@@ -477,6 +477,65 @@
             left: 0;
         }
     </style>
+    <style>
+        .d1tag {
+            cursor: pointer;
+            position: relative;
+            padding: 14px 30px;
+            border-radius: 50px;
+            /* line-height: 2.5rem; */
+            font-size: 17px;
+            font-weight: 600;
+
+            border: 1px solid #012880;
+            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+            box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.1),
+                0 -0.25rem 1.5rem rgba(110, 15, 155, 0.2) inset,
+                0 0.75rem 0.5rem rgba(255, 255, 255, 0.5) inset,
+                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 0.1) inset;
+        }
+
+        .d1tag span {
+            color: white;
+            background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+        }
+
+        .d1tag::before {
+            content: "";
+            display: block;
+            height: 0.25rem;
+            position: absolute;
+            top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 7.5rem);
+            background: #fff;
+            border-radius: 100%;
+
+            opacity: 0.7;
+            background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
+        }
+
+        .d1tag::after {
+            content: "";
+            display: block;
+            height: 0.25rem;
+            position: absolute;
+            bottom: 0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 7.5rem);
+            background: #fff;
+            border-radius: 100%;
+
+            filter: blur(1px);
+            opacity: 0.05;
+            background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
+        }
+    </style>
 
 
     <title>Document</title>
@@ -543,74 +602,15 @@
                                             name="serachProducts" placeholder="Search For Products..."
                                             autocomplete="off">
                                         <button type="submit" class="header--search__btn d1tag"> <span><i
-                                            class="fas fa-search"></i></span> </button>
+                                                    class="fas fa-search"></i></span> </button>
                                     </div>
-                                    <style>
-                                        .d1tag {
-                                            cursor: pointer;
-                                            position: relative;
-                                            padding: 14px 30px;
-                                            border-radius: 50px;
-                                            /* line-height: 2.5rem; */
-                                            font-size: 17px;
-                                            font-weight: 600;
-                                            
-                                            border: 1px solid #012880;
-                                            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
-                                            box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.1),
-                                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 0.2) inset,
-                                                                    0 0.75rem 0.5rem rgba(255,255,255, 0.5) inset,
-                                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 0.1) inset;
-                                        }
-                    
-                                        .d1tag span {
-                                            color: white;
-                                            background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
-                                            -webkit-background-clip: text;
-                                            background-clip: text;
-                                            filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
-                                        }
-                    
-                                        .d1tag::before {
-                                            content: "";
-                                            display: block;
-                                            height: 0.25rem;
-                                            position: absolute;
-                                            top: 0.5rem;
-                                            left: 50%;
-                                            transform: translateX(-50%);
-                                            width: calc(100% - 7.5rem);
-                                            background: #fff;
-                                            border-radius: 100%;
-                                            
-                                            opacity: 0.7;
-                                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
-                                        }
-                    
-                                        .d1tag::after {
-                                            content: "";
-                                            display: block;
-                                            height: 0.25rem;
-                                            position: absolute;
-                                            bottom: 0.75rem;
-                                            left: 50%;
-                                            transform: translateX(-50%);
-                                            width: calc(100% - 7.5rem);
-                                            background: #fff;
-                                            border-radius: 100%;
-                                            
-                                            filter: blur(1px);
-                                            opacity: 0.05;
-                                            background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
-                                        }
-                    
-                                    </style>
+
                                     <div class="header--search__cate">
                                         <select name="header-search" id="header--search__main">
                                             <option value="{{ route('shop') }}">All Categories</option>
                                             @foreach ($categories as $category)
-                                            @if($category->state !== 0)
-                                            <option
+                                                @if ($category->state !== 0)
+                                                    <option
                                                         value="{{ route('shopcategory', ['id' => $category->id]) }}">
                                                         {{ $category->name }}</option>
                                                 @endif
@@ -666,7 +666,9 @@
                                             </li>
                                         @endauth
 
-                                        <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                        <li><a class="" href="/chatify"><i
+                                                    class="fas fa-comment"><span class="cart__count">{{$unseenmessages}}</span></i></a>
+                                        </li>
                                         <li><a class="mini__cart--link" href="#"><i
                                                     class="fas fa-shopping-bag"><span
                                                         class="cart__count">{{ $totalItems }}</span></i><span
@@ -1026,15 +1028,15 @@
                                                 /* line-height: 2.5rem; */
                                                 font-size: 17px;
                                                 font-weight: 600;
-                                                
+
                                                 border: 1px solid #012880;
                                                 background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
-                                                box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
-                                                                        0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
-                                                                        0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
-                                                                        0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+                                                box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.50),
+                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                    0 0.75rem 0.5rem rgba(255, 255, 255, 0.4) inset,
+                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
                                             }
-                        
+
                                             .dtag span {
                                                 color: white;
                                                 background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
@@ -1042,7 +1044,7 @@
                                                 background-clip: text;
                                                 filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
                                             }
-                        
+
                                             .dtag::before {
                                                 content: "";
                                                 display: block;
@@ -1054,11 +1056,11 @@
                                                 width: calc(100% - 7.5rem);
                                                 background: #fff;
                                                 border-radius: 100%;
-                                                
+
                                                 opacity: 0.7;
-                                                background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                                                background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
                                             }
-                        
+
                                             .dtag::after {
                                                 content: "";
                                                 display: block;
@@ -1070,12 +1072,11 @@
                                                 width: calc(100% - 7.5rem);
                                                 background: #fff;
                                                 border-radius: 100%;
-                                                
+
                                                 filter: blur(1px);
                                                 opacity: 0.05;
-                                                background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+                                                background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
                                             }
-                        
                                         </style>
                                         <div class="shop_button">
                                             @if (auth()->check())
@@ -1086,8 +1087,7 @@
                                                 @endphp
                                                 @if (!$isSeller && $isAdmin)
                                                     <div class="dropdown">
-                                                        <button class="dtag"
-                                                            type="button" id="dropdownMenuButton"
+                                                        <button class="dtag" type="button" id="dropdownMenuButton"
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
                                                             <span>Admin Dashboard</span>
@@ -1101,8 +1101,7 @@
                                                     </div>
                                                 @elseif (!$isAdmin && $isSeller)
                                                     <div class="dropdown">
-                                                        <button class=" dtag "
-                                                            type="button" id="dropdownMenuButton"
+                                                        <button class=" dtag " type="button" id="dropdownMenuButton"
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
                                                             <span>Seller Dashboard</span>
@@ -1164,7 +1163,7 @@
                 </div>
                 <div class="button-wrapper">
                     <button id="cart" class="cart-icon"><i class="fas fa-shopping-cart"></i><span
-                            class="badge">{{$totalItems}}</span></button>
+                            class="badge">{{ $totalItems }}</span></button>
                     <span>Cart</span>
                 </div>
                 <div class="button-wrapper">
@@ -1277,9 +1276,20 @@
                 });
             });
         </script>
-
-
     </header>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('dd1dfe1c544c521ebe08', {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+        });
+    </script>
     <script>
         function toggleDashboard() {
             @if (auth()->check())

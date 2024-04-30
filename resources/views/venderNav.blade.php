@@ -33,6 +33,17 @@
             border: none;
         }
     </style>
+    <style>
+        #unseenMsgCounter {
+            margin: 0 10px;
+            background-color: #efefef;
+            color: black;
+            padding: 2px 5px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,7 +55,7 @@
                 <i class="fa fa-bars"></i>
             </button>
         </div> --}}
-        {{-- <div class="menu">
+    {{-- <div class="menu">
             <ul>
                 <li class="nav-item dropdown dropdown-list-toggle">
                     <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -169,6 +180,14 @@
                             <i class='bx bxs-dashboard icon'></i> Dashboard
                         </a>
                     </li>
+
+                    <li>
+                        <a href="/chatify" target="_blank" class="{{ Request::is('chatify*') ? 'active' : '' }}">
+                            <i class='bx bxs-dashboard icon'></i> Chats
+                            <span id="unseenMsgCounter" class="badge badge-danger">{{$unseenmessages}}</span>
+                        </a>
+                    </li>
+
 
                     {{-- <li>
                         <a href="{{ route('categoryview') }}"

@@ -14,6 +14,8 @@ use App\Models\Brand;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValue;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
@@ -47,7 +49,10 @@ class ProductController extends Controller
 
         $productAttributes = ProductAttribute::all();
 
-        return view('products', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory', 'brands', 'productAttributes'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('products', compact('shopInfo', 'cat_count', 'unseenmessages', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory', 'brands', 'productAttributes'));
     }
 
     public function add()
@@ -204,6 +209,8 @@ class ProductController extends Controller
         }
         $product->save();
 
+
+
         return redirect()->route('productview')->with('update_success', 'Product updated successfully.');
     }
 
@@ -285,8 +292,10 @@ class ProductController extends Controller
         $shopInfo = SellerShop::where('user_id', auth()->id())->first();
 
         $productAttributes = ProductAttribute::all();
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        return view('productAttributes', compact('productAttributes', 'shopInfo'));
+
+        return view('productAttributes', compact('productAttributes', 'unseenmessages', 'shopInfo'));
     }
 
     public function storeAttribute(Request $request)

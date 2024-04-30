@@ -24,6 +24,8 @@ use BaconQrCode\Renderer\RendererStyle\Image;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Stripe\Exception\CardException;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
 
@@ -60,7 +62,10 @@ class OredrController extends Controller
 
         $totalAmountReturned = $Orders->where('order_status', 'Returned')->sum('total_price');
 
-        return view('order', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalAmountReturned', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('order', compact('shopInfo', 'Orders', 'unseenmessages', 'totalOrdersCount', 'totalAmountReturned', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
     }
 
     public function finance()
@@ -110,7 +115,10 @@ class OredrController extends Controller
         $totalAmountReceivedCard = $cOrders->where('payment_method', 'Card Payment')->sum('total_price');
         $totalAmountReceivedCashOnDelivery = $cOrders->where('payment_method', 'cash on delivery')->sum('total_price');
 
-        return view('finance', compact('shopInfo', 'Orders', 'totalOrdersCount', 'totalOrdersCodCount', 'totalOrdersCardCount', 'totalProductsOrdered', 'totalAmountReceived', 'totalAmountReceivedCard', 'totalAmountReceivedCashOnDelivery', 'rejectedOrders', 'acceptedOrders', 'completedOrders', 'pendingOrders'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('finance', compact('shopInfo', 'Orders', 'unseenmessages', 'totalOrdersCount', 'totalOrdersCodCount', 'totalOrdersCardCount', 'totalProductsOrdered', 'totalAmountReceived', 'totalAmountReceivedCard', 'totalAmountReceivedCashOnDelivery', 'rejectedOrders', 'acceptedOrders', 'completedOrders', 'pendingOrders'));
     }
 
     public function placeOrder(Request $request)
@@ -299,7 +307,10 @@ class OredrController extends Controller
             return redirect()->route('home')->with('error', 'Order not found');
         }
 
-        return view('orderDetails', compact('order', 'shopInfo'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('orderDetails', compact('order', 'unseenmessages', 'shopInfo'));
     }
 
     public function udateOrderStatus($id)
@@ -343,7 +354,10 @@ class OredrController extends Controller
         $totalItems = $cart->sum('quantity');
         $trackOrders = Order::find($id);
 
-        return view('trackOrders', compact('trackOrders', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('trackOrders', compact('trackOrders', 'unseenmessages', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
     }
 
     public function userOrders()
@@ -370,7 +384,10 @@ class OredrController extends Controller
         $totalItems = $cart->sum('quantity');
         $userOrders = Order::where('user_id', $user_id)->get();
 
-        return view('userOrders', compact('userOrders', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('userOrders', compact('userOrders', 'unseenmessages', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
     }
 
     public function downloadPDF($id)

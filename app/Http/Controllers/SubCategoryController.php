@@ -8,6 +8,8 @@ use App\Models\SellerShop;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\SubCategory;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +42,11 @@ class SubCategoryController extends Controller
 
         $rev_count = $reviews->count();
 
-        return view('subCategories', compact('shopInfo', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+
+        return view('subCategories', compact('shopInfo', 'unseenmessages', 'cat_count', 'pro_count', 'rev_count', 'categories', 'products', 'subCategory'));
     }
 
     public function store(Request $request)
