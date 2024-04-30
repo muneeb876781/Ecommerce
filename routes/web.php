@@ -14,6 +14,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\OredrController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -207,4 +208,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/adminProfile', [AdminController::class, 'adminProfile'])
         ->name('adminProfile')
         ->middleware('admin');
+
+    Route::get('/chatify', [MessagesController::class, 'index'])
+        ->name('chatify');
 });

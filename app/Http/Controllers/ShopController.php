@@ -70,7 +70,10 @@ class ShopController extends Controller
         $policies = Policy::where('shop_id', $shopid)->get();
         // dd($policies);
 
-        return view('productDetails', compact('product', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart', 'policies'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('productDetails', compact('product', 'unseenmessages', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart', 'policies'));
     }
 
     public function shopPolicies($id){
@@ -96,7 +99,10 @@ class ShopController extends Controller
  
         $policy = Policy::where('id', $id)->first();
 
-        return view('shopPolicy', compact('products', 'policy',  'brands', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('shopPolicy', compact('products', 'unseenmessages', 'policy',  'brands', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
 
@@ -123,7 +129,10 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('ShopPage', compact('products', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProductsByBrand($brandId)
@@ -149,7 +158,10 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('ShopPage', compact('products', 'brands', 'brand', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'brand', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProductsBysubcategory($subcategoryId)
@@ -176,7 +188,10 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('ShopPage', compact('products', 'brands', 'subcategory', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'subcategory', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProducts(Request $request)
@@ -211,7 +226,10 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('ShopPage', compact('products', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('ShopPage', compact('products', 'brands', 'unseenmessages', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function searchProducts(Request $request)
@@ -257,6 +275,9 @@ class ShopController extends Controller
             })
             ->get();
 
-        return view('ShopPage', compact('products', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
+            $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 }
