@@ -340,7 +340,7 @@
             align-items: flex-start;
             flex-direction: column;
             width: 100%;
-            height: 30%;
+            height: 35%;
             background: #efefef;
         }
 
@@ -358,6 +358,7 @@
             background: #fff;
             color: #49aefb;
             margin-left: 20px;
+            margin-bottom: 10px;
         }
 
         .side_nav_trackorder {
@@ -367,11 +368,12 @@
         }
 
         .side_nav_trackorder i {
-            /* margin-right: 5px; */
             margin-left: 20px;
             color: #909090;
+        }
 
-            /* Adjust the margin as needed */
+        .side_nav_trackorder a {
+            padding: 6px;
         }
 
         .sidenav_login {
@@ -1235,6 +1237,14 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <a href="{{ route('userOrders') }}">Track My Orders</a>
                     </div>
+                    <div class="side_nav_trackorder">
+                        <i class="fas fa-comment"></i>
+                        <a href="{{ route('chatify') }}">Messages</a>
+                        @if ($unseenmessages > 0)
+                            <span class="badge">{{ $unseenmessages }}</span>
+                        @endif
+                    </div>
+                    
 
                 </div>
                 <div class="bottom_sidenav">
