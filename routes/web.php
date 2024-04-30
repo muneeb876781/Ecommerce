@@ -209,6 +209,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('adminProfile')
         ->middleware('admin');
 
-    Route::get('/chatify', [MessagesController::class, 'index'])
-        ->name('chatify');
+    Route::get('/chatify', [MessagesController::class, 'index'])->name('chatify');
+    Route::get('/chatifyy/{id}', [MessagesController::class, 'index'])->name('chatifyy');
 });

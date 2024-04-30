@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Brand;
 use App\Models\Policy;
 use App\Models\SubCategory;
+use App\Models\SellerShop;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -66,6 +67,11 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $shopid = $product->shop_id;
+        $userid = SellerShop::where('id', $shopid)->value('user_id');
+
+        // $shopId = $product->pluck('product.shop_id')->unique();
+
+        // $shop_user_id = $shopId->first();
 
         $policies = Policy::where('shop_id', $shopid)->get();
         // dd($policies);
@@ -73,7 +79,7 @@ class ShopController extends Controller
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
 
-        return view('productDetails', compact('product', 'unseenmessages', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart', 'policies'));
+        return view('productDetails', compact('product', 'shopid', 'userid', 'unseenmessages', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart', 'policies'));
     }
 
     public function shopPolicies($id){
