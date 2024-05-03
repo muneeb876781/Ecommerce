@@ -14,7 +14,7 @@
     <link rel="manifest" href="site.webmanifest">
     
 
-    <title>Document</title>
+    <title>PrimeTechnology - Home</title>
     <style>
         .sale-tag-new, .out-of-stock-tag-new {
             position: absolute;

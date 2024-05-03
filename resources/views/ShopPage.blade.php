@@ -13,7 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="manifest" href="site.webmanifest">
-    <title>Document</title>
+    <title>PrimeTechnology - Shop</title>
     <!-- Meta Pixel Code -->
     <script>
         ! function(f, b, e, v, n, t, s) {
