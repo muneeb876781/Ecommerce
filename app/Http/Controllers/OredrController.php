@@ -117,7 +117,6 @@ class OredrController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
         return view('finance', compact('shopInfo', 'Orders', 'unseenmessages', 'totalOrdersCount', 'totalOrdersCodCount', 'totalOrdersCardCount', 'totalProductsOrdered', 'totalAmountReceived', 'totalAmountReceivedCard', 'totalAmountReceivedCashOnDelivery', 'rejectedOrders', 'acceptedOrders', 'completedOrders', 'pendingOrders'));
     }
 
