@@ -132,6 +132,10 @@ class OredrController extends Controller
             'instructions' => 'nullable|string',
         ]);
 
+
+
+        
+
         $order = new Order();
         $order->user_id = auth()->id();
 
