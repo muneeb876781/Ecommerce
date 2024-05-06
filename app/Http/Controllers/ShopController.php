@@ -124,7 +124,7 @@ class ShopController extends Controller
             $products->where('Brand_id', request('brand_id'));
         }
 
-        $products = $products->get();
+        $products = $products->paginate(10); 
 
         $user_id = auth()->id();
         $cart = Cart::where('user_id', $user_id)->get();
@@ -153,7 +153,7 @@ class ShopController extends Controller
             $products->where('category_id', request('category_id'));
         }
 
-        $products = $products->get();
+        $products = $products->paginate(10); 
 
         $user_id = auth()->id();
         $cart = Cart::where('user_id', $user_id)->get();
@@ -177,7 +177,7 @@ class ShopController extends Controller
         $brands = Brand::all();
 
         $subcategory = SubCategory::find($subcategoryId);
-        $products = Product::where('SubCategory_id', $subcategory->id)->get();
+        $products = Product::where('SubCategory_id', $subcategory->id)->paginate(18);
 
         $user_id = auth()->id();
 
@@ -215,7 +215,7 @@ class ShopController extends Controller
             $products->where('brand_id', $request->brand_id);
         }
 
-        $products = $products->get();
+        $products = $products->paginate(10); 
 
         $user_id = auth()->id();
 
