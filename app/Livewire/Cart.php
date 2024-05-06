@@ -73,11 +73,10 @@ class Cart extends Component
 
         $cartItem->delete();
 
-        $this->cart = $this->cart->reject(function ($item) use ($id) {
-            return $item->id == $id;
-        });
+        $this->loadCart();
 
-        $this->totalPrice = $this->calculateTotalPrice();
+
+        // $this->totalPrice = $this->calculateTotalPrice();
 
         session()->flash('message', 'Item removed from cart.');
     }
