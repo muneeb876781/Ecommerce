@@ -234,7 +234,10 @@ class ProductController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('cart', compact('cart', 'categories', 'brands', 'totalPrice', 'totalItems'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('cart', compact('cart', 'categories', 'unseenmessages', 'brands', 'totalPrice', 'totalItems'));
     }
 
     public function addToCart(Request $request, $id)
