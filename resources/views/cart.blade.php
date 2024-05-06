@@ -66,17 +66,17 @@
     <script src="{{ asset('javascript/plugins.js') }}"></script>
     <script src="{{ asset('javascript/main.js') }}"></script>
     <title>Document</title>
-    <livewire:styles />
-
+    @livewireStyles
 
 </head>
 
 <body>
-    <livewire:scripts />
 
     <div>
         @livewire('cart')
     </div>
+
+    @livewireScripts
 
 </body>
 
