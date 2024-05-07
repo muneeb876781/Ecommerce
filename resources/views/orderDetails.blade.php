@@ -18,40 +18,24 @@
     <link rel="stylesheet" href="{{ asset('assets/modules/apexcharts/apexcharts.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    @livewireStyles
 
 
 </head>
 
 <body>
 
+
     @include('venderNav')
+
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
             <div class="content-header">
                 <h1>Orders Details</h1>
                 <div class="row">
-                    <div class="col-md-4">
-                        <form action="{{ route('udateOrderStatus', ['id' => $order->id]) }}" method="POST">
-                            @csrf
-                            <div class="input-group mb-2">
-                                <select class="form-select form-control-lg" name="status"
-                                    aria-label="Update Order Status">
-                                    <option value="Pending" {{ $order->order_status === 'Pending' ? 'selected' : '' }}>
-                                        Pending</option>
-                                    <option value="Accepted"
-                                        {{ $order->order_status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
-                                    <option value="Completed"
-                                        {{ $order->order_status === 'Completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="Rejected"
-                                        {{ $order->order_status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
-                                    <option value="Returned"
-                                        {{ $order->order_status === 'Returned' ? 'selected' : '' }}>Returned</option>
-
-                                </select>
-                                <button class="btn btn-primary" type="submit">Update Status</button>
-                            </div>
-                        </form>
-                    </div>
+                    
+                    @livewire('update-order-status', ['orderId' => $order->id])
+                    
                     <div class="col-md-8 text-md-end"> <!-- Align to the end of the column -->
                         <div class="d-flex justify-content-md-end"> <!-- Align to the end of the column -->
                             <a href="{{ route('downloadPDF', ['id' => $order->id]) }}" class="btn btn-primary">Download
@@ -146,6 +130,8 @@
             </div>
         </div>
     </div>
+    @livewireScripts
+
 </body>
 
 

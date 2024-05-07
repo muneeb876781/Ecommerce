@@ -324,7 +324,7 @@ class OredrController extends Controller
         }
 
         $status = request('status');
-        if (!in_array($status, ['Pending', 'Accepted', 'Completed', 'Rejected', 'Returned'])) {
+        if (!in_array($status, ['Pending', 'Accepted', 'Completed', 'Rejected', 'Returned', 'Dispatched'])) {
             return response()->json(['message' => 'Invalid status'], 400);
         }
 
