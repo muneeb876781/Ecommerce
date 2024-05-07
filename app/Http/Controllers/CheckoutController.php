@@ -9,6 +9,8 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Brand;
+use Illuminate\Support\Facades\DB;
+
 
 
 use Illuminate\Http\Request;
@@ -35,6 +37,9 @@ class CheckoutController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        return view('checkout', compact('cart', 'brands', 'categories', 'totalPrice', 'totalItems'));
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+
+        return view('checkout', compact('cart', 'brands', 'unseenmessages', 'categories', 'totalPrice', 'totalItems'));
     }
 }
