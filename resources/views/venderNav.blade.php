@@ -20,17 +20,20 @@
         .logout {
             padding: 10px 20px 10px 20px;
             background: transparent;
-            color: white;
+            color: #000;
             border: 1px solid white;
             border-radius: 12px;
             font-size: 16px;
             width: 100%;
             transition: 0.2s ease-in-out;
+            border: 1px solid rgba(47, 170, 244, 0.5);
+
         }
 
         .logout:hover {
-            background: blue;
-            border: none;
+            background: #456dff;
+            color: #ffffff;
+            box-shadow: 2px 2px 5px rgba(47, 170, 244, 0.5);
         }
     </style>
     <style>
@@ -120,11 +123,11 @@
                             font-size: bold;
                         }
 
-                        .dd-item:hover{
+                        .dd-item:hover {
                             border-bottom: 2px solid blue;
                         }
 
-                        .dd-item .fa{
+                        .dd-item .fa {
                             font-size: 20px;
                         }
                     </style>
