@@ -259,6 +259,8 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $searchText = $request->input('serachProducts');
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
 
         // $products = Product::where('name', 'like', "%$searchText%")
         //     ->orWhereHas('category', function ($query) use ($searchText) {
@@ -266,6 +268,7 @@ class ShopController extends Controller
         //     })
         //     ->orWhere('sku', 'like', "%$searchText%")
         //     ->get();
+
 
         $products = Product::where('name', 'like', "%$searchText%")
             ->orWhere('sku', 'like', "%$searchText%")
@@ -279,10 +282,7 @@ class ShopController extends Controller
             ->orWhereHas('subcategory', function ($query) use ($searchText) {
                 $query->where('name', 'like', "%$searchText%");
             })
-            ->get();
-
-            $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
-
+            ->paginate(18);
 
         return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
