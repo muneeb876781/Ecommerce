@@ -208,6 +208,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/adminProfile', [AdminController::class, 'adminProfile'])
         ->name('adminProfile')
         ->middleware('admin');
+    Route::get('/admin/table/{tableName}', [AdminController::class, 'showTable'])
+        ->name('admin.table')
+        ->middleware('admin');
+
 
     Route::get('/chatify', [MessagesController::class, 'index'])->name('chatify');
     Route::get('/chatifyy/{id}', [MessagesController::class, 'index'])->name('chatifyy');

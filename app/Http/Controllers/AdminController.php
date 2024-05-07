@@ -11,6 +11,7 @@ use App\Models\Cart;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +30,37 @@ class AdminController extends Controller
         $Products = Product::all();
         $SellerShops = SellerShop::all();
 
-        return view('adminDashboard', compact('admin', 'totalUsers', 'totalProducts', 'totalSellerShops', 'Users', 'Products', 'SellerShops'));
+        $tableNames = $this->getTableNames();
+
+        return view('adminDashboard', compact('admin', 'tableNames', 'totalUsers', 'totalProducts', 'totalSellerShops', 'Users', 'Products', 'SellerShops'));
+    }
+
+    private function getTableNames()
+    {
+        $tables = DB::select('SHOW TABLES');
+        return array_column($tables, 'Tables_in_' . env('DB_DATABASE'));
+    }
+
+    public function showTable($tableName)
+    {
+        $columns = DB::getSchemaBuilder()->getColumnListing($tableName);
+        $data = DB::table($tableName)->get();
+
+        $userId = Auth::id();
+        $admin = User::where('id', $userId)->first();
+
+        $totalUsers = User::count();
+        $totalProducts = Product::count();
+        $totalSellerShops = SellerShop::count();
+
+        $Users = User::all();
+        $Products = Product::all();
+        $SellerShops = SellerShop::all();
+
+        $tableNames = $this->getTableNames();
+
+
+        return view('adminDataTable', compact('admin', 'tableName', 'columns', 'data',  'tableNames', 'totalUsers', 'totalProducts', 'totalSellerShops', 'Users', 'Products', 'SellerShops'));
     }
 
     public function users()
@@ -45,7 +76,9 @@ class AdminController extends Controller
         $sellerUsers = User::where('role', 'seller')->get();
         $adminUsers = User::where('role', 'admin')->get();
 
-        return view('Userss', compact('totalUsers', 'admin', 'Users', 'sellerUsers', 'adminUsers', 'sellerUserscount', 'adminUserscount'));
+        $tableNames = $this->getTableNames();
+
+        return view('Userss', compact('totalUsers', 'tableNames', 'admin', 'Users', 'sellerUsers', 'adminUsers', 'sellerUserscount', 'adminUserscount'));
     }
 
     public function editUser(Request $request, $id)
@@ -75,14 +108,17 @@ class AdminController extends Controller
         return redirect()->back()->with('destroyUser_success', 'User deleted successfully!');
     }
 
-    public function shops(){
+    public function shops()
+    {
         $userId = Auth::id();
         $admin = User::where('id', $userId)->first();
 
         $shops = SellerShop::all();
         $totalSellerShops = SellerShop::count();
 
-        return view('shops', compact('shops', 'admin', 'totalSellerShops'));
+        $tableNames = $this->getTableNames();
+
+        return view('shops', compact('shops', 'tableNames', 'admin', 'totalSellerShops'));
     }
 
     public function destroyShop($id)
@@ -97,10 +133,13 @@ class AdminController extends Controller
         return redirect()->back()->with('destroyShop_success', 'Shop deleted successfully!');
     }
 
-    public function adminProfile(){
+    public function adminProfile()
+    {
         $userId = Auth::id();
         $admin = User::where('id', $userId)->first();
 
-        return view('adminProfile', compact('admin'));
+        $tableNames = $this->getTableNames();
+
+        return view('adminProfile', compact('admin', 'tableNames'));
     }
 }

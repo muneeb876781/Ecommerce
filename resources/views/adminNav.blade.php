@@ -174,6 +174,25 @@
                     </li>
 
                     <li>
+                        <a href="#">
+                            <i class='bx bx-columns icon'></i>
+                            DataBase
+                            <i class='bx bx-chevron-right icon-right'></i>
+                        </a>
+                        <ul class="side-dropdown">
+                            @foreach ($tableNames as $tableName)
+                                <li>
+                                    <a href="{{ route('admin.table', $tableName) }}"
+                                        class="{{ Request::is($tableName.'*') ? 'active' : '' }}">
+                                        {{ $tableName }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    
+
+                    <li>
                         <a href="{{ route('adminProfile') }}"
                             class="{{ Request::is('adminProfile*') ? 'active' : '' }}">
                             <i class='bx bxs-meh-blank icon'></i> My Profile
