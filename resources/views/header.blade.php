@@ -208,7 +208,7 @@
 
         @media (max-width: 760px) {
             .sticky-navbar {
-                display: block;
+                display: none;
             }
         }
 
@@ -1165,7 +1165,7 @@
                             class="badge">{{ $totalItems }}</span></button>
                     <span>Cart</span>
                 </div>
-                
+
                 <div class="button-wrapper">
                     <button id="dashboard" onclick="toggleDashboard()"><i class="fas fa-chart-line"></i></button>
                     <span>Dashboard</span>
@@ -1203,6 +1203,172 @@
                 </div>
             </div>
         </div>
+        <style>
+            .bottomNav {
+                position: fixed;
+                bottom: 0px;
+                /* right: 10px; */
+                display: none;
+                width: 100%;
+                height: auto;
+                z-index: 9999;
+                background: #efefef;
+            }
+
+            .bottomNav ul{
+                display: flex;
+                /* justify-content: center;
+                align-items: center; */
+                flex-direction: row;
+                width: 100%;
+            }
+
+            .bottomNav ul li{
+                position: relative;
+                list-style: none;
+                width: 20%;
+                height: 60px;
+                z-index: 1;
+            }
+
+            .bottomNav ul li a{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                font-weight: 500;
+            }
+
+            .bottomNav ul li a .icon{
+                position: relative;
+                display: block;
+                line-height: 75px;
+                font-size: 1.5em;
+                text-align: center;
+                transition: 0.5s;
+                color: #C01F9E;
+            }
+
+            .bottomNav ul li.active a .icon{
+                transform: translateY(-35px);
+            }
+
+            .bottomNav ul li a .text{
+                position: absolute;
+                color: #fff;
+                font-weight: 400;
+                font-size: 0.75em;
+                letter-spacing: 0.05em;
+                transition: 0.5s;
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            .bottomNav ul li.active a .text{
+                transform: translateY(-17px);
+                opacity: 1;
+                color: #fff
+            }
+
+            .bottomNav ul li.active a .icon{
+                color: #fff
+            }
+
+            .indicator{
+                position: absolute;
+                top: -50%;
+                width: 20%;
+                height: 80px;
+                /* background: #29fd53; */
+                background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                border-radius: 50%;
+                border: 6px solid white;
+                transition: 0.5s;
+            }
+
+            .bottomNav ul li:nth-child(1).active ~ .indicator{
+                transform: translateX(calc(80px * 0))
+            }
+
+            .bottomNav ul li:nth-child(2).active ~ .indicator{
+                transform: translateX(calc(80px * 1))
+            }
+
+            .bottomNav ul li:nth-child(3).active ~ .indicator{
+                transform: translateX(calc(80px * 2))
+            }
+
+            .bottomNav ul li:nth-child(4).active ~ .indicator{
+                transform: translateX(calc(80px * 3))
+            }
+
+            .bottomNav ul li:nth-child(5).active ~ .indicator{
+                transform: translateX(calc(80px * 4))
+            }
+
+            
+            @media (max-width: 760px) {
+            .bottomNav {
+                display: block;
+            }
+        }
+        </style>
+        <div class="bottomNav">
+            <ul>
+                <li class="list active" >
+                    <a href="{{ route('home')}}">
+                        <span class="icon"><ion-icon name="home"></ion-icon></span>
+                        <span class="text">Home</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ route('shop')}}">
+                        <span class="icon"><ion-icon name="card"></ion-icon></span>
+                        <span class="text">Shop</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ route('cart')}}">
+                        <span class="icon"><ion-icon name="cart"></ion-icon></span>
+                        <span class="text">Cart</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ route('dashboard')}}">
+                        <span class="icon"><ion-icon name="list"></ion-icon></span>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ route('chatify')}}">
+                        <span class="icon"><ion-icon name="chatbox"></ion-icon></span>
+                        <span class="text">Messages</span>
+                    </a>
+                </li>
+                <div class="indicator"></div>
+            </ul>
+        </div>
+        <script>
+            const lists = document.querySelectorAll('.list');
+            function setActiveLink(){
+                lists.forEach((item) => {
+                    if(item.querySelector('a').href === window.location.href){
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+            setActiveLink(); // Set initial active link
+            lists.forEach((item) => item.addEventListener('click', setActiveLink));
+        </script>
+        
+        
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" />
             <label class="menu__btn" for="menu__toggle">
@@ -1240,7 +1406,7 @@
                             <span class="badge">{{ $unseenmessages }}</span>
                         @endif
                     </div>
-                    
+
 
                 </div>
                 <div class="bottom_sidenav">
