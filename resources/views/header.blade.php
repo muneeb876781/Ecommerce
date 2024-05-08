@@ -1336,12 +1336,7 @@
         </style>
         <div class="bottomNav">
             <ul>
-                <li class="list active">
-                    <a href="{{ route('home') }}">
-                        <span class="icon"><ion-icon name="home"></ion-icon></span>
-                        <span class="text">Home</span>
-                    </a>
-                </li>
+                
                 <li class="list">
                     <a href="{{ route('shop') }}">
                         <span class="icon"><ion-icon name="card"></ion-icon></span>
@@ -1353,6 +1348,12 @@
                         <span class="icon"><ion-icon name="cart"></ion-icon><span
                                 class="cartbadge">{{ $totalItems }}</span></span>
                         <span class="text">Cart</span>
+                    </a>
+                </li>
+                <li class="list active">
+                    <a href="{{ route('home') }}">
+                        <span class="icon"><ion-icon name="home"></ion-icon></span>
+                        <span class="text">Home</span>
                     </a>
                 </li>
                 <li class="list">
