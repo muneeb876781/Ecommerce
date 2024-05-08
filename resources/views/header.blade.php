@@ -1215,7 +1215,7 @@
                 background: #efefef;
             }
 
-            .bottomNav ul{
+            .bottomNav ul {
                 display: flex;
                 /* justify-content: center;
                 align-items: center; */
@@ -1223,7 +1223,7 @@
                 width: 100%;
             }
 
-            .bottomNav ul li{
+            .bottomNav ul li {
                 position: relative;
                 list-style: none;
                 width: 20%;
@@ -1231,7 +1231,7 @@
                 z-index: 1;
             }
 
-            .bottomNav ul li a{
+            .bottomNav ul li a {
                 position: relative;
                 display: flex;
                 justify-content: center;
@@ -1242,7 +1242,7 @@
                 font-weight: 500;
             }
 
-            .bottomNav ul li a .icon{
+            .bottomNav ul li a .icon {
                 position: relative;
                 display: block;
                 line-height: 75px;
@@ -1252,11 +1252,11 @@
                 color: #C01F9E;
             }
 
-            .bottomNav ul li.active a .icon{
+            .bottomNav ul li.active a .icon {
                 transform: translateY(-35px);
             }
 
-            .bottomNav ul li a .text{
+            .bottomNav ul li a .text {
                 position: absolute;
                 color: #fff;
                 font-weight: 400;
@@ -1267,17 +1267,17 @@
                 transform: translateY(20px);
             }
 
-            .bottomNav ul li.active a .text{
+            .bottomNav ul li.active a .text {
                 transform: translateY(-17px);
                 opacity: 1;
                 color: #fff
             }
 
-            .bottomNav ul li.active a .icon{
+            .bottomNav ul li.active a .icon {
                 color: #fff
             }
 
-            .indicator{
+            .indicator {
                 position: absolute;
                 top: -50%;
                 width: 80px;
@@ -1289,62 +1289,81 @@
                 transition: 0.5s;
             }
 
-            .bottomNav ul li:nth-child(1).active ~ .indicator{
+            .bottomNav ul li:nth-child(1).active~.indicator {
                 transform: translateX(calc(77px * 0))
             }
 
-            .bottomNav ul li:nth-child(2).active ~ .indicator{
+            .bottomNav ul li:nth-child(2).active~.indicator {
                 transform: translateX(calc(77px * 1))
             }
 
-            .bottomNav ul li:nth-child(3).active ~ .indicator{
+            .bottomNav ul li:nth-child(3).active~.indicator {
                 transform: translateX(calc(77px * 2))
             }
 
-            .bottomNav ul li:nth-child(4).active ~ .indicator{
+            .bottomNav ul li:nth-child(4).active~.indicator {
                 transform: translateX(calc(77px * 3))
             }
 
-            .bottomNav ul li:nth-child(5).active ~ .indicator{
+            .bottomNav ul li:nth-child(5).active~.indicator {
                 transform: translateX(calc(77px * 4))
             }
 
-            
-            @media (max-width: 760px) {
-            .bottomNav {
-                display: block;
+            .cartbadge {
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                background: #48afff;
+                border-radius: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                font-size: 1rem;
+                right: -10px;
+                top: 5px;
+                padding: 9px;
             }
-        }
+
+
+
+            @media (max-width: 760px) {
+                .bottomNav {
+                    display: block;
+                }
+            }
         </style>
         <div class="bottomNav">
             <ul>
-                <li class="list active" >
-                    <a href="{{ route('home')}}">
+                <li class="list active">
+                    <a href="{{ route('home') }}">
                         <span class="icon"><ion-icon name="home"></ion-icon></span>
                         <span class="text">Home</span>
                     </a>
                 </li>
                 <li class="list">
-                    <a href="{{ route('shop')}}">
+                    <a href="{{ route('shop') }}">
                         <span class="icon"><ion-icon name="card"></ion-icon></span>
                         <span class="text">Shop</span>
                     </a>
                 </li>
                 <li class="list">
-                    <a href="{{ route('cart')}}">
-                        <span class="icon"><ion-icon name="cart"></ion-icon></span>
+                    <a href="{{ route('cart') }}">
+                        <span class="icon"><ion-icon name="cart"></ion-icon><span
+                                class="cartbadge">{{ $totalItems }}</span></span>
                         <span class="text">Cart</span>
                     </a>
                 </li>
                 <li class="list">
-                    <a href="{{ route('dashboard')}}">
+                    <a href="{{ route('dashboard') }}">
                         <span class="icon"><ion-icon name="list"></ion-icon></span>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li class="list">
-                    <a href="{{ route('chatify')}}">
-                        <span class="icon"><ion-icon name="chatbox"></ion-icon></span>
+                    <a href="{{ route('chatify') }}">
+                        <span class="icon"><ion-icon name="chatbox"></ion-icon><span
+                            class="cartbadge">{{ $unseenmessages }}</span></span>
                         <span class="text">Messages</span>
                     </a>
                 </li>
@@ -1353,9 +1372,10 @@
         </div>
         <script>
             const lists = document.querySelectorAll('.list');
-            function setActiveLink(){
+
+            function setActiveLink() {
                 lists.forEach((item) => {
-                    if(item.querySelector('a').href === window.location.href){
+                    if (item.querySelector('a').href === window.location.href) {
                         item.classList.add('active');
                     } else {
                         item.classList.remove('active');
@@ -1365,8 +1385,8 @@
             setActiveLink(); // Set initial active link
             lists.forEach((item) => item.addEventListener('click', setActiveLink));
         </script>
-        
-        
+
+
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <div class="hamburger-menu">
