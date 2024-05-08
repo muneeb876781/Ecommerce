@@ -1,4 +1,4 @@
-{{-- @include('header')/ --}}
+@include('header')
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -14,9 +14,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="{{ asset('csss/meanmenu.css') }}">
-    <link rel="stylesheet" href="{{ asset('csss/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('csss/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('../csss/meanmenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('../csss/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('../csss/responsive.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="manifest" href="site.webmanifest">
@@ -32,7 +32,7 @@
 
 
         <!-- reg area start -->
-        <section class="reg-area pt-60 pb-75">
+        <section class="reg-area pt-20 pb-75">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 text-center">
