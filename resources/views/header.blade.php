@@ -534,6 +534,137 @@
             background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
         }
     </style>
+            <style>
+                .bottomNav {
+                    position: fixed;
+                    bottom: 0px;
+                    /* right: 10px; */
+                    display: none;
+                    width: 100%;
+                    height: auto;
+                    z-index: 9999;
+                    background: #efefef;
+                }
+    
+                .bottomNav ul {
+                    display: flex;
+                    /* justify-content: center;
+                    align-items: center; */
+                    flex-direction: row;
+                    width: 100%;
+                }
+    
+                .bottomNav ul li {
+                    position: relative;
+                    list-style: none;
+                    width: 20%;
+                    height: 60px;
+                    z-index: 1;
+                }
+    
+                .bottomNav ul li a {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
+                    text-align: center;
+                    font-weight: 500;
+                }
+    
+                .bottomNav ul li a .icon {
+                    position: relative;
+                    display: block;
+                    line-height: 75px;
+                    font-size: 1.5em;
+                    text-align: center;
+                    transition: 0.5s;
+                    color: #C01F9E;
+                }
+    
+                .bottomNav ul li.active a .icon {
+                    transform: translateY(-35px);
+                }
+    
+                .bottomNav ul li a .text {
+                    position: absolute;
+                    color: #fff;
+                    font-weight: 400;
+                    font-size: 0.75em;
+                    letter-spacing: 0.05em;
+                    transition: 0.5s;
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+    
+                .bottomNav ul li.active a .text {
+                    transform: translateY(-17px);
+                    opacity: 1;
+                    color: #fff
+                }
+    
+                .bottomNav ul li.active a .icon {
+                    color: #fff
+                }
+    
+                .indicator {
+                    position: absolute;
+                    top: -50%;
+                    width: 80px;
+                    height: 80px;
+                    background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                    border-radius: 50%;
+                    border: 6px solid white;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    transition: 0.5s;
+                }
+    
+    
+                .bottomNav ul li:nth-child(1).active~.indicator {
+                    transform: translateX(calc(77px * 0))
+                }
+    
+                .bottomNav ul li:nth-child(2).active~.indicator {
+                    transform: translateX(calc(77px * 1))
+                }
+    
+                .bottomNav ul li:nth-child(3).active~.indicator {
+                    transform: translateX(calc(77px * 2))
+                }
+    
+                .bottomNav ul li:nth-child(4).active~.indicator {
+                    transform: translateX(calc(77px * 3))
+                }
+    
+                .bottomNav ul li:nth-child(5).active~.indicator {
+                    transform: translateX(calc(77px * 4))
+                }
+    
+                .cartbadge {
+                    position: absolute;
+                    width: 15px;
+                    height: 15px;
+                    background: #48afff;
+                    border-radius: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                    font-size: 1rem;
+                    right: -10px;
+                    top: 5px;
+                    padding: 9px;
+                }
+    
+    
+    
+                @media (max-width: 760px) {
+                    .bottomNav {
+                        display: block;
+                    }
+                }
+            </style>
 
 
     {{-- <title>Document</title> --}}
@@ -1203,137 +1334,6 @@
                 </div>
             </div>
         </div>
-        <style>
-            .bottomNav {
-                position: fixed;
-                bottom: 0px;
-                /* right: 10px; */
-                display: none;
-                width: 100%;
-                height: auto;
-                z-index: 9999;
-                background: #efefef;
-            }
-
-            .bottomNav ul {
-                display: flex;
-                /* justify-content: center;
-                align-items: center; */
-                flex-direction: row;
-                width: 100%;
-            }
-
-            .bottomNav ul li {
-                position: relative;
-                list-style: none;
-                width: 20%;
-                height: 60px;
-                z-index: 1;
-            }
-
-            .bottomNav ul li a {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                font-weight: 500;
-            }
-
-            .bottomNav ul li a .icon {
-                position: relative;
-                display: block;
-                line-height: 75px;
-                font-size: 1.5em;
-                text-align: center;
-                transition: 0.5s;
-                color: #C01F9E;
-            }
-
-            .bottomNav ul li.active a .icon {
-                transform: translateY(-35px);
-            }
-
-            .bottomNav ul li a .text {
-                position: absolute;
-                color: #fff;
-                font-weight: 400;
-                font-size: 0.75em;
-                letter-spacing: 0.05em;
-                transition: 0.5s;
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            .bottomNav ul li.active a .text {
-                transform: translateY(-17px);
-                opacity: 1;
-                color: #fff
-            }
-
-            .bottomNav ul li.active a .icon {
-                color: #fff
-            }
-
-            .indicator {
-                position: absolute;
-                top: -50%;
-                width: 80px;
-                height: 80px;
-                background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
-                border-radius: 50%;
-                border: 6px solid white;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                transition: 0.5s;
-            }
-
-
-            .bottomNav ul li:nth-child(1).active~.indicator {
-                transform: translateX(calc(77px * 0))
-            }
-
-            .bottomNav ul li:nth-child(2).active~.indicator {
-                transform: translateX(calc(77px * 1))
-            }
-
-            .bottomNav ul li:nth-child(3).active~.indicator {
-                transform: translateX(calc(77px * 2))
-            }
-
-            .bottomNav ul li:nth-child(4).active~.indicator {
-                transform: translateX(calc(77px * 3))
-            }
-
-            .bottomNav ul li:nth-child(5).active~.indicator {
-                transform: translateX(calc(77px * 4))
-            }
-
-            .cartbadge {
-                position: absolute;
-                width: 15px;
-                height: 15px;
-                background: #48afff;
-                border-radius: 50px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: #fff;
-                font-size: 1rem;
-                right: -10px;
-                top: 5px;
-                padding: 9px;
-            }
-
-
-
-            @media (max-width: 760px) {
-                .bottomNav {
-                    display: block;
-                }
-            }
-        </style>
         <div class="bottomNav">
             <ul>
                 
@@ -1372,25 +1372,6 @@
                 <div class="indicator"></div>
             </ul>
         </div>
-        <script>
-            const lists = document.querySelectorAll('.list');
-
-            function setActiveLink() {
-                lists.forEach((item) => {
-                    if (item.querySelector('a').href === window.location.href) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            }
-            setActiveLink(); // Set initial active link
-            lists.forEach((item) => item.addEventListener('click', setActiveLink));
-        </script>
-
-
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" />
             <label class="menu__btn" for="menu__toggle">
@@ -1449,6 +1430,25 @@
 
             </ul>
         </div>
+        <script>
+            const lists = document.querySelectorAll('.list');
+
+            function setActiveLink() {
+                lists.forEach((item) => {
+                    if (item.querySelector('a').href === window.location.href) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+            setActiveLink(); // Set initial active link
+            lists.forEach((item) => item.addEventListener('click', setActiveLink));
+        </script>
+
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var menuToggle = document.getElementById('menu__toggle');

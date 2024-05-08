@@ -1,4 +1,4 @@
-{{-- @include('header') --}}
+@include('header')
 
 <!doctype html>
 <html class="no-js" lang="zxx">
