@@ -1282,12 +1282,13 @@
                 top: -50%;
                 width: 80px;
                 height: 80px;
-                /* background: #29fd53; */
                 background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
                 border-radius: 50%;
                 border: 6px solid white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                 transition: 0.5s;
             }
+
 
             .bottomNav ul li:nth-child(1).active~.indicator {
                 transform: translateX(calc(77px * 0))
@@ -1363,7 +1364,7 @@
                 <li class="list">
                     <a href="{{ route('chatify') }}">
                         <span class="icon"><ion-icon name="chatbox"></ion-icon><span
-                            class="cartbadge">{{ $unseenmessages }}</span></span>
+                                class="cartbadge">{{ $unseenmessages }}</span></span>
                         <span class="text">Messages</span>
                     </a>
                 </li>
