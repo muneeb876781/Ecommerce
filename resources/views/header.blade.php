@@ -582,9 +582,22 @@
                     transition: 0.5s;
                     color: #C01F9E;
                 }
+
+                .bottomNav ul li.active a{
+                    position: absolute;
+                    top: -50%;
+                    width: 80px;
+                    height: 80px;
+                    background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                    border-radius: 50%;
+                    border: 6px solid white;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    transition: 0.5s;
+                }
     
                 .bottomNav ul li.active a .icon {
-                    transform: translateY(-35px);
+                    transform: translateY(-5px);
+                    
                 }
     
                 .bottomNav ul li a .text {
@@ -595,17 +608,17 @@
                     letter-spacing: 0.05em;
                     transition: 0.5s;
                     opacity: 0;
-                    transform: translateY(20px);
+                    transform: translateY(15px);
                 }
     
                 .bottomNav ul li.active a .text {
-                    transform: translateY(-17px);
+                    /* transform: translateY(-7px); */
                     opacity: 1;
-                    color: #fff
+                    color: #fff;
                 }
     
                 .bottomNav ul li.active a .icon {
-                    color: #fff
+                    color: #fff;
                 }
     
                 .indicator {
@@ -1369,7 +1382,7 @@
                         <span class="text">Messages</span>
                     </a>
                 </li>
-                <div class="indicator"></div>
+                {{-- <div class="indicator"></div> --}}
             </ul>
         </div>
         <div class="hamburger-menu">
