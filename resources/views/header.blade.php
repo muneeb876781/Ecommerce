@@ -1354,6 +1354,7 @@
                     <a href="{{ route('shop') }}">
                         <span class="icon"><ion-icon name="card-outline"></ion-icon></span>
                         <span class="text">Shop</span>
+                        
                     </a>
                 </li>
                 <li class="list">
