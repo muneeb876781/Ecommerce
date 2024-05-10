@@ -577,7 +577,7 @@
                     position: relative;
                     display: block;
                     line-height: 75px;
-                    font-size: 1.5em;
+                    font-size: 2em;
                     text-align: center;
                     transition: 0.5s;
                     color: #C01F9E;
@@ -1352,32 +1352,32 @@
                 
                 <li class="list">
                     <a href="{{ route('shop') }}">
-                        <span class="icon"><ion-icon name="card"></ion-icon></span>
+                        <span class="icon"><ion-icon name="card-outline"></ion-icon></span>
                         <span class="text">Shop</span>
                     </a>
                 </li>
                 <li class="list">
                     <a href="{{ route('cart') }}">
-                        <span class="icon"><ion-icon name="cart"></ion-icon><span
+                        <span class="icon"><ion-icon name="cart-outline"></ion-icon><span
                                 class="cartbadge">{{ $totalItems }}</span></span>
                         <span class="text">Cart</span>
                     </a>
                 </li>
                 <li class="list active">
                     <a href="{{ route('home') }}">
-                        <span class="icon"><ion-icon name="home"></ion-icon></span>
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                         <span class="text">Home</span>
                     </a>
                 </li>
                 <li class="list">
                     <a href="{{ route('dashboard') }}">
-                        <span class="icon"><ion-icon name="list"></ion-icon></span>
+                        <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li class="list">
                     <a href="{{ route('chatify') }}">
-                        <span class="icon"><ion-icon name="chatbox"></ion-icon><span
+                        <span class="icon"><ion-icon name="chatbox-outline"></ion-icon><span
                                 class="cartbadge">{{ $unseenmessages }}</span></span>
                         <span class="text">Messages</span>
                     </a>
@@ -1458,7 +1458,7 @@
                 });
             }
         
-            setActiveLink(); // Set initial active link
+            setActiveLink(); 
             lists.forEach((item) => item.addEventListener('click', setActiveLink));
         </script>
         
