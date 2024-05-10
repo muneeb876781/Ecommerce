@@ -1445,19 +1445,23 @@
         </div>
         <script>
             const lists = document.querySelectorAll('.list');
-
+        
             function setActiveLink() {
+                lists.forEach((item) => {
+                    item.classList.remove('active');
+                });
+        
                 lists.forEach((item) => {
                     if (item.querySelector('a').href === window.location.href) {
                         item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
                     }
                 });
             }
+        
             setActiveLink(); // Set initial active link
             lists.forEach((item) => item.addEventListener('click', setActiveLink));
         </script>
+        
 
 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
