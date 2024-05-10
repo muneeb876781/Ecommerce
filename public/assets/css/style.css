@@ -329,12 +329,14 @@ a.dropdown-item{
 .sidebar .logo h2{
 	color: #000;
 	width: 255px;
-	height: 75px;
+	/* height: 75px; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	z-index: 1;
-	margin-bottom: 50px;
+	/* margin-bottom: 10px; */
+	/* margin-top: 30px; */
+	padding: 0;
 }
 
 .sidebar .logo img{
@@ -342,6 +344,11 @@ a.dropdown-item{
 	height: 50px;
 	margin-right: 10px;
 	border: 2px solid rgba(47, 170, 244, 0.5);
+}
+
+.sidebar .logo a{
+	padding: 0;
+	margin: 0;
 }
 
 #sidebar .icon {
