@@ -109,7 +109,7 @@
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'Product Successfully added!',
+                title: 'Product Successfully edited!',
                 text: '{{ session('success') }}',
                 confirmButtonText: 'Close'
             });
@@ -159,12 +159,13 @@
     <div class="content-start transition  ">
         <div class="container-fluid dashboard">
             <div class="content-header">
-                <h1>Products</h1>
-                <button id="showAllProductsBtn" class="btn btn-primary">ALL Products</button>
+                <h1> Edit Product</h1>
+                <span style="color: black;">{{ $editProduct->name}}</span>
+                {{-- <button id="showAllProductsBtn" class="btn btn-primary">ALL Products</button>
                 <button id="showAddProductFormBtn" class="btn btn-primary">Add Product</button>
-                <br>
+                <br> --}}
 
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <div id="allProducts" class="card">
                         <div class="card-header">
                             <h4>Products</h4>
@@ -261,17 +262,12 @@
                                                     </form>
                                                 </td>
                                                 <td style="width: 19%">
-                                                    {{-- <a class="btn btn-link text-primary" href="#"
-                                                        title="View Details" data-bs-toggle="modal"
-                                                        data-bs-target="#productDetailsModal"
-                                                        onclick="showProductDetails('{{ $product->id }}', '{{ $product->name }}', '{{ $product->description }}', '{{ $product->price }}', '{{ $product->category->name }}')">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a> --}}
+                                                    
                                                     <a class="btn btn-link text-primary"
                                                         href="{{ route('singleProduct', ['id' => $product->id]) }}">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    {{-- <a class="btn btn-link text-warning" href="#" title="Edit"
+                                                    <a class="btn btn-link text-warning" href="#" title="Edit"
                                                         data-bs-toggle="modal" data-bs-target="#editProductModal"
                                                         onclick="prepareEditModal('{{ $product->id }}',
                                                             '{{ $product->name }}',
@@ -280,9 +276,6 @@
                                                             '{{ $product->discountedPrice }}',
                                                             '{{ $product->quantity }}',
                                                             '{{ $product->sku }}')">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a> --}}
-                                                    <a href="{{ route('editproduct', ['id' => $product->id]) }}" class="btn btn-link text-warning">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
@@ -310,10 +303,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div id="addProductForm" class="row" style="display: none;">
-                    <form action="{{ route('storeproduct') }}" method="post" enctype="multipart/form-data">
+                <div id="addProductForm" class="row">
+                    <form action="{{ route('saveproductchanges', ['id' => $editProduct->id]) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6">
@@ -326,11 +319,11 @@
                                         <div class="mb-3">
                                             <label for="productName">Product Name:</label>
                                             <input class="form-control" type="text" id="productName"
-                                                name="productName" placeholder="Enter Product Name">
+                                                name="productName" value="{{ $editProduct->name}}" placeholder="Enter Product Name">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productDescription">Product Description:</label>
-                                            <textarea class="form-control" id="editor" name="productDescription" placeholder="Enter Product Description"></textarea>
+                                            <textarea class="form-control" id="editor" name="productDescription" placeholder="Enter Product Description">{{ old('productDescription', $editProduct->description) }}</textarea>
                                         </div>
                                         {{-- <script>
                                             tinymce.init({
@@ -354,8 +347,8 @@
                                             });
                                         </script> --}}
                                         <div class="mb-3">
-                                            <label for="productSpecification">Product Description:</label>
-                                            <textarea class="form-control" id="editor" name="productSpecification" placeholder="Enter Product Specification"></textarea>
+                                            <label for="productSpecification">Product Specification:</label>
+                                            <textarea class="form-control" id="editor" name="productSpecification" placeholder="Enter Product Specification">{{ old('productSpecification', $editProduct->specification) }}</textarea>
                                         </div>
                                         <script src="https://cdn.tiny.cloud/1/elmma06n570gih5simypugr5mexr6mqv82cnbnodgqcxmpmg/tinymce/7/tinymce.min.js"
                                             referrerpolicy="origin"></script>
@@ -367,6 +360,7 @@
                                                 height: 250
                                             });
                                         </script>
+                                        
                                         {{-- <script>
                                             tinymce.init({
                                                 selector: 'textarea',
@@ -390,22 +384,21 @@
                                         </script> --}}
                                         <div class="mb-3">
                                             <label for="productCategory">Product Category:</label>
-                                            <select class="form-control" id="productCategory" name="productCategory"
-                                                class="form-control">
+                                            <select class="form-control" id="productCategory" name="productCategory">
                                                 <option value="">Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}
+                                                    <option value="{{ $category->id }}" {{ $category->id == old('productCategory', $editProduct->category_id) ? 'selected' : '' }}>
+                                                        {{ $category->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="productSubCategory">Product Sub Category:</label>
-                                            <select class="form-control" id="productSubCategory"
-                                                name="productSubCategory" class="form-control">
+                                            <select class="form-control" id="productSubCategory" name="productSubCategory">
                                                 <option value="">Select Sub Category</option>
                                                 @foreach ($subCategory as $subCategories)
-                                                    <option value="{{ $subCategories->id }}">
+                                                    <option value="{{ $subCategories->id }}" {{ $subCategories->id == old('productSubCategory', $editProduct->SubCategory_id) ? 'selected' : '' }}>
                                                         {{ $subCategories->name }}
                                                     </option>
                                                 @endforeach
@@ -414,11 +407,10 @@
 
                                         <div class="mb-3">
                                             <label for="productBrand">Product Brand</label>
-                                            <select class="form-control" id="productBrand" name="productBrand"
-                                                class="form-control">
+                                            <select class="form-control" id="productBrand" name="productBrand">
                                                 <option value="">Select Product Brand</option>
                                                 @foreach ($brands as $brand)
-                                                    <option value="{{ $brand->id }}">
+                                                    <option value="{{ $brand->id }}" {{ $brand->id == old('productBrand', $editProduct->brand_id) ? 'selected' : '' }}>
                                                         {{ $brand->name }}
                                                     </option>
                                                 @endforeach
@@ -491,23 +483,23 @@
                                         <div class="mb-3">
                                             <label for="productPrice">Product Price:</label>
                                             <input class="form-control" type="number" id="productPrice"
-                                                name="productPrice" placeholder="Enter Product Price" required>
+                                                name="productPrice" value="{{ $editProduct->price}}" placeholder="Enter Product Price" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="productDiscountPrice">Product Discount Price:</label>
                                             <input class="form-control" type="number" id="productDiscountPrice"
-                                                name="productDiscountPrice"
+                                                name="productDiscountPrice" value="{{ $editProduct->discountedPrice}}"
                                                 placeholder="Enter Product Discounted Price">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productQuantity">Product Quantity:</label>
                                             <input class="form-control" type="text" id="productQuantity"
-                                                name="productQuantity" placeholder="Enter Product Quantity">
+                                                name="productQuantity" value="{{ $editProduct->quantity}}" placeholder="Enter Product Quantity">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productSKU">Product SKU:</label>
                                             <input class="form-control" type="text" id="productSKU"
-                                                name="productSKU" placeholder="Enter Product SKU">
+                                                name="productSKU" value="{{ $editProduct->sku}}" placeholder="Enter Product SKU">
                                         </div>
 
 
@@ -560,12 +552,12 @@
                                                 <label id="uploadLabel" for="productImage">Add Image</label>
                                                 <img id="imagePreview" src="#"
                                                     style="display: none; width: auto; height: 100%;" />
-                                            </div>
+                                            </div> 
                                             <div class="mb-3">
                                                 <label for="productImageURL">Product Image URL (If no file
                                                     uploaded):</label>
                                                 <input class="form-control" type="text" id="productImageURL"
-                                                    name="productImageURL" placeholder="Enter Product Image URL">
+                                                    name="productImageURL" value="{{$editProduct->remote_image_url}}" placeholder="Enter Product Image URL">
                                             </div>
                                         </div>
 
@@ -706,19 +698,19 @@
                                             <label for="media11mageURL">Product Media Image 1 URL (If no file
                                                 uploaded):</label>
                                             <input class="form-control" type="text" id="media11mageURL"
-                                                name="media11mageURL" placeholder="Enter Product Image URL">
+                                                name="media11mageURL" value="{{$editProduct->remote_media1_url}}" placeholder="Enter Product Image URL">
                                         </div>
                                         <div class="mb-3">
                                             <label for="media12mageURL">Product Media Image 2 URL (If no file
                                                 uploaded):</label>
                                             <input class="form-control" type="text" id="media12mageURL"
-                                                name="media12mageURL" placeholder="Enter Product Image URL">
+                                                name="media12mageURL" value="{{$editProduct->remote_media2_url}}" placeholder="Enter Product Image URL">
                                         </div>
                                         <div class="mb-3">
                                             <label for="media13mageURL">Product Media Image 3 URL (If no file
                                                 uploaded):</label>
                                             <input class="form-control" type="text" id="media13mageURL"
-                                                name="media13mageURL" placeholder="Enter Product Image URL">
+                                                name="media13mageURL" value="{{$editProduct->remote_media3_url}}" placeholder="Enter Product Image URL">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productVideo">Product Video:</label>
@@ -735,7 +727,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Add Product</button>
+                                        <button class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
