@@ -59,7 +59,7 @@
                                     alt="user-avatar" class="d-block rounded" height="100" width="100px"
                                     id="shopLogo" />
                                 <div class="button-wrapper">
-                                    <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                    <label for="upload" class="btn btn-primary1 me-2 mb-4" tabindex="0">
                                         <span class="d-none d-sm-block">Upload new photo</span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
                                         <input type="file" id="upload" name="shopLogo" class="account-file-input"
@@ -67,6 +67,21 @@
                                     </label>
                                     <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                                 </div>
+                                <style>
+                                    .btn-primary1 {
+                                        background-color: white;
+                                        color: #456dff;
+                                        border-color: #456dff;
+                                        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); 
+
+                                    }
+
+                                    .btn-primary1:hover {
+                                        background-color: #456dff;
+                                        color: #fff;
+                                        border-color: #456dff;
+                                    }
+                                </style>
                             </div>
                         </div>
 
@@ -103,7 +118,7 @@
                                     <input class="form-control" type="password" id="sellerpass" name="sellerpass"
                                         value="{{ $seller->password }}" placeholder="Andree@example.com" />
                                 </div> --}}
-                                
+
 
 
 
@@ -113,7 +128,7 @@
                                         value="{{ $shopInfo->seller_phone }}" placeholder="Andree@example.com" />
                                 </div>
 
-                                
+
 
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">Seller Address</label>
