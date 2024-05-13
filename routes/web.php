@@ -82,6 +82,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/toggleProductState/{id}', [ProductController::class, 'toggleProductState'])->name('toggleProductState');
     Route::put('/activateAllProducts', [ProductController::class, 'activateAllProducts'])->name('activateAllProducts');
     Route::put('/deactivateAllProducts', [ProductController::class, 'deactivateAllProducts'])->name('deactivateAllProducts');
+    Route::get('/editproduct/{id}', [ProductController::class, 'editproduct'])->name('editproduct');
+    Route::post('/saveproductchanges/{id}', [ProductController::class, 'saveproductchanges'])->name('saveproductchanges');
+
+
 
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categoryview')
