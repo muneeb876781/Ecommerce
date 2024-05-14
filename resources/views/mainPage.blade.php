@@ -1005,7 +1005,7 @@
         </div>
 
         <!-- offer heading  -->
-        <div class="offer__heading" style="background: #efefef; color: black;">
+        {{-- <div class="offer__heading" style="background: #efefef; color: black;">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -1017,7 +1017,136 @@
                     </div>
                 </div>
             </div>
+        </div> --}}
+
+        <style>
+            .selling_options{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap-reverse;
+
+                width: 100%;
+                height: auto;
+                background: #efefef;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            .selling_options .right{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 50%;
+                height: auto;
+            }
+
+            .selling_options .right .sale_banner img{
+                width: 100%;
+                height: 100%;
+            }
+
+            .selling_options .left{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 50%;
+                height: auto;
+                background: #fff;
+            }
+
+            .selling_options .left{
+                padding: 10px;
+            }
+
+            .selling_options .left .card_box{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap-reverse;
+                width: 100%;
+                height: auto;
+            }
+
+            .selling_options .left .card{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                width: 100%;
+                height: 100%;
+                margin: 10px;
+                /* border-radius: 20px;  */
+            }
+
+            .selling_options .left .card img{
+                width: 30%;
+                height: auto;
+                /* border-top-left-radius: 20px;
+                border-top-right-radius: 20px; */
+            }
+
+            .selling_options .left .card .card_content{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 70%;
+                height: auto;
+            }
+
+            .selling_options .left .card h1{
+                font-size: 20px;
+                letter-spacing: 4px;
+                margin: 5px 0;
+            }
+
+            .selling_options .left .card p{
+            }
+        </style>
+
+        <div class="roe selling_options">
+            <div class="left col-sm-12 col-md-6">
+                <h3>More Reasons to Shop</h3>
+                <div class="card_box">
+                    <div class="card card1">
+                        <img src="../images/sale1.jpg" alt="">
+                        <div class="card_content">
+                            <h1>New Arrival</h1>
+                            <p>Get the best at best prices</p>
+                        </div>
+                    </div>
+                    <div class="card card1">
+                        <img src="../images/sale2.jpg   " alt="">
+                        <div class="card_content">
+                            <h1>Best Sellers</h1>
+                            <p>Papular picks..</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="right col-sm-12 col-md-6">
+                @foreach ($banners as $banner)
+                @if ($banner->Type === 'shop' && $banner->state !== 0 &&
+                        (($banner->brand && $banner->brand->state !== 0) ||
+                         ($banner->Category && $banner->Category->state !== 0) ||
+                         ($banner->Product && $banner->Product->state !== 0))
+                    )
+                            <div class="sale_banner">
+                                <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
+                            </div>
+                    @endif
+
+                @endforeach
+            </div>
         </div>
+
+        
         <!-- offer heading end -->
 
         <!-- Discover All Product  -->
