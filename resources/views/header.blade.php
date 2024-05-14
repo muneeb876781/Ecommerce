@@ -994,7 +994,7 @@
                             <div class="dropdown-content">
                                 @foreach ($categories as $key => $category)
                                     @if ($category->state !== 0)
-                                        @if ($key <= 6)
+                                        @if ($key <= 3)
                                             <div class="category">
                                                 <a href="{{ route('shopcategory', ['id' => $category->id]) }}"><img
                                                         src="{{ asset('storage/uploads/' . $category->image_url) }}"
@@ -1014,6 +1014,7 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                <a href="{{ route('shop')}}" style="border: 1px solid black; text-align: center; margin: 0 10px;">See all</a>
 
                             </div>
                         </div>
@@ -1077,18 +1078,19 @@
                                         <ul class="submenu">
                                             @foreach ($brands as $key => $brand)
                                                 @if ($brand->state !== 0)
-                                                    @if ($key <= 4)
+                                                    @if ($key <= 3)
                                                         <li>
                                                             <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
                                                                 <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                                                     alt="{{ $brand->name }}"
                                                                     style="max-width: 70px; max-height: 70px;">
-                                                                {{ $brand->name }}
+                                                                    <span style="margin-left: 10px; width: 50%;">{{$brand->name}}</span>
                                                             </a>
                                                         </li>
                                                     @endif
                                                 @endif
                                             @endforeach
+                                            <a href="{{ route('shop')}}" style="border: 1px solid black; text-align: center; margin: 10px 10px;">See all</a>
                                         </ul>
                                     </li>
 
