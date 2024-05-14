@@ -825,6 +825,8 @@ cart--header__middle.cart--header__two {
     top: 100%;
     left: 0;
     background: #fff;
+    display: flex;
+    flex-direction: column;
     width: 300px;
     border-top: 1px solid #ee3333;
     transition: .3s;
@@ -854,8 +856,8 @@ cart--header__middle.cart--header__two {
     display: block;
 }
 
-.main-menu ul li ul.submenu li:hover>a {
-    color: #ee3333;
+.main-menu ul li ul.submenu li a:hover {
+    background: #efefef;
 }
 
 .main-menu ul li:hover>ul.submenu {
