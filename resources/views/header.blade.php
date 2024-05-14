@@ -1379,8 +1379,7 @@
 
                 <script>
                     document.getElementById('dashboardButton').addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default behavior of the link
-
+                        event.preventDefault();
                         @auth
                         window.location.href =
                             "{{ Auth::user()->role === 'admin' ? route('adminDashboard') : route('dashboard') }}";
@@ -1478,8 +1477,6 @@
             lists.forEach((item) => item.addEventListener('click', setActiveLink));
         </script>
 
-
-
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script>
@@ -1505,6 +1502,8 @@
             });
         </script>
     </header>
+
+    
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
