@@ -39,7 +39,8 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        $banners = Banner::all();
+        $banners = Banner::where('Type', 'shop')->orderBy('created_at', 'asc')->first();
+
         return view('ShopPage', compact('products', 'banners', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
@@ -136,7 +137,10 @@ class ShopController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        $banners = Banner::all();
+        $banners = Banner::where('Type', 'shop')
+                ->where('category_id', $category->id)
+                ->orderBy('created_at', 'asc')
+                ->first();
 
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
@@ -182,8 +186,10 @@ class ShopController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        $banners = Banner::all();
-
+        $banners = Banner::where('Type', 'shop')
+                ->orderBy('created_at', 'asc')
+                ->first();
+                
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
@@ -211,9 +217,12 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
-        $banners = Banner::all();
-
         
+        $banners = Banner::where('Type', 'shop')
+                ->where('brand_id', $brand->id)
+                ->orderBy('created_at', 'asc')
+                ->first();
+
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'brand', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
