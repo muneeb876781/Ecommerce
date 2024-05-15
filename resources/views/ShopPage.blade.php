@@ -543,7 +543,8 @@
                         width: 100%;
                         height: auto;
                         background: #fff;
-                        border: 1px solid black;
+                        border: 1px solid rgba(47, 170, 244, 0.5);
+                        box-shadow: inset 0 0 5px hsla(203, 90%, 57%, 0.5);
                     }
 
                     .filter_shop h3 {
@@ -669,11 +670,12 @@
 
                     <div class="col-sm-9" id="product-list">
                         <div class="shop_banner">
-                            @foreach ($banners as $banner)
-                                @if ($banner->Type === 'shop' && $banner->state !== 0)
-                                    <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
+                            {{-- @foreach ($banners as $banner) --}}
+                                @if ($banners && $banners->Type === 'shop' && $banners->state !== 0)
+                                    <img src="{{ asset('storage/uploads/' . $banners->image_url) }}" alt="sale banner">
                                 @endif
-                            @endforeach
+                            {{-- @endforeach --}}
+
                         </div>
                         @if ($products->isEmpty())
                             <div class="text-center">No products in this category.</div>
@@ -688,7 +690,7 @@
                                         transition: height 0.3s;
                                         box-shadow: 2px 2px 2px rgba(47, 170, 244, 0.5);
                                         margin: 10px;
-                                        border-radius: 10px; 
+                                        border-radius: 10px;
                                     }
                                 </style>
                                 <script>
