@@ -51,7 +51,7 @@
 
         .dropdown-content a:hover {
             color: black;
-            background: #efefef;
+            background: #F1F3F6;
             border-radius: 10px;
         }
 
@@ -247,7 +247,7 @@
         }
 
         .dropdown-menu a:hover {
-            background-color: #efefef;
+            background-color: #F1F3F6;
         }
     </style>
     <style>
@@ -337,7 +337,7 @@
             flex-direction: column;
             width: 100%;
             height: 35%;
-            background: #efefef;
+            background: #F1F3F6;
         }
 
         .top_sidenav a {
@@ -427,7 +427,7 @@
         }
 
         .menu__item:hover {
-            background-color: #efefef;
+            background-color: #F1F3F6;
         }
 
         @media screen and (max-width: 1200px) {
@@ -543,7 +543,7 @@
             width: 100%;
             height: auto;
             z-index: 9999;
-            background: #efefef;
+            background: #F1F3F6;
         }
 
         .bottomNav ul {
@@ -686,7 +686,7 @@
 <body>
 
     <header class="header" id="header">
-        <div class="top header__top gray-bg d-none d-md-block">
+        <div style="background: #F1F3F6;" class="top header__top gray-bg d-none d-md-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5">
@@ -725,7 +725,7 @@
                 </div>
             </div>
         </div>
-        <div style="background: #f2f2f2;" class="middle header__middle bg--header__middle pt-15 pb-15">
+        <div style="background: #F1F3F6;" class="middle header__middle bg--header__middle pt-15 pb-15">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">

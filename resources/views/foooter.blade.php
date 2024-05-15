@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <footer class="foooter" style=" background: #f4f4f4;" class="footer--area">
+    <footer class="foooter" style=" background: #F1F3F6;" class="footer--area">
         <div class="footer--top pt-70 pb-25">
             <div class="container">
                 <div class="row">
