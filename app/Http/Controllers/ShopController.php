@@ -11,6 +11,7 @@ use App\Models\Brand;
 use App\Models\Policy;
 use App\Models\SubCategory;
 use App\Models\SellerShop;
+use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -38,8 +39,8 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
-        return view('ShopPage', compact('products', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        $banners = Banner::all();
+        return view('ShopPage', compact('products', 'banners', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function singleProduct(Request $request, $id)
@@ -78,11 +79,11 @@ class ShopController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
         return view('productDetails', compact('product', 'shopid', 'userid', 'unseenmessages', 'brands', 'relatedProducts', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart', 'policies'));
     }
 
-    public function shopPolicies($id){
+    public function shopPolicies($id)
+    {
         $products = Product::orderBy('created_at', 'desc')->get();
         $categories = Category::all();
         $reviews = Review::all();
@@ -102,15 +103,13 @@ class ShopController extends Controller
         }
 
         $totalItems = $cart->sum('quantity');
- 
+
         $policy = Policy::where('id', $id)->first();
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
-        return view('shopPolicy', compact('products', 'unseenmessages', 'policy',  'brands', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('shopPolicy', compact('products', 'unseenmessages', 'policy', 'brands', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
-
 
     public function showProductsByCategory($categoryId)
     {
@@ -124,7 +123,7 @@ class ShopController extends Controller
             $products->where('Brand_id', request('brand_id'));
         }
 
-        $products = $products->paginate(10); 
+        $products = $products->paginate(10);
 
         $user_id = auth()->id();
         $cart = Cart::where('user_id', $user_id)->get();
@@ -137,8 +136,55 @@ class ShopController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
+        $banners = Banner::all();
 
-        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
+    }
+
+    public function filterProductsByPrice($priceRange)
+    {
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $products = Product::query();
+
+        switch ($priceRange) {
+            case 'below-10':
+                $products->where('price', '<', 10);
+                break;
+            case '10-to-100':
+                $products->whereBetween('price', [10, 100]);
+                break;
+            case '100-to-200':
+                $products->whereBetween('price', [100, 200]);
+                break;
+            case '200-to-300':
+                $products->whereBetween('price', [200, 300]);
+                break;
+            case 'above-300':
+                $products->where('price', '>', 300);
+                break;
+            default:
+                // Do nothing or handle error
+                break;
+        }
+
+        $products = $products->paginate(10);
+
+        $user_id = auth()->id();
+        $cart = Cart::where('user_id', $user_id)->get();
+
+        $totalPrice = $cart->sum(function ($item) {
+            return $item->product->discountedPrice ?? $item->product->price;
+        });
+
+        $totalItems = $cart->sum('quantity');
+
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+        $banners = Banner::all();
+
+        return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProductsByBrand($brandId)
@@ -153,7 +199,7 @@ class ShopController extends Controller
             $products->where('category_id', request('category_id'));
         }
 
-        $products = $products->paginate(10); 
+        $products = $products->paginate(10);
 
         $user_id = auth()->id();
         $cart = Cart::where('user_id', $user_id)->get();
@@ -165,9 +211,10 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+        $banners = Banner::all();
 
-
-        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'brand', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        
+        return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'brand', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProductsBysubcategory($subcategoryId)
@@ -196,8 +243,9 @@ class ShopController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
+        $banners = Banner::all();
 
-        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'subcategory', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'subcategory', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function showProducts(Request $request)
@@ -215,7 +263,7 @@ class ShopController extends Controller
             $products->where('brand_id', $request->brand_id);
         }
 
-        $products = $products->paginate(10); 
+        $products = $products->paginate(10);
 
         $user_id = auth()->id();
 
@@ -233,9 +281,9 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+        $banners = Banner::all();
 
-
-        return view('ShopPage', compact('products', 'brands', 'unseenmessages', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('ShopPage', compact('products', 'banners', 'brands', 'unseenmessages', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function searchProducts(Request $request)
@@ -261,14 +309,12 @@ class ShopController extends Controller
         $searchText = $request->input('serachProducts');
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
         // $products = Product::where('name', 'like', "%$searchText%")
         //     ->orWhereHas('category', function ($query) use ($searchText) {
         //         $query->where('name', 'like', "%$searchText%");
         //     })
         //     ->orWhere('sku', 'like', "%$searchText%")
         //     ->get();
-
 
         $products = Product::where('name', 'like', "%$searchText%")
             ->orWhere('sku', 'like', "%$searchText%")
@@ -284,6 +330,8 @@ class ShopController extends Controller
             })
             ->paginate(18);
 
-        return view('ShopPage', compact('products', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
+            $banners = Banner::all();
+
+        return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 }

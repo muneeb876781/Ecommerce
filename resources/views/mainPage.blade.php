@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{{ asset('csss/responsive.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&family=Dosis:wght@200..800&family=Tac+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&family=Dancing+Script:wght@400..700&family=Dosis:wght@200..800&family=Tac+One&display=swap" rel="stylesheet">
     <link rel="manifest" href="site.webmanifest">
     
 
@@ -1037,6 +1043,13 @@
             .selling_options h3{
                 font-size: 25px;
                 padding: 5px;
+                /* font-family: "Briem Hand", cursive; */
+                /* font-family: "Dancing Script", cursive; */
+            }
+
+            .selling_options h3 span{
+                font-family: "Dancing Script", cursive;
+                color: #FCF447;
             }
         
             .selling_options .right,
@@ -1152,7 +1165,7 @@
 
         <div class="roe selling_options">
             <div class="left col-sm-12 col-md-6">
-                <h3>More Reasons to Shop</h3>
+                <h3>More Reasons to <span>Shop</span></h3>
                 <div class="card_box">
                     <a href="{{ route('shop')}}" class="card card1">
                         <img src="../images/sale1.jpg" alt="">
@@ -1172,7 +1185,7 @@
             </div>
             <div class="right col-sm-12 col-md-6">
                 @foreach ($banners as $banner)
-                @if ($banner->Type === 'shop' && $banner->state !== 0)
+                @if ($banner->Type === 'Advertisement' && $banner->state !== 0)
                             <div class="sale_banner">
                                 <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
                             </div>

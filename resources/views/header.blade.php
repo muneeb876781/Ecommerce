@@ -751,7 +751,7 @@
                                         <select name="header-search" id="header--search__main">
                                             <option value="{{ route('shop') }}">All Categories</option>
                                             @foreach ($categories as $category)
-                                                @if ($category->state !== 0)
+                                                @if ($category->status !== 0)
                                                     <option
                                                         value="{{ route('shopcategory', ['id' => $category->id]) }}">
                                                         {{ $category->name }}</option>

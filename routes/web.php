@@ -191,6 +191,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('templatesedit')
         ->middleware('seller');
 
+    Route::get('/shop/price/{range}', [ShopController::class, 'filterProductsByPrice'])->name('filterProductsByPrice');
+    Route::get('/shop/combined-filter', [ShopController::class, 'combinedFilter'])->name('combinedFilter');
+
+
+
     Route::get('/adminDashboard', [AdminController::class, 'index'])
         ->name('adminDashboard')
         ->middleware('admin');

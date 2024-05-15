@@ -13,6 +13,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('../img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="manifest" href="site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&family=Dancing+Script:wght@400..700&family=Dosis:wght@200..800&family=Tac+One&display=swap"
+        rel="stylesheet">
     <title>PrimeTechnology - Shop</title>
     <!-- Meta Pixel Code -->
     <script>
@@ -129,7 +134,7 @@
     }
 
     .product-s {
-        width: 16%;
+        width: 20%;
         /* min-height: 400px; */
         float: left;
     }
@@ -364,7 +369,7 @@
     <main class="main--wrapper">
 
         <!-- shop area start -->
-        <div class="product shop-page pt-20 pb-80 fix">
+        <div class="product shop-page pb-80 fix">
             <div class="container">
                 {{-- <div class="her0_section">
                     <section>
@@ -389,7 +394,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="brand-active brand-active1">
+                                <div class="brand-active brand-active2">
                                     @foreach ($brands as $brand)
                                         @if ($brand->state !== 0)
                                             <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
@@ -397,8 +402,6 @@
                                                     <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                                         class="brand-image" alt="">
                                                 </div>
-
-
                                             </a>
                                         @endif
                                     @endforeach
@@ -435,7 +438,7 @@
                     });
                 </script> --}}
 
-                <div class="border-b">
+                {{-- <div class="border-b">
                     <div class="row">
                         <div class="col-lg-5 col-md-4">
                             <div class="shop-bar d-flex align-items-center">
@@ -452,10 +455,7 @@
                             <form action="{{ route('shopss') }}" method="GET" id="shop-select-one">
 
                                 <div class="bar-wrapper">
-                                    {{-- <div class="select-text">
-                                    <span>Showing 1–{{ $products->count() }} of {{ $products->count() }}
-                                        Results</span>
-                                </div> --}}
+                                    
                                     <div class="shop-select ">
                                         <select name="select" id="shop-select-one">
                                             <option value="1">Deafult Sorting</option>
@@ -514,40 +514,6 @@
                                             this.form.submit();
                                         });
                                     </script>
-
-
-
-
-
-
-                                    {{-- <div class="shop-select">
-                                    <select name="select" id="category-select">
-                                        <option value="{{ route('shop') }}">Categories</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ route('shopcategory', ['id' => $category->id]) }}">
-                                                {{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
-
-                                    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script>
-                                    $(document).ready(function() {
-                                        $("#category-select").change(function() {
-                                            window.location = $(this).val();
-                                        })
-                                    })
-                                </script>
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script>
-                                    $(document).ready(function() {
-                                        $("#Brand-select").change(function() {
-                                            window.location = $(this).val();
-                                        })
-                                    })
-                                </script> --}}
-
-
                                 </div>
                             </form>
 
@@ -567,9 +533,147 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
+                <style>
+                    .filter_shop {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        flex-direction: column;
+                        width: 100%;
+                        height: auto;
+                        background: #fff;
+                        border: 1px solid black;
+                    }
+
+                    .filter_shop h3 {
+                        font-size: 25px;
+                        padding: 10px;
+                    }
+
+                    .filter_shop .filter_box {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        flex-direction: column;
+                        width: 100%;
+                        padding-bottom: 10px;
+                    }
+
+                    .filter_shop .filter_box h4 {
+                        font-size: 20px;
+                        letter-spacing: 2px;
+                    }
+
+                    .filter_shop .filter_box a {
+                        padding: 10px 20px;
+                        width: 100%;
+                        border-bottom: 1px solid rgba(47, 170, 244, 0.5);
+                    }
+
+                    .filter_shop .filter_box a .active {
+                        background: rgba(47, 170, 244, 0.5);
+                    }
+
+                    .filter_shop h3 span {
+                        font-family: "Dancing Script", cursive;
+                        color: #FCF447;
+                    }
+
+                    @media screen and (max-width: 540px) {
+    .filter_shop {
+        display: none; /* Hide the filter section */
+    }
+}
+
+
+                    .shop_banner {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        width: 100%;
+                        height: auto;
+                        padding-bottom: 10px;
+                    }
+
+                    .shop_banner img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                </style>
                 <div class="row mt-30">
-                    <div class="col-sm-12" id="product-list">
+                    <div class="col-sm-3 filter_shop">
+                        <h3>Filter your <span>Choice</span></h3>
+                        <div class="filter_box">
+                            <h4>Categories</h4>
+                            @foreach ($categories as $category)
+                                @if ($category->state !== 0)
+                                    <a class="active" href="{{ route('shopcategory', ['id' => $category->id]) }}">
+                                        <span>{{ $category->name }}</span>
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="filter_box">
+                            <h4>Brands</h4>
+                            @foreach ($brands as $brand)
+                                @if ($brand->state !== 0)
+                                    <a class="active" href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                        <span>{{ $brand->name }}</span>
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="filter_box">
+                            <h4>Prices</h4>
+                            <a class="active" href="{{ route('filterProductsByPrice', ['range' => 'below-10']) }}">
+                                <span>Below 10 AED.</span>
+                            </a>
+                            <a class="active" href="{{ route('filterProductsByPrice', ['range' => '10-to-100']) }}">
+                                <span>10 AED to 100 AED</span>
+                            </a>
+                            <a class="active" href="{{ route('filterProductsByPrice', ['range' => '100-to-200']) }}">
+                                <span>100 AED to 200 AED</span>
+                            </a>
+                            <a class="active" href="{{ route('filterProductsByPrice', ['range' => '200-to-300']) }}">
+                                <span>200 AED to 300 AED</span>
+                            </a>
+                            <a class="active" href="{{ route('filterProductsByPrice', ['range' => 'above-300']) }}">
+                                <span>Above 300 AED.</span>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const filterLinks = document.querySelectorAll('.filter_shop .filter_box a');
+
+                            filterLinks.forEach(link => {
+                                link.addEventListener('click', function(event) {
+                                    // Remove active class from all links
+                                    filterLinks.forEach(link => {
+                                        link.classList.remove('active');
+                                    });
+
+                                    // Add active class to clicked link
+                                    this.classList.add('active');
+                                });
+                            });
+                        });
+                    </script>
+
+
+                    <div class="col-sm-9" id="product-list">
+                        <div class="shop_banner">
+                            @foreach ($banners as $banner)
+                                @if ($banner->Type === 'shop' && $banner->state !== 0)
+                                    <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
+                                @endif
+                            @endforeach
+                        </div>
                         @if ($products->isEmpty())
                             <div class="text-center">No products in this category.</div>
                         @else
@@ -603,7 +707,7 @@
                                                             @endif
 
                                                             @if ($product->quantity == 0)
-                                                                <span class="out-of-stock-tag">Out of Stock</span>
+                                                                <span class="out-of-stock-tag dtag">Out of Stock</span>
                                                             @elseif ($product->discountedPrice)
                                                                 @php
                                                                     $salePercentage =
@@ -612,7 +716,7 @@
                                                                         100;
                                                                 @endphp
                                                                 @if ($salePercentage > 0)
-                                                                    <span class="sale-tag">
+                                                                    <span class="sale-tag dtag">
                                                                         {{ round($salePercentage) }}% Off</span>
                                                                 @endif
                                                             @endif
@@ -622,8 +726,7 @@
                                                             <a
                                                                 href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
                                                                     class="fas fa-eye"></span></a>
-                                                            <a
-                                                                href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
+                                                            <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
                                                                     class="fas fa-shopping-cart"></span></a>
                                                         </div>
                                                     </div>
@@ -689,6 +792,7 @@
                             </div>
                         @endif
                     </div>
+
                 </div>
                 <!-- Pagination -->
             </div>
@@ -714,7 +818,8 @@
 
     <!-- JS here -->
     <script src="{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}">
-    <script src="{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}"></script>
+        < script src = "{{ asset('javascript/vendor/modernizr-3.5.0.min.js') }}" >
+    </script>
     <script src="{{ asset('javascript/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('javascript/popper.min.js') }}"></script>
     <script src="{{ asset('javascript/bootstrap.min.js') }}"></script>

@@ -254,6 +254,7 @@
                                                 <option value="">Select Banner Type</option>
                                                 <option value="main">Main Banners</option>
                                                 <option value="sales">Sales Banners</option>
+                                                <option value="Advertisement">Advertisement Banners</option>
                                                 <option value="shop">Shop Banners</option>
                                             </select>
                                         </div>
