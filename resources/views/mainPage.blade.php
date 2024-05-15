@@ -1820,6 +1820,36 @@
                     </div>
                 </div>
                 <div class="row mt-30">
+                    <style>
+                        .product__single {
+                            height: auto;
+                            overflow: hidden;
+                            margin-bottom: 20px;
+                            transition: height 0.3s;
+                            box-shadow: 2px 2px 2px rgba(47, 170, 244, 0.5);
+                            margin: 10px;
+                            border-radius: 10px; 
+                        }
+                    </style>
+                    <script>
+                        window.addEventListener('DOMContentLoaded', (event) => {
+                            // Get all product__single elements
+                            let productCards = document.querySelectorAll('.product__single');
+
+                            // Calculate the maximum height
+                            let maxHeight = 0;
+                            productCards.forEach(card => {
+                                if (card.clientHeight > maxHeight) {
+                                    maxHeight = card.clientHeight;
+                                }
+                            });
+
+                            // Set the maximum height to all cards
+                            productCards.forEach(card => {
+                                card.style.height = (maxHeight - 15) + 'px';
+                            });
+                        });
+                    </script>
                     <div class="col-sm-12" id="product-list">
                         @if ($products->isEmpty())
                             <div class="text-center">No products in this category.</div>
@@ -1835,7 +1865,7 @@
                                 $product->state !== 0
                                 // $product->discountedPrice !== null
                             )
-                                            <div class="product-s" s>
+                                            <div class="product-s">
                                                 <div class="product__single">
                                                     <div class="product__box">
                                                         <div class="product__thumb">
