@@ -134,7 +134,7 @@
     }
 
     .product-s {
-        width: 20%;
+        width: 25%;
         /* min-height: 400px; */
         float: left;
     }
