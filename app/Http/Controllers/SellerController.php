@@ -245,7 +245,7 @@ class SellerController extends Controller
             'bannerCategory' => 'nullable|exists:categories,id',
             'bannerProduct' => 'nullable|exists:products,id',
             'bannerType' => 'nullable|in:main,sales,shop',
-            'BannerImage' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+            'BannerImage' => 'image|mimes:jpeg,png,jpg,gif,avif|max:5120',
             'bannerRemoteImage' => 'nullable|url',
         ]);
 

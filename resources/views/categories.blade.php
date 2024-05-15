@@ -155,7 +155,7 @@
                                                     </a>
                                                     <a class="btn btn-link text-warning" href="#" title="Edit"
                                                         data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                                        onclick="prepareEditCategoryModal('{{ $category->id }}', '{{ $category->name }}', '{{ $category->description }}')">
+                                                        onclick="prepareEditCategoryModal('{{ $category->id }}', '{{ $category->name }}', '{{ $category->description }}', '{{ $category->image_url }}')">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
@@ -273,7 +273,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editCategoryForm" action="#" method="post">
+                    <form id="editCategoryForm" action="#" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -281,9 +281,14 @@
                             <input type="text" class="form-control" id="editCategoryName"
                                 name="editCategoryName">
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="editCategoryDescription" class="form-label">Category Description</label>
                             <textarea class="form-control" id="editCategoryDescription" name="editCategoryDescription"></textarea>
+                        </div> --}}
+                        <div class="mb-3">
+                            <label for="editCategoryImage" class="form-label">Category Image</label>
+                            <input type="file" class="form-control" id="editCategoryImage"
+                                name="editCategoryImage"></input>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
@@ -330,9 +335,11 @@
         }
     </script>
     <script>
-        function prepareEditCategoryModal(categoryId, categoryName, categoryDescription) {
+        function prepareEditCategoryModal(categoryId, categoryName, categoryDescription, categoryImage) {
             document.getElementById('editCategoryName').value = categoryName;
-            document.getElementById('editCategoryDescription').value = categoryDescription;
+            // document.getElementById('editCategoryDescription').value = categoryDescription;
+            // document.getElementById('editCategoryImage').value = categoryImage;
+
 
             document.getElementById('editCategoryForm').action = `/categories/${categoryId}`;
         }

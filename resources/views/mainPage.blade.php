@@ -1026,12 +1026,17 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: row;
-                flex-wrap: wrap-reverse;
+                flex-wrap: wrap;
                 width: 100%;
                 height: auto;
-                background: #efefef;
+                background: #F1F3F6;
                 padding: 10px;
                 margin-bottom: 10px;
+            }
+
+            .selling_options h3{
+                font-size: 25px;
+                padding: 5px;
             }
         
             .selling_options .right,
@@ -1072,6 +1077,13 @@
                 width: 100%;
                 height: 100%;
                 margin: 10px;
+                box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+                transition: 0.4s ease-in-out;
+            }
+
+            .selling_options .left .card:hover{
+                box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.1);
+
             }
         
             .selling_options .left .card img {
@@ -1142,30 +1154,25 @@
             <div class="left col-sm-12 col-md-6">
                 <h3>More Reasons to Shop</h3>
                 <div class="card_box">
-                    <div class="card card1">
+                    <a href="{{ route('shop')}}" class="card card1">
                         <img src="../images/sale1.jpg" alt="">
                         <div class="card_content">
                             <h1>New Arrival</h1>
                             <p>Get the best at best prices</p>
                         </div>
-                    </div>
-                    <div class="card card1">
-                        <img src="../images/sale2.jpg   " alt="">
+                    </a>
+                    <a href="{{ route('shop')}}" class="card card1">
+                        <img src="../images/sale3.jpg" alt="">
                         <div class="card_content">
                             <h1>Best Sellers</h1>
-                            <p>Papular picks..</p>
+                            <p>Popular picks..</p>
                         </div>
-                    </div>
-                    
+                    </a>
                 </div>
             </div>
             <div class="right col-sm-12 col-md-6">
                 @foreach ($banners as $banner)
-                @if ($banner->Type === 'shop' && $banner->state !== 0 &&
-                        (($banner->brand && $banner->brand->state !== 0) ||
-                         ($banner->Category && $banner->Category->state !== 0) ||
-                         ($banner->Product && $banner->Product->state !== 0))
-                    )
+                @if ($banner->Type === 'shop' && $banner->state !== 0)
                             <div class="sale_banner">
                                 <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
                             </div>

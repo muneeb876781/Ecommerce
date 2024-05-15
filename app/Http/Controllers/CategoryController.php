@@ -84,8 +84,21 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
+        $validatedData = $request->validate([
+            'editCategoryName' => 'required|string',
+            // 'editCategoryDescription' => 'required|string',
+            'editCategoryImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('editCategoryImage')) {
+            $image = $request->file('editCategoryImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('public/uploads', $imageName);
+            $category->image_url = $imageName;
+        }
+
         $category->name = $request->editCategoryName;
-        $category->description = $request->editCategoryDescription;
+        // $category->description = $request->editCategoryDescription;
 
         $category->save();
 
