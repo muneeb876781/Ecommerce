@@ -1824,7 +1824,6 @@
                         .product__single {
                             height: auto;
                             overflow: hidden;
-                            /* border: 1px solid #ddd; */
                             margin-bottom: 20px;
                             transition: height 0.3s;
                             box-shadow: 2px 2px 2px rgba(47, 170, 244, 0.5);
