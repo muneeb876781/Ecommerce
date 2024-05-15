@@ -581,10 +581,11 @@
                     }
 
                     @media screen and (max-width: 540px) {
-    .filter_shop {
-        display: none; /* Hide the filter section */
-    }
-}
+                        .filter_shop {
+                            display: none;
+                            /* Hide the filter section */
+                        }
+                    }
 
 
                     .shop_banner {
@@ -678,6 +679,37 @@
                             <div class="text-center">No products in this category.</div>
                         @else
                             <div class="row">
+                                <style>
+                                    .product__single {
+                                        height: auto;
+                                        overflow: hidden;
+                                        /* border: 1px solid #ddd; */
+                                        margin-bottom: 20px;
+                                        transition: height 0.3s;
+                                        box-shadow: 2px 2px 2px rgba(47, 170, 244, 0.5);
+                                        margin: 10px;
+                                        border-radius: 10px; 
+                                    }
+                                </style>
+                                <script>
+                                    window.addEventListener('DOMContentLoaded', (event) => {
+                                        // Get all product__single elements
+                                        let productCards = document.querySelectorAll('.product__single');
+
+                                        // Calculate the maximum height
+                                        let maxHeight = 0;
+                                        productCards.forEach(card => {
+                                            if (card.clientHeight > maxHeight) {
+                                                maxHeight = card.clientHeight;
+                                            }
+                                        });
+
+                                        // Set the maximum height to all cards
+                                        productCards.forEach(card => {
+                                            card.style.height = (maxHeight - 15) + 'px';
+                                        });
+                                    });
+                                </script>
                                 @foreach ($products as $product)
                                     @if (
                                         $product->brand &&

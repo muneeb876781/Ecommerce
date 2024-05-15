@@ -1437,7 +1437,7 @@ ul.sub__menu.sub__dept--menu li:hover ul.sub__menu.level2 {
 
 .product__content--top {
     padding-bottom: 10px;
-    border-bottom: 1px solid #dddddd;
+    /* border-bottom: 1px solid #dddddd; */
     margin-bottom: 12px;
     padding-top: 10px;
 }
