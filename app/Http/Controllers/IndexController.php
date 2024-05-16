@@ -12,8 +12,7 @@ use App\Models\Brand;
 use App\Models\Banner;
 use App\Models\Templates;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Chatify\Facades\ChatifyMessenger as Chatify;
+
 
 class IndexController extends Controller
 {
@@ -24,13 +23,9 @@ class IndexController extends Controller
     //     return view('indexPage', compact('products', 'categories'));
     // }
 
-    public function index($id = null)
+    public function index()
     {
-        $messenger_color = Auth::user()->messenger_color;
-        $messengerColor = $messenger_color ? $messenger_color : Chatify::getFallbackColor();
-        $dark_mode = Auth::user()->dark_mode < 1 ? 'light' : 'dark';
-
-        // Your existing product-related code
+        // $products = Product::orderBy('created_at', 'desc')->get();
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
@@ -38,6 +33,7 @@ class IndexController extends Controller
         $brands = Brand::all();
 
         $user_id = auth()->id();
+
         $cart = Cart::where('user_id', $user_id)->get();
 
         $totalPrice = 0;
@@ -57,12 +53,14 @@ class IndexController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        if ($template && $template->name == 'General') {
-            $viewName = 'mainPage';
+        if ($template) {
+            if ($template->name == 'General') {
+                return view('mainPage', compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+            } else {
+                return view('indexPage', compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
+            }
         } else {
-            $viewName = 'indexPage';
+            return view('mainPage', compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems'));
         }
-
-        return view($viewName, compact('products', 'banners', 'unseenmessages', 'reviews', 'brands', 'categories', 'subcategories', 'totalPrice', 'cart', 'totalItems', 'messengerColor', 'dark_mode', 'id'));
     }
 }
