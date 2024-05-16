@@ -60,12 +60,79 @@
         </div>
         <div class="menu">
             <ul>
-                <li class="nav-item dropdown dropdown-list-toggle">
-                    <a class="nav-link" href="/chatify" target="_blank" aria-expanded="false">
+                {{-- <li class="nav-item dropdown dropdown-list-toggle">
+                    <a class="nav-link" href="#" onclick="openChatify()" target="_blank" aria-expanded="false">
                         <i class="fa fa-bell size-icon-1"></i><span
                             class="badge bg-danger notif">{{ $unseenmessages }}</span>
                     </a>
-                </li>
+                </li> --}}
+
+                <div class="chat-dialog">
+                    <a class="" href="#" onclick="openChatify()">
+                        <i class="fas fa-comment"> Messages
+                            <span class="msg__count">{{ $unseenmessages }}</span>
+                        </i>
+                    </a>
+                </div>
+
+
+                <script>
+                    function openChatify() {
+                        window.open("{{ route('chatify') }}", "_blank", "width=400,height=600,top=100,right=20");
+                    }
+                </script>
+
+                <style>
+                    .chat-dialog {
+                        position: fixed;
+                        bottom: 60px;
+                        right: 100px;
+                        background-color: #f9f9f9;
+                        border: 1px solid blue;
+                        border-radius: 20px;
+                        padding: 10px 20px;
+                        box-shadow: 0 12px 15px rgba(0, 0, 0, 0.1);
+                        z-index: 1000;
+                        width: auto;
+                        height: auto;
+                        text-align: center;
+                        color: blue;
+                    }
+
+                    .chat-dialog a {
+                        text-decoration: none;
+                        color: inherit;
+                    }
+
+                    .msg__count {
+                        position: absolute;
+                        top: -10px;
+                        right: -10px;
+                        background-color: red;
+                        color: #fff;
+                        border-radius: 50%;
+                        padding: 5px;
+                        font-size: 14px;
+                        width: 25px;
+                        height: 25px;
+                    }
+
+                    @media only screen and (max-width: 768px) {
+                        .chat-dialog {
+                            bottom: 25px;
+                            right: 25px;
+                            padding: 5px 10px;
+                        }
+
+                        .msg__count {
+                            top: -5px;
+                            right: -5px;
+                            font-size: 12px;
+                            width: 22px;
+                            height: 22px;
+                            padding: 5px;
+                        }
+                </style>
 
                 <li class="nav-item dropdown">
                     @if (isset($shopInfo))
@@ -148,8 +215,9 @@
                             <img style="width: 20%; height: 100%; border-radius: 100%;"
                                 src="{{ asset('storage/uploads/' . $shopInfo->logo) }}" alt="">
                             {{-- <h2 style="font-size: 20px; width: 80%; " class="mb-0 ml-0 pl-0">{{ auth()->user()->name }}</h2> --}}
-                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                <h2 style="font-size: 20px; width: 100%; " >{{ $shopInfo->name }}</h2>
+                            <div
+                                style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <h2 style="font-size: 20px; width: 100%; ">{{ $shopInfo->name }}</h2>
                                 <a href="{{ route('venderProfile') }}">Edit Profile</a>
                             </div>
 
@@ -183,11 +251,20 @@
                         </li>
 
                         <li>
-                            <a href="/chatify" target="_blank" class="{{ Request::is('chatify*') ? 'active' : '' }}">
+                            <a href="#" class="{{ Request::is('chatify*') ? 'active' : '' }}"
+                                onclick="openChatify()">
                                 <i class='bx bxs-dashboard icon'></i> Chats
                                 <span id="unseenMsgCounter" class="badge badge-danger">{{ $unseenmessages }}</span>
                             </a>
                         </li>
+
+                        <script>
+                            function openChatify() {
+                                window.open("{{ route('chatify') }}", "_blank", "width=400,height=600,top=100,right=20");
+                            }
+                        </script>
+
+
 
 
                         {{-- <li>

@@ -808,10 +808,73 @@
                                             </li>
                                         @endauth
 
-                                        <li><a class="" href="{{ route('chatify') }}" target="_blank"><i
-                                                    class="fas fa-comment"><span
-                                                        class="cart__count">{{ $unseenmessages }}</span></i></a>
-                                        </li>
+                                        <div class="chat-dialog">
+                                            <a class="" href="#" onclick="openChatify()">
+                                                <i class="fas fa-comment"> Messages
+                                                    <span class="msg__count">{{ $unseenmessages }}</span>
+                                                </i>
+                                            </a>
+                                        </div>
+
+
+                                        <script>
+                                            function openChatify() {
+                                                window.open("{{ route('chatify') }}", "_blank", "width=400,height=600,top=100,right=20");
+                                            }
+                                        </script>
+
+                                        <style>
+                                            .chat-dialog {
+                                                position: fixed;
+                                                bottom: 60px;
+                                                right: 100px;
+                                                background-color: #f9f9f9;
+                                                border: 1px solid blue;
+                                                border-radius: 20px;
+                                                padding: 10px 20px;
+                                                box-shadow: 0 12px 15px rgba(0, 0, 0, 0.1);
+                                                z-index: 1000;
+                                                width: auto;
+                                                height: auto;
+                                                text-align: center;
+                                                color: blue;
+                                            }
+
+                                            .chat-dialog a {
+                                                text-decoration: none;
+                                                color: inherit;
+                                            }
+
+                                            .msg__count {
+                                                position: absolute;
+                                                top: -10px;
+                                                right: -10px;
+                                                background-color: red;
+                                                color: #fff;
+                                                border-radius: 50%;
+                                                padding: 5px;
+                                                font-size: 14px;
+                                                width: 25px;
+                                                height: 25px;
+                                            }
+
+                                            @media only screen and (max-width: 768px) {
+                                                .chat-dialog {
+                                                    bottom: 25px;
+                                                    right: 25px;
+                                                    padding: 5px 10px;
+                                                }
+
+                                                .msg__count {
+                                                    top: -5px;
+                                                    right: -5px;
+                                                    font-size: 12px;
+                                                    width: 22px;
+                                                    height: 22px;
+                                                    padding: 5px;
+                                                }
+                                        </style>
+
                                         <li><a class="mini__cart--link" href="#"><i
                                                     class="fas fa-shopping-bag"><span
                                                         class="cart__count">{{ $totalItems }}</span></i><span
@@ -1014,7 +1077,8 @@
                                         @endif
                                     @endif
                                 @endforeach
-                                <a href="{{ route('shop')}}" style="border: 1px solid black; text-align: center; margin: 0 10px;">See all</a>
+                                <a href="{{ route('shop') }}"
+                                    style="border: 1px solid black; text-align: center; margin: 0 10px;">See all</a>
 
                             </div>
                         </div>
@@ -1084,13 +1148,16 @@
                                                                 <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
                                                                     alt="{{ $brand->name }}"
                                                                     style="max-width: 70px; max-height: 70px;">
-                                                                    <span style="margin-left: 10px; width: 50%;">{{$brand->name}}</span>
+                                                                <span
+                                                                    style="margin-left: 10px; width: 50%;">{{ $brand->name }}</span>
                                                             </a>
                                                         </li>
                                                     @endif
                                                 @endif
                                             @endforeach
-                                            <a href="{{ route('shop')}}" style="border: 1px solid black; text-align: center; margin: 10px 10px;">See all</a>
+                                            <a href="{{ route('shop') }}"
+                                                style="border: 1px solid black; text-align: center; margin: 10px 10px;">See
+                                                all</a>
                                         </ul>
                                     </li>
 
@@ -1505,7 +1572,7 @@
         </script>
     </header>
 
-    
+
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
