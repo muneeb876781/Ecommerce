@@ -804,6 +804,7 @@
                                                                 @if ($product->discountedPrice)
                                                                     <span class="original-price"
                                                                         style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
+                                                                        <br>
                                                                     <span
                                                                         class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
                                                                 @else
