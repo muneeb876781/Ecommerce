@@ -28,22 +28,22 @@
             border-radius: 5px;
             z-index: 1;
             color: white;
-            border: 1px solid #012880;
-            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+            border: 1px solid #F1F3F6;
+            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
         }
     
         .sale-tag-new {
             top: 10px;
             left: 10px;
             background-color: #FF89D6; 
-            color: #fff; 
+            color: red; 
         }
     
         .out-of-stock-tag-new {
             top: 10px;
             right: 10px;
             background-color: #FF89D6; 
-            color: #fff;
+            color: red;
         }
     
         @media (max-width: 760px) {
@@ -1219,7 +1219,7 @@
                                             aria-controls="nav-contact" aria-selected="false">Popular
                                             Product</a> --}}
                                     </div>
-                                    <style>
+                                    {{-- <style>
                                         .dtag {
                                             cursor: pointer;
                                             position: relative;
@@ -1228,8 +1228,9 @@
                                             /* line-height: 2.5rem; */
                                             font-size: 17px;
                                             font-weight: 600;
-                                            border: 1px solid #012880;
-                                            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                                            border: 1px solid #F1F3F6;
+                                            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+                                            box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
                                             /* box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
                                                         0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
                                                         0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
@@ -1281,7 +1282,7 @@
                                                 font-size: 10px; 
                                             }
                                         }
-                                    </style>
+                                    </style> --}}
                                     
                                 </nav>
                             </div>
@@ -1336,7 +1337,7 @@
                                                                     $salePercentage = (($product->price - $product->discountedPrice) / $product->price) * 100;
                                                                 @endphp
                                                                 @if ($salePercentage > 0)
-                                                                    <span class="sale-tag sale-tag-new">{{ round($salePercentage) }}% Off</span>
+                                                                    <span class="sale-tag sale-tag-new"> <span> {{ round($salePercentage) }}% Off</span> </span>
                                                                 @endif
                                                             @endif
                                                         </a>

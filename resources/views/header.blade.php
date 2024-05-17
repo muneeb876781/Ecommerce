@@ -485,12 +485,13 @@
             font-size: 17px;
             font-weight: 600;
 
-            border: 1px solid #012880;
-            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
-            box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.1),
+            border: 1px solid #F1F3F6;
+            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+            /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5); */
+            /* box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.1),
                 0 -0.25rem 1.5rem rgba(110, 15, 155, 0.2) inset,
                 0 0.75rem 0.5rem rgba(255, 255, 255, 0.5) inset,
-                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 0.1) inset;
+                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 0.1) inset; */
         }
 
         .d1tag span {
@@ -1241,8 +1242,10 @@
                                                 font-size: 17px;
                                                 font-weight: 600;
 
-                                                border: 1px solid #012880;
-                                                background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+                                                border: 1px solid #F1F3F6;
+                                                background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+                                                box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+
                                                 /* box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.50),
                                                     0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
                                                     0 0.75rem 0.5rem rgba(255, 255, 255, 0.4) inset,

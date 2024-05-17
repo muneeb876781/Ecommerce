@@ -48,6 +48,42 @@
     <!-- End Meta Pixel Code -->
 </head>
 <style>
+    .sale-tag-new, .out-of-stock-tag-new {
+        position: absolute;
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 1;
+        color: white;
+        border: 1px solid #F1F3F6;
+        background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+    }
+
+    .sale-tag-new {
+        top: 10px;
+        left: 10px;
+        background-color: #FF89D6; 
+        color: red; 
+    }
+
+    .out-of-stock-tag-new {
+        top: 10px;
+        right: 10px;
+        background-color: #FF89D6; 
+        color: red;
+    }
+
+    @media (max-width: 760px) {
+        .sale-tag-new, .out-of-stock-tag-new {
+            font-size: 10px; 
+            padding: 3px 6px; 
+        }
+    }
+
+    .star-gold{
+        color: gold;
+    }
+</style>
+<style>
     .sale-tag {
         position: absolute;
         top: 10px;
@@ -741,17 +777,13 @@
                                                             @endif
 
                                                             @if ($product->quantity == 0)
-                                                                <span class="out-of-stock-tag dtag">Out of Stock</span>
+                                                                <span class="out-of-stock-tag out-of-stock-tag-new">Out of Stock</span>
                                                             @elseif ($product->discountedPrice)
                                                                 @php
-                                                                    $salePercentage =
-                                                                        (($product->price - $product->discountedPrice) /
-                                                                            $product->price) *
-                                                                        100;
+                                                                    $salePercentage = (($product->price - $product->discountedPrice) / $product->price) * 100;
                                                                 @endphp
                                                                 @if ($salePercentage > 0)
-                                                                    <span class="sale-tag dtag">
-                                                                        {{ round($salePercentage) }}% Off</span>
+                                                                    <span class="sale-tag sale-tag-new"> <span> {{ round($salePercentage) }}% Off</span> </span>
                                                                 @endif
                                                             @endif
                                                         </a>
