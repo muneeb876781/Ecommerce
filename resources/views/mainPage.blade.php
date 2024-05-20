@@ -1390,13 +1390,13 @@
                                                             class="product__content--rating d-flex justify-content-between">
                                                             <div class="price">
                                                                 @if ($product->discountedPrice)
-                                                                    <span class="original-price"
-                                                                        style="text-decoration: line-through; font-size: 11px; margin-right: 3px;">AED.{{ $product->price }}</span>
-                                                                        <br>
-                                                                    <span
-                                                                        class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                                    <span class="original-price" style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
+                                                                        {{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
+                                                                    </span>
+                                                                    <br>
+                                                                    <span class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
                                                                 @else
-                                                                    <span>AED.{{ $product->price }}</span>
+                                                                    <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -1859,36 +1859,28 @@
                         @else
                             <div class="row">
                                 @foreach ($products->take(20) as $key => $product)
-                            @if (
-                                $product->brand &&
-                                $product->category &&
-                                $product &&
-                                $product->brand->state !== 0 &&
-                                $product->category->state !== 0 &&
-                                $product->state !== 0
-                                // $product->discountedPrice !== null
-                            )
-                                            <div class="product-s">
-                                                <div class="product__single">
-                                                    <div class="product__box">
-                                                        <div class="product__thumb">
-                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                class="img-wrapper">
-                                                                @if ($product->image_url)
-                                                                    <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                        class="img"
-                                                                        src="{{ asset('storage/uploads/' . $product->image_url) }}"
-                                                                        alt="">
-                                                                @elseif (!$product->image_url && $product->remote_image_url)
-                                                                    <img style="height: auto; width: auto; margin: 0 auto;"
-                                                                        class="img"
-                                                                        src="{{ $product->remote_image_url }}"
-                                                                        alt="">
-                                                                @else
-                                                                    <span>No image available</span>
-                                                                @endif
-
-                                                                @if ($product->quantity == 0)
+                                    @if (
+                                        $product->brand &&
+                                        $product->category &&
+                                        $product &&
+                                        $product->brand->state !== 0 &&
+                                        $product->category->state !== 0 &&
+                                        $product->state !== 0
+                                    )
+                                        <div class="product-s">
+                                            <div class="product__single">
+                                                <div class="product__box">
+                                                    <div class="product__thumb">
+                                                        <a href="{{ route('singleProduct', ['id' => $product->id]) }}" class="img-wrapper">
+                                                            @if ($product->image_url)
+                                                                <img style="height: auto; width: auto; margin: 0 auto;" class="img" src="{{ asset('storage/uploads/' . $product->image_url) }}" alt="">
+                                                            @elseif (!$product->image_url && $product->remote_image_url)
+                                                                <img style="height: auto; width: auto; margin: 0 auto;" class="img" src="{{ $product->remote_image_url }}" alt="">
+                                                            @else
+                                                                <span>No image available</span>
+                                                            @endif
+                    
+                                                            @if ($product->quantity == 0)
                                                                 <span class="out-of-stock-tag out-of-stock-tag-new">Out of Stock</span>
                                                             @elseif ($product->discountedPrice)
                                                                 @php
@@ -1898,77 +1890,62 @@
                                                                     <span class="sale-tag sale-tag-new">{{ round($salePercentage) }}% Off</span>
                                                                 @endif
                                                             @endif
-                                                            </a>
-                                                            <div class="product-action">
-                                                                <a href="#"><span
-                                                                        class="fas fa-heart"></span></a>
-                                                                <a
-                                                                    href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
-                                                                        class="fas fa-eye"></span></a>
-                                                                <a
-                                                                    href="{{ route('addtoCart', ['id' => $product->id]) }}"><span
-                                                                        class="fas fa-shopping-cart"></span></a>
-                                                            </div>
+                                                        </a>
+                                                        <div class="product-action">
+                                                            <a href="#"><span class="fas fa-heart"></span></a>
+                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}"><span class="fas fa-eye"></span></a>
+                                                            <a href="{{ route('addtoCart', ['id' => $product->id]) }}"><span class="fas fa-shopping-cart"></span></a>
                                                         </div>
-                                                        <div class="product__content--top pt-10 pb-10">
-                                                            <span
-                                                                class="cate-name">{{ $product->category->name }}</span>
-                                                            <h6 class="product__title mine__shaft-color f-400 mb-0"
-                                                                style="white-space: wrap; overflow-wrap: break-word;">
-                                                                <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
-                                                                    style="display: inline-block; max-width: 100%; ">
-                                                                    {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
-                                                                    @if (str_word_count($product->name) > 5)
-                                                                        ...
-                                                                    @endif
-                                                                </a>
-                                                            </h6>
-
-
-
-                                                            @php
-                                                                $averageRating = $product->reviews->avg('rating');
-                                                            @endphp
-                                                            <div class="rating" style="padding-top: 5px;">
-                                                                <ul class="list-inline">
-                                                                    @for ($i = 1; $i <= 5; $i++)
-                                                                        @if ($i <= $averageRating)
-                                                                            <li class="rating-active"><i
-                                                                                    class="fas fa-star star-gold"></i>
-                                                                            </li>
-                                                                        @else
-                                                                            <li><i class="far fa-star"></i></li>
-                                                                        @endif
-                                                                    @endfor
-                                                                </ul>
-                                                            </div>
-
-
-
-                                                            <br>
-                                                            <div
-                                                                class="product__content--rating d-flex justify-content-between">
-                                                                <div class="price">
-                                                                    @if ($product->discountedPrice)
-                                                                        <span class="original-price"
-                                                                            style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
-                                                                            <br>
-                                                                        <span
-                                                                            class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                    </div>
+                                                    <div class="product__content--top pt-10 pb-10">
+                                                        <span class="cate-name">{{ $product->category->name }}</span>
+                                                        <h6 class="product__title mine__shaft-color f-400 mb-0" style="white-space: wrap; overflow-wrap: break-word;">
+                                                            <a href="{{ route('singleProduct', ['id' => $product->id]) }}" style="display: inline-block; max-width: 100%; ">
+                                                                {{ implode(' ', array_slice(explode(' ', $product->name), 0, 5)) }}
+                                                                @if (str_word_count($product->name) > 5)
+                                                                    ...
+                                                                @endif
+                                                            </a>
+                                                        </h6>
+                    
+                                                        @php
+                                                            $averageRating = $product->reviews->avg('rating');
+                                                        @endphp
+                                                        <div class="rating" style="padding-top: 5px;">
+                                                            <ul class="list-inline">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $averageRating)
+                                                                        <li class="rating-active"><i class="fas fa-star star-gold"></i></li>
                                                                     @else
-                                                                        <span>AED.{{ $product->price }}</span>
+                                                                        <li><i class="far fa-star"></i></li>
                                                                     @endif
-                                                                </div>
+                                                                @endfor
+                                                            </ul>
+                                                        </div>
+                                                        <br>
+                                                        <div class="product__content--rating d-flex justify-content-between">
+                                                            <div class="price">
+                                                                @if ($product->discountedPrice)
+                                                                    <span class="original-price" style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
+                                                                        {{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
+                                                                    </span>
+                                                                    <br>
+                                                                    <span class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
+                                                                @else
+                                                                    <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         @endif
                     </div>
+                    
                 </div>
             </div>
         </div>

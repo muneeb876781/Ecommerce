@@ -589,7 +589,7 @@
             top: -50%;
             width: 80px;
             height: 80px;
-            background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
             border-radius: 50%;
             border: 6px solid white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -692,7 +692,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5">
                         <div class="message--header__top">
-                            <p class="message m-0 dove__gray-color">Free Shipping Worldwide - On All Order Over $1000
+                            <p class="message m-0 dove__gray-color">Free Shipping Worldwide - On All Order Over AED 1000
                             </p>
                         </div>
                     </div>
@@ -706,19 +706,39 @@
                                             href="{{ route('userOrders') }}">Track Orders</a></li>
                                     <li><a class="nav--top__link dove__gray-color text-capitalize position-relative"
                                             href="#">Credit Card</a></li>
-                                    <li class="nav--top__dropdown position-relative"><a
-                                            class="nav--top__link lang--top__link dove__gray-color text-capitalize position-relative"
-                                            href="#">English & Dollar<span
-                                                class="lnr lnr-chevron-down"></span></a>
-                                        <ul class="dropdown-show">
-                                            <li><a class="dove__gray-color text-capitalize" href="#"><span
-                                                        class="lang">canada</span><span
-                                                        class="currency">USD</span></a></li>
-                                            <li><a class="dove__gray-color text-capitalize" href="#"><span
-                                                        class="lang">Bangladesh</span><span
-                                                        class="currency">TAKA</span></a></li>
-                                        </ul>
-                                    </li>
+                                            <li class="nav--top__dropdown position-relative">
+                                                <a class="nav--top__link lang--top__link dove__gray-color text-capitalize position-relative" href="#">Currency: 
+                                                    {{ session('currency', 'AED') }} <span class="lnr lnr-chevron-down"></span>
+                                                </a>
+                                                <ul class="dropdown-show">
+                                                    <li>
+                                                        <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'PKR' ? 'selected' : '' }}"
+                                                            href="{{ route('switch-currency', ['currency' => 'PKR']) }}">
+                                                            <span class="lang">Pakistan</span>
+                                                            <span class="currency">PKR</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'AED' ? 'selected' : '' }}"
+                                                            href="{{ route('switch-currency', ['currency' => 'AED']) }}">
+                                                            <span class="lang">Dubai</span>
+                                                            <span class="currency">AED</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <style>
+                                                .selected {
+                                                font-weight: bold;
+                                                color: #000; /* Change color to indicate the selected currency */
+                                            }
+                                            </style>
+
+                                            
+                                            
+                                            
+
                                 </ul>
                             </nav>
                         </div>
@@ -879,7 +899,7 @@
                                         <li><a class="mini__cart--link" href="#"><i
                                                     class="fas fa-shopping-bag"><span
                                                         class="cart__count">{{ $totalItems }}</span></i><span
-                                                    class="cart__amount">AED. {{ $totalPrice }}</span></a></li>
+                                                    class="cart__amount">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span></a></li>
 
                                     </ul>
                                 </div>
@@ -917,8 +937,11 @@
                                                             <span
                                                                 class="cart-price f-400 dusty__gray-color">{{ $item->quantity }}
                                                                 x </span>
-                                                            <span class="price f-800 cod__black-color">Rs
-                                                                {{ $item->product->price }}</span>
+                                                                @if ($item->product->discountedPrice)
+                                                                    <span class="price f-800 cod__black-color">{{ session('currency', 'AED') }}.{{ number_format(convert_price($item->product->discountedPrice), 2) }}</span>
+                                                                @else
+                                                                    <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($item->product->price), 2) }}</span>
+                                                                @endif
                                                         </div>
                                                         <div class="del-button">
                                                             <a href="#"><i class="icofont-close-line"></i></a>
@@ -937,7 +960,7 @@
                                         <li>
                                             <div class="total-text d-flex justify-content-between">
                                                 <span class="f-800 cod__black-color">Total Bag </span>
-                                                <span class="f-800 cod__black-color">Rs {{ $totalPrice }}</span>
+                                                <span class="f-800 cod__black-color">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span>
                                             </div>
                                         </li>
                                         <li>

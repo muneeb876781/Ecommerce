@@ -85,8 +85,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/editproduct/{id}', [ProductController::class, 'editproduct'])->name('editproduct');
     Route::post('/saveproductchanges/{id}', [ProductController::class, 'saveproductchanges'])->name('saveproductchanges');
 
-
-
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categoryview')
         ->middleware('seller');
@@ -194,8 +192,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/shop/price/{range}', [ShopController::class, 'filterProductsByPrice'])->name('filterProductsByPrice');
     Route::get('/shop/combined-filter', [ShopController::class, 'combinedFilter'])->name('combinedFilter');
 
-
-
     Route::get('/adminDashboard', [AdminController::class, 'index'])
         ->name('adminDashboard')
         ->middleware('admin');
@@ -221,6 +217,10 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.table')
         ->middleware('admin');
 
+    Route::get('/switch-currency/{currency}', function ($currency) {
+        Session::put('currency', $currency);
+        return redirect()->back();
+    })->name('switch-currency');
 
     Route::get('/chatify', [MessagesController::class, 'index'])->name('chatify');
     Route::get('/chatifyy/{id}', [MessagesController::class, 'index'])->name('chatifyy');
