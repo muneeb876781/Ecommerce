@@ -108,18 +108,19 @@
                                              </td>
                                              <td>
                                                  <div class="price-wrap">
-                                                     <var class="price">AED
+                                                    
+                                                     <var class="price">{{ session('currency', 'AED') }}.
                                                          @if ($item->product->discountedPrice)
-                                                             {{ $item->product->discountedPrice * $item->quantity }}
+                                                             {{ number_format(convert_price($item->product->discountedPrice * $item->quantity), 2) }}
                                                          @else
-                                                             {{ $item->product->price * $item->quantity }}
+                                                             {{ number_format(convert_price($item->product->price * $item->quantity), 2) }}
                                                          @endif
                                                      </var>
                                                      @if ($item->quantity > 1)
                                                          <small class="text-muted"> AED @if ($item->product->discountedPrice)
-                                                                 {{ $item->product->discountedPrice }}
+                                                                 {{ number_format(convert_price($item->product->discountedPrice), 2) }}
                                                              @else
-                                                                 {{ $item->product->price }}
+                                                                 {{ number_format(convert_price($item->product->price), 2) }}
                                                              @endif
                                                              each </small>
                                                      @endif
@@ -174,16 +175,17 @@
                      <div class="card-body">
                          <dl class="dlist-align">
                              <dt>Total price:</dt>
-                             <dd id="totalPrice" class="text-right ml-3">AED {{ $totalPrice }}</dd>
+                             <dd id="totalPrice" class="text-right ml-3">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}
+                            </dd>
                          </dl>
                          <dl class="dlist-align">
                              <dt>Discount:</dt>
-                             <dd id="discount" class="text-right text-danger ml-3">- AED 0</dd>
+                             <dd id="discount" class="text-right text-danger ml-3">- {{ session('currency', 'AED') }} 0</dd>
                          </dl>
                          <dl class="dlist-align">
                              <dt>Total:</dt>
-                             <dd id="finalTotal" class="text-right text-dark b ml-3"><strong>AED
-                                     {{ $totalPrice }}</strong></dd>
+                             <dd id="totalPrice" class="text-right ml-3">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}
+
                          </dl>
 
                          <hr> <a style="background: #cd3301;color: #fff;" href="{{ route('checkout') }}"

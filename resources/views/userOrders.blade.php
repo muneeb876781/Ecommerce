@@ -80,7 +80,7 @@
                                                 <strong>Address: </strong> {{ $order->delivery_address }} <br>
                                                 <strong>Postal Code: </strong>{{ $order->postal_code }}
                                             </td>
-                                            <td>{{ $order->total_price }}</td>
+                                            <td>{{ session('currency', 'AED') }}.{{ number_format(convert_price($order->total_price), 2) }}</td>
                                             <td>
                                                 {{ $order->items->count() }}
                                             </td>

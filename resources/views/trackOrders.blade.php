@@ -266,7 +266,8 @@ s
                                     <p class="title"> <strong>{{ $orderitems->product_name }}</strong> </p> 
                                     <span class="text-muted">Color {{ $orderitems->product_color }} </span><br>
                                     <span class="text-muted">Size {{ $orderitems->product_size }} </span><br>
-                                    <span class="text-muted">AED {{ $orderitems->price }} </span><br>
+                                    <span class="text-muted">{{ session('currency', 'AED') }}.{{ number_format(convert_price($orderitems->price), 2) }} </span><br>
+
 
                                     <span class="text-muted"> Quantity: {{ $orderitems->quantity }} </span>
                                 </figcaption>

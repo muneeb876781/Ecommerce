@@ -13,7 +13,6 @@ use App\Models\Banner;
 use App\Models\Templates;
 use Illuminate\Support\Facades\DB;
 
-
 class IndexController extends Controller
 {
     // public function index(){
@@ -25,7 +24,6 @@ class IndexController extends Controller
 
     public function index()
     {
-        // $products = Product::orderBy('created_at', 'desc')->get();
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
@@ -33,7 +31,6 @@ class IndexController extends Controller
         $brands = Brand::all();
 
         $user_id = auth()->id();
-
         $cart = Cart::where('user_id', $user_id)->get();
 
         $totalPrice = 0;
@@ -46,11 +43,8 @@ class IndexController extends Controller
         }
 
         $totalItems = $cart->sum('quantity');
-
         $banners = Banner::all();
-
         $template = Templates::where('state', 1)->first();
-
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
         if ($template) {

@@ -632,13 +632,13 @@
                             </div>
                             <div class="price mt-15 mb-20">
                                 @if ($product->discountedPrice)
-                                    <span style="text-decoration: line-through;">AED {{ $product->price }}</span>
-                                    <h4>AED {{ $product->discountedPrice }}</h4>
+                                    <span style="text-decoration: line-through;">{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
+                                    <h4>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</h4>
                                 @else
-                                    <h4>AED {{ $product->price }}</h4>
+                                    <h4>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</h4>
                                 @endif
-
                             </div>
+                           
                             <form action="{{ route('addToCart', ['id' => $product->id]) }}" method="POST">
                                 @csrf
                                 <div class="row">
@@ -1053,14 +1053,14 @@
                                             <div class="product__content--rating d-flex justify-content-between">
 
                                                 <div class="price">
-                                                    @if ($relProduct->discountedPrice)
-                                                        <span class="original-price"
-                                                            style="text-decoration: line-through; font-size: 13px; margin-right: 5px;">AED.
-                                                            {{ $relProduct->price }}</span>
-                                                        <span class="discounted-price"> <strong>AED.
-                                                                {{ $relProduct->discountedPrice }}</strong></span>
+                                                    @if ($product->discountedPrice)
+                                                        <span class="original-price" style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
+                                                            {{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
+                                                        </span>
+                                                        <br>
+                                                        <span class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
                                                     @else
-                                                        <span>AED. {{ $relProduct->price }}</span>
+                                                        <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
                                                     @endif
                                                 </div>
 

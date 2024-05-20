@@ -834,13 +834,13 @@
                                                             class="product__content--rating d-flex justify-content-between">
                                                             <div class="price">
                                                                 @if ($product->discountedPrice)
-                                                                    <span class="original-price"
-                                                                        style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">AED.{{ $product->price }}</span>
-                                                                        <br>
-                                                                    <span
-                                                                        class="discounted-price"><strong>AED.{{ $product->discountedPrice }}</strong></span>
+                                                                    <span class="original-price" style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
+                                                                        {{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
+                                                                    </span>
+                                                                    <br>
+                                                                    <span class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
                                                                 @else
-                                                                    <span>AED.{{ $product->price }}</span>
+                                                                    <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
                                                                 @endif
                                                             </div>
                                                         </div>

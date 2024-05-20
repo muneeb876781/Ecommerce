@@ -418,11 +418,13 @@
                                                         </a>
 
                                                         <span>
+
                                                             @if ($item->product->discountedPrice)
-                                                                AED
-                                                                {{ $item->quantity * $item->product->discountedPrice }}
+                                                            {{ session('currency', 'AED') }}.
+                                                                {{ number_format(convert_price($item->quantity * $item->product->discountedPrice), 2) }}
                                                             @else
-                                                                AED {{ $item->quantity * $item->product->price }}
+                                                                {{ number_format(convert_price($item->quantity * $item->product->price), 2) }}
+
                                                             @endif
                                                         </span>
                                                     </li>
