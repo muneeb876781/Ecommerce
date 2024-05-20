@@ -1600,7 +1600,7 @@
                     position: absolute;
                     top: 100%;
                     right: 0;
-                    background-color: #f9f9f9;
+                    background-color: #F1F3F6;
                     min-width: 100px;
                     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                     z-index: 1;
@@ -1614,7 +1614,7 @@
                 }
 
                 .currency-dropdown a:hover {
-                    background-color: #f1f1f1;
+                    background-color: #F1F3F6;
                 }
 
                 .currency-switch:hover .currency-dropdown {
