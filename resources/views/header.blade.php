@@ -692,6 +692,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5">
                         <div class="message--header__top">
+
                             <p class="message m-0 dove__gray-color">Free Shipping Worldwide - On All Order Over AED 1000
                             </p>
                         </div>
@@ -700,44 +701,66 @@
                         <div class="menu--header__top text-right">
                             <nav class="nav--top__list">
                                 <ul class="list-inline">
+                                    <li class="nav--top__dropdown position-relative">
+                                        <a class="nav--top__link lang--top__link dove__gray-color text-capitalize position-relative"
+                                            href="#">Currency:
+                                            <span id="selected-currency">{{ session('currency', 'AED') }}</span>
+                                            <img id="selected-currency-flag"
+                                                src="../images/{{ session('currency', 'AED') == 'PKR' ? 'pkr.png' : 'dubai.png' }}"
+                                                alt="Selected Currency Flag">
+                                            <span class="lnr lnr-chevron-down"></span>
+                                        </a>
+                                        <ul class="dropdown-show">
+                                            <li>
+                                                <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'PKR' ? 'selected' : '' }}"
+                                                    href="{{ route('switch-currency', ['currency' => 'PKR']) }}"
+                                                    onclick="updateSelectedCurrency('PKR')">
+                                                    <img src="../images/pkr.png" alt="Pakistan Flag">
+                                                    <span class="lang">Pakistan</span>
+                                                    {{-- <span class="currency">PKR</span> --}}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'AED' ? 'selected' : '' }}"
+                                                    href="{{ route('switch-currency', ['currency' => 'AED']) }}"
+                                                    onclick="updateSelectedCurrency('AED')">
+                                                    <img src="../images/dubai.png" alt="Dubai Flag">
+                                                    <span class="lang">Dubai</span>
+                                                    {{-- <span class="currency">AED</span> --}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <script>
+                                        function updateSelectedCurrency(currency) {
+                                            document.getElementById('selected-currency').innerText = currency;
+                                            document.getElementById('selected-currency-flag').src = `../images/${currency.toLowerCase()}.png`;
+                                        }
+                                    </script>
+
+                                    <style>
+                                        .selected {
+                                            font-weight: bold;
+                                            color: #000;
+                                        }
+
+                                        .nav--top__dropdown img {
+                                            width: 25px;
+                                            margin-right: 10px;
+                                            margin-left: 10px;
+                                        }
+                                    </style>
                                     <li><a class="nav--top__link dove__gray-color text-capitalize position-relative"
                                             href="#">store Locator</a></li>
                                     <li><a class="nav--top__link dove__gray-color text-capitalize position-relative"
                                             href="{{ route('userOrders') }}">Track Orders</a></li>
                                     <li><a class="nav--top__link dove__gray-color text-capitalize position-relative"
                                             href="#">Credit Card</a></li>
-                                            <li class="nav--top__dropdown position-relative">
-                                                <a class="nav--top__link lang--top__link dove__gray-color text-capitalize position-relative" href="#">Currency: 
-                                                    {{ session('currency', 'AED') }} <span class="lnr lnr-chevron-down"></span>
-                                                </a>
-                                                <ul class="dropdown-show">
-                                                    <li>
-                                                        <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'PKR' ? 'selected' : '' }}"
-                                                            href="{{ route('switch-currency', ['currency' => 'PKR']) }}">
-                                                            <span class="lang">Pakistan</span>
-                                                            <span class="currency">PKR</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'AED' ? 'selected' : '' }}"
-                                                            href="{{ route('switch-currency', ['currency' => 'AED']) }}">
-                                                            <span class="lang">Dubai</span>
-                                                            <span class="currency">AED</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
 
-                                            <style>
-                                                .selected {
-                                                font-weight: bold;
-                                                color: #000; /* Change color to indicate the selected currency */
-                                            }
-                                            </style>
 
-                                            
-                                            
-                                            
+
+
 
                                 </ul>
                             </nav>
@@ -753,8 +776,8 @@
                         <div class="content--header__middle d-flex align-items-center justify-content-between">
                             <div class="logo--header__middle ">
                                 <div class="logo">
-                                    <a class="logo__link" href="{{ route('home') }}"><img src="../img/logo/h1__logo.png"
-                                            alt=""></a>
+                                    <a class="logo__link" href="{{ route('home') }}"><img
+                                            src="../img/logo/h1__logo.png" alt=""></a>
                                 </div>
                             </div>
                             <div class="search--header__middle h1search--header__middle">
@@ -899,7 +922,8 @@
                                         <li><a class="mini__cart--link" href="#"><i
                                                     class="fas fa-shopping-bag"><span
                                                         class="cart__count">{{ $totalItems }}</span></i><span
-                                                    class="cart__amount">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span></a></li>
+                                                    class="cart__amount">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span></a>
+                                        </li>
 
                                     </ul>
                                 </div>
@@ -937,11 +961,12 @@
                                                             <span
                                                                 class="cart-price f-400 dusty__gray-color">{{ $item->quantity }}
                                                                 x </span>
-                                                                @if ($item->product->discountedPrice)
-                                                                    <span class="price f-800 cod__black-color">{{ session('currency', 'AED') }}.{{ number_format(convert_price($item->product->discountedPrice), 2) }}</span>
-                                                                @else
-                                                                    <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($item->product->price), 2) }}</span>
-                                                                @endif
+                                                            @if ($item->product->discountedPrice)
+                                                                <span
+                                                                    class="price f-800 cod__black-color">{{ session('currency', 'AED') }}.{{ number_format(convert_price($item->product->discountedPrice), 2) }}</span>
+                                                            @else
+                                                                <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($item->product->price), 2) }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="del-button">
                                                             <a href="#"><i class="icofont-close-line"></i></a>
@@ -960,7 +985,8 @@
                                         <li>
                                             <div class="total-text d-flex justify-content-between">
                                                 <span class="f-800 cod__black-color">Total Bag </span>
-                                                <span class="f-800 cod__black-color">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span>
+                                                <span
+                                                    class="f-800 cod__black-color">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span>
                                             </div>
                                         </li>
                                         <li>
@@ -1501,57 +1527,160 @@
                 <span id="menu__icon"></span>
             </label>
 
+            <div class="currency-switch">
+                <button id="currency-switch-btn">
+                    <span
+                        style="color: black; font-size: 10px;">{{ session('currency', 'AED') == 'PKR' ? 'PKR' : 'AED' }}</span>
+                    <img src="../images/{{ session('currency', 'AED') == 'PKR' ? 'pkr.png' : 'dubai.png' }}"
+                        alt="Selected Currency Flag">
+                </button>
 
-            <ul class="menu__box">
-                <div class="top_sidenav">
-                    <a class="logo__link" href="index.html"><img src="img/logo/h1__logo.png" alt=""></a>
-                    @guest
-                        <li class="nav-item">
-                            <a class="sidenav_login mt-2" href="{{ route('register') }}">Login</a>
-                        </li>
-                        {{-- <li class="nav-item">
+                <ul class="currency-dropdown">
+                    <li>
+                        <a href="{{ route('switch-currency', ['currency' => 'PKR']) }}"
+                            onclick="updateSelectedCurrency('PKR')">
+                            <img src="../images/pkr.png" alt="Pakistan Flag">
+                            <span class="lang">Pakistan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('switch-currency', ['currency' => 'AED']) }}"
+                            onclick="updateSelectedCurrency('AED')">
+                            <img src="../images/dubai.png" alt="Dubai Flag">
+                            <span class="lang">Dubai</span>
+                        </a>
+                    </li>
+                    <!-- Add more countries as needed -->
+                </ul>
+            </div>
+
+        </div>
+
+        <style>
+            .currency-switch {
+                display: none;
+                position: fixed;
+                top: 11px;
+                right: 20px;
+                width: 70px;
+                /* Increased width to accommodate text and flag */
+                z-index: 9999;
+            }
+
+            @media screen and (max-width: 1200px) {
+                .currency-switch {
+                    display: block;
+                }
+            }
+
+            #currency-switch-btn {
+                border: none;
+                background: none;
+                cursor: pointer;
+                width: 100%;
+                height: 30px;
+                /* Adjusted height for better alignment */
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 5px;
+                /* Added padding for better spacing */
+            }
+
+            .currency-switch img {
+                width: 30px;
+                /* Adjusted width of the flag */
+                /* padding-left: 10px; */
+                height: auto;
+                object-fit: contain;
+            }
+
+            .currency-dropdown {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: #f9f9f9;
+                min-width: 100px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            .currency-dropdown a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .currency-dropdown a:hover {
+                background-color: #f1f1f1;
+            }
+
+            .currency-switch:hover .currency-dropdown {
+                display: block;
+            }
+        </style>
+
+        <script>
+            // JavaScript function to update selected currency
+            function updateSelectedCurrency(currency) {
+                document.getElementById('selected-currency').innerText = currency;
+                document.getElementById('selected-currency-flag').src = `../images/${currency.toLowerCase()}.png`;
+            }
+        </script>
+
+
+        <ul class="menu__box">
+            <div class="top_sidenav">
+                <a class="logo__link" href="index.html"><img src="img/logo/h1__logo.png" alt=""></a>
+                @guest
+                    <li class="nav-item">
+                        <a class="sidenav_login mt-2" href="{{ route('register') }}">Login</a>
+                    </li>
+                    {{-- <li class="nav-item">
                             <a class="side_nav_logout" href="{{ route('register') }}">Register</a>
                         </li> --}}
-                    @endguest
-                    @auth
-                        <li class="nav-item">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class="side_nav_logout" type="submit">Logout</button>
-                            </form>
-                        </li>
-                    @endauth
-                    <div class="side_nav_trackorder">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <a href="{{ route('userOrders') }}">Track My Orders</a>
-                    </div>
-                    <div class="side_nav_trackorder">
-                        <i class="fas fa-comment"></i>
-                        <a href="{{ route('chatify') }}" target="_blank">Messages</a>
-                        @if ($unseenmessages > 0)
-                            <span class="badge">{{ $unseenmessages }}</span>
+                @endguest
+                @auth
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="side_nav_logout" type="submit">Logout</button>
+                        </form>
+                    </li>
+                @endauth
+                <div class="side_nav_trackorder">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a href="{{ route('userOrders') }}">Track My Orders</a>
+                </div>
+                <div class="side_nav_trackorder">
+                    <i class="fas fa-comment"></i>
+                    <a href="{{ route('chatify') }}" target="_blank">Messages</a>
+                    @if ($unseenmessages > 0)
+                        <span class="badge">{{ $unseenmessages }}</span>
+                    @endif
+                </div>
+
+
+            </div>
+            <div class="bottom_sidenav">
+                <h4>Categories</h4>
+
+                @foreach ($categories as $key => $category)
+                    <li>
+                        @if ($key <= 5)
+                            <a class="menu__item"
+                                href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                         @endif
-                    </div>
+                    </li>
+                @endforeach
+                <a class="visit_shop" href="{{ route('shop') }}">View All</a>
 
 
-                </div>
-                <div class="bottom_sidenav">
-                    <h4>Categories</h4>
+            </div>
 
-                    @foreach ($categories as $key => $category)
-                        <li>
-                            @if ($key <= 5)
-                                <a class="menu__item"
-                                    href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                            @endif
-                        </li>
-                    @endforeach
-                    <a class="visit_shop" href="{{ route('shop') }}">View All</a>
-
-
-                </div>
-
-            </ul>
+        </ul>
         </div>
         <script>
             const lists = document.querySelectorAll('.list');
