@@ -53,6 +53,11 @@ Route::get('/shop/subcategory/{id}', [ShopController::class, 'showProductsBysubc
 
 Route::get('/shopss', [ShopController::class, 'showProducts'])->name('shopss');
 
+Route::get('/switch-currency/{currency}', function ($currency) {
+        Session::put('currency', $currency);
+        return redirect()->back();
+    })->name('switch-currency');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [SellerController::class, 'index'])
         ->name('dashboard')
@@ -129,6 +134,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/{id}', [ProductController::class, 'remove'])->name('remove');
 
     Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+    Route::get('/handleCheckout', [OrderController::class, 'handleCheckout'])->name('handleCheckout');
     Route::post('/order', [OredrController::class, 'placeOrder'])->name('order');
     Route::post('/udateOrderStatus/{id}', [OredrController::class, 'udateOrderStatus'])->name('udateOrderStatus');
     Route::get('/Order', [OredrController::class, 'index'])->name('Order');
@@ -217,11 +223,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.table')
         ->middleware('admin');
 
-    Route::get('/switch-currency/{currency}', function ($currency) {
-        Session::put('currency', $currency);
-        return redirect()->back();
-    })->name('switch-currency');
-
+    
     Route::get('/chatify', [MessagesController::class, 'index'])->name('chatify');
     Route::get('/chatifyy/{id}', [MessagesController::class, 'index'])->name('chatifyy');
 });
