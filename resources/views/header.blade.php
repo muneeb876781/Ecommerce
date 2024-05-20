@@ -917,6 +917,7 @@
                                                     height: 22px;
                                                     padding: 5px;
                                                 }
+                                            }
                                         </style>
 
                                         <li><a class="mini__cart--link" href="#"><i
@@ -1554,133 +1555,132 @@
                 </ul>
             </div>
 
-        </div>
 
-        <style>
-            .currency-switch {
-                display: none;
-                position: fixed;
-                top: 11px;
-                right: 20px;
-                width: 70px;
-                /* Increased width to accommodate text and flag */
-                z-index: 9999;
-            }
-
-            @media screen and (max-width: 1200px) {
+            <style>
                 .currency-switch {
+                    display: none;
+                    position: fixed;
+                    top: 11px;
+                    right: 20px;
+                    width: 70px;
+                    /* Increased width to accommodate text and flag */
+                    z-index: 9999;
+                }
+
+                @media screen and (max-width: 1200px) {
+                    .currency-switch {
+                        display: block;
+                    }
+                }
+
+                #currency-switch-btn {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    width: 100%;
+                    height: 30px;
+                    /* Adjusted height for better alignment */
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 5px;
+                    /* Added padding for better spacing */
+                }
+
+                .currency-switch img {
+                    width: 30px;
+                    /* Adjusted width of the flag */
+                    /* padding-left: 10px; */
+                    height: auto;
+                    object-fit: contain;
+                }
+
+                .currency-dropdown {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    background-color: #f9f9f9;
+                    min-width: 100px;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    z-index: 1;
+                }
+
+                .currency-dropdown a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
                     display: block;
                 }
-            }
 
-            #currency-switch-btn {
-                border: none;
-                background: none;
-                cursor: pointer;
-                width: 100%;
-                height: 30px;
-                /* Adjusted height for better alignment */
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0 5px;
-                /* Added padding for better spacing */
-            }
+                .currency-dropdown a:hover {
+                    background-color: #f1f1f1;
+                }
 
-            .currency-switch img {
-                width: 30px;
-                /* Adjusted width of the flag */
-                /* padding-left: 10px; */
-                height: auto;
-                object-fit: contain;
-            }
+                .currency-switch:hover .currency-dropdown {
+                    display: block;
+                }
+            </style>
 
-            .currency-dropdown {
-                display: none;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background-color: #f9f9f9;
-                min-width: 100px;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                z-index: 1;
-            }
-
-            .currency-dropdown a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-            .currency-dropdown a:hover {
-                background-color: #f1f1f1;
-            }
-
-            .currency-switch:hover .currency-dropdown {
-                display: block;
-            }
-        </style>
-
-        <script>
-            // JavaScript function to update selected currency
-            function updateSelectedCurrency(currency) {
-                document.getElementById('selected-currency').innerText = currency;
-                document.getElementById('selected-currency-flag').src = `../images/${currency.toLowerCase()}.png`;
-            }
-        </script>
+            <script>
+                // JavaScript function to update selected currency
+                function updateSelectedCurrency(currency) {
+                    document.getElementById('selected-currency').innerText = currency;
+                    document.getElementById('selected-currency-flag').src = `../images/${currency.toLowerCase()}.png`;
+                }
+            </script>
 
 
-        <ul class="menu__box">
-            <div class="top_sidenav">
-                <a class="logo__link" href="index.html"><img src="img/logo/h1__logo.png" alt=""></a>
-                @guest
-                    <li class="nav-item">
-                        <a class="sidenav_login mt-2" href="{{ route('register') }}">Login</a>
-                    </li>
-                    {{-- <li class="nav-item">
+            <ul class="menu__box">
+                <div class="top_sidenav">
+                    <a class="logo__link" href="index.html"><img src="img/logo/h1__logo.png" alt=""></a>
+                    @guest
+                        <li class="nav-item">
+                            <a class="sidenav_login mt-2" href="{{ route('register') }}">Login</a>
+                        </li>
+                        {{-- <li class="nav-item">
                             <a class="side_nav_logout" href="{{ route('register') }}">Register</a>
                         </li> --}}
-                @endguest
-                @auth
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="side_nav_logout" type="submit">Logout</button>
-                        </form>
-                    </li>
-                @endauth
-                <div class="side_nav_trackorder">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <a href="{{ route('userOrders') }}">Track My Orders</a>
-                </div>
-                <div class="side_nav_trackorder">
-                    <i class="fas fa-comment"></i>
-                    <a href="{{ route('chatify') }}" target="_blank">Messages</a>
-                    @if ($unseenmessages > 0)
-                        <span class="badge">{{ $unseenmessages }}</span>
-                    @endif
-                </div>
-
-
-            </div>
-            <div class="bottom_sidenav">
-                <h4>Categories</h4>
-
-                @foreach ($categories as $key => $category)
-                    <li>
-                        @if ($key <= 5)
-                            <a class="menu__item"
-                                href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                    @endguest
+                    @auth
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="side_nav_logout" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    @endauth
+                    <div class="side_nav_trackorder">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{{ route('userOrders') }}">Track My Orders</a>
+                    </div>
+                    <div class="side_nav_trackorder">
+                        <i class="fas fa-comment"></i>
+                        <a href="{{ route('chatify') }}" target="_blank">Messages</a>
+                        @if ($unseenmessages > 0)
+                            <span class="badge">{{ $unseenmessages }}</span>
                         @endif
-                    </li>
-                @endforeach
-                <a class="visit_shop" href="{{ route('shop') }}">View All</a>
+                    </div>
 
 
-            </div>
+                </div>
+                <div class="bottom_sidenav">
+                    <h4>Categories</h4>
 
-        </ul>
+                    @foreach ($categories as $key => $category)
+                        <li>
+                            @if ($key <= 5)
+                                <a class="menu__item"
+                                    href="{{ route('shopcategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                            @endif
+                        </li>
+                    @endforeach
+                    <a class="visit_shop" href="{{ route('shop') }}">View All</a>
+
+
+                </div>
+
+            </ul>
         </div>
         <script>
             const lists = document.querySelectorAll('.list');
