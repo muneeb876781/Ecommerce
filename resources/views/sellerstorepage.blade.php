@@ -703,12 +703,18 @@
         }
 
         .seller_shop_contain .products {
+            order: 2;
+            /* Products will appear second */
             width: 100%;
         }
 
         .seller_shop_contain .reviews {
+            order: 1;
+            /* Reviews will appear first */
             width: 100%;
             margin-top: 20px;
+            margin-bottom: 20px;
+
         }
     }
 
@@ -734,6 +740,8 @@
         }
     }
 </style>
+
+
 
 
 
