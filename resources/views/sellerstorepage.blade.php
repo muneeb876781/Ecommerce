@@ -422,7 +422,7 @@
     }
 
     .product-s {
-        width: 16%;
+        width: 20%;
         /* min-height: 400px; */
         float: left;
     }
@@ -449,8 +449,8 @@
     }
 </style>
 
-
 <style>
+    /* Existing styles */
     .seller_shop_banner {
         display: flex;
         justify-content: center;
@@ -487,7 +487,6 @@
         width: 100%;
         height: 20%;
         flex-direction: column;
-        /* padding: 10px 0; */
         padding-bottom: 15px;
     }
 
@@ -510,7 +509,30 @@
         align-items: center;
         width: 70%;
         height: auto;
+        flex-direction: row;
+    }
+
+    .seller_shop_analytics .analytics_card {
+        width: 150px;
+        height: 100px;
+        padding: 10px;
+        margin: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
         flex-direction: column;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .seller_shop_analytics .analytics_card h2 {
+        font-size: 22px;
+    }
+
+    .seller_shop_analytics .analytics_card h4 {
+        font-size: 17px;
     }
 
     .seller_shop_body {
@@ -534,6 +556,8 @@
         width: 100%;
         height: auto;
         flex-direction: row;
+        flex-wrap: wrap;
+        /* Added to allow wrapping on smaller screens */
     }
 
     .seller_shop_body .seller_products .seller_product_card {
@@ -590,13 +614,128 @@
         align-items: flex-end;
     }
 
-    .seller_shop_body .seller_products .seller_product_card .seller_product_card_content .price .cart_sec .fas{
+    .seller_shop_body .seller_products .seller_product_card .seller_product_card_content .price .cart_sec .fas {
         padding: 5px;
         font-size: 15px;
         border: 1px solid rgba(0, 0, 0, 0.2);
         margin: 5px;
     }
+
+    .seller_shop_contain {
+        display: flex;
+        width: 100%;
+    }
+
+    .seller_shop_contain .products {
+        display: flex;
+        width: 70%;
+        flex-direction: column;
+    }
+
+    .seller_shop_contain .reviews {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        padding: 20px;
+        box-shadow: 2px 2px 2px rgba(47, 170, 244, 0.5);
+        border: 2px solid rgba(47, 170, 244, 0.5);
+        border-radius: 10px;
+    }
+
+    .seller_shop_contain .reviews .stars {
+        color: gold;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 1200px) {
+        .seller_shop_info {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .seller_shop_analytics {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .seller_shop_analytics .analytics_card {
+            width: 80%;
+            margin: 10px 0;
+        }
+
+        .seller_shop_body .seller_products .seller_product_card {
+            width: 45%;
+            margin: 10px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .seller_shop_banner {
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .seller_shop_info {
+            width: 100%;
+            align-items: center;
+        }
+
+        .seller_shop_analytics {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .seller_shop_analytics .analytics_card {
+            width: 90%;
+            margin: 10px 0;
+        }
+
+        .seller_shop_body .seller_products .seller_product_card {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .seller_shop_contain {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .seller_shop_contain .products {
+            width: 100%;
+        }
+
+        .seller_shop_contain .reviews {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .seller_shop_info .seller_shop_content h2 {
+            font-size: 20px;
+        }
+
+        .seller_shop_analytics .analytics_card h2 {
+            font-size: 18px;
+        }
+
+        .seller_shop_analytics .analytics_card h4 {
+            font-size: 14px;
+        }
+
+        .seller_shop_body h2 {
+            font-size: 18px;
+        }
+
+        .seller_shop_body .seller_products .seller_product_card .seller_product_card_content h6 {
+            font-size: 14px;
+        }
+    }
 </style>
+
+
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -612,11 +751,25 @@
                         </div>
                         <div class="seller_shop_content">
                             <h2>{{ $sellerShop->name }}</h2>
-
                         </div>
                     </div>
                     <div class="seller_shop_analytics">
-
+                        <div class="analytics_card">
+                            <h2>{{ $productscount }}</h2>
+                            <h4>Products</h4>
+                        </div>
+                        <div class="analytics_card">
+                            <h2>{{ $reviewscount }}</h2>
+                            <h4>Reviews</h4>
+                        </div>
+                        <div class="analytics_card">
+                            <h2>{{ $categoriescount }}</h2>
+                            <h4>Categories</h4>
+                        </div>
+                        <div class="analytics_card">
+                            <h2>{{ $Brandscount }}</h2>
+                            <h4>Brands</h4>
+                        </div>
                     </div>
                 </div>
                 {{-- <div class="seller_shop_body">
@@ -681,13 +834,76 @@
                         @endforeach
                     </div>
                 </div> --}}
-                <section class="all__product pt-20 pb-20">
-                    <div class="all__product--body"
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 p-0">
-                                    @foreach ($products as $product)
-                                    @if ($product->brand && $product->category && $product && $product->brand->state !== 0 && $product->category->state !== 0 && $product->state !== 0)
+
+                <h2 style="font-size: 20px; padding-top: 20px; padding-bottom: 10px;">All products by this seller </h2>
+                <div class="seller_shop_contain">
+                    <div class="products">
+                        <div class="brand">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="brand-active brand-active1">
+                                            @foreach ($sellerBrands as $brand)
+                                                @if ($brand->state !== 0)
+                                                    <a href="{{ route('brandsShop', ['id' => $brand->id]) }}">
+                                                        <div class="single-brand">
+                                                            <img src="{{ asset('storage/uploads/' . $brand->image_url) }}"
+                                                                class="brand-image" alt="">
+                                                        </div>
+
+                                                    </a>
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section class="all__product pt-20 pb-20">
+                            <style>
+                                .product__single {
+                                    height: auto;
+                                    overflow: hidden;
+                                    /* border: 1px solid #ddd; */
+                                    margin-bottom: 20px;
+                                    transition: height 0.3s;
+                                    box-shadow: 2px 2px 2px rgba(47, 170, 244, 0.5);
+                                    margin: 10px;
+                                    border-radius: 10px;
+                                }
+                            </style>
+                            <script>
+                                window.addEventListener('DOMContentLoaded', (event) => {
+                                    // Get all product__single elements
+                                    let productCards = document.querySelectorAll('.product__single');
+
+                                    // Calculate the maximum height
+                                    let maxHeight = 0;
+                                    productCards.forEach(card => {
+                                        if (card.clientHeight > maxHeight) {
+                                            maxHeight = card.clientHeight;
+                                        }
+                                    });
+
+                                    // Set the maximum height to all cards
+                                    productCards.forEach(card => {
+                                        card.style.height = (maxHeight - 15) + 'px';
+                                    });
+                                });
+                            </script>
+                            <div class="all__product--body" <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 p-0">
+                                        @foreach ($products as $product)
+                                            @if (
+                                                $product->brand &&
+                                                    $product->category &&
+                                                    $product &&
+                                                    $product->brand->state !== 0 &&
+                                                    $product->category->state !== 0 &&
+                                                    $product->state !== 0)
                                                 <div class="product-s">
                                                     <div class="product__single">
                                                         <div class="product__box">
@@ -707,20 +923,29 @@
                                                                     @else
                                                                         <span>No image available</span>
                                                                     @endif
-        
+
                                                                     @if ($product->quantity == 0)
-                                                                        <span class="out-of-stock-tag out-of-stock-tag-new">Out of Stock</span>
+                                                                        <span
+                                                                            class="out-of-stock-tag out-of-stock-tag-new">Out
+                                                                            of Stock</span>
                                                                     @elseif ($product->discountedPrice)
                                                                         @php
-                                                                            $salePercentage = (($product->price - $product->discountedPrice) / $product->price) * 100;
+                                                                            $salePercentage =
+                                                                                (($product->price -
+                                                                                    $product->discountedPrice) /
+                                                                                    $product->price) *
+                                                                                100;
                                                                         @endphp
                                                                         @if ($salePercentage > 0)
-                                                                            <span class="sale-tag sale-tag-new"> <span> {{ round($salePercentage) }}% Off</span> </span>
+                                                                            <span class="sale-tag sale-tag-new"> <span>
+                                                                                    {{ round($salePercentage) }}%
+                                                                                    Off</span> </span>
                                                                         @endif
                                                                     @endif
                                                                 </a>
                                                                 <div class="product-action">
-                                                                    <a href="#"><span class="fas fa-heart"></span></a>
+                                                                    <a href="#"><span
+                                                                            class="fas fa-heart"></span></a>
                                                                     <a
                                                                         href="{{ route('singleProduct', ['id' => $product->id]) }}"><span
                                                                             class="fas fa-eye"></span></a>
@@ -730,7 +955,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="product__content--top pt-10 pb-10 mt-0">
-                                                                <span class="cate-name">{{ $product->category->name }}</span>
+                                                                <span
+                                                                    class="cate-name">{{ $product->category->name }}</span>
                                                                 <h6 class="product__title mine__shaft-color f-400 mb-0"
                                                                     style="white-space: wrap; overflow-wrap: break-word;">
                                                                     <a href="{{ route('singleProduct', ['id' => $product->id]) }}"
@@ -741,9 +967,9 @@
                                                                         @endif
                                                                     </a>
                                                                 </h6>
-        
-        
-        
+
+
+
                                                                 @php
                                                                     $averageRating = $product->reviews->avg('rating');
                                                                 @endphp
@@ -752,26 +978,29 @@
                                                                         @for ($i = 1; $i <= 5; $i++)
                                                                             @if ($i <= $averageRating)
                                                                                 <li class="rating-active"><i
-                                                                                        class="fas fa-star star-gold"></i></li>
+                                                                                        class="fas fa-star star-gold"></i>
+                                                                                </li>
                                                                             @else
                                                                                 <li><i class="far fa-star"></i></li>
                                                                             @endif
                                                                         @endfor
                                                                     </ul>
                                                                 </div>
-        
-        
-        
+
+
+
                                                                 <br>
                                                                 <div
                                                                     class="product__content--rating d-flex justify-content-between">
                                                                     <div class="price">
                                                                         @if ($product->discountedPrice)
-                                                                            <span class="original-price" style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
+                                                                            <span class="original-price"
+                                                                                style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
                                                                                 {{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
                                                                             </span>
                                                                             <br>
-                                                                            <span class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
+                                                                            <span
+                                                                                class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
                                                                         @else
                                                                             <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
                                                                         @endif
@@ -782,27 +1011,44 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                    @endforeach
+                                        @endforeach
+                                    </div>
+                                    <style>
+                                        .sale_banner {}
+
+                                        .sale_banner img {
+                                            width: 100%;
+                                            height: 100%;
+                                        }
+                                    </style>
                                 </div>
-                                <style>
-                                    .sale_banner{
-        
-                                    }
-        
-                                    .sale_banner img{
-                                        width: 100%;
-                                        height: 100%;
-                                    }
-                                </style>
-                                
-                                
-                               
-        
                             </div>
-                        </div>
+                        </section>
                     </div>
-                </section>
+
+                    <div class="reviews">
+                        <h4>
+                            Reviews({{ $reviewscount }})
+                        </h4>
+                        @foreach ($reviews as $review)
+                            <span style="font-weight: 700">{{ $review->user->name }}</span>
+                            <span>{{ $review->comment }}</span>
+                            <span class="stars">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review->rating)
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
+                            </span>
+                            <br>
+                        @endforeach
+                    </div>
+                </div>
             </div>
+
+        </div>
         </div>
     </main>
     <!-- JS here -->
