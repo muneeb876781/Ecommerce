@@ -701,7 +701,7 @@
                         <div class="menu--header__top text-right">
                             <nav class="nav--top__list">
                                 <ul class="list-inline">
-                                    <li class="nav--top__dropdown position-relative">
+                                    {{-- <li class="nav--top__dropdown position-relative">
                                         <a class="nav--top__link lang--top__link dove__gray-color text-capitalize position-relative"
                                             href="#">Currency:
                                             <span id="selected-currency">{{ session('currency', 'AED') }}</span>
@@ -717,7 +717,6 @@
                                                     onclick="updateSelectedCurrency('PKR')">
                                                     <img src="../images/pkr.png" alt="Pakistan Flag">
                                                     <span class="lang">Pakistan</span>
-                                                    {{-- <span class="currency">PKR</span> --}}
                                                 </a>
                                             </li>
                                             <li>
@@ -726,7 +725,6 @@
                                                     onclick="updateSelectedCurrency('AED')">
                                                     <img src="../images/dubai.png" alt="Dubai Flag">
                                                     <span class="lang">Dubai</span>
-                                                    {{-- <span class="currency">AED</span> --}}
                                                 </a>
                                             </li>
                                         </ul>
@@ -750,7 +748,7 @@
                                             margin-right: 10px;
                                             margin-left: 10px;
                                         }
-                                    </style>
+                                    </style> --}}
                                     <li><a class="nav--top__link dove__gray-color text-capitalize position-relative"
                                             href="#">store Locator</a></li>
                                     <li><a class="nav--top__link dove__gray-color text-capitalize position-relative"
@@ -776,9 +774,76 @@
                         <div class="content--header__middle d-flex align-items-center justify-content-between">
                             <div class="logo--header__middle ">
                                 <div class="logo">
-                                    <a class="logo__link" href="{{ route('home') }}"><img
-                                            src="../img/logo/h1__logo.png" alt=""></a>
+                                    <a class="logo__link" href="{{ route('home') }}"><img src="../img/logo/h1__logo.png"
+                                            alt=""></a>
                                 </div>
+                            </div>
+                            <div class="price_switch">
+                                <li class="nav--top__dropdown position-relative">
+                                    <a class="nav--top__link lang--top__link dove__gray-color text-capitalize position-relative"
+                                        href="#">
+                                        <span id="selected-currency">{{ session('currency', 'AED') }}</span>
+                                        <img id="selected-currency-flag"
+                                            src="../images/{{ session('currency', 'AED') == 'PKR' ? 'pkr.png' : 'dubai.png' }}"
+                                            alt="Selected Currency Flag">
+                                        <span class="lnr lnr-chevron-down"></span>
+                                    </a>
+                                    <ul class="dropdown-show">
+                                        <li>
+                                            <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'PKR' ? 'selected' : '' }}"
+                                                href="{{ route('switch-currency', ['currency' => 'PKR']) }}"
+                                                onclick="updateSelectedCurrency('PKR')">
+                                                <img src="../images/pkr.png" alt="Pakistan Flag">
+                                                <span class="lang">Pakistan</span>
+                                                {{-- <span class="currency">PKR</span> --}}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dove__gray-color text-capitalize {{ session('currency', 'AED') == 'AED' ? 'selected' : '' }}"
+                                                href="{{ route('switch-currency', ['currency' => 'AED']) }}"
+                                                onclick="updateSelectedCurrency('AED')">
+                                                <img src="../images/dubai.png" alt="Dubai Flag">
+                                                <span class="lang">Dubai</span>
+                                                {{-- <span class="currency">AED</span> --}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <script>
+                                    function updateSelectedCurrency(currency) {
+                                        document.getElementById('selected-currency').innerText = currency;
+                                        document.getElementById('selected-currency-flag').src = `../images/${currency.toLowerCase()}.png`;
+                                    }
+                                </script>
+
+                                <style>
+                                    .selected {
+                                        font-weight: bold;
+                                        color: #000;
+                                    }
+
+                                    .nav--top__dropdown img {
+                                        width: 35px;
+                                        margin-right: 10px;
+                                        margin-left: 10px;
+                                    }
+
+                                    .nav--top__dropdown {
+                                        margin-left: 30px;
+                                        width: 200px;
+                                    }
+
+                                    .price_switch {
+                                        width: 200px;
+                                    }
+
+                                    @media (max-width: 1199px) {
+                                        .price_switch {
+                                            display: none;
+                                        }
+                                    }
+                                </style>
                             </div>
                             <div class="search--header__middle h1search--header__middle">
                                 <form class="search--header__form position-relative"

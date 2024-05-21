@@ -44,6 +44,38 @@ class ShopController extends Controller
         return view('ShopPage', compact('products', 'banners', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
+    public function sellerstorepage($id)
+    {
+        $products = Product::orderBy('created_at', 'desc')->paginate(18);
+        $categories = Category::all();
+        $reviews = Review::all();
+        $brands = Brand::all();
+        $sellerShop = SellerShop::where('id', $id)->first();
+        $products = Product::where('shop_id', $id)->orderBy('created_at', 'desc')->get();
+        // dd($products);
+
+
+        $user_id = auth()->id();
+
+        $cart = Cart::where('user_id', $user_id)->get();
+
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            if ($item->product->discountedPrice) {
+                $totalPrice += $item->product->discountedPrice * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+        }
+
+        $totalItems = $cart->sum('quantity');
+        $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+        $banners = Banner::where('Type', 'shop')->orderBy('created_at', 'asc')->first();
+
+        return view('sellerstorepage', compact('products', 'sellerShop', 'banners', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+    }
+
     public function singleProduct(Request $request, $id)
     {
         $product = Product::find($id);
@@ -138,9 +170,9 @@ class ShopController extends Controller
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
         $banners = Banner::where('Type', 'shop')
-                ->where('category_id', $category->id)
-                ->orderBy('created_at', 'asc')
-                ->first();
+            ->where('category_id', $category->id)
+            ->orderBy('created_at', 'asc')
+            ->first();
 
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'category', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
@@ -186,10 +218,8 @@ class ShopController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-        $banners = Banner::where('Type', 'shop')
-                ->orderBy('created_at', 'asc')
-                ->first();
-                
+        $banners = Banner::where('Type', 'shop')->orderBy('created_at', 'asc')->first();
+
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
@@ -217,11 +247,11 @@ class ShopController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
-        
+
         $banners = Banner::where('Type', 'shop')
-                ->where('brand_id', $brand->id)
-                ->orderBy('created_at', 'asc')
-                ->first();
+            ->where('brand_id', $brand->id)
+            ->orderBy('created_at', 'asc')
+            ->first();
 
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'brand', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
@@ -339,7 +369,7 @@ class ShopController extends Controller
             })
             ->paginate(18);
 
-            $banners = Banner::all();
+        $banners = Banner::all();
 
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }

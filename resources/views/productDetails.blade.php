@@ -527,16 +527,31 @@
                             </p>
                             <h5 class="title pb-0 pt-0">{{ $product->name }}</h5>
                             <div class="pro-rating pb-15">
-                                <a href="#" class="active"><i class="fas fa-star"></i></a>
-                                <a href="#" class="active"><i class="fas fa-star"></i></a>
-                                <a href="#" class="active"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
+                                @php
+                                    $averageRating = $product->reviews->avg('rating');
+                                @endphp
+                                <div class="rating" style="padding-top: 5px;">
+                                    <ul class="list-inline">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $averageRating)
+                                                <li class="rating-active"><i class="fas fa-star star-gold"></i></li>
+                                            @else
+                                                <li><i class="far fa-star"></i></li>
+                                            @endif
+                                        @endfor
+                                    </ul>
+                                </div>
                                 <a href="#" class="review">({{ $reviews->count() }} customer reviews)</a>
                             </div>
                             <div class="pro-social mb-15">
                                 <a href="#"><img src="../img/payment/pro-details-social.jpg" class="img-fluid"
                                         alt=""></a>
+                            </div>
+                            <div class="pro-social mb-15">
+                                Sold by: 
+                                <a style="margin-left: 10px; text-decoration: underline;" href="{{ route('sellerstorepage', ['id' => $product->shop->id])}}"><img style="margin-left: 10px; margin-right: 10px; width: 40px; height: auto; border-radius: 100px; border: 1px solid rgba(0, 0, 0, 0.3);" src="{{ asset('storage/uploads/' . $product->shop->logo) }}" class="img-fluid"
+                                        alt="">{{$product->shop->name}}</a>
+
                             </div>
                             <div class="pro-code mt-1 mb-1">
                                 <ul>
@@ -632,13 +647,16 @@
                             </div>
                             <div class="price mt-15 mb-20">
                                 @if ($product->discountedPrice)
-                                    <span style="text-decoration: line-through;">{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
-                                    <h4>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</h4>
+                                    <span
+                                        style="text-decoration: line-through;">{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
+                                    <h4>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}
+                                    </h4>
                                 @else
-                                    <h4>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</h4>
+                                    <h4>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
+                                    </h4>
                                 @endif
                             </div>
-                           
+
                             <form action="{{ route('addToCart', ['id' => $product->id]) }}" method="POST">
                                 @csrf
                                 <div class="row">
@@ -722,8 +740,9 @@
                                 </div>
                                 <button type="submit" class="cart-button mt-2 pt-0 pb-0 pb-0 mb-0">Add to
                                     Cart</button>
-                                    <a href="{{ route('chatifyy', ['id' => $userid]) }}" target="_blank" class="cart-button mt-2 pt-0 pb-0 pb-0 mb-0">Message Seller</a>
-                                </form>
+                                <a href="{{ route('chatifyy', ['id' => $userid]) }}" target="_blank"
+                                    class="cart-button mt-2 pt-0 pb-0 pb-0 mb-0">Message Seller</a>
+                            </form>
 
 
 
@@ -1054,11 +1073,13 @@
 
                                                 <div class="price">
                                                     @if ($product->discountedPrice)
-                                                        <span class="original-price" style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
+                                                        <span class="original-price"
+                                                            style="text-decoration: line-through; font-size: 12px; margin-right: 3px;">
                                                             {{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}
                                                         </span>
                                                         <br>
-                                                        <span class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
+                                                        <span
+                                                            class="discounted-price"><strong>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->discountedPrice), 2) }}</strong></span>
                                                     @else
                                                         <span>{{ session('currency', 'AED') }}.{{ number_format(convert_price($product->price), 2) }}</span>
                                                     @endif

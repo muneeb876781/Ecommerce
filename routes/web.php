@@ -52,6 +52,8 @@ Route::get('/shop/brand/{id}', [ShopController::class, 'showProductsByBrand'])->
 Route::get('/shop/subcategory/{id}', [ShopController::class, 'showProductsBysubcategory'])->name('shopsubcategory');
 
 Route::get('/shopss', [ShopController::class, 'showProducts'])->name('shopss');
+Route::get('/sellerstorepage/{id}', [ShopController::class, 'sellerstorepage'])->name('sellerstorepage');
+
 
 Route::get('/switch-currency/{currency}', function ($currency) {
         Session::put('currency', $currency);
