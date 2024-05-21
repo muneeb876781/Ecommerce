@@ -938,10 +938,11 @@
                                                     <h2>Product Reviews</h2>
                                                     @foreach ($reviews as $review)
                                                         <div class="review pb-0">
-                                                            <p style="font-weight: bold; font-size: 16px;">
-                                                                {{ $review->user->name }}</p>
-                                                            <p>{{ $review->comment }}</p>
-                                                            <p class="stars">
+                                                            <span style="font-weight: bold; font-size: 16px;">
+                                                                {{ $review->user->name }}</span>
+                                                                <br>
+                                                            <span>{{ $review->comment }}</span><br>
+                                                            <span class="stars">
                                                                 @for ($i = 1; $i <= 5; $i++)
                                                                     @if ($i <= $review->rating)
                                                                         <i class="fas fa-star"></i>
@@ -949,8 +950,9 @@
                                                                         <i class="far fa-star"></i>
                                                                     @endif
                                                                 @endfor
-                                                            </p>
-                                                            <hr>
+                                                            </span>
+                                                            <br>
+                                                            <br>
                                                         </div>
                                                     @endforeach
                                                 </div>

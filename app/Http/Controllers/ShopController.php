@@ -53,7 +53,18 @@ class ShopController extends Controller
         $sellerShop = SellerShop::where('id', $id)->first();
         $products = Product::where('shop_id', $id)->orderBy('created_at', 'desc')->get();
         // dd($products);
+        $productscount = Product::where('shop_id', $id)->orderBy('created_at', 'desc')->count();
+        $Brandscount = Brand::where('seller_shop_id', $id)->orderBy('created_at', 'desc')->count();
+        $sellerBrands = Brand::where('seller_shop_id', $id)->orderBy('created_at', 'desc')->get();
 
+        $categoriescount = Category::where('seller_shop_id', $id)->orderBy('created_at', 'desc')->count();
+
+
+        $reviewscount = Review::whereHas('product', function ($query) use ($id) {
+            $query->where('shop_id', $id);
+        })
+            ->orderBy('created_at', 'desc')
+            ->count();
 
         $user_id = auth()->id();
 
@@ -68,12 +79,18 @@ class ShopController extends Controller
             }
         }
 
+        $reviews = Review::whereHas('product', function ($query) use ($id) {
+            $query->where('shop_id', $id);
+        })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $totalItems = $cart->sum('quantity');
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
         $banners = Banner::where('Type', 'shop')->orderBy('created_at', 'asc')->first();
 
-        return view('sellerstorepage', compact('products', 'sellerShop', 'banners', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
+        return view('sellerstorepage', compact('products', 'sellerShop', 'productscount', 'sellerBrands', 'Brandscount', 'categoriescount', 'reviewscount', 'reviews', 'banners', 'brands', 'unseenmessages', 'reviews', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
 
     public function singleProduct(Request $request, $id)
