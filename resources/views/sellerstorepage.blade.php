@@ -619,7 +619,7 @@
 
                     </div>
                 </div>
-                <div class="seller_shop_body">
+                {{-- <div class="seller_shop_body">
                     <h2>All products by this seller </h2>
                     <div class="seller_products">
                         @foreach ($products as $product)
@@ -680,8 +680,8 @@
                             </a>
                         @endforeach
                     </div>
-                </div>
-                {{-- <section class="all__product pt-20 pb-20">
+                </div> --}}
+                <section class="all__product pt-20 pb-20">
                     <div class="all__product--body"
                         <div class="container">
                             <div class="row">
@@ -801,7 +801,7 @@
                             </div>
                         </div>
                     </div>
-                </section> --}}
+                </section>
             </div>
         </div>
     </main>
