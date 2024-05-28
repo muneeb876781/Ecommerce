@@ -182,13 +182,11 @@
                                     <button type="submit" class="btn btn-sm btn-success">Activate All</button>
                                 </form>
                             </div>
-
-
-
                         </div>
+                        
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="categoryTable" class="table table-striped">
+                                <table id="producttable" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th class="serial-number">No.</th>
@@ -198,6 +196,7 @@
                                             <th class="ranking">Price</th>
                                             <th class="ranking">Category</th>
                                             <th class="ranking">Availability</th>
+                                            <th>State</th>
                                             <th class="ranking">Actions</th>
                                         </tr>
                                     </thead>
@@ -849,17 +848,16 @@
 
 
 
-    <!-- DataTables Script -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            var toolsTable = $('#categoryTable').DataTable({
+            var toolsTable = $('#producttable').DataTable({
                 "lengthMenu": [5, 10, 25, 50, -1],
                 "pageLength": 50,
             });
 
             // Search input event
-            $('#categoryTable').on('keyup', function() {
+            $('#producttable').on('keyup', function() {
                 toolsTable.search(this.value).draw();
             });
         });
