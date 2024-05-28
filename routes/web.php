@@ -50,6 +50,10 @@ Route::get('/single/{id}', [ShopController::class, 'singleProduct'])->name('sing
 Route::get('/shop/category/{id}', [ShopController::class, 'showProductsByCategory'])->name('shopcategory');
 Route::get('/shop/brand/{id}', [ShopController::class, 'showProductsByBrand'])->name('shopBrand');
 Route::get('/shop/subcategory/{id}', [ShopController::class, 'showProductsBysubcategory'])->name('shopsubcategory');
+Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
+Route::get('/serachProducts', [ShopController::class, 'searchProducts'])->name('searchProducts');
+
+
 
 Route::get('/shopss', [ShopController::class, 'showProducts'])->name('shopss');
 Route::get('/sellerstorepage/{id}', [ShopController::class, 'sellerstorepage'])->name('sellerstorepage');
@@ -148,7 +152,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/trackOrders/{id}', [OredrController::class, 'trackOrders'])->name('trackOrders');
     Route::get('/userOrders', [OredrController::class, 'userOrders'])->name('userOrders');
 
-    Route::get('/serachProducts', [ShopController::class, 'searchProducts'])->name('searchProducts');
 
     Route::get('/pAttributes', [ProductController::class, 'productAttributes'])->name('productAttributes');
     Route::post('/storeAttribute', [ProductController::class, 'storeAttribute'])->name('storeAttribute');
@@ -168,7 +171,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/brands/{id}', [BrandController::class, 'edit'])
         ->name('brandsEdit')
         ->middleware('seller');
-    Route::get('/brandsShop/{id}', [ShopController::class, 'showProductsByBrand'])->name('brandsShop');
     Route::put('/toggleBrandState/{id}', [BrandController::class, 'toggleState'])->name('toggleBrandState');
     Route::put('/activateAllBrands', [BrandController::class, 'activateAllBrands'])->name('activateAllBrands');
     Route::put('/deactivateAllBrands', [BrandController::class, 'deactivateAllBrands'])->name('deactivateAllBrands');

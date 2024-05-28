@@ -660,7 +660,7 @@
         }
 
         .seller_shop_analytics .analytics_card {
-            width: 80%;
+            width: 90%;
             margin: 10px 0;
         }
 
