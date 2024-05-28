@@ -59,6 +59,7 @@ class ShopController extends Controller
 
         $categoriescount = Category::where('seller_shop_id', $id)->orderBy('created_at', 'desc')->count();
 
+
         $reviewscount = Review::whereHas('product', function ($query) use ($id) {
             $query->where('shop_id', $id);
         })
@@ -366,8 +367,15 @@ class ShopController extends Controller
 
         $totalItems = $cart->sum('quantity');
 
-        $searchText = $request->input('searchProducts');
+        $searchText = $request->input('serachProducts');
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+
+        // $products = Product::where('name', 'like', "%$searchText%")
+        //     ->orWhereHas('category', function ($query) use ($searchText) {
+        //         $query->where('name', 'like', "%$searchText%");
+        //     })
+        //     ->orWhere('sku', 'like', "%$searchText%")
+        //     ->get();
 
         $products = Product::where('name', 'like', "%$searchText%")
             ->orWhere('sku', 'like', "%$searchText%")
@@ -383,8 +391,9 @@ class ShopController extends Controller
             })
             ->paginate(18);
 
-        $brandIds = $products->pluck('brand_id')->unique();
-        $banners = Banner::whereIn('brand_id', $brandIds)->where('Type', 'shop')->orderBy('created_at', 'asc')->first();
+        $banners = Banner::first();
+
+        
 
         return view('ShopPage', compact('products', 'banners', 'unseenmessages', 'brands', 'categories', 'totalPrice', 'totalItems', 'cart'));
     }
