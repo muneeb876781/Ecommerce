@@ -486,7 +486,7 @@
             font-weight: 600;
 
             border: 1px solid #F1F3F6;
-            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+            background-image: linear-gradient(-180deg, #fff 0%, #F1F3F6 100%);
             /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5); */
             /* box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.1),
                 0 -0.25rem 1.5rem rgba(110, 15, 155, 0.2) inset,
@@ -495,11 +495,11 @@
         }
 
         .d1tag span {
-            color: white;
+            color: #000;
             background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
             -webkit-background-clip: text;
             background-clip: text;
-            filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+            /* filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1)); */
         }
 
         .d1tag::before {
@@ -589,7 +589,7 @@
             top: -50%;
             width: 80px;
             height: 80px;
-            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+            background-image: linear-gradient(-180deg, #fff 0%, #F1F3F6 100%);
             border-radius: 50%;
             border: 6px solid white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -598,7 +598,6 @@
 
         .bottomNav ul li.active a .icon {
             transform: translateY(-5px);
-
         }
 
         .bottomNav ul li a .text {
@@ -615,11 +614,11 @@
         .bottomNav ul li.active a .text {
             /* transform: translateY(-7px); */
             opacity: 1;
-            color: #fff;
+            color: #000;
         }
 
         .bottomNav ul li.active a .icon {
-            color: #fff;
+            color: #C01F9E;
         }
 
         .indicator {
@@ -1358,7 +1357,7 @@
                                                 font-weight: 600;
 
                                                 border: 1px solid #F1F3F6;
-                                                background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+                                                background-image: linear-gradient(-180deg, #fff 0%, #F1F3F6 100%);
                                                 box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
 
                                                 /* box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.50),
@@ -1368,11 +1367,11 @@
                                             }
 
                                             .dtag span {
-                                                color: white;
+                                                color: black;
                                                 background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
                                                 -webkit-background-clip: text;
                                                 background-clip: text;
-                                                filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+                                                /* filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1)); */
                                             }
 
                                             .dtag::before {
