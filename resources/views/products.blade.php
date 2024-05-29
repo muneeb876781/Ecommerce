@@ -196,7 +196,7 @@
                                             <th class="ranking">Price</th>
                                             <th class="ranking">Category</th>
                                             <th class="ranking">Availability</th>
-                                            <th>State</th>
+                                            <t class="status">State</t>
                                             <th class="ranking">Actions</th>
                                         </tr>
                                     </thead>
