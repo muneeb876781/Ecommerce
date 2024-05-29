@@ -674,7 +674,7 @@
     
                                     .navigation div {
                                         /* background-color: rgba(0, 0, 0, 0.3); */
-                                        color: #fff;
+                                        color: #000;
                                         font-size: 20px;
                                         width: 25px;
                                         height: 80px;
@@ -683,7 +683,8 @@
                                         align-items: center;
                                         cursor: pointer;
                                         border: 1px solid #F1F3F6;
-                                        background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+                                        background: #fff;
+                                        /* background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%); */
                                         box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
                                         /* box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
                                                     0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
@@ -694,6 +695,11 @@
                                     .navigation .prev {
                                         order: -1;
                                     }
+
+                                    .navigation .next {
+                                        box-shadow: -10px 5px 5px rgba(0, 0, 0, 0.1);
+                                    }
+    
     
                                     .navigation .next {
                                         order: 1;
@@ -814,6 +820,11 @@
     
                                         .photo {
                                             height: auto;
+                                        }
+
+                                        .navigation div {
+                                            height: 25px;
+                                            width: 15px;
                                         }
                                     }
                                 </style>
