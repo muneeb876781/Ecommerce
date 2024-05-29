@@ -599,275 +599,272 @@
         </div>
 
         <div class="her0_section">
-            <section>
-                <div class="rt-container">
-                    <div class="col-rt-12">
-                        <div class="Scriptcontent">
-
-                            <!-- partial:index.partial.html -->
-                            <div class="containerr">
-                                <div class="slider">
-                                @foreach ($banners as $key => $banner)
-                                    @if ($key <= 3 && $banner->state !== 0 && $banner->Type === 'main' &&
-                                        (($banner->brand && $banner->brand->state !== 0) ||
-                                         ($banner->Category && $banner->Category->state !== 0) ||
-                                         ($banner->Product && $banner->Product->state !== 0))
-                                    )
-                                        @if ($banner->image_url)
-                                            <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
-                                                src="{{ asset('storage/uploads/' . $banner->image_url) }}"
-                                                alt="Image 1" />
-                                        @elseif (!$banner->image_url && $banner->remote_image_url)
-                                            <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
-                                                src="{{ asset('storage/uploads/' . $banner->remote_image_url) }}"
-                                                alt="Image 1" />
-                                        @else
-                                            <span>No image available</span>
+            <div class="container">
+                <section>
+                    <div class="rt-container">
+                        <div class="col-rt-12">
+                            <div class="Scriptcontent">
+                                <div class="containerr">
+                                    <div class="slider">
+                                    @foreach ($banners as $key => $banner)
+                                        @if ($key <= 3 && $banner->state !== 0 && $banner->Type === 'main' &&
+                                            (($banner->brand && $banner->brand->state !== 0) ||
+                                             ($banner->Category && $banner->Category->state !== 0) ||
+                                             ($banner->Product && $banner->Product->state !== 0))
+                                        )
+                                            @if ($banner->image_url)
+                                                <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
+                                                    src="{{ asset('storage/uploads/' . $banner->image_url) }}"
+                                                    alt="Image 1" />
+                                            @elseif (!$banner->image_url && $banner->remote_image_url)
+                                                <img class='photo{{ count($banners) === 1 ? ' single-image' : '' }}'
+                                                    src="{{ asset('storage/uploads/' . $banner->remote_image_url) }}"
+                                                    alt="Image 1" />
+                                            @else
+                                                <span>No image available</span>
+                                            @endif
                                         @endif
-                                    @endif
-                                @endforeach
-                                
-                                
-                                </div>
-                                <div class="navigation">
-                                    <div class="prev">
-                                        <i class="fas fa-chevron-left"></i>
+                                    @endforeach 
                                     </div>
-                                    <div class="next">
-                                        <i class="fas fa-chevron-right"></i>
+                                    <div class="navigation">
+                                        <div class="prev">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </div>
+                                        <div class="next">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </div>
                                     </div>
-                                
                                 </div>
-                            </div>
-
-
-                            <style>
-                                .containerr {
-                                    position: relative;
-                                    width: 100%;
-                                    height: 700px;
-                                    overflow: hidden;
-                                    /* box-shadow: inset 0 0 10px #f8a100; */
-                                    /* border: 1px solid #e0e0e0; */
-                                }
-
-                                .slider {
-                                    display: flex;
-                                    width: 100%;
-                                    height: 100%;
-                                    position: relative;
-                                }
-
-                                .photo {
-                                    flex: 1;
-                                    animation: round 16s infinite;
-                                    opacity: 0;
-                                    width: 100%;
-                                    height: auto;
-                                }
-
-                                .navigation {
-                                    position: absolute;
-                                    top: 50%;
-                                    transform: translateY(-50%);
-                                    width: 100%;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    z-index: 1;
-                                }
-
-                                .navigation div {
-                                    /* background-color: rgba(0, 0, 0, 0.3); */
-                                    color: #fff;
-                                    font-size: 20px;
-                                    width: 25px;
-                                    height: 80px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    cursor: pointer;
-                                    border: 1px solid #F1F3F6;
-                                    background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
-                                    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
-                                    /* box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
-                                                0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
-                                                0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
-                                                0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset; */
-                                }
-
-                                .navigation .prev {
-                                    order: -1;
-                                }
-
-                                .navigation .next {
-                                    order: 1;
-                                }
-
-                                @keyframes round {
-
-                                    0%,
-                                    100% {
+    
+    
+                                <style>
+                                    .containerr {
+                                        position: relative;
+                                        width: 100%;
+                                        height: auto;
+                                        overflow: hidden;
+                                        /* box-shadow: inset 0 0 10px #f8a100; */
+                                        /* border: 1px solid #e0e0e0; */
+                                    }
+    
+                                    .slider {
+                                        display: flex;
+                                        width: 100%;
+                                        height: 100%;
+                                        position: relative;
+                                    }
+    
+                                    .photo {
+                                        flex: 1;
+                                        animation: round 16s infinite;
                                         opacity: 0;
-                                    }
-
-                                    20% {
-                                        opacity: 1;
-                                    }
-                                }
-
-
-
-                                @media (max-width: 1800px) {
-                                    .containerr {
-                                        height: 600px;
-                                    }
-
-                                    .photo {
+                                        width: 100%;
                                         height: auto;
                                     }
-                                }
-
-                                @media (max-width: 1600px) {
-                                    .containerr {
-                                        height: 550px;
+    
+                                    .navigation {
+                                        position: absolute;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        z-index: 1;
                                     }
-
-                                    .photo {
-                                        height: auto;
-                                    }
-                                }
-
-                                @media (max-width: 1400px) {
-                                    .containerr {
-                                        height: 450px;
-                                    }
-
-                                    .photo {
-                                        height: auto;
-                                    }
-                                }
-
-                                @media (max-width: 1200px) {
-                                    .containerr {
-                                        height: 370px;
-                                    }
-
-                                    .photo {
-                                        height: auto;
-                                    }
-                                }
-
-                                @media (max-width: 1000px) {
-                                    .containerr {
-                                        height: 300px;
-                                    }
-
-                                    .photo {
-                                        height: auto;
-                                    }
-                                }
-
-                                @media (max-width: 800px) {
-                                    .containerr {
-                                        height: 300px;
-                                    }
-
-                                    .photo {
-                                        height: auto;
-                                    }
-                                }
-
-                                @media (max-width: 700px) {
-                                    .containerr {
-                                        height: 250px;
-                                    }
-
-                                    .photo {
-                                        height: auto;
-                                    }
-
+    
                                     .navigation div {
-                                        height: 40px;
+                                        /* background-color: rgba(0, 0, 0, 0.3); */
+                                        color: #fff;
+                                        font-size: 20px;
+                                        width: 25px;
+                                        height: 80px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        cursor: pointer;
+                                        border: 1px solid #F1F3F6;
+                                        background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+                                        box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+                                        /* box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+                                                    0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+                                                    0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+                                                    0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset; */
                                     }
-                                }
-
-                                @media (max-width: 600px) {
-                                    .containerr {
-                                        height: 220px;
+    
+                                    .navigation .prev {
+                                        order: -1;
                                     }
-
-                                    .photo {
-                                        height: auto;
+    
+                                    .navigation .next {
+                                        order: 1;
                                     }
-                                }
-
-                                @media (max-width: 500px) {
-                                    .containerr {
-                                        height: 180px;
+    
+                                    @keyframes round {
+    
+                                        0%,
+                                        100% {
+                                            opacity: 0;
+                                        }
+    
+                                        20% {
+                                            opacity: 1;
+                                        }
                                     }
-
-                                    .photo {
-                                        height: auto;
+    
+    
+    
+                                    @media (max-width: 1800px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
                                     }
-                                }
-
-                                @media (max-width: 400px) {
-                                    .containerr {
-                                        height: 150px;
+    
+                                    @media (max-width: 1600px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
                                     }
-
-                                    .photo {
-                                        height: auto;
+    
+                                    @media (max-width: 1400px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
                                     }
-                                }
-                            </style>
-
-                            <script>
-                                const slider = document.querySelector('.slider');
-                                const prevBtn = document.querySelector('.prev');
-                                const nextBtn = document.querySelector('.next');
-                                const slides = document.querySelectorAll('.photo');
-                                let currentIndex = 0;
-                                const slideInterval = 6000; // Interval between slides in milliseconds (3 seconds)
-
-                                function showSlide(index) {
-                                    slides.forEach((slide, i) => {
-                                        slide.style.display = i === index ? 'block' : 'none';
-                                    });
-                                }
-
-                                function goToNextSlide() {
-                                    currentIndex = (currentIndex + 1) % slides.length;
+    
+                                    @media (max-width: 1200px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+                                    }
+    
+                                    @media (max-width: 1000px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+                                    }
+    
+                                    @media (max-width: 800px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+                                    }
+    
+                                    @media (max-width: 700px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+    
+                                        .navigation div {
+                                            height: 40px;
+                                        }
+                                    }
+    
+                                    @media (max-width: 600px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+                                    }
+    
+                                    @media (max-width: 500px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+                                    }
+    
+                                    @media (max-width: 400px) {
+                                        .containerr {
+                                            height: auto;
+                                        }
+    
+                                        .photo {
+                                            height: auto;
+                                        }
+                                    }
+                                </style>
+    
+                                <script>
+                                    const slider = document.querySelector('.slider');
+                                    const prevBtn = document.querySelector('.prev');
+                                    const nextBtn = document.querySelector('.next');
+                                    const slides = document.querySelectorAll('.photo');
+                                    let currentIndex = 0;
+                                    const slideInterval = 6000; // Interval between slides in milliseconds (3 seconds)
+    
+                                    function showSlide(index) {
+                                        slides.forEach((slide, i) => {
+                                            slide.style.display = i === index ? 'block' : 'none';
+                                        });
+                                    }
+    
+                                    function goToNextSlide() {
+                                        currentIndex = (currentIndex + 1) % slides.length;
+                                        showSlide(currentIndex);
+                                    }
+    
+                                    function goToPrevSlide() {
+                                        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                                        showSlide(currentIndex);
+                                    }
+    
+                                    // Automatic slide change
+                                    function autoSlide() {
+                                        setInterval(goToNextSlide, slideInterval);
+                                    }
+    
+                                    // Initial slide
                                     showSlide(currentIndex);
-                                }
-
-                                function goToPrevSlide() {
-                                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                                    showSlide(currentIndex);
-                                }
-
-                                // Automatic slide change
-                                function autoSlide() {
-                                    setInterval(goToNextSlide, slideInterval);
-                                }
-
-                                // Initial slide
-                                showSlide(currentIndex);
-
-                                // Click event listeners for navigation
-                                prevBtn.addEventListener('click', goToPrevSlide);
-                                nextBtn.addEventListener('click', goToNextSlide);
-
-                                // Start automatic sliding
-                                autoSlide();
-                            </script>
-
-                            <!-- partial -->
+    
+                                    // Click event listeners for navigation
+                                    prevBtn.addEventListener('click', goToPrevSlide);
+                                    nextBtn.addEventListener('click', goToNextSlide);
+    
+                                    // Start automatic sliding
+                                    autoSlide();
+                                </script>
+    
+                                <!-- partial -->
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
+                </section>
+            </div>
+               
         </div>
 
         <script>
@@ -1088,6 +1085,7 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: row;
+                flex-wrap: wrap;
                 width: 100%;
                 height: 100%;
                 margin: 10px;
@@ -1112,6 +1110,7 @@
                 flex-direction: column;
                 width: 70%;
                 height: auto;
+                text-align: center;
             }
         
             .selling_options .left .card h1 {
@@ -1132,7 +1131,7 @@
                 }
         
                 .selling_options .left .card {
-                    width: 45%;
+                    width: 100%;
                 }
         
                 .selling_options .left .card img {
@@ -1148,8 +1147,17 @@
                 }
             }
         
-            @media (max-width: 576px) {
+            /* @media (max-width: 576px) {
+                .selling_options .right,
+                .selling_options .left {
+                    width: 100%;
+                }
+
                 .selling_options .left .card {
+                    width: 100%;
+                }
+
+                .selling_options .left .card img {
                     width: 100%;
                 }
         
@@ -1160,42 +1168,44 @@
                 .selling_options .left .card img {
                     width: 50%;
                 }
-            }
+            } */
         </style>
         
 
-        <div class="roe selling_options">
-            <div class="left col-sm-12 col-md-6">
-                <h3>More Reasons to <span>Shop</span></h3>
-                <div class="card_box">
-                    <a href="{{ route('shop')}}" class="card card1">
-                        <img src="../images/sale1.jpg" alt="">
-                        <div class="card_content">
-                            <h1>New Arrival</h1>
-                            <p>Get the best at best prices</p>
-                        </div>
-                    </a>
-                    <a href="{{ route('shop')}}" class="card card1">
-                        <img src="../images/sale3.jpg" alt="">
-                        <div class="card_content">
-                            <h1>Best Sellers</h1>
-                            <p>Popular picks..</p>
-                        </div>
-                    </a>
+        <div class="container">
+            <div class="roe selling_options">
+                <div class="left col-sm-12 col-md-6">
+                    <h3>More Reasons to <span>Shop</span></h3>
+                    <div class="card_box">
+                        <a href="{{ route('shop')}}" class="card card1">
+                            <img src="../images/sale1.jpg" alt="">
+                            <div class="card_content">
+                                <h1>New Arrival</h1>
+                                <p>Get the best at best prices</p>
+                            </div>
+                        </a>
+                        <a href="{{ route('shop')}}" class="card card1">
+                            <img src="../images/sale3.jpg" alt="">
+                            <div class="card_content">
+                                <h1>Best Sellers</h1>
+                                <p>Popular picks..</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="right col-sm-12 col-md-6">
+                    @foreach ($banners as $banner)
+                    @if ($banner->Type === 'Advertisement' && $banner->state !== 0)
+                                <div class="sale_banner">
+                                    <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
+                                </div>
+                        @endif
+    
+                    @endforeach
                 </div>
             </div>
-            <div class="right col-sm-12 col-md-6">
-                @foreach ($banners as $banner)
-                @if ($banner->Type === 'Advertisement' && $banner->state !== 0)
-                            <div class="sale_banner">
-                                <img src="{{ asset('storage/uploads/' . $banner->image_url) }}" alt="sale banner">
-                            </div>
-                    @endif
-
-                @endforeach
-            </div>
         </div>
-
+        
         
         <!-- offer heading end -->
 
