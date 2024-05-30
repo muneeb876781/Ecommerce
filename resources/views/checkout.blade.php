@@ -108,15 +108,8 @@
                                     <!-- Payment Methods Content -->
                                     <div class="tab-content">
                                         <div id="credit-card" class="tab-pane fade show active pt-3">
-                                            <!-- Credit Card Form -->
-                                            <form action="{{ route('cardOrder') }}" method="POST">
+                                            <form id="payment-form" action="{{ route('cardOrder') }}" method="POST">
                                                 @csrf
-                                                <div id="card-element">
-                                                    <!-- A Stripe Element will be inserted here. -->
-                                                </div>
-                                                <input type="hidden" name="stripeToken" />
-                                                <input type="hidden" name="payment_method" id="payment_method" />
-
                                                 <div class="form-group row">
                                                     <div class="col-md-6">
                                                         <label for="firstName">
@@ -172,140 +165,67 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="username">
-                                                        <h6>Card Owner</h6>
+                                                    <label for="card-element">
+                                                        <h6>Credit or debit card</h6>
                                                     </label>
-                                                    <input type="text" id="username" name="username"
-                                                        placeholder="Card Owner Name" required class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="cardNumber">
-                                                        <h6>Card number</h6>
-                                                    </label>
-                                                    <div class="input-group">
-                                                        <input type="text" id="cardNumber" name="cardNumber"
-                                                            placeholder="Valid card number" class="form-control"
-                                                            required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text text-muted">
-                                                                <i class="fab fa-cc-visa mx-1"></i>
-                                                                <i class="fab fa-cc-mastercard mx-1"></i>
-                                                                <i class="fab fa-cc-amex mx-1"></i>
-                                                            </span>
-                                                        </div>
+                                                    <div id="card-element">
+                                                        <!-- A Stripe Element will be inserted here. -->
                                                     </div>
+                                                    <div id="card-errors" role="alert"></div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-                                                        <div class="form-group">
-                                                            <label>
-                                                                <span class="hidden-xs">
-                                                                    <h6>Expiration Date</h6>
-                                                                </span>
-                                                            </label>
-                                                            <div class="input-group">
-                                                                <input type="number" id="expMonth" placeholder="MM"
-                                                                    name="expMonth" class="form-control" required>
-                                                                <input type="number" id="expYear" placeholder="YY"
-                                                                    name="expYear" class="form-control" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group mb-4">
-                                                            <label data-toggle="tooltip"
-                                                                title="Three digit CV code on the back of your card">
-                                                                <h6>CVV <i class="fa fa-question-circle d-inline"></i>
-                                                                </h6>
-                                                            </label>
-                                                            <input type="text" id="cvv" required
-                                                                class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                                <input type="hidden" name="payment_method" id="payment_method" />
                                                 <div class="card-footer"
                                                     style="background: white; justify-content: center;">
                                                     <button style="background: #cd3301; color: #fff; width: 50%;"
-                                                        type="submit"
+                                                        id="submit-button" type="submit"
                                                         class="subscribe btn btn-primary btn-block shadow-sm">Confirm
                                                         Order</button>
                                                 </div>
                                             </form>
-
-
                                         </div>
 
-                                        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-                                        <script type="text/javascript">
-                                            $(function() {
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const stripe = Stripe('{{ $stripePublicKey }}');
+                                                const elements = stripe.elements();
+                                                const cardElement = elements.create('card');
+                                                cardElement.mount('#card-element');
 
-                                                /*------------------------------------------
-                                                --------------------------------------------
-                                                Stripe Payment Code
-                                                --------------------------------------------
-                                                --------------------------------------------*/
+                                                const form = document.getElementById('payment-form');
 
-                                                var $form = $(".require-validation");
+                                                form.addEventListener('submit', async (event) => {
+                                                    event.preventDefault();
 
-                                                $('form.require-validation').bind('submit', function(e) {
-                                                    var $form = $(".require-validation"),
-                                                        inputSelector = ['input[type=email]', 'input[type=password]',
-                                                            'input[type=text]', 'input[type=file]',
-                                                            'textarea'
-                                                        ].join(', '),
-                                                        $inputs = $form.find('.required').find(inputSelector),
-                                                        $errorMessage = $form.find('div.error'),
-                                                        valid = true;
-                                                    $errorMessage.addClass('hide');
-
-                                                    $('.has-error').removeClass('has-error');
-                                                    $inputs.each(function(i, el) {
-                                                        var $input = $(el);
-                                                        if ($input.val() === '') {
-                                                            $input.parent().addClass('has-error');
-                                                            $errorMessage.removeClass('hide');
-                                                            e.preventDefault();
-                                                        }
+                                                    const {
+                                                        paymentMethod,
+                                                        error
+                                                    } = await stripe.createPaymentMethod({
+                                                        type: 'card',
+                                                        card: cardElement,
+                                                        billing_details: {
+                                                            name: form.querySelector('input[name="firstName"]').value + ' ' + form
+                                                                .querySelector('input[name="lastName"]').value,
+                                                            email: form.querySelector('input[name="email"]').value,
+                                                            address: {
+                                                                line1: form.querySelector('textarea[name="address"]').value,
+                                                                postal_code: form.querySelector('input[name="postalCode"]').value
+                                                            },
+                                                            phone: form.querySelector('input[name="phone"]').value,
+                                                        },
                                                     });
 
-                                                    if (!$form.data('cc-on-file')) {
-                                                        e.preventDefault();
-                                                        Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                                                        Stripe.createToken({
-                                                            number: $('.card-number').val(),
-                                                            cvc: $('.card-cvc').val(),
-                                                            exp_month: $('.card-expiry-month').val(),
-                                                            exp_year: $('.card-expiry-year').val()
-                                                        }, stripeResponseHandler);
-                                                    }
-
-                                                });
-
-                                                /*------------------------------------------
-                                                --------------------------------------------
-                                                Stripe Response Handler
-                                                --------------------------------------------
-                                                --------------------------------------------*/
-                                                function stripeResponseHandler(status, response) {
-                                                    if (response.error) {
-                                                        $('.error')
-                                                            .removeClass('hide')
-                                                            .find('.alert')
-                                                            .text(response.error.message);
+                                                    if (error) {
+                                                        const errorElement = document.getElementById('card-errors');
+                                                        errorElement.textContent = error.message;
                                                     } else {
-                                                        /* token contains id, last4, and card type */
-                                                        var token = response['id'];
-
-                                                        $form.find('input[type=text]').empty();
-                                                        $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                                                        $form.get(0).submit();
+                                                        document.getElementById('payment_method').value = paymentMethod.id;
+                                                        form.submit();
                                                     }
-                                                }
-
+                                                });
                                             });
                                         </script>
 
-                                        
 
 
                                         <div id="Cash" class="tab-pane fade pt-3">
@@ -420,11 +340,10 @@
                                                         <span>
 
                                                             @if ($item->product->discountedPrice)
-                                                            {{ session('currency', 'AED') }}.
+                                                                {{ session('currency', 'AED') }}.
                                                                 {{ number_format(convert_price($item->quantity * $item->product->discountedPrice), 2) }}
                                                             @else
                                                                 {{ number_format(convert_price($item->quantity * $item->product->price), 2) }}
-
                                                             @endif
                                                         </span>
                                                     </li>

@@ -38,8 +38,10 @@ class CheckoutController extends Controller
         $totalItems = $cart->sum('quantity');
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
+        $stripePublicKey = env('STRIPE_KEY');
 
 
-        return view('checkout', compact('cart', 'brands', 'unseenmessages', 'categories', 'totalPrice', 'totalItems'));
+
+        return view('checkout', compact('cart', 'brands', 'stripePublicKey', 'unseenmessages', 'categories', 'totalPrice', 'totalItems'));
     }
 }
