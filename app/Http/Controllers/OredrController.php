@@ -26,7 +26,6 @@ use Stripe\PaymentIntent;
 use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\DB;
 
-
 use Illuminate\Http\Request;
 
 class OredrController extends Controller
@@ -63,7 +62,6 @@ class OredrController extends Controller
         $totalAmountReturned = $Orders->where('order_status', 'Returned')->sum('total_price');
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
-
 
         return view('order', compact('shopInfo', 'Orders', 'unseenmessages', 'totalOrdersCount', 'totalAmountReturned', 'totalProductsOrdered', 'totalAmountReceived', 'rejectedOrders', 'completedOrders', 'pendingOrders'));
     }
@@ -131,10 +129,6 @@ class OredrController extends Controller
             'phone' => 'required|string|max:15',
             'instructions' => 'nullable|string',
         ]);
-
-
-
-        
 
         $order = new Order();
         $order->user_id = auth()->id();
@@ -249,18 +243,19 @@ class OredrController extends Controller
         $order->special_instructions = $request->input('instructions');
         $order->tracking_number = Str::random(10);
         $order->Total_price = $totalPrice;
-
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $description = 'New order payment from ' . $request->input('firstName') . ' - Tracking ID: ' . $order->tracking_number;
 
         // Create a PaymentIntent
-        $paymentIntent = \Stripe\PaymentIntent::create([
+        $paymentIntent = PaymentIntent::create([
             'amount' => $totalPrice * 100,
             'currency' => 'AED',
-            'payment_method_types' => ['card'],
-            'payment_method' => $request->input('stripeToken'),
+            'payment_method' => $request->input('payment_method'),
+            'confirmation_method' => 'manual',
+            'confirm' => true,
             'description' => $description,
+            'return_url' => route('home'),
         ]);
 
         $order->save();
@@ -312,7 +307,6 @@ class OredrController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
         return view('orderDetails', compact('order', 'unseenmessages', 'shopInfo'));
     }
 
@@ -359,7 +353,6 @@ class OredrController extends Controller
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
 
-
         return view('trackOrders', compact('trackOrders', 'unseenmessages', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
     }
 
@@ -371,7 +364,6 @@ class OredrController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $brands = Brand::all();
-
 
         $cart = Cart::where('user_id', $user_id)->get();
 
@@ -388,7 +380,7 @@ class OredrController extends Controller
         $userOrders = Order::where('user_id', $user_id)->get();
 
         $unseenmessages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '0')->count();
-        $seemmesages =DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '1')->count();
+        $seemmesages = DB::table('ch_messages')->where('to_id', '=', auth()->id())->where('seen', '=', '1')->count();
 
         return view('userOrders', compact('userOrders', 'unseenmessages', 'brands', 'categories', 'products', 'subcategories', 'totalItems', 'totalPrice', 'cart'));
     }
