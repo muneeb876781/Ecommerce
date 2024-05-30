@@ -686,7 +686,7 @@
 <body>
 
     <header class="header" id="header">
-        <div style="background: #F1F3F6;" class="top header__top gray-bg d-none d-md-block">
+        <div style="background: #F1F5F6;" class="top header__top gray-bg d-none d-md-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5">
@@ -766,7 +766,7 @@
                 </div>
             </div>
         </div>
-        <div style="background: #F1F3F6;" class="middle header__middle bg--header__middle pt-15 pb-15">
+        <div style="background: #F1F5F6;" class="middle header__middle bg--header__middle pt-15 pb-15">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -844,7 +844,7 @@
                                     }
                                 </style>
                             </div>
-                            <div class="search--header__middle h1search--header__middle">
+                            <div class=" search--header__middle h1search--header__middle">
                                 <form class="search--header__form position-relative"
                                     action="{{ route('searchProducts') }}" method="GET">
                                     <div class="header--search__box">
@@ -984,11 +984,68 @@
                                             }
                                         </style>
 
-                                        <li><a class="mini__cart--link" href="#"><i
-                                                    class="fas fa-shopping-bag"><span
+                                        {{-- <li><a class="mini__cart--link" href="#"><i
+                                                    class="fa fa-shopping-bag"><span
                                                         class="cart__count">{{ $totalItems }}</span></i><span
                                                     class="cart__amount">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span></a>
+                                        </li> --}}
+                                        <style>
+                                            .mini__cart--link {
+                                                display: flex;
+                                                align-items: center;
+                                                text-decoration: none;
+                                                padding: 10px 15px;
+                                                /* background-color: #ff6f61; */
+                                                background-image: linear-gradient(-180deg, #fff 0%, #F1F3F6 100%);
+                                                box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+                                                color: #fff;
+                                                border-radius: 5px;
+                                                transition: background-color 0.3s ease;
+                                            }
+
+                                            .mini__cart--link:hover {
+                                                background-image: linear-gradient(-180deg, #fff 0%, #F1F3F6 100%);
+                                                box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
+                                            }
+
+                                            .cart-icon-wrapper {
+                                                position: relative;
+                                                display: inline-block;
+                                                margin-right: 5px;
+                                            }
+
+                                            .cart__count {
+                                                position: absolute;
+                                                top: -5px;
+                                                right: -10px;
+                                                background-color: blue;
+                                                color: #fff;
+                                                /* padding: 3px 7px; */
+                                                border-radius: 50%;
+                                                font-size: 12px;
+                                                font-weight: bold;
+                                            }
+
+                                            .cart__amount {
+                                                font-size: 16px;
+                                                font-weight: bold;
+                                            }
+
+                                            ion-icon {
+                                                font-size: 34px;
+                                            }
+                                        </style>
+                                        <li>
+                                            <a class="mini__cart--link" href="#">
+                                                <div class="cart-icon-wrapper">
+                                                    <ion-icon name="cart-outline"></ion-icon>
+                                                    <span class="badge">{{ $totalItems }}</span>
+                                                </div>
+                                                <span
+                                                    class="cart__amount">{{ session('currency', 'AED') }}.{{ number_format(convert_price($totalPrice), 2) }}</span>
+                                            </a>
                                         </li>
+
 
                                     </ul>
                                 </div>

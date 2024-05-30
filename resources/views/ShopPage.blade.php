@@ -53,9 +53,9 @@
         padding: 5px 10px;
         border-radius: 5px;
         z-index: 1;
-        color: white;
+        color: red;
         border: 1px solid #F1F3F6;
-        background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+        background-image: linear-gradient(-180deg, #ffffff 0%, #F1F3F6 100%);
     }
 
     .sale-tag-new {
@@ -83,53 +83,7 @@
         color: gold;
     }
 </style>
-<style>
-    .sale-tag {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background-color: #f00;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        z-index: 1;
-    }
 
-    @media (max-width: 500px) {
-        .sale-tag {
-            font-size: 12px;
-        }
-    }
-
-    @media (max-width: 412px) {
-        .sale-tag {
-            font-size: 10px;
-        }
-    }
-
-    .out-of-stock-tag {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #ff0000;
-        color: #ffffff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        z-index: 1;
-    }
-
-    @media (max-width: 500px) {
-        .out-of-stock-tag {
-            font-size: 12px;
-        }
-    }
-
-    @media (max-width: 412px) {
-        .out-of-stock-tag {
-            font-size: 10px;
-        }
-    }
-</style>
 
 <style>
     .product__thumb {
