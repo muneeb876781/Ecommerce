@@ -29,7 +29,7 @@
             z-index: 1;
             color: white;
             border: 1px solid #F1F3F6;
-            background-image: linear-gradient(-180deg, #FF89D6 0%, #F1F3F6 100%);
+            background-image: linear-gradient(-180deg, #ffffff 0%, #F1F3F6 100%);
         }
     
         .sale-tag-new {

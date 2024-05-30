@@ -63,6 +63,7 @@ body {
     font-size: 14px;
     color: #000000;
     letter-spacing: 0.02em;
+    /* background: #F1F5F6; */
 }
 
 .img {
@@ -508,7 +509,7 @@ label {
 }
 
 .search--header__middle {
-    min-width: 46.32%;
+    min-width: 33.32%;
     padding: 0 15px;
 }
 
